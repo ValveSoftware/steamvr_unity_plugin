@@ -42,7 +42,7 @@ public class SteamVR_Editor : Editor
 	{
 		serializedObject.Update();
 
-		var rect = GUILayoutUtility.GetRect(Screen.width - 38, bannerHeight, GUI.skin.box);
+		var rect = GUILayoutUtility.GetRect(EditorGUIUtility.currentViewWidth - 38, bannerHeight, GUI.skin.box);
 		if (logo)
 			GUI.DrawTexture(rect, logo, ScaleMode.ScaleToFit);
 
