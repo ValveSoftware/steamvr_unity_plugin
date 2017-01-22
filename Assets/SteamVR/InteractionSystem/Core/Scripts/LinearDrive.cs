@@ -48,7 +48,9 @@ namespace Valve.VR.InteractionSystem
 				linearMapping = gameObject.AddComponent<LinearMapping>();
 			}
 
-			if ( repositionGameObject )
+             initialMappingOffset = linearMapping.value;
+
+             if ( repositionGameObject )
 			{
 				UpdateLinearMapping( transform );
 			}
