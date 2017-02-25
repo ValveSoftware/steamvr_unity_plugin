@@ -7,22 +7,26 @@
 using UnityEngine;
 using Valve.VR;
 
-[RequireComponent(typeof(Camera))]
 public class SteamVR_UpdatePoses : MonoBehaviour
 {
-#if !(UNITY_5_6)
-	void Awake()
+	void OnEnable()
 	{
-		var camera = GetComponent<Camera>();
-		camera.stereoTargetEye = StereoTargetEyeMask.None;
-		camera.clearFlags = CameraClearFlags.Nothing;
-		camera.useOcclusionCulling = false;
-		camera.cullingMask = 0;
-		camera.depth = -9999;
+		Camera.onPreCull += OnCameraPreCull;
 	}
-#endif
-	void OnPreCull()
+
+	void OnDisable()
 	{
+		Camera.onPreCull -= OnCameraPreCull;
+	}
+
+	void OnCameraPreCull(Camera cam)
+	{
+		// Only update poses for one camera
+		if (SteamVR_Render.Top().gameObject != cam.gameObject)
+		{
+			return;
+		}
+
 		var compositor = OpenVR.Compositor;
 		if (compositor != null)
 		{
