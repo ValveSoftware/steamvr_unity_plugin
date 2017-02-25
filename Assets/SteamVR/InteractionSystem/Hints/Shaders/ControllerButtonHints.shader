@@ -3,7 +3,7 @@
 // Purpose: 
 //
 //=============================================================================
-
+// UNITY_SHADER_NO_UPGRADE
 Shader "Valve/VR/ControllerButtonHints"
 {
 	Properties

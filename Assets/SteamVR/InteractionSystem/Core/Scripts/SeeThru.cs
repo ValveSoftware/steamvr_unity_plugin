@@ -16,7 +16,6 @@ namespace Valve.VR.InteractionSystem
 		public Material seeThruMaterial;
 
 		private GameObject seeThru;
-		private Hand hand;
 		private Interactable interactable;
 		private Renderer sourceRenderer;
 		private Renderer destRenderer;

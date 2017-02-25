@@ -8,6 +8,10 @@ Refer to InteractionSystem.pdf for instructions on getting started and more docu
 
 Changelog:
 
+ v1.0.1
+ - Updated documentation to fix a few minor errors
+ - Added an icon for all the scripts in the interaction system
+
 v1.0.0
  - Initial version
  - Includes all scripts and assets for the core interaction system

@@ -35,7 +35,7 @@ namespace Valve.VR.InteractionSystem
 		void Awake()
 		{
 			renderModelLoadedAction = SteamVR_Events.RenderModelLoadedAction( OnRenderModelLoaded );
-        }
+		}
 
 
 		//-------------------------------------------------

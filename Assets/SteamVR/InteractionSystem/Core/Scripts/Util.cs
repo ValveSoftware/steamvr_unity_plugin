@@ -568,7 +568,7 @@ namespace Valve.VR.InteractionSystem
 
 
 		//-------------------------------------------------
-#if (UNITY_5_5 || UNITY_5_4)
+#if ( UNITY_5_4 )
 		public static float PathLength( NavMeshPath path )
 #else
 		public static float PathLength( UnityEngine.AI.NavMeshPath path )
@@ -690,10 +690,8 @@ namespace Valve.VR.InteractionSystem
 	[System.Serializable]
 	public class AfterTimer_Component : MonoBehaviour
 	{
-		private GameObject go;
 		private System.Action callback;
 		private float triggerTime;
-		private float timer;
 		private bool timerActive = false;
 		private bool triggerOnEarlyDestroy = false;
 
