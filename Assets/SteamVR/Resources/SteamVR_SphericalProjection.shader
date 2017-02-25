@@ -1,4 +1,6 @@
-﻿Shader "Custom/SteamVR_SphericalProjection" {
+﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
+// UNITY_SHADER_NO_UPGRADE
+Shader "Custom/SteamVR_SphericalProjection" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_N ("N (normal of plane)", Vector) = (0,0,0,0)
