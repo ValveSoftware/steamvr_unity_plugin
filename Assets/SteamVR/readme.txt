@@ -1,4 +1,4 @@
-SteamVR plugin for Unity - v1.2.0
+SteamVR plugin for Unity - v1.2.1
 Copyright (c) Valve Corporation, All rights reserved.
 
 
@@ -12,7 +12,37 @@ Requirements:
 
 The SteamVR runtime must be installed.  This can be found in Steam under Tools.
 
-The plugin currently only supports Windows / DX11.
+
+Changes for v1.2.1:
+
+* Updated to SteamVR runtime v1485823399 and SDK version 1.0.6.
+
+* Switched SteamVR_Events.SystemAction from using strings to specify event type over to their associated enum values.
+
+* Fixed an issue with using WWW in static constructors.
+
+* Added Unity Preferences for SteamVR to allow disabling automatic enabling of native OpenVR support in Unity 5.4 or newer.
+https://github.com/ValveSoftware/steamvr_unity_plugin/issues/8
+https://github.com/ValveSoftware/steamvr_unity_plugin/pull/9
+
+* Added UNITY_SHADER_NO_UPGRADE to all shaders to avoid log spam in later versions of Unity for issues that have already been fixed but the compiler isn't able to detect.
+
+* Specified Vulkan support for Interaction System shaders.
+
+* Fix for crash in Interaction_Example selecting BowPickup:
+https://github.com/ValveSoftware/steamvr_unity_plugin/issues/4
+
+* Cleaned up unused fields:
+https://github.com/ValveSoftware/steamvr_unity_plugin/issues/2
+
+* Updated Interaction System's LinearDrive to initialize using linearMapping.value.
+https://github.com/ValveSoftware/steamvr_unity_plugin/pull/5
+
+* Updated Interaction System documetation to fix a few errors.
+
+* Added an icon for all Interaction System scripts.
+
+* Fixes for SteamVR on Linux.
 
 
 Changes for v1.2.0:

@@ -183,21 +183,21 @@ public static class SteamVR_Events
 	public static Event<SteamVR_RenderModel, bool> RenderModelLoaded = new Event<SteamVR_RenderModel, bool>();
 	public static Action RenderModelLoadedAction(UnityAction<SteamVR_RenderModel, bool> action) { return new Action<SteamVR_RenderModel, bool>(RenderModelLoaded, action); }
 
-	static System.Collections.Generic.Dictionary<string, Event<VREvent_t>> systemEvents = new System.Collections.Generic.Dictionary<string, Event<VREvent_t>>();
-	public static Event<VREvent_t> System(string name)
+	static System.Collections.Generic.Dictionary<EVREventType, Event<VREvent_t>> systemEvents = new System.Collections.Generic.Dictionary<EVREventType, Event<VREvent_t>>();
+	public static Event<VREvent_t> System(EVREventType eventType)
 	{
 		Event<VREvent_t> e;
-		if (!systemEvents.TryGetValue(name, out e))
+		if (!systemEvents.TryGetValue(eventType, out e))
 		{
 			e = new Event<VREvent_t>();
-			systemEvents.Add(name, e);
+			systemEvents.Add(eventType, e);
 		}
 		return e;
 	}
 
-	public static Action SystemAction(string eventName, UnityAction<VREvent_t> action)
+	public static Action SystemAction(EVREventType eventType, UnityAction<VREvent_t> action)
 	{
-		return new Action<VREvent_t>(System(eventName), action);
+		return new Action<VREvent_t>(System(eventType), action);
 	}
 }
 

@@ -1,4 +1,6 @@
-﻿Shader "Custom/SteamVR_HiddenArea" {
+﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
+// UNITY_SHADER_NO_UPGRADE
+Shader "Custom/SteamVR_HiddenArea" {
 
 	CGINCLUDE
 
