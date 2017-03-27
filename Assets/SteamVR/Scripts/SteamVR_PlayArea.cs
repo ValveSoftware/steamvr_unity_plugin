@@ -65,17 +65,17 @@ public class SteamVR_PlayArea : MonoBehaviour
 
 				pRect.vCorners0.v0 =  x;
 				pRect.vCorners0.v1 =  0;
-				pRect.vCorners0.v2 =  z;
+				pRect.vCorners0.v2 =  -z;
 
-				pRect.vCorners1.v0 =  x;
+				pRect.vCorners1.v0 =  -x;
 				pRect.vCorners1.v1 =  0;
 				pRect.vCorners1.v2 = -z;
 
 				pRect.vCorners2.v0 = -x;
 				pRect.vCorners2.v1 =  0;
-				pRect.vCorners2.v2 = -z;
+				pRect.vCorners2.v2 = z;
 
-				pRect.vCorners3.v0 = -x;
+				pRect.vCorners3.v0 = x;
 				pRect.vCorners3.v1 =  0;
 				pRect.vCorners3.v2 =  z;
 
