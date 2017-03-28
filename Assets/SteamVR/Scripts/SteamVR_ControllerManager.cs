@@ -56,7 +56,7 @@ public class SteamVR_ControllerManager : MonoBehaviour
 		for (int i = 0; i < objects.Length; i++)
 		{
 			var obj = objects[i];
-			if (obj != null)
+			if (obj != null && indices[i] == OpenVR.k_unTrackedDeviceIndexInvalid)
 				obj.SetActive(false);
 		}
 
