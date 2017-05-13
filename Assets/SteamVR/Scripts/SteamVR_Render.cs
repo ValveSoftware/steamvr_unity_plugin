@@ -312,20 +312,17 @@ public class SteamVR_Render : MonoBehaviour
 		}
 	}
 
-#if !(UNITY_5_6)
 	private SteamVR_UpdatePoses poseUpdater;
-#endif
 
 	void Update()
 	{
-#if !(UNITY_5_6)
 		if (poseUpdater == null)
 		{
 			var go = new GameObject("poseUpdater");
 			go.transform.parent = transform;
 			poseUpdater = go.AddComponent<SteamVR_UpdatePoses>();
 		}
-#endif
+
 		// Force controller update in case no one else called this frame to ensure prevState gets updated.
 		SteamVR_Controller.Update();
 
