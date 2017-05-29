@@ -10,7 +10,7 @@ using Valve.VR;
 [RequireComponent(typeof(Camera))]
 public class SteamVR_UpdatePoses : MonoBehaviour
 {
-#if !(UNITY_5_6)
+#if !(UNITY_5_6_OR_NEWER)
 	void Awake()
 	{
 		var camera = GetComponent<Camera>();

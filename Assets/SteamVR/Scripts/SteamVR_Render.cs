@@ -312,13 +312,13 @@ public class SteamVR_Render : MonoBehaviour
 		}
 	}
 
-#if !(UNITY_5_6)
+#if !(UNITY_5_6_OR_NEWER)
 	private SteamVR_UpdatePoses poseUpdater;
 #endif
 
 	void Update()
 	{
-#if !(UNITY_5_6)
+#if !(UNITY_5_6_OR_NEWER)
 		if (poseUpdater == null)
 		{
 			var go = new GameObject("poseUpdater");
