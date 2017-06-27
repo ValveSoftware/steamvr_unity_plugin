@@ -14,18 +14,19 @@ using Valve.VR;
 public class SteamVR_RenderModel : MonoBehaviour
 {
 	public SteamVR_TrackedObject.EIndex index = SteamVR_TrackedObject.EIndex.None;
-	public string modelOverride;
+    [Tooltip("Model override is really only meant to be used in the scene view for lining things up; using it at runtime is discouraged.  Use tracked device index instead to ensure the correct model is displayed for all users.")]
+    public string modelOverride;
 
-	// Shader to apply to model.
+	[Tooltip("Shader to apply to model.")]
 	public Shader shader;
 
-	// Enable to print out when render models are loaded.
+    [Tooltip("Enable to print out when render models are loaded.")]
 	public bool verbose = false;
 
-	// If available, break down into separate components instead of loading as a single mesh.
+    [Tooltip("If available, break down into separate components instead of loading as a single mesh.")]
 	public bool createComponents = true;
 
-	// Update transforms of components at runtime to reflect user action.
+	[Tooltip("Update transforms of components at runtime to reflect user action.")]
 	public bool updateDynamically = true;
 
 	// Additional controller settings for showing scrollwheel, etc.
