@@ -85,7 +85,7 @@ public class SteamVR_RenderModelEditor : Editor
 		//EditorGUILayout.PropertyField(modelOverride);
 
 		GUILayout.BeginHorizontal();
-		GUILayout.Label("Model Override");
+		GUILayout.Label(new GUIContent("Model Override", "Model override is really only meant to be used in the scene view for lining things up; using it at runtime is discouraged.\n\nUse tracked device index instead to ensure the correct model is displayed for all users."));
 		var selected = EditorGUILayout.Popup(renderModelIndex, renderModelNames);
 		if (selected != renderModelIndex)
 		{

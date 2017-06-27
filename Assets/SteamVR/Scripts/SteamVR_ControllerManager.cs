@@ -11,9 +11,11 @@ using Valve.VR;
 public class SteamVR_ControllerManager : MonoBehaviour
 {
 	public GameObject left, right;
-	public GameObject[] objects; // populate with objects you want to assign to additional controllers
+    [Tooltip("Populate with objects you want to assign to additional controllers")]
+	public GameObject[] objects;
 
-	public bool assignAllBeforeIdentified; // set to true if you want objects arbitrarily assigned to controllers before their role (left vs right) is identified
+    [Tooltip("Set to true if you want objects arbitrarily assigned to controllers before their role (left vs right) is identified")]
+	public bool assignAllBeforeIdentified;
 
 	uint[] indices; // assigned
 	bool[] connected = new bool[OpenVR.k_unMaxTrackedDeviceCount]; // controllers only
