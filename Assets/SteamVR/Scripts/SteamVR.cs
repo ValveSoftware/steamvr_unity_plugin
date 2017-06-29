@@ -161,23 +161,23 @@ public class SteamVR : System.IDisposable
 		return null;
 	}
 
-	string GetStringProperty(ETrackedDeviceProperty prop)
+	public string GetStringProperty(ETrackedDeviceProperty prop, uint deviceId = OpenVR.k_unTrackedDeviceIndex_Hmd)
 	{
 		var error = ETrackedPropertyError.TrackedProp_Success;
-		var capactiy = hmd.GetStringTrackedDeviceProperty(OpenVR.k_unTrackedDeviceIndex_Hmd, prop, null, 0, ref error);
+		var capactiy = hmd.GetStringTrackedDeviceProperty(deviceId, prop, null, 0, ref error);
 		if (capactiy > 1)
 		{
 			var result = new System.Text.StringBuilder((int)capactiy);
-			hmd.GetStringTrackedDeviceProperty(OpenVR.k_unTrackedDeviceIndex_Hmd, prop, result, capactiy, ref error);
+			hmd.GetStringTrackedDeviceProperty(deviceId, prop, result, capactiy, ref error);
 			return result.ToString();
 		}
 		return (error != ETrackedPropertyError.TrackedProp_Success) ? error.ToString() : "<unknown>";
 	}
 
-	float GetFloatProperty(ETrackedDeviceProperty prop)
+	public float GetFloatProperty(ETrackedDeviceProperty prop, uint deviceId = OpenVR.k_unTrackedDeviceIndex_Hmd)
 	{
 		var error = ETrackedPropertyError.TrackedProp_Success;
-		return hmd.GetFloatTrackedDeviceProperty(OpenVR.k_unTrackedDeviceIndex_Hmd, prop, ref error);
+		return hmd.GetFloatTrackedDeviceProperty(deviceId, prop, ref error);
 	}
 
 	#region Event callbacks

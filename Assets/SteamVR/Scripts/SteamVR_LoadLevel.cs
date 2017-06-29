@@ -97,7 +97,7 @@ public class SteamVR_LoadLevel : MonoBehaviour
 	public void Trigger()
 	{
 		if (!loading && !string.IsNullOrEmpty(levelName))
-			StartCoroutine("LoadLevel");
+			StartCoroutine(LoadLevel());
 	}
 
 	// Helper function to quickly and simply load a level from script.
@@ -350,7 +350,7 @@ public class SteamVR_LoadLevel : MonoBehaviour
 				Debug.Log("LaunchInternalProcessError: " + error);
 #if UNITY_EDITOR
 				UnityEditor.EditorApplication.isPlaying = false;
-#else
+#elif !UNITY_METRO
 				System.Diagnostics.Process.GetCurrentProcess().Kill();
 #endif
 			}

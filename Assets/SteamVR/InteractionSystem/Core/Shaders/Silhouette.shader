@@ -11,6 +11,7 @@ Shader "Valve/VR/Silhouette"
 	{
 		g_vOutlineColor( "Outline Color", Color ) = ( .5, .5, .5, 1 )
 		g_flOutlineWidth( "Outline width", Range ( .001, 0.03 ) ) = .005
+		g_flCornerAdjust( "Corner Adjustment", Range( 0, 2 ) ) = .5
 	}
 
 	//-------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Shader "Valve/VR/Silhouette"
 		//-------------------------------------------------------------------------------------------------------------------------------------------------------------
 		float4 g_vOutlineColor;
 		float g_flOutlineWidth;
+		float g_flCornerAdjust;
 
 		//-------------------------------------------------------------------------------------------------------------------------------------------------------------
 		struct VS_INPUT
@@ -80,13 +82,21 @@ Shader "Valve/VR/Silhouette"
 		[maxvertexcount(18)]
 		void ExtrudeGs( triangle PS_INPUT inputTriangle[3], inout TriangleStream<PS_INPUT> outputStream )
 		{
+		    float3 a = normalize(inputTriangle[0].vPositionOs.xyz - inputTriangle[1].vPositionOs.xyz);
+		    float3 b = normalize(inputTriangle[1].vPositionOs.xyz - inputTriangle[2].vPositionOs.xyz);
+		    float3 c = normalize(inputTriangle[2].vPositionOs.xyz - inputTriangle[0].vPositionOs.xyz);
+
+		    inputTriangle[0].vNormalOs = inputTriangle[0].vNormalOs + normalize( a - c) * g_flCornerAdjust;
+		    inputTriangle[1].vNormalOs = inputTriangle[1].vNormalOs + normalize(-a + b) * g_flCornerAdjust;
+		    inputTriangle[2].vNormalOs = inputTriangle[2].vNormalOs + normalize(-b + c) * g_flCornerAdjust;
+
 		    PS_INPUT extrudedTriangle0 = Extrude( inputTriangle[0] );
 		    PS_INPUT extrudedTriangle1 = Extrude( inputTriangle[1] );
 		    PS_INPUT extrudedTriangle2 = Extrude( inputTriangle[2] );
 
 		    outputStream.Append( inputTriangle[0] );
 		    outputStream.Append( extrudedTriangle0 );
-		    outputStream.Append( extrudedTriangle1 );
+		    outputStream.Append( inputTriangle[1] );
 		    outputStream.Append( extrudedTriangle0 );
 		    outputStream.Append( extrudedTriangle1 );
 		    outputStream.Append( inputTriangle[1] );
@@ -94,13 +104,13 @@ Shader "Valve/VR/Silhouette"
 		    outputStream.Append( inputTriangle[1] );
 		    outputStream.Append( extrudedTriangle1 );
 		    outputStream.Append( extrudedTriangle2 );
-		    outputStream.Append( extrudedTriangle1 );
+		    outputStream.Append( inputTriangle[1] );
 		    outputStream.Append( extrudedTriangle2 );
 		    outputStream.Append( inputTriangle[2] );
 
 		    outputStream.Append( inputTriangle[2] );
 		    outputStream.Append( extrudedTriangle2 );
-		    outputStream.Append( extrudedTriangle0 );
+		    outputStream.Append(inputTriangle[0]);
 		    outputStream.Append( extrudedTriangle2 );
 		    outputStream.Append( extrudedTriangle0 );
 		    outputStream.Append( inputTriangle[0] );
@@ -139,7 +149,7 @@ Shader "Valve/VR/Silhouette"
 				Comp always
 				Pass replace
 			}
-		
+
 			CGPROGRAM
 				#pragma vertex MainVs
 				#pragma fragment NullPs

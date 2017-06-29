@@ -275,11 +275,15 @@ public class SteamVR_Render : MonoBehaviour
 
 	void OnEnable()
 	{
-		StartCoroutine("RenderLoop");
+		StartCoroutine(RenderLoop());
 		SteamVR_Events.InputFocus.Listen(OnInputFocus);
 		SteamVR_Events.System(EVREventType.VREvent_Quit).Listen(OnQuit);
 		SteamVR_Events.System(EVREventType.VREvent_RequestScreenshot).Listen(OnRequestScreenshot);
-
+#if UNITY_2017_1_OR_NEWER
+		Application.onBeforeRender += OnBeforeRender;
+#else
+		Camera.onPreCull += OnCameraPreCull;
+#endif
 		var vr = SteamVR.instance;
 		if (vr == null)
 		{
@@ -296,6 +300,11 @@ public class SteamVR_Render : MonoBehaviour
 		SteamVR_Events.InputFocus.Remove(OnInputFocus);
 		SteamVR_Events.System(EVREventType.VREvent_Quit).Remove(OnQuit);
 		SteamVR_Events.System(EVREventType.VREvent_RequestScreenshot).Remove(OnRequestScreenshot);
+#if UNITY_2017_1_OR_NEWER
+		Application.onBeforeRender -= OnBeforeRender;
+#else
+		Camera.onPreCull -= OnCameraPreCull;
+#endif
 	}
 
 	void Awake()
@@ -312,20 +321,34 @@ public class SteamVR_Render : MonoBehaviour
 		}
 	}
 
-#if !(UNITY_5_6)
-	private SteamVR_UpdatePoses poseUpdater;
+	public void UpdatePoses()
+	{
+		var compositor = OpenVR.Compositor;
+		if (compositor != null)
+		{
+			compositor.GetLastPoses(poses, gamePoses);
+			SteamVR_Events.NewPoses.Send(poses);
+			SteamVR_Events.NewPosesApplied.Send();
+		}
+	}
+
+#if UNITY_2017_1_OR_NEWER
+	void OnBeforeRender() { UpdatePoses(); }
+#else
+	void OnCameraPreCull(Camera cam)
+	{
+		// Only update poses on the first camera per frame.
+		if (Time.frameCount != lastFrameCount)
+		{
+			lastFrameCount = Time.frameCount;
+			UpdatePoses();
+		}
+	}
+	static int lastFrameCount = -1;
 #endif
 
 	void Update()
 	{
-#if !(UNITY_5_6)
-		if (poseUpdater == null)
-		{
-			var go = new GameObject("poseUpdater");
-			go.transform.parent = transform;
-			poseUpdater = go.AddComponent<SteamVR_UpdatePoses>();
-		}
-#endif
 		// Force controller update in case no one else called this frame to ensure prevState gets updated.
 		SteamVR_Controller.Update();
 

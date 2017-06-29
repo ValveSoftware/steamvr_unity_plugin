@@ -5,32 +5,14 @@
 //=============================================================================
 
 using UnityEngine;
-using Valve.VR;
 
-[RequireComponent(typeof(Camera))]
+[ExecuteInEditMode]
 public class SteamVR_UpdatePoses : MonoBehaviour
 {
-#if !(UNITY_5_6)
 	void Awake()
 	{
-		var camera = GetComponent<Camera>();
-		camera.stereoTargetEye = StereoTargetEyeMask.None;
-		camera.clearFlags = CameraClearFlags.Nothing;
-		camera.useOcclusionCulling = false;
-		camera.cullingMask = 0;
-		camera.depth = -9999;
-	}
-#endif
-	void OnPreCull()
-	{
-		var compositor = OpenVR.Compositor;
-		if (compositor != null)
-		{
-			var render = SteamVR_Render.instance;
-			compositor.GetLastPoses(render.poses, render.gamePoses);
-			SteamVR_Events.NewPoses.Send(render.poses);
-			SteamVR_Events.NewPosesApplied.Send();
-		}
+		Debug.Log("SteamVR_UpdatePoses has been deprecated - REMOVING");
+		DestroyImmediate(this);
 	}
 }
 

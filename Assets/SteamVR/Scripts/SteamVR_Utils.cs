@@ -357,7 +357,7 @@ public static class SteamVR_Utils
 		if (initOpenVR)
 		{
 			var error = EVRInitError.None;
-			OpenVR.Init(ref error, EVRApplicationType.VRApplication_Other);
+			OpenVR.Init(ref error, EVRApplicationType.VRApplication_Utility);
 		}
 
 		var system = OpenVR.System;

@@ -72,6 +72,8 @@ namespace Valve.VR.InteractionSystem
 			Transform bodyTransform = transform.Find( "body" );
 			if ( bodyTransform != null )
 			{
+				bodyTransform.gameObject.layer = gameObject.layer;
+				bodyTransform.gameObject.tag = gameObject.tag;
 				bodyMeshRenderer = bodyTransform.GetComponent<MeshRenderer>();
 				bodyMeshRenderer.material = highLightMaterial;
 				bodyMeshRenderer.enabled = false;
@@ -80,6 +82,8 @@ namespace Valve.VR.InteractionSystem
 			Transform trackingHatTransform = transform.Find( "trackhat" );
 			if ( trackingHatTransform != null )
 			{
+				trackingHatTransform.gameObject.layer = gameObject.layer;
+				trackingHatTransform.gameObject.tag = gameObject.tag;
 				trackingHatMeshRenderer = trackingHatTransform.GetComponent<MeshRenderer>();
 				trackingHatMeshRenderer.material = highLightMaterial;
 				trackingHatMeshRenderer.enabled = false;

@@ -157,6 +157,8 @@ namespace Valve.VR.InteractionSystem
 							Texture mainTexture = renderers[j].material.mainTexture;
 							renderers[j].sharedMaterial = materials[i];
 							renderers[j].material.mainTexture = mainTexture;
+							renderers[j].gameObject.layer = gameObject.layer;
+							renderers[j].tag = gameObject.tag;
 						}
 					}
 				}
