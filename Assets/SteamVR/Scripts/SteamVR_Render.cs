@@ -350,11 +350,15 @@ public class SteamVR_Render : MonoBehaviour
 
 	void OnEnable()
 	{
-		StartCoroutine("RenderLoop");
+		StartCoroutine(RenderLoop());
 		SteamVR_Events.InputFocus.Listen(OnInputFocus);
 		SteamVR_Events.System(EVREventType.VREvent_Quit).Listen(OnQuit);
 		SteamVR_Events.System(EVREventType.VREvent_RequestScreenshot).Listen(OnRequestScreenshot);
-
+#if UNITY_2017_1_OR_NEWER
+		Application.onBeforeRender += OnBeforeRender;
+#elif !(UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
+		Camera.onPreCull += OnCameraPreCull;
+#endif
 		var vr = SteamVR.instance;
 		if (vr == null)
 		{
@@ -371,6 +375,11 @@ public class SteamVR_Render : MonoBehaviour
 		SteamVR_Events.InputFocus.Remove(OnInputFocus);
 		SteamVR_Events.System(EVREventType.VREvent_Quit).Remove(OnQuit);
 		SteamVR_Events.System(EVREventType.VREvent_RequestScreenshot).Remove(OnRequestScreenshot);
+#if UNITY_2017_1_OR_NEWER
+		Application.onBeforeRender -= OnBeforeRender;
+#elif !(UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
+		Camera.onPreCull -= OnCameraPreCull;
+#endif
 	}
 
 	void Awake()
@@ -400,20 +409,35 @@ public class SteamVR_Render : MonoBehaviour
 #endif
 	}
 
-#if !(UNITY_5_6 || UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
-	private SteamVR_UpdatePoses poseUpdater;
+	public void UpdatePoses()
+	{
+		var compositor = OpenVR.Compositor;
+		if (compositor != null)
+		{
+			compositor.GetLastPoses(poses, gamePoses);
+			SteamVR_Events.NewPoses.Send(poses);
+			SteamVR_Events.NewPosesApplied.Send();
+		}
+	}
+
+#if UNITY_2017_1_OR_NEWER
+	void OnBeforeRender() { UpdatePoses(); }
+#elif !(UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
+	void OnCameraPreCull(Camera cam)
+	{
+		// Only update poses on the first camera per frame.
+		if (Time.frameCount != lastFrameCount)
+		{
+			lastFrameCount = Time.frameCount;
+			UpdatePoses();
+		}
+	}
+	static int lastFrameCount = -1;
 #endif
 
 	void Update()
 	{
-#if !(UNITY_5_6 || UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
-		if (poseUpdater == null)
-		{
-			var go = new GameObject("poseUpdater");
-			go.transform.parent = transform;
-			poseUpdater = go.AddComponent<SteamVR_UpdatePoses>();
-		}
-#else
+#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
 		if (cameras.Length == 0)
 		{
 			enabled = false;
