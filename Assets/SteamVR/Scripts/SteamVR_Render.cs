@@ -336,7 +336,7 @@ public class SteamVR_Render : MonoBehaviour
 
 	void OnEnable()
 	{
-		StartCoroutine("RenderLoop");
+		StartCoroutine(RenderLoop());
 		SteamVR_Events.InputFocus.Listen(OnInputFocus);
 		SteamVR_Events.System(EVREventType.VREvent_Quit).Listen(OnQuit);
 		SteamVR_Events.System(EVREventType.VREvent_RequestScreenshot).Listen(OnRequestScreenshot);

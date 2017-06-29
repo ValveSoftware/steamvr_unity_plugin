@@ -14,9 +14,15 @@ public class SteamVR_Overlay : MonoBehaviour
 	public bool curved = true;
 	public bool antialias = true;
 	public bool highquality = true;
-	public float scale = 3.0f;			// size of overlay view
-	public float distance = 1.25f;		// distance from surface
-	public float alpha = 1.0f;			// opacity 0..1
+
+	[Tooltip("Size of overlay view.")]
+	public float scale = 3.0f;
+
+	[Tooltip("Distance from surface.")]
+	public float distance = 1.25f;
+
+	[Tooltip("Opacity"), Range(0.0f, 1.0f)]
+	public float alpha = 1.0f;
 
 	public Vector4 uvOffset = new Vector4(0, 0, 1, 1);
 	public Vector2 mouseScale = new Vector2(1, 1);
