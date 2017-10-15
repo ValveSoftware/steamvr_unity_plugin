@@ -19,9 +19,13 @@ public class SteamVR : System.IDisposable
 	{
 		get
 		{
+#if UNITY_STANDALONE_LINUX
+			return false;
+#else
 			if (!UnityEngine.VR.VRSettings.enabled)
 				enabled = false;
 			return _enabled;
+#endif
 		}
 		set
 		{
@@ -58,7 +62,11 @@ public class SteamVR : System.IDisposable
 
 	public static bool usingNativeSupport
 	{
+#if UNITY_STANDALONE_LINUX
+        get { return false; }
+#else
 		get { return UnityEngine.VR.VRDevice.GetNativePtr() != System.IntPtr.Zero; }
+#endif
 	}
 
 	static SteamVR CreateInstance()
