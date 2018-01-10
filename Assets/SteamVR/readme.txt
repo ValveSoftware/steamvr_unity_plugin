@@ -19,7 +19,7 @@ Changes for v1.2.3:
 
 * [RenderModels] Switched from using TextureFormat.ARGB32 to RGBA32 to fix pink texture issue on Vulkan.
 
-* [RenderModels] Fix for not initializing propery if game is paused on startup.
+* [RenderModels] Fix for not initializing properly if game is paused on startup.
 https://github.com/ValveSoftware/steamvr_unity_plugin/issues/62
 
 * [InteractionSystem] Added implemention for ItemPackageSpawner requireTriggerPressToReturn.
