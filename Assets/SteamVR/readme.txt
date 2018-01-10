@@ -1,16 +1,29 @@
-SteamVR plugin for Unity - v1.2.2
+SteamVR plugin for Unity - v1.2.3
 Copyright (c) Valve Corporation, All rights reserved.
-
-
-Quickstart:
-
-To use, simply add the SteamVR_Camera script to your Camera object(s).  Everything else gets set up at
-runtime.  See the included quickstart guide for more details.
 
 
 Requirements:
 
 The SteamVR runtime must be installed.  This can be found in Steam under Tools.
+
+
+Changes for v1.2.3:
+
+* Updated to SteamVR runtime v1515522829 and SDK version 1.0.12.
+
+* Updated quickstart guide.
+
+* [General] Fixed deprecation warnings for GUILayer in Unity version 2017.2 and newer (removed associated functionality).
+
+* [LoadLevel] Fixed a crash when using SteamVR_LoadLevel to load a scene which has no cameras in it.
+
+* [RenderModels] Switched from using TextureFormat.ARGB32 to RGBA32 to fix pink texture issue on Vulkan.
+
+* [RenderModels] Fix for not initializing propery if game is paused on startup.
+https://github.com/ValveSoftware/steamvr_unity_plugin/issues/62
+
+* [InteractionSystem] Added implemention for ItemPackageSpawner requireTriggerPressToReturn.
+https://github.com/ValveSoftware/steamvr_unity_plugin/pull/17/files
 
 
 Changes for v1.2.2:

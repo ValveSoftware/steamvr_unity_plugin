@@ -1,4 +1,4 @@
-﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
+//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
 // Purpose: Render model of associated tracked object
 //
@@ -255,7 +255,7 @@ public class SteamVR_RenderModel : MonoBehaviour
 
 				if (loading)
 				{
-					yield return new WaitForSeconds(0.1f);
+					yield return new WaitForSecondsRealtime(0.1f);
 				}
 				else
 				{
@@ -391,7 +391,7 @@ public class SteamVR_RenderModel : MonoBehaviour
 			if (error == EVRRenderModelError.None)
 			{
 				var diffuseTexture = MarshalRenderModel_TextureMap(pDiffuseTexture);
-				var texture = new Texture2D(diffuseTexture.unWidth, diffuseTexture.unHeight, TextureFormat.ARGB32, false);
+				var texture = new Texture2D(diffuseTexture.unWidth, diffuseTexture.unHeight, TextureFormat.RGBA32, false);
 				if (SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Direct3D11)
 				{
 					texture.Apply();

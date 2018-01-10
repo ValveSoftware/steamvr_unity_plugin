@@ -403,6 +403,8 @@ public class SteamVR_LoadLevel : MonoBehaviour
 		// Fade out to compositor
 		SteamVR_Events.LoadingFadeIn.Send(fadeInTime);
 
+		// Refresh compositor reference since loading scenes might have invalidated it.
+		compositor = OpenVR.Compositor;
 		if (compositor != null)
 		{
 			// Fade out foreground color if necessary.
