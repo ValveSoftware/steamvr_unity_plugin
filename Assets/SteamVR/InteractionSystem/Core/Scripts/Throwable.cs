@@ -63,7 +63,7 @@ namespace Valve.VR.InteractionSystem
 
 
 		//-------------------------------------------------
-		private void OnHandHoverBegin( Hand hand )
+		protected virtual void OnHandHoverBegin( Hand hand )
 		{
 			bool showHint = false;
 
@@ -91,14 +91,14 @@ namespace Valve.VR.InteractionSystem
 
 
 		//-------------------------------------------------
-		private void OnHandHoverEnd( Hand hand )
+		protected virtual void OnHandHoverEnd( Hand hand )
 		{
 			ControllerButtonHints.HideButtonHint( hand, Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger );
 		}
 
 
 		//-------------------------------------------------
-		private void HandHoverUpdate( Hand hand )
+		protected virtual void HandHoverUpdate( Hand hand )
 		{
 			//Trigger got pressed
 			if ( hand.GetStandardInteractionButtonDown() )
@@ -109,7 +109,7 @@ namespace Valve.VR.InteractionSystem
 		}
 
 		//-------------------------------------------------
-		private void OnAttachedToHand( Hand hand )
+		protected virtual void OnAttachedToHand( Hand hand )
 		{
 			attached = true;
 
@@ -154,7 +154,7 @@ namespace Valve.VR.InteractionSystem
 
 
 		//-------------------------------------------------
-		private void OnDetachedFromHand( Hand hand )
+		protected virtual void OnDetachedFromHand( Hand hand )
 		{
 			attached = false;
 
@@ -199,7 +199,7 @@ namespace Valve.VR.InteractionSystem
 
 
 		//-------------------------------------------------
-		private void HandAttachedUpdate( Hand hand )
+		protected virtual void HandAttachedUpdate( Hand hand )
 		{
 			//Trigger got released
 			if ( !hand.GetStandardInteractionButton() )
