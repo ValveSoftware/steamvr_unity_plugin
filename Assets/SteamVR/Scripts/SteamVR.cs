@@ -19,7 +19,7 @@ public class SteamVR : System.IDisposable
 	{
 		get
 		{
-			if (!UnityEngine.VR.VRSettings.enabled)
+			if (!UnityEngine.XR.XRSettings.enabled)
 				enabled = false;
 			return _enabled;
 		}
