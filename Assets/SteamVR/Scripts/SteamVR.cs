@@ -58,7 +58,7 @@ public class SteamVR : System.IDisposable
 
 	public static bool usingNativeSupport
 	{
-		get { return UnityEngine.VR.VRDevice.GetNativePtr() != System.IntPtr.Zero; }
+		get { return UnityEngine.XR.XRDevice.GetNativePtr() != System.IntPtr.Zero; }
 	}
 
 	static SteamVR CreateInstance()
