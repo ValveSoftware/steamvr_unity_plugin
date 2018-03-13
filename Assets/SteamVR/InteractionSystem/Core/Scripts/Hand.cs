@@ -66,6 +66,8 @@ namespace Valve.VR.InteractionSystem
 			public GameObject attachedObject;
 			public GameObject originalParent;
 			public bool isParentedToHand;
+			public bool useGravity;
+			public bool isKinematic;
 		}
 
 		private List<AttachedObject> attachedObjects = new List<AttachedObject>();
@@ -257,6 +259,14 @@ namespace Valve.VR.InteractionSystem
 			{
 				attachedObject.isParentedToHand = false;
 			}
+
+			//save rigidbody configs
+			Rigidbody rigidbody = objectToAttach.GetComponent<Rigidbody>();
+			if(rigidbody != null) {
+				attachedObject.useGravity = rigidbody.useGravity;
+				attachedObject.isKinematic = rigidbody.isKinematic;
+			}
+
 			attachedObjects.Add( attachedObject );
 
 			if ( ( flags & AttachmentFlags.SnapOnAttach ) == AttachmentFlags.SnapOnAttach )
@@ -285,19 +295,27 @@ namespace Valve.VR.InteractionSystem
 				HandDebugLog( "DetachObject " + objectToDetach );
 
 				GameObject prevTopObject = currentAttachedObject;
+				AttachedObject attachedObject = attachedObjects[index];
 
 				Transform parentTransform = null;
-				if ( attachedObjects[index].isParentedToHand )
+				if ( attachedObject.isParentedToHand )
 				{
-					if ( restoreOriginalParent && ( attachedObjects[index].originalParent != null ) )
+					if ( restoreOriginalParent && ( attachedObject.originalParent != null ) )
 					{
-						parentTransform = attachedObjects[index].originalParent.transform;
+						parentTransform = attachedObject.originalParent.transform;
 					}
-					attachedObjects[index].attachedObject.transform.parent = parentTransform;
+					attachedObject.attachedObject.transform.parent = parentTransform;
 				}
 
-				attachedObjects[index].attachedObject.SetActive( true );
-				attachedObjects[index].attachedObject.SendMessage( "OnDetachedFromHand", this, SendMessageOptions.DontRequireReceiver );
+				//restore rigidbody configs
+				Rigidbody rigidbody = attachedObject.attachedObject.GetComponent<Rigidbody>();
+				if(rigidbody != null) {
+					rigidbody.useGravity = attachedObject.useGravity;
+					rigidbody.isKinematic = attachedObject.isKinematic;
+				}
+
+				attachedObject.attachedObject.SetActive( true );
+				attachedObject.attachedObject.SendMessage( "OnDetachedFromHand", this, SendMessageOptions.DontRequireReceiver );
 				attachedObjects.RemoveAt( index );
 
 				GameObject newTopObject = currentAttachedObject;

@@ -163,7 +163,6 @@ namespace Valve.VR.InteractionSystem
 			hand.HoverUnlock( null );
 
 			Rigidbody rb = GetComponent<Rigidbody>();
-			rb.isKinematic = false;
 			rb.interpolation = RigidbodyInterpolation.Interpolate;
 
 			Vector3 position = Vector3.zero;
