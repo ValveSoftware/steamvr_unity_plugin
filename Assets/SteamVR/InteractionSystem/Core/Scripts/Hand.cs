@@ -686,6 +686,12 @@ namespace Valve.VR.InteractionSystem
 			{
 				hoveringInteractable.SendMessage( "HandHoverUpdate", this, SendMessageOptions.DontRequireReceiver );
 			}
+			
+			// Process hand movements here when time is paused and FixedUpdate() is not being called
+			if ( Time.timeScale == 0.0f )
+			{
+				UpdateHandPoses();
+			}
 		}
 
 
