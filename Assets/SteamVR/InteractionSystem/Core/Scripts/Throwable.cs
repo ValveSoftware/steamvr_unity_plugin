@@ -16,6 +16,8 @@ namespace Valve.VR.InteractionSystem
 	[RequireComponent( typeof( VelocityEstimator ) )]
 	public class Throwable : MonoBehaviour
 	{
+		public SteamVR_Controller.Button GrabButton = SteamVR_Controller.Button.Trigger;
+
 		[EnumFlags]
 		[Tooltip( "The flags used to attach this object to the hand." )]
 		public Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.ParentToHand | Hand.AttachmentFlags.DetachFromOtherHand;
@@ -62,6 +64,14 @@ namespace Valve.VR.InteractionSystem
 		}
 
 
+		public bool GetGrabButton(Hand hand) {
+			return hand.controller.GetPress(SteamVR_Controller.GetButtonMask(GrabButton));
+		}
+		public bool GetGrabButtonDown(Hand hand) {
+			return hand.controller.GetPressDown(SteamVR_Controller.GetButtonMask(GrabButton));
+		}
+
+
 		//-------------------------------------------------
 		private void OnHandHoverBegin( Hand hand )
 		{
@@ -72,7 +82,7 @@ namespace Valve.VR.InteractionSystem
 			// and if it isn't attached to another hand
 			if ( !attached )
 			{
-				if ( hand.GetStandardInteractionButton() )
+				if ( GetGrabButton(hand) )
 				{
 					Rigidbody rb = GetComponent<Rigidbody>();
 					if ( rb.velocity.magnitude >= catchSpeedThreshold )
@@ -101,7 +111,7 @@ namespace Valve.VR.InteractionSystem
 		private void HandHoverUpdate( Hand hand )
 		{
 			//Trigger got pressed
-			if ( hand.GetStandardInteractionButtonDown() )
+			if ( GetGrabButtonDown(hand) )
 			{
 				hand.AttachObject( gameObject, attachmentFlags, attachmentPoint );
 				ControllerButtonHints.HideButtonHint( hand, Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger );
@@ -163,7 +173,6 @@ namespace Valve.VR.InteractionSystem
 			hand.HoverUnlock( null );
 
 			Rigidbody rb = GetComponent<Rigidbody>();
-			rb.isKinematic = false;
 			rb.interpolation = RigidbodyInterpolation.Interpolate;
 
 			Vector3 position = Vector3.zero;
@@ -202,7 +211,7 @@ namespace Valve.VR.InteractionSystem
 		private void HandAttachedUpdate( Hand hand )
 		{
 			//Trigger got released
-			if ( !hand.GetStandardInteractionButton() )
+			if ( !GetGrabButton(hand) )
 			{
 				// Detach ourselves late in the frame.
 				// This is so that any vehicles the player is attached to
