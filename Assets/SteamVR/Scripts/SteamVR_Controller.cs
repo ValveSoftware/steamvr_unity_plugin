@@ -29,6 +29,19 @@ public class SteamVR_Controller
 		public const ulong Trigger			= (1ul << (int)EVRButtonId.k_EButton_SteamVR_Trigger);
 	}
 
+	public enum Button {
+		Trigger, Grip, Menu
+	}
+
+	public static ulong GetButtonMask(Button button) {
+		switch(button) {
+			case Button.Trigger:	return ButtonMask.Trigger;
+			case Button.Grip:		return ButtonMask.Grip;
+			case Button.Menu:		return ButtonMask.ApplicationMenu;
+			default:				return 0;
+		}
+	}
+
 	public class Device
 	{
 		public Device(uint i) { index = i; }
