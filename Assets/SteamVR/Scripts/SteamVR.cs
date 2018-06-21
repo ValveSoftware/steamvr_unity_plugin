@@ -7,6 +7,13 @@
 using UnityEngine;
 using Valve.VR;
 
+#if UNITY_2017_2_OR_NEWER
+    using UnityEngine.XR;
+#else
+using XRSettings = UnityEngine.VR.VRSettings;
+using XRDevice = UnityEngine.VR.VRDevice;
+#endif
+
 public class SteamVR : System.IDisposable
 {
 	// Use this to check if SteamVR is currently active without attempting
@@ -19,7 +26,7 @@ public class SteamVR : System.IDisposable
 	{
 		get
 		{
-			if (!UnityEngine.VR.VRSettings.enabled)
+			if (!XRSettings.enabled)
 				enabled = false;
 			return _enabled;
 		}
@@ -58,8 +65,10 @@ public class SteamVR : System.IDisposable
 
 	public static bool usingNativeSupport
 	{
-		get { return UnityEngine.VR.VRDevice.GetNativePtr() != System.IntPtr.Zero; }
+		get { return XRDevice.GetNativePtr() != System.IntPtr.Zero; }
 	}
+
+    public static SteamVR_Settings settings { get; private set; }
 
 	static SteamVR CreateInstance()
 	{
@@ -87,7 +96,11 @@ public class SteamVR : System.IDisposable
 				ReportError(error);
 				return null;
 			}
-		}
+
+            settings = SteamVR_Settings.instance;
+
+            SteamVR_Input.IdentifyActionsFile();
+        }
 		catch (System.Exception e)
 		{
 			Debug.LogError(e);
@@ -97,7 +110,7 @@ public class SteamVR : System.IDisposable
 		return new SteamVR();
 	}
 
-	static void ReportError(EVRInitError error)
+    static void ReportError(EVRInitError error)
 	{
 		switch (error)
 		{
@@ -172,7 +185,7 @@ public class SteamVR : System.IDisposable
 			return result.ToString();
 		}
 		return (error != ETrackedPropertyError.TrackedProp_Success) ? error.ToString() : "<unknown>";
-	}
+	}   
 
 	public float GetFloatProperty(ETrackedDeviceProperty prop, uint deviceId = OpenVR.k_unTrackedDeviceIndex_Hmd)
 	{
@@ -180,9 +193,81 @@ public class SteamVR : System.IDisposable
 		return hmd.GetFloatTrackedDeviceProperty(deviceId, prop, ref error);
 	}
 
-	#region Event callbacks
+#if UNITY_EDITOR
+    public static void ShowBindingsForEditor()
+    {
+        var initOpenVR = (!SteamVR.active && !SteamVR.usingNativeSupport);
+        if (initOpenVR)
+        {
+            var error = EVRInitError.None;
+            OpenVR.Init(ref error, EVRApplicationType.VRApplication_Utility);
 
-	private void OnInitializing(bool initializing)
+            if (error != EVRInitError.None)
+                Debug.LogError("[SteamVR] Error during OpenVR Init: " + error.ToString());
+        }
+
+        Valve.VR.EVRSettingsError bindingFlagError = Valve.VR.EVRSettingsError.None;
+        Valve.VR.OpenVR.Settings.SetBool(Valve.VR.OpenVR.k_pch_SteamVR_Section, Valve.VR.OpenVR.k_pch_SteamVR_DebugInputBinding, true, ref bindingFlagError);
+
+        if (bindingFlagError != Valve.VR.EVRSettingsError.None)
+            Debug.LogError("[SteamVR] Error turning on the debug input binding flag in steamvr: " + bindingFlagError.ToString());
+
+        if (Application.isPlaying == false)
+            SteamVR_Input.IdentifyActionsFile();
+
+        /*
+        GameObject tempObject = new GameObject("[Temp] [SteamVR Input]");
+        SteamVR_Input.Initialize(tempObject);
+
+        VRActiveActionSet_t[] sets = new VRActiveActionSet_t[SteamVR_Input.actionSets.Length];
+        for (int setIndex = 0; setIndex < SteamVR_Input.actionSets.Length; setIndex++)
+        {
+            sets[setIndex].ulActionSet = SteamVR_Input.actionSets[setIndex].handle;
+        }
+
+        EVRInputError showBindingsError = OpenVR.Input.ShowBindingsForActionSet(sets, (uint)(sets.Length * System.Runtime.InteropServices.Marshal.SizeOf(typeof(VRActiveActionSet_t))), 0);
+
+        if (showBindingsError != EVRInputError.None)
+        {
+            Debug.LogError("Error showing bindings ui: " + showBindingsError.ToString());
+        }
+        */
+
+        if (initOpenVR)
+            OpenVR.Shutdown();
+
+        Application.OpenURL("http://localhost:8998/dashboard/controllerbinding.html?app=system.generated.unity.exe"); //todo: update with the actual call
+    }
+
+    public static string GetResourcesFolderPath(bool fromAssetsDirectory = false)
+    {
+        SteamVR_Input_References asset = ScriptableObject.CreateInstance<SteamVR_Input_References>();
+        UnityEditor.MonoScript scriptAsset = UnityEditor.MonoScript.FromScriptableObject(asset);
+
+        string scriptPath = UnityEditor.AssetDatabase.GetAssetPath(scriptAsset);
+
+        System.IO.FileInfo fi = new System.IO.FileInfo(scriptPath);
+        string rootPath = fi.Directory.Parent.ToString();
+
+        string resourcesPath = System.IO.Path.Combine(rootPath, "Resources");
+
+        resourcesPath = resourcesPath.Replace("//", "/");
+        resourcesPath = resourcesPath.Replace("\\\\", "\\");
+        resourcesPath = resourcesPath.Replace("\\", "/");
+
+        if (fromAssetsDirectory)
+        {
+            int assetsIndex = resourcesPath.IndexOf("/Assets/");
+            resourcesPath = resourcesPath.Substring(assetsIndex + 1);
+        }
+
+        return resourcesPath;
+    }
+#endif
+
+    #region Event callbacks
+
+    private void OnInitializing(bool initializing)
 	{
 		SteamVR.initializing = initializing;
 	}

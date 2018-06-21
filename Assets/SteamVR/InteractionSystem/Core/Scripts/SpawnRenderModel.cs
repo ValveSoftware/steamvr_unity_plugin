@@ -15,6 +15,8 @@ namespace Valve.VR.InteractionSystem
 	{
 		public Material[] materials;
 
+        public bool defaultToHidden = false;
+
 		private SteamVR_RenderModel[] renderModels;
 		private Hand hand;
 		private List<MeshRenderer> renderers = new List<MeshRenderer>();
@@ -25,6 +27,26 @@ namespace Valve.VR.InteractionSystem
 
 		SteamVR_Events.Action renderModelLoadedAction;
 
+        public bool isShown
+        {
+            get
+            {
+                bool shown = false;
+
+                if (renderModels != null)
+                {
+                    for (int renderModelIndex = 0; renderModelIndex < renderModels.Length; renderModelIndex++)
+                    {
+                        if (renderModels[renderModelIndex] == null || renderModels[renderModelIndex].gameObject == null)
+                            return false;
+
+                        shown = true;
+                    }
+                }
+
+                return shown;
+            }
+        }
 
 		//-------------------------------------------------
 		void Awake()
@@ -37,7 +59,8 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		void OnEnable()
 		{
-			ShowController();
+            if (defaultToHidden == false)
+			    ShowController();
 
 			renderModelLoadedAction.enabled = true;
 
@@ -60,7 +83,9 @@ namespace Valve.VR.InteractionSystem
 		private void OnAttachedToHand( Hand hand )
 		{
 			this.hand = hand;
-			ShowController();
+
+            if (defaultToHidden == false)
+                ShowController();
 		}
 
 
@@ -103,11 +128,15 @@ namespace Valve.VR.InteractionSystem
 			spawnRenderModelUpdateIndex++;
 		}
 
+        public void DefaultControllerToHidden(bool defaultState)
+        {
+            defaultToHidden = defaultState;
+        }
 
-		//-------------------------------------------------
-		private void ShowController()
+        //-------------------------------------------------
+        public void ShowController()
 		{
-			if ( hand == null || hand.controller == null )
+			if ( hand == null || hand.isActive == false )
 			{
 				return;
 			}
@@ -123,13 +152,14 @@ namespace Valve.VR.InteractionSystem
 				}
 
 				renderModels[i].gameObject.SetActive( true );
-				renderModels[i].SetDeviceIndex( (int)hand.controller.index );
+
+				renderModels[i].SetDeviceIndex( (int)hand.poseAction.GetDeviceIndex() );
 			}
 		}
 
 
 		//-------------------------------------------------
-		private void HideController()
+		public void HideController()
 		{
 			for ( int i = 0; i < renderModels.Length; i++ )
 			{

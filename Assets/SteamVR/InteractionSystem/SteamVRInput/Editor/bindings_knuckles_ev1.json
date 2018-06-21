@@ -1,0 +1,150 @@
+{
+  "controller_type": "knuckles_ev1",
+  "action_binds": [
+    {
+      "action": "/actions/default/in/MoveLeft",
+      "source": [ "/user/hand/left/input/trackpad/x", "/user/hand/left/input/trackpad/y" ]
+    },
+    {
+      "action": "/actions/default/in/UseLeft",
+      "source": "/user/hand/left/input/trigger/value"
+    },
+    {
+      "action": "/actions/default/in/InteractLeft",
+      "source": "/filters/left_trigger_threshold/result"
+    },
+    {
+      "action": "/actions/default/in/TeleportLeft",
+      "source": "/user/hand/left/input/trackpad/click"
+    },
+    {
+      "action": "/actions/default/in/GripLeft",
+      "source": "/user/hand/left/input/grip/click"
+    },
+    {
+      "action": "/actions/default/in/MoveRight",
+      "source": [ "/user/hand/right/input/trackpad/x", "/user/hand/right/input/trackpad/y" ]
+    },
+    {
+      "action": "/actions/default/in/UseRight",
+      "source": "/user/hand/right/input/trigger/value"
+    },
+    {
+      "action": "/actions/default/in/InteractRight",
+      "source": "/filters/right_trigger_threshold/result"
+    },
+    {
+      "action": "/actions/default/in/TeleportRight",
+      "source": "/user/hand/right/input/trackpad/click"
+    },
+    {
+      "action": "/actions/default/in/GripRight",
+      "source": "/user/hand/right/input/grip/click"
+    },
+    {
+      "action": "/actions/default/in/PoseRight",
+      "source": "/user/hand/right/pose/raw"
+    },
+    {
+      "action": "/actions/default/in/PoseLeft",
+      "source": "/user/hand/left/pose/raw"
+    },
+    {
+      "action": "/actions/default/in/SkeletonLeft",
+      "source": "/user/hand/left/input/skeleton"
+    },
+    {
+      "action": "/actions/default/in/SkeletonRight",
+      "source": "/user/hand/right/input/skeleton"
+    },
+    {
+      "action": "/actions/default/out/VibrateLeft",
+      "source": "/user/hand/left/output/haptic"
+    },
+    {
+      "action": "/actions/default/out/VibrateRight",
+      "source": "/user/hand/right/output/haptic"
+    },
+    {
+      "action": "/actions/hands/in/IndexCurlLeft",
+      "source": "/user/hand/left/input/finger/index"
+    },
+    {
+      "action": "/actions/hands/in/MiddleCurlLeft",
+      "source": "/user/hand/left/input/finger/middle"
+    },
+    {
+      "action": "/actions/hands/in/RingCurlLeft",
+      "source": "/user/hand/left/input/finger/ring"
+    },
+    {
+      "action": "/actions/hands/in/PinkyCurlLeft",
+      "source": "/user/hand/left/input/finger/pinky"
+    },
+    {
+      "action": "/actions/hands/in/IndexCurlRight",
+      "source": "/user/hand/right/input/finger/index"
+    },
+    {
+      "action": "/actions/hands/in/MiddleCurlRight",
+      "source": "/user/hand/right/input/finger/middle"
+    },
+    {
+      "action": "/actions/hands/in/RingCurlRight",
+      "source": "/user/hand/right/input/finger/ring"
+    },
+    {
+      "action": "/actions/hands/in/PinkyCurlRight",
+      "source": "/user/hand/right/input/finger/pinky"
+    },
+    {
+      "action": "/actions/default/in/LightPinchLeft",
+      "source": "/user/hand/left/input/trackpad/force"
+    },
+    {
+      "action": "/actions/default/in/LightGripLeft",
+      "source": "/user/hand/left/input/grip/force"
+    },
+    {
+      "action": "/actions/default/in/HeavyPinchLeft",
+      "source": "/user/hand/left/input/trackpad/force"
+    },
+    {
+      "action": "/actions/default/in/HeavyGripLeft",
+      "source": "/user/hand/left/input/grip/force"
+    },
+    {
+      "action": "/actions/default/in/LightPinchRight",
+      "source": "/user/hand/right/input/trackpad/force"
+    },
+    {
+      "action": "/actions/default/in/LightGripRight",
+      "source": "/user/hand/right/input/grip/force"
+    },
+    {
+      "action": "/actions/default/in/HeavyPinchRight",
+      "source": "/user/hand/right/input/trackpad/force"
+    },
+    {
+      "action": "/actions/default/in/HeavyGripRight",
+      "source": "/user/hand/right/input/grip/force"
+    }
+  ],
+
+  "filters": [
+    {
+      "name": "left_trigger_threshold",
+      "type": "boolean_threshold",
+      "action_sets": [ "/actions/default" ],
+      "input": "/user/hand/left/input/trigger/value",
+      "output": "result"
+    },
+    {
+      "name": "right_trigger_threshold",
+      "type": "boolean_threshold",
+      "action_sets": [ "/actions/default" ],
+      "input": "/user/hand/right/input/trigger/value",
+      "output": "result"
+    }
+  ]
+}

@@ -25,11 +25,13 @@ namespace Valve.VR.InteractionSystem
 			{
 				float distance = Vector3.Distance( firstTransform.position, secondTransform.position );
 
-				SteamVR_TrackedObject trackedObject = GetComponentInParent<SteamVR_TrackedObject>();
-				if ( trackedObject )
-				{
+                Hand hand = GetComponentInParent<Hand>();
+                if (hand != null)
+                { 
 					float pulse = distanceIntensityCurve.Evaluate( distance );
-					SteamVR_Controller.Input( (int)trackedObject.index ).TriggerHapticPulse( (ushort)pulse );
+                    hand.TriggerHapticPulse((ushort)pulse);
+
+                    //SteamVR_Controller.Input( (int)trackedObject.index ).TriggerHapticPulse( (ushort)pulse );
 				}
 
 				float nextPulse = pulseIntervalCurve.Evaluate( distance );

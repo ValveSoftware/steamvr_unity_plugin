@@ -1,0 +1,92 @@
+{
+  "actions": [
+    {
+      "name": "/actions/default/in/Move",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/default/in/Use",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/InteractUI",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Teleport",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/GrabPinch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/GrabGrip",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/PoseLeftHand",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/default/in/PoseRightHand",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/default/in/SkeletonLeftHand",
+      "type": "skeleton",
+      "skeleton": "/skeleton/hand/left"
+    },
+    {
+      "name": "/actions/default/in/SkeletonRightHand",
+      "type": "skeleton",
+      "skeleton": "/skeleton/hand/right"
+    },
+    {
+      "name": "/actions/default/out/HapticLeftHand",
+      "type": "vibration"
+    },
+    {
+      "name": "/actions/default/out/HapticRightHand",
+      "type": "vibration"
+    }
+  ],
+  "action_sets": [
+    {
+      "name": "/actions/default",
+      "usage": "leftright"
+    }
+  ],
+  "default_bindings": [
+    {
+      "controller_type": "vive_controller",
+      "binding_url": "bindings_vive_controller.json"
+    },
+    {
+      "controller_type": "oculus_touch",
+      "binding_url": "bindings_oculus_touch.json"
+    },
+    {
+      "controller_type": "knuckles",
+      "binding_url": "bindings_knuckles.json"
+    }
+  ],
+  "localization": [
+    {
+      "language_tag": "en_US",
+      "/actions/default/in/Move": "Move",
+      "/actions/default/in/Use": "Use",
+      "/actions/default/in/InteractUI": "Interact With UI",
+      "/actions/default/in/Teleport": "Teleport",
+      "/actions/default/in/GrabPinch": "Grab Pinch",
+      "/actions/default/in/GrabGrip": "Grab Grip",
+      "/actions/default/in/PoseLeftHand": "Pose (Left)",
+      "/actions/default/in/PoseRightHand": "Pose (Right)",
+      "/actions/default/in/SkeletonLeftHand": "Skeleton (Left)",
+      "/actions/default/in/SkeletonRightHand": "Skeleton (Right)",
+      "/actions/default/out/HapticLeftHand": "Haptic (Left)",
+      "/actions/default/out/HapticRightHand": "Haptic (Right)",
+      "/actions/default/in/Plant": "Plant"
+    }
+  ]
+}

@@ -116,7 +116,7 @@ namespace Valve.VR.InteractionSystem
 						continue;
 					}
 
-					if ( hands[j].GuessCurrentHandType() != Hand.HandType.Left )
+					if ( hands[j].handType != SteamVR_Input_Input_Sources.LeftHand)
 					{
 						continue;
 					}
@@ -141,7 +141,7 @@ namespace Valve.VR.InteractionSystem
 						continue;
 					}
 
-					if ( hands[j].GuessCurrentHandType() != Hand.HandType.Right )
+					if ( hands[j].handType != SteamVR_Input_Input_Sources.RightHand)
 					{
 						continue;
 					}
@@ -155,47 +155,20 @@ namespace Valve.VR.InteractionSystem
 
 
 		//-------------------------------------------------
-		public SteamVR_Controller.Device leftController
-		{
-			get
-			{
-				Hand h = leftHand;
-				if ( h )
-				{
-					return h.controller;
-				}
-				return null;
-			}
-		}
-
-
-		//-------------------------------------------------
-		public SteamVR_Controller.Device rightController
-		{
-			get
-			{
-				Hand h = rightHand;
-				if ( h )
-				{
-					return h.controller;
-				}
-				return null;
-			}
-		}
-
-
-		//-------------------------------------------------
 		// Get the HMD transform. This might return the fallback camera transform if SteamVR is unavailable or disabled.
 		//-------------------------------------------------
 		public Transform hmdTransform
 		{
 			get
 			{
-				for ( int i = 0; i < hmdTransforms.Length; i++ )
-				{
-					if ( hmdTransforms[i].gameObject.activeInHierarchy )
-						return hmdTransforms[i];
-				}
+                if (hmdTransforms != null)
+                {
+                    for (int i = 0; i < hmdTransforms.Length; i++)
+                    {
+                        if (hmdTransforms[i].gameObject.activeInHierarchy)
+                            return hmdTransforms[i];
+                    }
+                }
 				return null;
 			}
 		}
@@ -323,17 +296,18 @@ namespace Valve.VR.InteractionSystem
 			{
 				Hand hand = GetHand( i );
 
-				if ( hand.startingHandType == Hand.HandType.Left )
+				if ( hand.handType == SteamVR_Input_Input_Sources.LeftHand)
 				{
 					Gizmos.DrawIcon( hand.transform.position, "vr_interaction_system_left_hand.png" );
 				}
-				else if ( hand.startingHandType == Hand.HandType.Right )
+				else if ( hand.handType == SteamVR_Input_Input_Sources.RightHand)
 				{
 					Gizmos.DrawIcon( hand.transform.position, "vr_interaction_system_right_hand.png" );
 				}
 				else
 				{
-					Hand.HandType guessHandType = hand.GuessCurrentHandType();
+                    /*
+					Hand.HandType guessHandType = hand.currentHandType;
 
 					if ( guessHandType == Hand.HandType.Left )
 					{
@@ -347,6 +321,7 @@ namespace Valve.VR.InteractionSystem
 					{
 						Gizmos.DrawIcon( hand.transform.position, "vr_interaction_system_unknown_hand.png" );
 					}
+                    */
 				}
 			}
 		}

@@ -1,10 +1,95 @@
-SteamVR plugin for Unity - v1.2.3
+SteamVR plugin for Unity - v1.3b06
 Copyright (c) Valve Corporation, All rights reserved.
 
 
 Requirements:
 
 The SteamVR runtime must be installed.  This can be found in Steam under Tools.
+
+
+Changes for v1.3b06:
+
+* Added some flower and planting stuff for the tutorial
+
+* Updating knuckles actions and binding jsons
+
+* Added code solution for blending skeleton animations to mechanim, no example yet though
+
+* Updated some helper components to utilize Unity Events properly
+
+* Updated skeleton hierarchy
+
+
+Changes for v1.3b05:
+
+* Added a knuckles binding for the Grab mode
+
+* Fixed some bugs around skeleton updates and GC alloc
+
+* Fixed a pretty significant perf hit
+
+* Added a blending option to skeletons
+
+* Added some ui to try out skeleton options
+
+* Added a target for the throwing examples
+
+* Updated longbow to only fire arrows with the pinch action
+
+* Updated other interactable examples
+
+* Added some helper methods to hand around showing / hiding controller or the whole hand.
+
+* Fixed some of the throwing examples
+
+
+Changes for v1.3b04:
+
+* Added some more extensive velocity and angular velocity estimation based on positions and rotations per frame. Normalizing for time between frames.
+
+* Cleaned out and updated the actions + bindings for knuckles/wands/touch.
+
+* Fixed a bug with newly created actions not having a set type
+
+* Updated extra scenes to use the new input system
+
+
+Changes for v1.3b03:
+
+* Fixed some warnings for unity 2017 / 2018.
+
+* Fixed some editor UI issues for 2018
+
+* Fixed issues with Unity 2017+ not wanting to open scenes from a script reloaded callback
+
+
+Changes for v1.3b02:
+
+* Added DefaultInputAction attribute to automatically assign actions during action generation.
+
+* Updated default CameraRig prefab to use the new input system and components
+
+
+Changes for v1.3b01:
+
+* Integrated SteamVR Input System.
+https://steamcommunity.com/games/250820/announcements/detail/3809361199426010680
+
+* [InteractionSystem] Added basic examples of the Skeletal API
+
+* [InteractionSystem] Integrated SteamVR Input System. Actions and Action Sets instead of buttons.
+
+* [InteractionSystem] Added Velocity style object interaction
+
+* [InteractionSystem] Fixed some issues from github. Took some pull requests.
+https://github.com/ValveSoftware/steamvr_unity_plugin/pull/79
+https://github.com/ValveSoftware/steamvr_unity_plugin/pull/73
+https://github.com/ValveSoftware/steamvr_unity_plugin/pull/72
+https://github.com/ValveSoftware/steamvr_unity_plugin/pull/71
+https://github.com/ValveSoftware/steamvr_unity_plugin/pull/67
+https://github.com/ValveSoftware/steamvr_unity_plugin/pull/64
+https://github.com/ValveSoftware/steamvr_unity_plugin/issues/84
+https://github.com/ValveSoftware/steamvr_unity_plugin/issues/78
 
 
 Changes for v1.2.3:
@@ -19,7 +104,7 @@ Changes for v1.2.3:
 
 * [RenderModels] Switched from using TextureFormat.ARGB32 to RGBA32 to fix pink texture issue on Vulkan.
 
-* [RenderModels] Fix for not initializing propery if game is paused on startup.
+* [RenderModels] Fix for not initializing properly if game is paused on startup.
 https://github.com/ValveSoftware/steamvr_unity_plugin/issues/62
 
 * [InteractionSystem] Added implemention for ItemPackageSpawner requireTriggerPressToReturn.

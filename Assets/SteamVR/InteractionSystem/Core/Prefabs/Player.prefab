@@ -852,7 +852,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otherHand: {fileID: 11450312}
-  startingHandType: 2
+  handType: 2
+  poseAction: {fileID: 11400000, guid: 514d274cd7a71ea4a97268c1ffed950a, type: 2}
+  grabPinchAction: {fileID: 11400000, guid: 14d5d27fa803ebd43aff7579ec40ad47, type: 2}
+  grabGripAction: {fileID: 11400000, guid: c36f37b766001024bbe88ee1851e2161, type: 2}
+  hapticAction: {fileID: 11400000, guid: 773fa217e1549a540b9c17bc1f79f447, type: 2}
+  uiInteractAction: {fileID: 11400000, guid: bde4128ac2200dd4aa5028602754ad8b, type: 2}
   hoverSphereTransform: {fileID: 0}
   hoverSphereRadius: 0.05
   hoverLayerMask:
@@ -862,7 +867,8 @@ MonoBehaviour:
   noSteamVRFallbackCamera: {fileID: 0}
   noSteamVRFallbackMaxDistanceNoItem: 10
   noSteamVRFallbackMaxDistanceWithItem: 0.5
-  controllerPrefab: {fileID: 168468, guid: 3f39fc63a93686e4a8e9168ee73f24d9, type: 2}
+  controllerPrefab: {fileID: 1000012782440478, guid: cf4a852a7a390644ebea6643f5dc1872,
+    type: 2}
   showDebugText: 0
   spewDebugText: 0
 --- !u!114 &11405908
@@ -890,7 +896,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otherHand: {fileID: 11401046}
-  startingHandType: 2
+  handType: 1
+  poseAction: {fileID: 11400000, guid: 349edc9654d3fbe439224a49ba1643cf, type: 2}
+  grabPinchAction: {fileID: 11400000, guid: 14d5d27fa803ebd43aff7579ec40ad47, type: 2}
+  grabGripAction: {fileID: 11400000, guid: c36f37b766001024bbe88ee1851e2161, type: 2}
+  hapticAction: {fileID: 11400000, guid: 0b5ad2d8c2cc42f4f8290f3746802cda, type: 2}
+  uiInteractAction: {fileID: 11400000, guid: bde4128ac2200dd4aa5028602754ad8b, type: 2}
   hoverSphereTransform: {fileID: 0}
   hoverSphereRadius: 0.05
   hoverLayerMask:
@@ -900,7 +911,8 @@ MonoBehaviour:
   noSteamVRFallbackCamera: {fileID: 0}
   noSteamVRFallbackMaxDistanceNoItem: 10
   noSteamVRFallbackMaxDistanceWithItem: 0.5
-  controllerPrefab: {fileID: 168468, guid: 3f39fc63a93686e4a8e9168ee73f24d9, type: 2}
+  controllerPrefab: {fileID: 1000012801256346, guid: d6ca068ee482b274a945aece6f541467,
+    type: 2}
   showDebugText: 0
   spewDebugText: 0
 --- !u!114 &11450526
@@ -1039,11 +1051,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e979227f3384fac4b8ca0b3550bf005c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseGameWhenDashboardIsVisible: 1
-  lockPhysicsUpdateRateToRenderFrequency: 1
   externalCamera: {fileID: 0}
   externalCameraConfigPath: externalcamera.cfg
-  trackingSpace: 1
 --- !u!114 &11489144
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1086,7 +1095,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otherHand: {fileID: 0}
-  startingHandType: 2
+  handType: 0
+  poseAction: {fileID: 0}
+  grabPinchAction: {fileID: 0}
+  grabGripAction: {fileID: 0}
+  hapticAction: {fileID: 0}
+  uiInteractAction: {fileID: 0}
   hoverSphereTransform: {fileID: 0}
   hoverSphereRadius: 0.05
   hoverLayerMask:

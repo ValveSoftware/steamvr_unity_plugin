@@ -53,7 +53,7 @@ namespace Valve.VR.InteractionSystem
 
 
 		//-------------------------------------------------
-		private void OnHandInitialized( int deviceIndex )
+		private void OnHandInitialized(int deviceIndex)
 		{
 			renderModel = gameObject.AddComponent<SteamVR_RenderModel>();
 			renderModel.SetDeviceIndex( deviceIndex );
@@ -155,7 +155,7 @@ namespace Valve.VR.InteractionSystem
 
 			if ( fireHapticsOnHightlight )
 			{
-				hand.controller.TriggerHapticPulse( 500 );
+				hand.TriggerHapticPulse( 500 );
 			}
 
 			if ( bodyMeshRenderer != null )
@@ -180,7 +180,7 @@ namespace Valve.VR.InteractionSystem
 
 			if ( fireHapticsOnHightlight )
 			{
-				hand.controller.TriggerHapticPulse( 300 );
+				hand.TriggerHapticPulse( 300 );
 			}
 
 			if ( bodyMeshRenderer != null )

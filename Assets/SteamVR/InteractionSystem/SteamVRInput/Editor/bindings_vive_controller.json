@@ -1,0 +1,257 @@
+{
+   "app_key" : "system.generated.unity.exe",
+   "bindings" : {
+      "/actions/default" : {
+         "chords" : [],
+         "haptics" : [
+            {
+               "output" : "/actions/default/out/vibrateleft",
+               "path" : "/user/hand/left/output/haptic"
+            },
+            {
+               "output" : "/actions/default/out/vibrateright",
+               "path" : "/user/hand/right/output/haptic"
+            }
+         ],
+         "poses" : [
+            {
+               "output" : "/actions/default/in/poseleft",
+               "path" : "/user/hand/left/pose/raw"
+            },
+            {
+               "output" : "/actions/default/in/poseright",
+               "path" : "/user/hand/right/pose/raw"
+            }
+         ],
+         "skeleton" : [
+            {
+               "output" : "/actions/default/in/skeletonleft",
+               "path" : "/user/hand/left/input/skeleton"
+            },
+            {
+               "output" : "/actions/default/in/skeletonright",
+               "path" : "/user/hand/right/input/skeleton"
+            }
+         ],
+         "sources" : [
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/grabpinch"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/grabpinchleft"
+                  },
+                  "pull" : {
+                     "output" : "/actions/default/in/use"
+                  }
+               },
+               "mode" : "trigger",
+               "path" : "/user/hand/left/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/teleport"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/trackpad"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/grip"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/grip"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/grabgrip"
+                  },
+                  "pull" : {
+                     "output" : "/actions/default/in/lightgripleft"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/grip"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/grabpinch"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/grabpinchright"
+                  },
+                  "pull" : {
+                     "output" : "/actions/default/in/use"
+                  }
+               },
+               "mode" : "trigger",
+               "path" : "/user/hand/right/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/teleport"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/trackpad"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/grip"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/grip"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/grabgrip"
+                  },
+                  "pull" : {
+                     "output" : "/actions/default/in/lightgripright"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/grip"
+            },
+            {
+               "inputs" : {
+                  "position" : {
+                     "output" : "/actions/default/in/move"
+                  }
+               },
+               "mode" : "trackpad",
+               "path" : "/user/hand/left/input/trackpad"
+            },
+            {
+               "inputs" : {
+                  "position" : {
+                     "output" : "/actions/default/in/move"
+                  }
+               },
+               "mode" : "trackpad",
+               "path" : "/user/hand/right/input/trackpad"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/interact"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/interact"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/trigger"
+            }
+         ]
+      },
+      "/actions/hands" : {
+         "sources" : [
+            {
+               "inputs" : {
+                  "pull" : {
+                     "output" : "/actions/hands/in/indexcurlleft"
+                  }
+               },
+               "mode" : "trigger",
+               "path" : "/user/hand/left/input/finger/index"
+            },
+            {
+               "inputs" : {
+                  "pull" : {
+                     "output" : "/actions/hands/in/middlecurlleft"
+                  }
+               },
+               "mode" : "trigger",
+               "path" : "/user/hand/left/input/finger/middle"
+            },
+            {
+               "inputs" : {
+                  "pull" : {
+                     "output" : "/actions/hands/in/ringcurlleft"
+                  }
+               },
+               "mode" : "trigger",
+               "path" : "/user/hand/left/input/finger/ring"
+            },
+            {
+               "inputs" : {
+                  "pull" : {
+                     "output" : "/actions/hands/in/pinkycurlleft"
+                  }
+               },
+               "mode" : "trigger",
+               "path" : "/user/hand/left/input/finger/pinky"
+            },
+            {
+               "inputs" : {
+                  "pull" : {
+                     "output" : "/actions/hands/in/indexcurlright"
+                  }
+               },
+               "mode" : "trigger",
+               "path" : "/user/hand/right/input/finger/index"
+            },
+            {
+               "inputs" : {
+                  "pull" : {
+                     "output" : "/actions/hands/in/middlecurlright"
+                  }
+               },
+               "mode" : "trigger",
+               "path" : "/user/hand/right/input/finger/middle"
+            },
+            {
+               "inputs" : {
+                  "pull" : {
+                     "output" : "/actions/hands/in/ringcurlright"
+                  }
+               },
+               "mode" : "trigger",
+               "path" : "/user/hand/right/input/finger/ring"
+            },
+            {
+               "inputs" : {
+                  "pull" : {
+                     "output" : "/actions/hands/in/pinkycurlright"
+                  }
+               },
+               "mode" : "trigger",
+               "path" : "/user/hand/right/input/finger/pinky"
+            }
+         ]
+      }
+   },
+   "controller_type" : "vive_controller",
+   "description" : "",
+   "name" : "binding_vive_controller_doublePoseSkeletonHaptic"
+}

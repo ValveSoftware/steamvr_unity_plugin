@@ -117,7 +117,7 @@ public class SteamVR_Overlay : MonoBehaviour
 				offset.pos.z += distance;
 
 				var t = offset.ToHmdMatrix34();
-				overlay.SetOverlayTransformAbsolute(handle, SteamVR_Render.instance.trackingSpace, ref t);
+				overlay.SetOverlayTransformAbsolute(handle, SteamVR.settings.trackingSpace, ref t);
 			}
 
 			overlay.SetOverlayInputMethod(handle, inputMethod);
@@ -167,7 +167,7 @@ public class SteamVR_Overlay : MonoBehaviour
 			return false;
 
 		var input = new VROverlayIntersectionParams_t();
-		input.eOrigin = SteamVR_Render.instance.trackingSpace;
+		input.eOrigin = SteamVR.settings.trackingSpace;
 		input.vSource.v0 =  source.x;
 		input.vSource.v1 =  source.y;
 		input.vSource.v2 = -source.z;

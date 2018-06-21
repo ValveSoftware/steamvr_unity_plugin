@@ -21,6 +21,9 @@ namespace Valve.VR.InteractionSystem
 		[HideInInspector]
 		public event OnDetachedFromHandDelegate onDetachedFromHand;
 
+        [System.NonSerialized]
+        public Hand attachedToHand;
+
 		//-------------------------------------------------
 		private void OnAttachedToHand( Hand hand )
 		{
@@ -28,7 +31,9 @@ namespace Valve.VR.InteractionSystem
 			{
 				onAttachedToHand.Invoke( hand );
 			}
-		}
+
+            attachedToHand = hand;
+        }
 
 
 		//-------------------------------------------------
@@ -38,6 +43,8 @@ namespace Valve.VR.InteractionSystem
 			{
 				onDetachedFromHand.Invoke( hand );
 			}
+
+            attachedToHand = null;
 		}
 	}
 }

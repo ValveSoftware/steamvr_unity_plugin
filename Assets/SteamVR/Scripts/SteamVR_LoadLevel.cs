@@ -487,12 +487,12 @@ public class SteamVR_LoadLevel : MonoBehaviour
 				offset.pos.z /= vrcam.origin.localScale.z;
 
 				var t = offset.ToHmdMatrix34();
-				overlay.SetOverlayTransformAbsolute(handle, SteamVR_Render.instance.trackingSpace, ref t);
+				overlay.SetOverlayTransformAbsolute(handle, SteamVR.settings.trackingSpace, ref t);
 			}
 			else
 			{
 				var t = new SteamVR_Utils.RigidTransform(transform).ToHmdMatrix34();
-				overlay.SetOverlayTransformAbsolute(handle, SteamVR_Render.instance.trackingSpace, ref t);
+				overlay.SetOverlayTransformAbsolute(handle, SteamVR.settings.trackingSpace, ref t);
 			}
 		}
 

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 4390f3b73c731c846a0cc863c72d7a1e
+timeCreated: 1529518097
+licenseType: Pro
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - plantAction: {instanceID: 0}
+  - hand: {instanceID: 0}
+  - prefabToPlant: {fileID: 1000011210241306, guid: 8a2487c189a464148aadc3af2effa7c8,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

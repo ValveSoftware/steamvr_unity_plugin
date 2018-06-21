@@ -10,13 +10,8 @@ using Valve.VR;
 
 public class SteamVR_Render : MonoBehaviour
 {
-	public bool pauseGameWhenDashboardIsVisible = true;
-	public bool lockPhysicsUpdateRateToRenderFrequency = true;
-
 	public SteamVR_ExternalCamera externalCamera;
 	public string externalCameraConfigPath = "externalcamera.cfg";
-
-	public ETrackingUniverseOrigin trackingSpace = ETrackingUniverseOrigin.TrackingUniverseStanding;
 
 	static public EVREye eye { get; private set; }
 
@@ -31,6 +26,11 @@ public class SteamVR_Render : MonoBehaviour
 
 				if (_instance == null)
 					_instance = new GameObject("[SteamVR]").AddComponent<SteamVR_Render>();
+
+                if (SteamVR_Settings.instance.inputUpdateMode != SteamVR_UpdateModes.Nothing || SteamVR_Settings.instance.poseUpdateMode != SteamVR_UpdateModes.Nothing)
+                {
+                    SteamVR_Input.Initialize(_instance.gameObject);
+                }
 			}
 			return _instance;
 		}
@@ -157,7 +157,7 @@ public class SteamVR_Render : MonoBehaviour
 				if (!compositor.CanRenderScene())
 					continue;
 
-				compositor.SetTrackingSpace(trackingSpace);
+				compositor.SetTrackingSpace(SteamVR.settings.trackingSpace);
 			}
 
 			var overlay = SteamVR_Overlay.instance;
@@ -193,7 +193,7 @@ public class SteamVR_Render : MonoBehaviour
 	{
 		if (hasFocus)
 		{
-			if (pauseGameWhenDashboardIsVisible)
+			if (SteamVR.settings.pauseGameWhenDashboardVisible)
 			{
 				Time.timeScale = timeScale;
 			}
@@ -202,7 +202,7 @@ public class SteamVR_Render : MonoBehaviour
 		}
 		else
 		{
-			if (pauseGameWhenDashboardIsVisible)
+			if (SteamVR.settings.pauseGameWhenDashboardVisible)
 			{
 				timeScale = Time.timeScale;
 				Time.timeScale = 0.0f;
@@ -321,21 +321,34 @@ public class SteamVR_Render : MonoBehaviour
 		}
 	}
 
-	public void UpdatePoses()
-	{
-		var compositor = OpenVR.Compositor;
-		if (compositor != null)
-		{
-			compositor.GetLastPoses(poses, gamePoses);
-			SteamVR_Events.NewPoses.Send(poses);
-			SteamVR_Events.NewPosesApplied.Send();
-		}
-	}
+    public void UpdatePoses()
+    {
+        SteamVR_Input.UpdateVisualActions();
+
+        var compositor = OpenVR.Compositor;
+        if (compositor != null)
+        {
+            compositor.GetLastPoses(poses, gamePoses);
+            SteamVR_Events.NewPoses.Send(poses);
+            SteamVR_Events.NewPosesApplied.Send();
+        }
+    }
 
 #if UNITY_2017_1_OR_NEWER
-	void OnBeforeRender() { UpdatePoses(); }
+	void OnBeforeRender() 
+    { 
+        if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnPreCull))
+        {
+            UpdatePoses();
+        }
+
+        if (SteamVR.settings.IsInputUpdateMode(SteamVR_UpdateModes.OnPreCull))
+        {
+            SteamVR_Input.UpdateNonVisualActions();
+        }
+    }
 #else
-	void OnCameraPreCull(Camera cam)
+    void OnCameraPreCull(Camera cam)
 	{
 #if !( UNITY_5_4 )
 		if (cam.cameraType != CameraType.VR)
@@ -345,16 +358,46 @@ public class SteamVR_Render : MonoBehaviour
 		if (Time.frameCount != lastFrameCount)
 		{
 			lastFrameCount = Time.frameCount;
-			UpdatePoses();
-		}
+
+            if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnPreCull))
+            {
+                UpdatePoses();
+            }
+
+            if (SteamVR.settings.IsInputUpdateMode(SteamVR_UpdateModes.OnPreCull))
+            {
+                SteamVR_Input.UpdateNonVisualActions();
+            }
+        }
 	}
 	static int lastFrameCount = -1;
 #endif
 
-	void Update()
+    private void FixedUpdate()
+    {
+        if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnFixedUpdate))
+        {
+            UpdatePoses();
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnLateUpdate))
+        {
+            UpdatePoses();
+        }
+    }
+
+    void Update()
 	{
-		// Force controller update in case no one else called this frame to ensure prevState gets updated.
-		SteamVR_Controller.Update();
+        if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnUpdate))
+        {
+            UpdatePoses();
+        }
+
+        // Force controller update in case no one else called this frame to ensure prevState gets updated.
+        SteamVR_Controller.Update();
 
 		// Dispatch any OpenVR events.
 		var system = OpenVR.System;
@@ -400,7 +443,7 @@ public class SteamVR_Render : MonoBehaviour
 		QualitySettings.maxQueuedFrames = -1;
 		QualitySettings.vSyncCount = 0; // this applies to the companion window
 
-		if (lockPhysicsUpdateRateToRenderFrequency && Time.timeScale > 0.0f)
+		if (SteamVR.settings.lockPhysicsUpdateRateToRenderFrequency && Time.timeScale > 0.0f)
 		{
 			var vr = SteamVR.instance;
 			if (vr != null)

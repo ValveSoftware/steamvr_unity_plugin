@@ -1,4 +1,4 @@
-//======= Copyright (c) Valve Corporation, All rights reserved. ===============
+﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
 // Purpose: Destroys this object when its particle system dies
 //

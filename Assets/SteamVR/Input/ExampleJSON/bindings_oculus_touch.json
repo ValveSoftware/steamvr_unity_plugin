@@ -1,0 +1,169 @@
+{
+   "bindings" : {
+      "/actions/default" : {
+         "chords" : [],
+         "haptics" : [
+            {
+               "output" : "/actions/default/out/hapticlefthand",
+               "path" : "/user/hand/left/output/haptic"
+            },
+            {
+               "output" : "/actions/default/out/hapticrighthand",
+               "path" : "/user/hand/right/output/haptic"
+            }
+         ],
+         "poses" : [
+            {
+               "output" : "/actions/default/in/poselefthand",
+               "path" : "/user/hand/left/pose/raw"
+            },
+            {
+               "output" : "/actions/default/in/poserighthand",
+               "path" : "/user/hand/right/pose/raw"
+            }
+         ],
+         "skeleton" : [
+            {
+               "output" : "/actions/default/in/skeletonlefthand",
+               "path" : "/user/hand/left/input/skeleton/left"
+            },
+            {
+               "output" : "/actions/default/in/skeletonrighthand",
+               "path" : "/user/hand/right/input/skeleton/right"
+            }
+         ],
+         "sources" : [
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/use"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/interactui"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/trigger"
+            },
+          {
+            "inputs": {
+              "position": {
+                "output": "/actions/default/in/move"
+              }
+            },
+            "mode": "joystick",
+            "path": "/user/hand/left/input/joystick"
+          },
+          {
+            "inputs": {
+              "click": {
+                "output": "/actions/default/in/teleport"
+              }
+            },
+            "mode": "button",
+            "path": "/user/hand/left/input/joystick"
+          },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/grabgrip"
+                  }
+               },
+               "mode" : "button",
+               "parameters" : {
+                  "click_activate_threshold" : "0.05",
+                  "click_deactivate_threshold" : "0",
+                  "force_input" : "force"
+               },
+               "path" : "/user/hand/left/input/grip"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/grabpinch"
+                  }
+               },
+               "mode" : "button",
+               "parameters" : {
+                  "click_activate_threshold" : "0.1",
+                  "click_deactivate_threshold" : "0.05",
+                  "force_input" : "value"
+               },
+               "path" : "/user/hand/left/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/use"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/interactui"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/grabpinch"
+                  }
+               },
+               "mode" : "button",
+               "parameters" : {
+                  "click_activate_threshold" : "0.1",
+                  "click_deactivate_threshold" : "0.05"
+               },
+               "path" : "/user/hand/right/input/trigger"
+            },
+          {
+            "inputs": {
+              "position": {
+                "output": "/actions/default/in/move"
+              }
+            },
+            "mode": "joystick",
+            "path": "/user/hand/right/input/joystick"
+          },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/teleport"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/joystick"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/grabgrip"
+                  }
+               },
+               "mode" : "button",
+               "parameters" : {
+                  "click_activate_threshold" : "0.05",
+                  "click_deactivate_threshold" : "0",
+                  "force_input" : "force"
+               },
+               "path" : "/user/hand/right/input/grip"
+            }
+         ]
+      }
+   },
+   "controller_type" : "oculus_touch",
+   "description" : "",
+   "name" : "oculus_touch"
+}

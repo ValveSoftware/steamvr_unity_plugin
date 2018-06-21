@@ -8,18 +8,21 @@ public class SteamVR_TestThrow : MonoBehaviour
 	public GameObject prefab;
 	public Rigidbody attachPoint;
 
-	SteamVR_TrackedObject trackedObj;
+    [DefaultInputAction("Interact")]
+    public SteamVR_Input_Action_Boolean spawn;
+
+    SteamVR_Input_TrackedObject trackedObj;
 	FixedJoint joint;
 
 	void Awake()
 	{
-		trackedObj = GetComponent<SteamVR_TrackedObject>();
+		trackedObj = GetComponent<SteamVR_Input_TrackedObject>();
 	}
 
 	void FixedUpdate()
 	{
-		var device = SteamVR_Controller.Input((int)trackedObj.index);
-		if (joint == null && device.GetTouchDown(SteamVR_Controller.ButtonMask.Trigger))
+		var device = SteamVR_Controller.Input((int)trackedObj.poseAction.GetDeviceIndex());
+		if (joint == null && spawn.GetStateDown(trackedObj.inputSource))
 		{
 			var go = GameObject.Instantiate(prefab);
 			go.transform.position = attachPoint.transform.position;
@@ -27,7 +30,7 @@ public class SteamVR_TestThrow : MonoBehaviour
 			joint = go.AddComponent<FixedJoint>();
 			joint.connectedBody = attachPoint;
 		}
-		else if (joint != null && device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
+		else if (joint != null && spawn.GetStateUp(trackedObj.inputSource))
 		{
 			var go = joint.gameObject;
 			var rigidbody = go.GetComponent<Rigidbody>();

@@ -173,12 +173,11 @@ public class SteamVR_Menu : MonoBehaviour
 		if (tracker != null)
 		{
 			tracker.wireframe = GUILayout.Toggle(tracker.wireframe, "Wireframe");
-
-			var render = SteamVR_Render.instance;
-			if (render.trackingSpace == ETrackingUniverseOrigin.TrackingUniverseSeated)
+            
+			if (SteamVR.settings.trackingSpace == ETrackingUniverseOrigin.TrackingUniverseSeated)
 			{
 				if (GUILayout.Button("Switch to Standing"))
-					render.trackingSpace = ETrackingUniverseOrigin.TrackingUniverseStanding;
+                    SteamVR.settings.trackingSpace = ETrackingUniverseOrigin.TrackingUniverseStanding;
 				if (GUILayout.Button("Center View"))
 				{
 					var system = OpenVR.System;
@@ -189,7 +188,7 @@ public class SteamVR_Menu : MonoBehaviour
 			else
 			{
 				if (GUILayout.Button("Switch to Seated"))
-					render.trackingSpace = ETrackingUniverseOrigin.TrackingUniverseSeated;
+                    SteamVR.settings.trackingSpace = ETrackingUniverseOrigin.TrackingUniverseSeated;
 			}
 		}
 

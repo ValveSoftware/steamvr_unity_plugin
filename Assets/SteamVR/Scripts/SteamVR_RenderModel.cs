@@ -438,7 +438,7 @@ public class SteamVR_RenderModel : MonoBehaviour
 			}
 			else
 			{
-				Debug.Log("Failed to load render model texture for render model " + renderModelName);
+				Debug.Log("Failed to load render model texture for render model " + renderModelName + ". Error: " + error.ToString());
 			}
 		}
 

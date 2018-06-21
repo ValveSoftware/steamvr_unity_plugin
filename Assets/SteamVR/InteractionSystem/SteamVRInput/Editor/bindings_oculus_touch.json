@@ -1,0 +1,75 @@
+{
+  "controller_type": "oculus_touch",
+  "action_binds": [
+    {
+      "action": "/actions/default/in/UseLeft",
+      "source": "/user/hand/left/input/trigger/value"
+    },
+    {
+      "action": "/actions/default/in/GripLeft",
+      "source": "/filters/left_grip_threshold/result"
+    },
+    {
+      "action": "/actions/default/in/UseRight",
+      "source": "/user/hand/right/input/trigger/value"
+    },
+    {
+      "action": "/actions/default/in/GripRight",
+      "source": "/filters/right_grip_threshold/result"
+    },
+    {
+      "action": "/actions/default/in/PoseRight",
+      "source": "/user/hand/right/pose"
+    },
+    {
+      "action": "/actions/default/in/PoseLeft",
+      "source": "/user/hand/left/pose"
+    },
+    {
+      "action": "/actions/default/out/VibrateLeft",
+      "source": "/user/hand/left/output/haptic"
+    },
+    {
+      "action": "/actions/default/out/VibrateRight",
+      "source": "/user/hand/right/output/haptic"
+    },
+    {
+      "action": "/actions/default/in/SkeletonLeft",
+      "source": "/user/hand/left/input/skeleton"
+    },
+    {
+      "action": "/actions/default/in/SkeletonRight",
+      "source": "/user/hand/right/input/skeleton"
+    }
+  ],
+  "filters": [
+    {
+      "name": "left_trigger_threshold",
+      "type": "boolean_threshold",
+      "action_sets": [ "/actions/default" ],
+      "input": "/user/hand/left/input/trigger/value",
+      "output": "result"
+    },
+    {
+      "name": "left_grip_threshold",
+      "type": "boolean_threshold",
+      "action_sets": [ "/actions/default" ],
+      "input": "/user/hand/left/input/grip/value",
+      "output": "result"
+    },
+    {
+      "name": "right_trigger_threshold",
+      "type": "boolean_threshold",
+      "action_sets": [ "/actions/default" ],
+      "input": "/user/hand/right/input/trigger/value",
+      "output": "result"
+    },
+    {
+      "name": "right_grip_threshold",
+      "type": "boolean_threshold",
+      "action_sets": [ "/actions/default" ],
+      "input": "/user/hand/right/input/grip/value",
+      "output": "result"
+    }
+  ]
+}
