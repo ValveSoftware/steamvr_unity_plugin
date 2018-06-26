@@ -1,10 +1,29 @@
-SteamVR plugin for Unity - v1.3b06
+SteamVR plugin for Unity - v1.3b07
 Copyright (c) Valve Corporation, All rights reserved.
 
 
 Requirements:
 
 The SteamVR runtime must be installed.  This can be found in Steam under Tools.
+
+
+Changes for v1.3b07:
+
+* Fixed issue with upgrading from the legacy system
+
+* Fixed some line endings
+
+* Fixed generation bug where it wouldn't reopen to the scene you started on
+
+* Auto replacing app key in binding files
+
+* Updating actions and bindings to have one pose and one haptic action
+
+* Gave each app its own app id via a vrmanifest that is generated on import. Can be modified in SteamVR_Settings for release.
+
+* Fixed haptic actions not displaying in play mode
+
+* Temporary fix for skeletons erroring while the dashboard is up
 
 
 Changes for v1.3b06:

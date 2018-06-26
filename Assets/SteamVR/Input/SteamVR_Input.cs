@@ -66,6 +66,8 @@ public partial class SteamVR_Input : MonoBehaviour
 
     public SteamVR_Input_Action_Skeleton[] instance_actionsSkeleton;
 
+    public SteamVR_Input_Action_Vibration[] instance_actionsVibration;
+
     public SteamVR_Input_Action_In[] instance_actionsNonPoseNonSkeletonIn;
 
     public static SteamVR_Input_Action[] actions
@@ -137,6 +139,14 @@ public partial class SteamVR_Input : MonoBehaviour
         get
         {
             return SteamVR_Input.instance.instance_actionsSkeleton;
+        }
+    }
+
+    public static SteamVR_Input_Action_Vibration[] actionsVibration
+    {
+        get
+        {
+            return SteamVR_Input.instance.instance_actionsVibration;
         }
     }
 
@@ -619,7 +629,7 @@ public partial class SteamVR_Input : MonoBehaviour
             }
             else if (type == typeof(SteamVR_Input_Action_Vibration))
             {
-                return actionsOut.Cast<SteamVR_Input_Action_Vibration>() as T[];
+                return actionsVibration as T[];
             }
             else
             {
@@ -801,6 +811,7 @@ public class SteamVR_Input_Generator_Names
     public const string actionsFieldName = "actions";
     public const string actionsInFieldName = "actionsIn";
     public const string actionsOutFieldName = "actionsOut";
+    public const string actionsVibrationFieldName = "actionsVibration";
     public const string actionsPoseFieldName = "actionsPose";
     public const string actionsBooleanFieldName = "actionsBoolean";
     public const string actionsSingleFieldName = "actionsSingle";

@@ -6,6 +6,7 @@
 
 using UnityEngine;
 using Valve.VR;
+using System.IO;
 
 #if UNITY_2017_2_OR_NEWER
     using UnityEngine.XR;
@@ -98,6 +99,8 @@ public class SteamVR : System.IDisposable
 			}
 
             settings = SteamVR_Settings.instance;
+
+            IdentifyApplication();
 
             SteamVR_Input.IdentifyActionsFile();
         }
@@ -213,7 +216,11 @@ public class SteamVR : System.IDisposable
             Debug.LogError("[SteamVR] Error turning on the debug input binding flag in steamvr: " + bindingFlagError.ToString());
 
         if (Application.isPlaying == false)
+        {
+            IdentifyApplication();
+
             SteamVR_Input.IdentifyActionsFile();
+        }
 
         /*
         GameObject tempObject = new GameObject("[Temp] [SteamVR Input]");
@@ -236,7 +243,7 @@ public class SteamVR : System.IDisposable
         if (initOpenVR)
             OpenVR.Shutdown();
 
-        Application.OpenURL("http://localhost:8998/dashboard/controllerbinding.html?app=system.generated.unity.exe"); //todo: update with the actual call
+        Application.OpenURL("http://localhost:8998/dashboard/controllerbinding.html?app=" + SteamVR_Settings.instance.appKey.ToLower()); //todo: update with the actual call
     }
 
     public static string GetResourcesFolderPath(bool fromAssetsDirectory = false)
@@ -264,6 +271,80 @@ public class SteamVR : System.IDisposable
         return resourcesPath;
     }
 #endif
+
+
+    public const string defaultUnityAppKeyTemplate = "system.generated.unity.{0}.exe";
+    public const string defaultAppKeyTemplate = "system.generated.{0}";
+
+    public static string GenerateAppKey()
+    {
+        string productName = Application.productName;
+        if (string.IsNullOrEmpty(productName))
+            productName = "unnamed_product";
+        else
+        {
+            productName = System.Text.RegularExpressions.Regex.Replace(Application.productName, "[^\\w\\._]", "");
+            productName = productName.ToLower();
+        }
+
+        return string.Format(defaultUnityAppKeyTemplate, productName);
+    }
+
+    private static string GetManifestFile()
+    {
+        string currentPath = Application.dataPath;
+        int lastIndex = currentPath.LastIndexOf('/');
+        currentPath = currentPath.Remove(lastIndex, currentPath.Length - lastIndex);
+
+        string fullPath = Path.Combine(currentPath, "unityProject.vrmanifest");
+
+        if (File.Exists(fullPath) == false)
+        {
+            SteamVR_Input_ManifestFile manifestFile = new SteamVR_Input_ManifestFile();
+            manifestFile.source = "Unity";
+            SteamVR_Input_ManifestFile_Application manifestApplication = new SteamVR_Input_ManifestFile_Application();
+            manifestApplication.app_key = SteamVR_Settings.instance.appKey;
+            manifestApplication.action_manifest_path = SteamVR_Settings.instance.actionsFilePath;
+            manifestApplication.launch_type = "binary";
+            manifestApplication.binary_path_windows = SteamVR_Utils.ConvertToForwardSlashes(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            manifestApplication.binary_path_linux = SteamVR_Utils.ConvertToForwardSlashes(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            manifestApplication.binary_path_osx = SteamVR_Utils.ConvertToForwardSlashes(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            manifestApplication.strings.Add("en_us", new SteamVR_Input_ManifestFile_ApplicationString() { name = string.Format("{0} [Testing]", Application.productName) });
+            manifestFile.applications = new System.Collections.Generic.List<SteamVR_Input_ManifestFile_Application>();
+            manifestFile.applications.Add(manifestApplication);
+
+            string json = Valve.Newtonsoft.Json.JsonConvert.SerializeObject(manifestFile, Valve.Newtonsoft.Json.Formatting.Indented, new Valve.Newtonsoft.Json.JsonSerializerSettings
+            { NullValueHandling = Valve.Newtonsoft.Json.NullValueHandling.Ignore });
+
+            File.WriteAllText(fullPath, json);
+        }
+
+        return fullPath;
+    }
+
+    private static void IdentifyApplication()
+    {
+        string manifestPath = GetManifestFile();
+
+        bool isInstalled = OpenVR.Applications.IsApplicationInstalled(SteamVR_Settings.instance.appKey);
+
+        if (isInstalled == false)
+        {
+            var addManifestErr = OpenVR.Applications.AddApplicationManifest(manifestPath, true);
+            if (addManifestErr != EVRApplicationError.None)
+                Debug.LogError("Error adding vr manifest file: " + addManifestErr.ToString());
+            else
+                Debug.Log("Successfully added vr manifest");
+        }
+
+        int processId = System.Diagnostics.Process.GetCurrentProcess().Id;
+        var applicationIdentifyErr = OpenVR.Applications.IdentifyApplication((uint)processId, SteamVR_Settings.instance.appKey);
+
+        if (applicationIdentifyErr != EVRApplicationError.None)
+            Debug.LogError("Error identifying application: " + applicationIdentifyErr.ToString());
+        else
+            Debug.Log("Successfully identified application");
+    }
 
     #region Event callbacks
 

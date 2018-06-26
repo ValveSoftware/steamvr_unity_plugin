@@ -3649,6 +3649,12 @@ public enum EColorSpace
 	Gamma = 1,
 	Linear = 2,
 }
+public enum EDeviceType
+{
+	Invalid = -1,
+	DirectX11 = 0,
+	Vulkan = 1,
+}
 public enum ETrackingResult
 {
 	Uninitialized = 1,
@@ -4021,6 +4027,7 @@ public enum EVREventType
 	VREvent_Input_BindingLoadFailed = 1701,
 	VREvent_Input_BindingLoadSuccessful = 1702,
 	VREvent_Input_ActionManifestReloaded = 1703,
+	VREvent_Input_ActionManifestLoadFailed = 1704,
 	VREvent_SpatialAnchors_PoseUpdated = 1800,
 	VREvent_SpatialAnchors_DescriptorUpdated = 1801,
 	VREvent_SpatialAnchors_RequestPoseUpdate = 1802,
@@ -4751,6 +4758,19 @@ public enum EIOBufferMode
 	public ETextureType eType;
 	public EColorSpace eColorSpace;
 }
+[StructLayout(LayoutKind.Sequential)] public struct VRVulkanDevice_t
+{
+	public IntPtr m_pInstance; // struct VkInstance_T *
+	public IntPtr m_pDevice; // struct VkDevice_T *
+	public IntPtr m_pPhysicalDevice; // struct VkPhysicalDevice_T *
+	public IntPtr m_pQueue; // struct VkQueue_T *
+	public uint m_uQueueFamilyIndex;
+}
+[StructLayout(LayoutKind.Sequential)] public struct VRNativeDevice_t
+{
+	public IntPtr handle; // void *
+	public EDeviceType eType;
+}
 [StructLayout(LayoutKind.Sequential)] public struct TrackedDevicePose_t
 {
 	public HmdMatrix34_t mDeviceToAbsoluteTracking;
@@ -4953,6 +4973,13 @@ public enum EIOBufferMode
 	public ulong pathMessage;
 	public ulong pathUrl;
 	public ulong pathControllerType;
+}
+[StructLayout(LayoutKind.Sequential)] public struct VREvent_InputActionManifestLoad_t
+{
+	public ulong pathAppKey;
+	public ulong pathMessage;
+	public ulong pathMessageParam;
+	public ulong pathManifestPath;
 }
 [StructLayout(LayoutKind.Sequential)] public struct VREvent_SpatialAnchor_t
 {

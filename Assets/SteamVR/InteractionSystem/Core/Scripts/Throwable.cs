@@ -237,6 +237,7 @@ namespace Valve.VR.InteractionSystem
 		{
 			if ( hand.IsGrabEnding(this.gameObject) )
 			{
+
 				// Detach ourselves late in the frame.
 				// This is so that any vehicles the player is attached to
 				// have a chance to finish updating themselves.

@@ -8,24 +8,40 @@ public class SteamVR_Settings : ScriptableObject
     {
         get
         {
+            LoadInstance();
+
+            return _instance;
+        }
+    }
+
+    private static void LoadInstance()
+    {
+        if (_instance == null)
+        {
+            _instance = Resources.Load<SteamVR_Settings>("SteamVR_Settings");
+
             if (_instance == null)
             {
-                _instance = Resources.Load<SteamVR_Settings>("SteamVR_Settings");
-
-                if (_instance == null)
-                {
-                    _instance = SteamVR_Settings.CreateInstance<SteamVR_Settings>();
+                _instance = SteamVR_Settings.CreateInstance<SteamVR_Settings>();
 
 #if UNITY_EDITOR
-                    string folderPath = SteamVR.GetResourcesFolderPath(true);
-                    string assetPath = System.IO.Path.Combine(folderPath, "SteamVR_Settings.asset");
+                string folderPath = SteamVR.GetResourcesFolderPath(true);
+                string assetPath = System.IO.Path.Combine(folderPath, "SteamVR_Settings.asset");
 
-                    UnityEditor.AssetDatabase.CreateAsset(_instance, assetPath);
-                    UnityEditor.AssetDatabase.SaveAssets();
+                UnityEditor.AssetDatabase.CreateAsset(_instance, assetPath);
+                UnityEditor.AssetDatabase.SaveAssets();
 #endif
-                }
             }
-            return _instance;
+
+            if (string.IsNullOrEmpty(_instance.appKey))
+            {
+                _instance.appKey = SteamVR.GenerateAppKey();
+                Debug.Log("[SteamVR] Generated you an app key of: " + _instance.appKey + ". This can be changed in Assets/SteamVR/Resources/SteamVR_Settings");
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(_instance);
+                UnityEditor.AssetDatabase.SaveAssets();
+#endif
+            }
         }
     }
 
@@ -41,6 +57,7 @@ public class SteamVR_Settings : ScriptableObject
 
     public bool activateFirstActionSetOnStart = true;
 
+    public string appKey;
 
     public bool IsInputUpdateMode(SteamVR_UpdateModes tocheck)
     {
@@ -49,5 +66,10 @@ public class SteamVR_Settings : ScriptableObject
     public bool IsPoseUpdateMode(SteamVR_UpdateModes tocheck)
     {
         return (poseUpdateMode & tocheck) == poseUpdateMode;
+    }
+
+    public static void VerifyScriptableObject()
+    {
+        LoadInstance();
     }
 }

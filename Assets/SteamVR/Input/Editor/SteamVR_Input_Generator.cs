@@ -146,6 +146,7 @@ public static class SteamVR_Input_Generator
 #else
         CheckForNextStep();
 #endif
+        SteamVR_Settings.VerifyScriptableObject();
     }
 
     private static void CheckForNextStep()
@@ -322,6 +323,8 @@ public static class SteamVR_Input_Generator
             EditorSceneManager.SaveOpenScenes();
 
         var activeScene = EditorSceneManager.GetActiveScene();
+        string activeScenePath = activeScene.path;
+
         List<string> processedScenes = new List<string>();
 
         AssignDefaultsInScene();
@@ -360,8 +363,11 @@ public static class SteamVR_Input_Generator
             }
         }
 
-        if (string.IsNullOrEmpty(activeScene.path) == false)
-            EditorSceneManager.OpenScene(activeScene.path, OpenSceneMode.Single);
+        if (string.IsNullOrEmpty(activeScenePath) == false)
+        {
+            EditorSceneManager.OpenScene(activeScenePath, OpenSceneMode.Single);
+            Debug.Log("Opened previous scene: " + activeScenePath);
+        }
     }
 
     private static void AssignDefaultsInScene()
@@ -936,6 +942,8 @@ public static class SteamVR_Input_Generator
 
         CodeArrayCreateExpression actionsOutArray = new CodeArrayCreateExpression(new CodeTypeReference(typeof(SteamVR_Input_Action_Out)));
 
+        CodeArrayCreateExpression actionsVibrationArray = new CodeArrayCreateExpression(new CodeTypeReference(typeof(SteamVR_Input_Action_Vibration)));
+
         CodeArrayCreateExpression actionsPoseArray = new CodeArrayCreateExpression(new CodeTypeReference(typeof(SteamVR_Input_Action_Pose)));
 
         CodeArrayCreateExpression actionsSkeletonArray = new CodeArrayCreateExpression(new CodeTypeReference(typeof(SteamVR_Input_Action_Skeleton)));
@@ -1009,6 +1017,8 @@ public static class SteamVR_Input_Generator
             }
             else
             {
+                actionsVibrationArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), codeFriendlyInstanceName));
+
                 actionsOutArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), codeFriendlyInstanceName));
             }
 
@@ -1018,6 +1028,7 @@ public static class SteamVR_Input_Generator
         AddAssignStatement(actionsInitMethod, GetCodeFriendlyInstanceName(SteamVR_Input_Generator_Names.actionsFieldName), actionsArray);
         AddAssignStatement(actionsInitMethod, GetCodeFriendlyInstanceName(SteamVR_Input_Generator_Names.actionsInFieldName), actionsInArray);
         AddAssignStatement(actionsInitMethod, GetCodeFriendlyInstanceName(SteamVR_Input_Generator_Names.actionsOutFieldName), actionsOutArray);
+        AddAssignStatement(actionsInitMethod, GetCodeFriendlyInstanceName(SteamVR_Input_Generator_Names.actionsVibrationFieldName), actionsVibrationArray);
         AddAssignStatement(actionsInitMethod, GetCodeFriendlyInstanceName(SteamVR_Input_Generator_Names.actionsPoseFieldName), actionsPoseArray);
         AddAssignStatement(actionsInitMethod, GetCodeFriendlyInstanceName(SteamVR_Input_Generator_Names.actionsBooleanFieldName), actionsBooleanArray);
         AddAssignStatement(actionsInitMethod, GetCodeFriendlyInstanceName(SteamVR_Input_Generator_Names.actionsSingleFieldName), actionsSingleArray);
@@ -1322,66 +1333,5 @@ public static class SteamVR_Input_Generator
         methodToAddTo.Statements.Add(condition);
 
         return condition;
-    }
-
-    private static void CreateManifestFile()
-    {
-        SteamVR_Input_ManifestFile file = new SteamVR_Input_ManifestFile();
-        file.source = "builtin";
-
-        SteamVR_Input_ManifestFile_Application application = new SteamVR_Input_ManifestFile_Application();
-        file.applications.Add(application);
-
-        string appKey = GetValidIdentifier("com." + PlayerSettings.companyName + "." + PlayerSettings.productName);
-
-        application.app_key = appKey;
-        application.launch_type = "binary";
-        application.binary_path_windows = ConvertToForwardSlashes(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
-        application.action_manifest_path = ConvertToForwardSlashes(SteamVR_Input.actionsFilePath);
-
-        SteamVR_Input_ManifestFile_Application_Binding touchBinding = CreateApplicationBindingItem(SteamVR_Input_ManifestFile_Application_Binding_ControllerTypes.oculus_touch);
-        SteamVR_Input_ManifestFile_Application_Binding viveBinding = CreateApplicationBindingItem(SteamVR_Input_ManifestFile_Application_Binding_ControllerTypes.vive_controller);
-        SteamVR_Input_ManifestFile_Application_Binding knucklesBinding = CreateApplicationBindingItem(SteamVR_Input_ManifestFile_Application_Binding_ControllerTypes.knuckles);
-
-        application.bindings.Add(touchBinding);
-        application.bindings.Add(viveBinding);
-        application.bindings.Add(knucklesBinding);
-
-        application.strings = new Dictionary<string, SteamVR_Input_ManifestFile_ApplicationString>();
-        application.strings["en_us"] = new SteamVR_Input_ManifestFile_ApplicationString() { name = PlayerSettings.productName + "[Testing]" };
-
-        string json = Valve.Newtonsoft.Json.JsonConvert.SerializeObject(file, Valve.Newtonsoft.Json.Formatting.Indented, new Valve.Newtonsoft.Json.JsonSerializerSettings
-        { NullValueHandling = Valve.Newtonsoft.Json.NullValueHandling.Ignore });
-
-
-        string currentPath = Application.dataPath;
-        int lastIndex = currentPath.LastIndexOf('/');
-        currentPath = currentPath.Remove(lastIndex, currentPath.Length - lastIndex);
-
-        string fullPath = Path.Combine(currentPath, "example.vrmanifest");
-        File.WriteAllText(fullPath, json);
-
-        Debug.Log("[SteamVR] Wrote example json: " + fullPath);
-    }
-
-    private static SteamVR_Input_ManifestFile_Application_Binding CreateApplicationBindingItem(string controller_type)
-    {
-        string actionsPath = ConvertToForwardSlashes(SteamVR_Input.actionsFilePath);
-        int lastSlash = actionsPath.LastIndexOf('/');
-        string path = actionsPath.Substring(0, lastSlash);
-
-        SteamVR_Input_ManifestFile_Application_Binding binding = new SteamVR_Input_ManifestFile_Application_Binding();
-        binding.controller_type = controller_type;
-        binding.binding_url = ConvertToForwardSlashes(Path.Combine(path, string.Format("bindings_{0}.json", binding.controller_type)));
-
-        return binding;
-    }
-
-    private static string ConvertToForwardSlashes(string fromString)
-    {
-        string newString = fromString.Replace("\\\\", "\\");
-        newString = newString.Replace("\\", "/");
-
-        return newString;
     }
 }

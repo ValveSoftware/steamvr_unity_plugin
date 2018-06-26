@@ -29,6 +29,7 @@ namespace Valve.VR.InteractionSystem
             VelocityMovement = 1 << 4, // The object will attempt to move to match the position and rotation of the hand.
             TurnOnKinematic = 1 << 5, // The object will not respond to external physics.
             TurnOffGravity = 1 << 6, // The object will not respond to external physics.
+            AllowSidegrade = 1 << 7, // The object is able to switch from a pinch grab to a grip grab. Decreases likelyhood of a good throw but also decreases likelyhood of accidental drop
         };
 
         public const AttachmentFlags defaultAttachmentFlags = AttachmentFlags.ParentToHand |
@@ -40,7 +41,7 @@ namespace Valve.VR.InteractionSystem
         public Hand otherHand;
         public SteamVR_Input_Input_Sources handType;
 
-        [DefaultInputAction("Pose", null, "handType")]
+        [DefaultInputAction("Pose")]
         public SteamVR_Input_Action_Pose poseAction;
 
         [DefaultInputAction("GrabPinch")]
@@ -49,7 +50,7 @@ namespace Valve.VR.InteractionSystem
         [DefaultInputAction("GrabGrip")]
         public SteamVR_Input_Action_Boolean grabGripAction;
 
-        [DefaultInputAction("Haptic", null, "handType")]
+        [DefaultInputAction("Haptic")]
         public SteamVR_Input_Action_Vibration hapticAction;
         
         [DefaultInputAction("InteractUI")]

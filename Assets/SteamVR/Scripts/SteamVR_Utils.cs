@@ -620,5 +620,13 @@ public static class SteamVR_Utils
 
         return sb.ToString();
     }
+
+    public static string ConvertToForwardSlashes(string fromString)
+    {
+        string newString = fromString.Replace("\\\\", "\\");
+        newString = newString.Replace("\\", "/");
+
+        return newString;
+    }
 }
 

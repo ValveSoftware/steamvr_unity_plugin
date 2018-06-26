@@ -68,9 +68,13 @@ public class SteamVR_Input_Action_Skeleton : SteamVR_Input_Action_Pose
 
         EVRInputError err = OpenVR.Input.GetSkeletalActionData(handle, ref tempSkeletonActionData, skeletonActionData_size, SteamVR_Input_Input_Source.GetHandle(inputSource));
         if (err != EVRInputError.None)
-            Debug.LogError("GetSkeletalActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString());
+        {
+            Debug.LogWarning("GetSkeletalActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString()); //todo: this should be an error
+            active[inputSource] = false;
+            return;
+        }
 
-        active[inputSource] = tempSkeletonActionData.bActive;
+        active[inputSource] &= tempSkeletonActionData.bActive; //anding from the pose active state
         activeOrigin[inputSource] = tempSkeletonActionData.activeOrigin;
 
         if (active[inputSource])

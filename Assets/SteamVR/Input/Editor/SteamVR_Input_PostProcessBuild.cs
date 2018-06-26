@@ -37,6 +37,8 @@ public class SteamVR_Input_PostProcessBuild
 
                     File.Copy(file, newFilePath);
 
+                    UpdateAppKey(newFilePath, fileInfo.Name);
+
                     Debug.Log("[SteamVR] Copied (overwrote) SteamVR Input file at build path: " + newFilePath);
                 }
                 else
@@ -47,8 +49,44 @@ public class SteamVR_Input_PostProcessBuild
             else
             {
                 File.Copy(file, newFilePath);
+                UpdateAppKey(newFilePath, fileInfo.Name);
 
                 Debug.Log("[SteamVR] Copied SteamVR Input file to build folder: " + newFilePath);
+            }
+
+        }
+    }
+
+    private static void UpdateAppKey(string newFilePath, string executableName)
+    {
+        if (File.Exists(newFilePath))
+        {
+            string jsonText = System.IO.File.ReadAllText(newFilePath);
+
+            string findString = "\"app_key\" : \"";
+            int stringStart = jsonText.IndexOf(findString);
+
+            if (stringStart == -1)
+            {
+                findString = findString.Replace(" ", "");
+                stringStart = jsonText.IndexOf(findString);
+
+                if (stringStart == -1)
+                    return; //no app key
+            }
+
+            stringStart += findString.Length;
+            int stringEnd = jsonText.IndexOf("\"", stringStart);
+
+            int stringLength = stringEnd - stringStart;
+
+            string appKey = jsonText.Substring(stringStart, stringLength);
+
+            if (string.Equals(appKey, SteamVR_Settings.instance.appKey, System.StringComparison.CurrentCultureIgnoreCase) == false)
+            {
+                jsonText = jsonText.Replace(appKey, SteamVR_Settings.instance.appKey);
+
+                File.WriteAllText(newFilePath, jsonText);
             }
         }
     }

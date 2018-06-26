@@ -25,11 +25,7 @@
       "type": "boolean"
     },
     {
-      "name": "/actions/default/in/PoseLeftHand",
-      "type": "pose"
-    },
-    {
-      "name": "/actions/default/in/PoseRightHand",
+      "name": "/actions/default/in/Pose",
       "type": "pose"
     },
     {
@@ -43,11 +39,7 @@
       "skeleton": "/skeleton/hand/right"
     },
     {
-      "name": "/actions/default/out/HapticLeftHand",
-      "type": "vibration"
-    },
-    {
-      "name": "/actions/default/out/HapticRightHand",
+      "name": "/actions/default/out/Haptic",
       "type": "vibration"
     }
   ],
@@ -84,9 +76,11 @@
       "/actions/default/in/PoseRightHand": "Pose (Right)",
       "/actions/default/in/SkeletonLeftHand": "Skeleton (Left)",
       "/actions/default/in/SkeletonRightHand": "Skeleton (Right)",
-      "/actions/default/out/HapticLeftHand": "Haptic (Left)",
+      "/actions/default/out/HapticLeftHand": "Haptic",
       "/actions/default/out/HapticRightHand": "Haptic (Right)",
-      "/actions/default/in/Plant": "Plant"
+      "/actions/default/in/Plant": "Plant",
+      "/actions/default/in/Pose": "Pose",
+      "/actions/default/out/Haptic": "Haptic"
     }
   ]
 }

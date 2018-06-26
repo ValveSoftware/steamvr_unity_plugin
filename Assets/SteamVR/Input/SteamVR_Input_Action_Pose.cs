@@ -66,7 +66,18 @@ public class SteamVR_Input_Action_Pose : SteamVR_Input_Action_In
 
         EVRInputError err = OpenVR.Input.GetPoseActionData(handle, universeOrigin, predictedSecondsFromNow, ref tempPoseActionData, poseActionData_size, SteamVR_Input_Input_Source.GetHandle(inputSource));
         if (err != EVRInputError.None)
-            Debug.LogError("GetPoseActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString());
+        {
+            if (err == EVRInputError.InvalidHandle)
+            {
+                //todo: ignoring this error for now since it throws while the dashboard is up
+            }
+            else
+            {
+                Debug.LogError("GetPoseActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString()); //todo: this should be an error
+            }
+            active[inputSource] = false;
+            return;
+        }
 
         poseActionData[inputSource] = tempPoseActionData;
         active[inputSource] = tempPoseActionData.bActive;

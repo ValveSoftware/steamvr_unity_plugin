@@ -4,21 +4,21 @@
          "chords" : [],
          "haptics" : [
             {
-               "output" : "/actions/default/out/hapticlefthand",
+               "output" : "/actions/default/out/haptic",
                "path" : "/user/hand/left/output/haptic"
             },
             {
-               "output" : "/actions/default/out/hapticrighthand",
+               "output" : "/actions/default/out/haptic",
                "path" : "/user/hand/right/output/haptic"
             }
          ],
          "poses" : [
             {
-               "output" : "/actions/default/in/poselefthand",
+               "output" : "/actions/default/in/pose",
                "path" : "/user/hand/left/pose/raw"
             },
             {
-               "output" : "/actions/default/in/poserighthand",
+               "output" : "/actions/default/in/pose",
                "path" : "/user/hand/right/pose/raw"
             }
          ],

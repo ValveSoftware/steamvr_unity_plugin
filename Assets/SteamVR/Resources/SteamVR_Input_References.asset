@@ -22,12 +22,10 @@ MonoBehaviour:
   - instance___actions_default_in_Teleport
   - instance___actions_default_in_GrabPinch
   - instance___actions_default_in_GrabGrip
-  - instance___actions_default_in_PoseLeftHand
-  - instance___actions_default_in_PoseRightHand
+  - instance___actions_default_in_Pose
   - instance___actions_default_in_SkeletonLeftHand
   - instance___actions_default_in_SkeletonRightHand
-  - instance___actions_default_out_HapticLeftHand
-  - instance___actions_default_out_HapticRightHand
+  - instance___actions_default_out_Haptic
   actionObjects:
   - {fileID: 11400000, guid: 6d4b53cc799cc6343b314a913487ea0e, type: 2}
   - {fileID: 11400000, guid: f8abd57a6046bf948a9b1b622f9c84d8, type: 2}
@@ -35,9 +33,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3d7c69143e6e1794aab42d5f5d2d7f0d, type: 2}
   - {fileID: 11400000, guid: 14d5d27fa803ebd43aff7579ec40ad47, type: 2}
   - {fileID: 11400000, guid: c36f37b766001024bbe88ee1851e2161, type: 2}
-  - {fileID: 11400000, guid: 349edc9654d3fbe439224a49ba1643cf, type: 2}
-  - {fileID: 11400000, guid: 514d274cd7a71ea4a97268c1ffed950a, type: 2}
+  - {fileID: 11400000, guid: 5dca2b69c27ecb142a5c4df8b5dfd343, type: 2}
   - {fileID: 11400000, guid: 7272e122063ee9c40a16c5961a54f938, type: 2}
   - {fileID: 11400000, guid: 3df5cc0626e7d424eb9c25d57d078f39, type: 2}
-  - {fileID: 11400000, guid: 0b5ad2d8c2cc42f4f8290f3746802cda, type: 2}
-  - {fileID: 11400000, guid: 773fa217e1549a540b9c17bc1f79f447, type: 2}
+  - {fileID: 11400000, guid: 047e3723e290bef4eb5a170e108402eb, type: 2}
