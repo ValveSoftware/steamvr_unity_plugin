@@ -52,6 +52,9 @@ public class SteamVR_Settings : ScriptableObject
     [Tooltip("Filename local to the project root (or executable, in a build)")]
     public string actionsFilePath = "actions.json";
 
+    [Tooltip("Path local to the Assets folder")]
+    public string steamVRInputPath = "SteamVR_Input";
+
     public SteamVR_UpdateModes inputUpdateMode = SteamVR_UpdateModes.OnUpdate;
     public SteamVR_UpdateModes poseUpdateMode = SteamVR_UpdateModes.OnPreCull;
 

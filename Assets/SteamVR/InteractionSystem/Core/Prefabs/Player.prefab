@@ -853,13 +853,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   otherHand: {fileID: 11450312}
   handType: 2
-  poseAction: {fileID: 11400000, guid: 5dca2b69c27ecb142a5c4df8b5dfd343, type: 2}
-  grabPinchAction: {fileID: 11400000, guid: 14d5d27fa803ebd43aff7579ec40ad47, type: 2}
-  grabGripAction: {fileID: 11400000, guid: c36f37b766001024bbe88ee1851e2161, type: 2}
-  hapticAction: {fileID: 11400000, guid: 047e3723e290bef4eb5a170e108402eb, type: 2}
-  uiInteractAction: {fileID: 11400000, guid: bde4128ac2200dd4aa5028602754ad8b, type: 2}
-  hoverSphereTransform: {fileID: 0}
-  hoverSphereRadius: 0.05
+  poseAction: {fileID: 11400000, guid: 0e754678c7d6c6b41854e69ae58e74ae, type: 2}
+  grabPinchAction: {fileID: 11400000, guid: bccf745dc5e5ece44b85e531c9d3569b, type: 2}
+  grabGripAction: {fileID: 11400000, guid: 65460bf3025b7ef43b7771b4c0ff9a8b, type: 2}
+  hapticAction: {fileID: 11400000, guid: 9ef77b3121cc90240af4f46ea2d1f342, type: 2}
+  uiInteractAction: {fileID: 11400000, guid: 9affd786fb56acf468c8d1d9dfdca015, type: 2}
+  hoverSphereTransform: {fileID: 480432}
+  hoverSphereRadius: 0.06
   hoverLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -897,13 +897,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   otherHand: {fileID: 11401046}
   handType: 1
-  poseAction: {fileID: 11400000, guid: 5dca2b69c27ecb142a5c4df8b5dfd343, type: 2}
-  grabPinchAction: {fileID: 11400000, guid: 14d5d27fa803ebd43aff7579ec40ad47, type: 2}
-  grabGripAction: {fileID: 11400000, guid: c36f37b766001024bbe88ee1851e2161, type: 2}
-  hapticAction: {fileID: 11400000, guid: 047e3723e290bef4eb5a170e108402eb, type: 2}
-  uiInteractAction: {fileID: 11400000, guid: bde4128ac2200dd4aa5028602754ad8b, type: 2}
-  hoverSphereTransform: {fileID: 0}
-  hoverSphereRadius: 0.05
+  poseAction: {fileID: 11400000, guid: 0e754678c7d6c6b41854e69ae58e74ae, type: 2}
+  grabPinchAction: {fileID: 11400000, guid: bccf745dc5e5ece44b85e531c9d3569b, type: 2}
+  grabGripAction: {fileID: 11400000, guid: 65460bf3025b7ef43b7771b4c0ff9a8b, type: 2}
+  hapticAction: {fileID: 11400000, guid: 9ef77b3121cc90240af4f46ea2d1f342, type: 2}
+  uiInteractAction: {fileID: 11400000, guid: 9affd786fb56acf468c8d1d9dfdca015, type: 2}
+  hoverSphereTransform: {fileID: 490018}
+  hoverSphereRadius: 0.06
   hoverLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295

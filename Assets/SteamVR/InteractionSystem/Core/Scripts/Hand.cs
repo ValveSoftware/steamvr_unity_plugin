@@ -9,6 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using UnityEngine.Events;
 
 namespace Valve.VR.InteractionSystem
 {
@@ -492,7 +493,7 @@ namespace Valve.VR.InteractionSystem
         {
             if (poseAction != null && poseAction.GetActive(handType))
             {
-                return transform.parent.TransformVector(poseAction.GetVelocity(handType));
+                return Player.instance.trackingOriginTransform.TransformVector(poseAction.GetVelocity(handType));
             }
 
             return Vector3.zero;
@@ -501,8 +502,8 @@ namespace Valve.VR.InteractionSystem
 
         public Vector3 GetOldControllerVelocity()
         {
-            var controller = SteamVR_Controller.Input((int)poseAction.GetDeviceIndex(handType));
-            return controller.velocity;
+            SteamVR_Controller.Device controller = SteamVR_Controller.Input((int)poseAction.GetDeviceIndex(handType));
+            return Player.instance.trackingOriginTransform.TransformVector(controller.velocity);
         }
 
         //-------------------------------------------------
@@ -512,7 +513,7 @@ namespace Valve.VR.InteractionSystem
         {
             if (poseAction != null && poseAction.GetActive(handType))
             {
-                return transform.parent.TransformVector(poseAction.GetAngularVelocity(handType));
+                return Player.instance.trackingOriginTransform.TransformDirection(poseAction.GetAngularVelocity(handType));
             }
 
             return Vector3.zero;
@@ -520,8 +521,8 @@ namespace Valve.VR.InteractionSystem
 
         public Vector3 GetOldControllerAngularVelocity()
         {
-            var controller = SteamVR_Controller.Input((int)poseAction.GetDeviceIndex(handType));
-            return controller.angularVelocity;
+            SteamVR_Controller.Device controller = SteamVR_Controller.Input((int)poseAction.GetDeviceIndex(handType));
+            return Player.instance.trackingOriginTransform.TransformDirection(controller.angularVelocity);
         }
 
         public void GetEstimatedPeakVelocities(out Vector3 velocity, out Vector3 angularVelocity)
@@ -608,33 +609,25 @@ namespace Valve.VR.InteractionSystem
             float closestDistance = float.MaxValue;
             Interactable closestInteractable = null;
 
-            // Pick the closest hovering
-            float flHoverRadiusScale = playerInstance.transform.lossyScale.x;
-            float flScaledSphereRadius = hoverSphereRadius * flHoverRadiusScale;
-
-            // if we're close to the floor, increase the radius to make things easier to pick up
-            float handDiff = Mathf.Abs(transform.position.y - playerInstance.trackingOriginTransform.position.y);
-            float boxMult = Util.RemapNumberClamped(handDiff, 0.0f, 0.5f * flHoverRadiusScale, 5.0f, 1.0f) * flHoverRadiusScale;
-
             // null out old vals
             for (int i = 0; i < overlappingColliders.Length; ++i)
             {
                 overlappingColliders[i] = null;
             }
 
-            Physics.OverlapBoxNonAlloc(
-                hoverSphereTransform.position - new Vector3(0, flScaledSphereRadius * boxMult - flScaledSphereRadius, 0),
-                new Vector3(flScaledSphereRadius, flScaledSphereRadius * boxMult * 2.0f, flScaledSphereRadius),
-                overlappingColliders,
-                Quaternion.identity,
-                hoverLayerMask.value
-            );
+            // Pick the closest hovering
+            float scaledHoverRadius = hoverSphereRadius * SteamVR_Utils.GetLossyScale(hoverSphereTransform);
+
+            Physics.OverlapSphereNonAlloc(hoverSphereTransform.position, scaledHoverRadius, overlappingColliders, hoverLayerMask.value);
+            
 
             // DebugVar
             int iActualColliderCount = 0;
 
-            foreach (Collider collider in overlappingColliders)
+            for (int colliderIndex = 0; colliderIndex < overlappingColliders.Length; colliderIndex++)
             {
+                Collider collider = overlappingColliders[colliderIndex];
+
                 if (collider == null)
                     continue;
 
@@ -655,7 +648,16 @@ namespace Valve.VR.InteractionSystem
                 }
 
                 // Can't hover over the object if it's attached
-                if (attachedObjects.FindIndex(l => l.attachedObject == contacting.gameObject) != -1)
+                bool hoveringOverAttached = false;
+                for (int attachedIndex = 0; attachedIndex < attachedObjects.Count; attachedIndex++)
+                {
+                    if (attachedObjects[attachedIndex].attachedObject == contacting.gameObject)
+                    {
+                        hoveringOverAttached = true;
+                        break;
+                    }
+                }
+                if (hoveringOverAttached)
                     continue;
 
                 // Occupied by another hand, so we can't touch it
@@ -864,14 +866,20 @@ namespace Valve.VR.InteractionSystem
 
         protected void UpdateAttachedVelocity(AttachedObject attachedObjectInfo)
         {
+            float scale = SteamVR_Utils.GetLossyScale(this.transform);
+
+            float maxVelocityChange = MaxVelocityChange * scale;
+            float velocityMagic = VelocityMagic;
+            float angularVelocityMagic = AngularVelocityMagic;
+            float maxAngularVelocityChange = MaxAngularVelocityChange * scale;
+
             Vector3 targetItemPosition = this.transform.TransformPoint(attachedObjectInfo.initialPositionalOffset);
             Vector3 positionDelta = (targetItemPosition - attachedObjectInfo.attachedObject.transform.position);
-            Vector3 velocityTarget = (positionDelta * VelocityMagic * Time.deltaTime);
+            Vector3 velocityTarget = (positionDelta * velocityMagic * Time.deltaTime);
 
             if (float.IsNaN(velocityTarget.x) == false && float.IsInfinity(velocityTarget.x) == false)
             {
-                attachedObjectInfo.attachedRigidbody.velocity = Vector3.MoveTowards(attachedObjectInfo.attachedRigidbody.velocity, velocityTarget, MaxVelocityChange);
-                //attachedObjectInfo.attachedRigidbody.position = targetItemPosition;
+                attachedObjectInfo.attachedRigidbody.velocity = Vector3.MoveTowards(attachedObjectInfo.attachedRigidbody.velocity, velocityTarget, maxVelocityChange);
             }
 
 
@@ -887,10 +895,9 @@ namespace Valve.VR.InteractionSystem
 
             if (angle != 0 && float.IsNaN(axis.x) == false && float.IsInfinity(axis.x) == false)
             {
-                Vector3 angularTarget = angle * axis * AngularVelocityMagic * Time.deltaTime;
+                Vector3 angularTarget = angle * axis * angularVelocityMagic * Time.deltaTime;
 
-                attachedObjectInfo.attachedRigidbody.angularVelocity = Vector3.MoveTowards(attachedObjectInfo.attachedRigidbody.angularVelocity, angularTarget, MaxAngularVelocityChange);
-                //attachedObjectInfo.attachedRigidbody.rotation = targetItemRotation;
+                attachedObjectInfo.attachedRigidbody.angularVelocity = Vector3.MoveTowards(attachedObjectInfo.attachedRigidbody.angularVelocity, angularTarget, maxAngularVelocityChange);
             }
         }
 
@@ -1055,6 +1062,21 @@ namespace Valve.VR.InteractionSystem
             }
         }
 
+        public bool IsGrabbingWithOppositeType(GrabTypes type)
+        {
+            switch (type)
+            {
+                case GrabTypes.Pinch:
+                    return grabGripAction.GetState(handType);
+
+                case GrabTypes.Grip:
+                    return grabPinchAction.GetState(handType);
+
+                default:
+                    return false;
+            }
+        }
+
         public GrabTypes GetBestGrabbingType()
         {
             return GetBestGrabbingType(GrabTypes.None);
@@ -1117,6 +1139,9 @@ namespace Valve.VR.InteractionSystem
         }
     }
 
+
+    [System.Serializable]
+    public class HandEvent : UnityEvent<Hand> { }
 
 
 #if UNITY_EDITOR

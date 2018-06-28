@@ -628,5 +628,17 @@ public static class SteamVR_Utils
 
         return newString;
     }
+
+    public static float GetLossyScale(Transform forTransform)
+    {
+        float scale = 1f;
+        while (forTransform.parent != null)
+        {
+            forTransform = forTransform.parent;
+            scale *= forTransform.localScale.x;
+        }
+
+        return scale;
+    }
 }
 

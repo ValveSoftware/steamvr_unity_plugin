@@ -1,10 +1,25 @@
-SteamVR plugin for Unity - v1.3b07
+SteamVR plugin for Unity - v1.3b08
 Copyright (c) Valve Corporation, All rights reserved.
 
 
 Requirements:
 
 The SteamVR runtime must be installed.  This can be found in Steam under Tools.
+
+
+Changes for v1.3b08:
+
+* SteamVR_Input_References has been moved to the generated folder so new plugin updates don't wipe yours. Prior beta users: Please delete your existing one in Assets/SteamVR/Resources/SteamVR_Input_References.asset
+
+* SteamVR_Input is no longer a MonoBehaviour. This fixes scene transition issues as well as event subscription issues.
+
+* The Live Action View has been moved to its own window under the Window menu.
+
+* Some excess configuration options were removed from the settings window, some were moved into SteamVR_Settings if still needed.
+
+* Added a Hover Button that depresses when the controller gets close to it.
+
+* Fixed an issue where default throwables would "auto catch" objects
 
 
 Changes for v1.3b07:

@@ -23,8 +23,8 @@ namespace Valve.VR.InteractionSystem
 		[Tooltip( "Name of the attachment transform under in the hand's hierarchy which the object should should snap to." )]
 		public string attachmentPoint;
 
-		[Tooltip( "How fast must this object be moving to attach due to a trigger hold instead of a trigger press?" )]
-		public float catchSpeedThreshold = 0.0f;
+		[Tooltip( "How fast must this object be moving to attach due to a trigger hold instead of a trigger press? (-1 to disable)" )]
+        public float catchingSpeedThreshold = -1;
 
         public ReleaseStyle releaseVelocityStyle = ReleaseStyle.RawFromHand;
 
@@ -70,6 +70,7 @@ namespace Valve.VR.InteractionSystem
 
             rigidbody = GetComponent<Rigidbody>();
             rigidbody.maxAngularVelocity = 50.0f;
+
 		}
 
 
@@ -78,16 +79,18 @@ namespace Valve.VR.InteractionSystem
 		{
 			bool showHint = false;
 
-			// "Catch" the throwable by holding down the interaction button instead of pressing it.
-			// Only do this if the throwable is moving faster than the prescribed threshold speed,
-			// and if it isn't attached to another hand
-			if ( !attached )
-			{
+            // "Catch" the throwable by holding down the interaction button instead of pressing it.
+            // Only do this if the throwable is moving faster than the prescribed threshold speed,
+            // and if it isn't attached to another hand
+            if ( !attached && catchingSpeedThreshold != -1)
+            {
+                float catchingThreshold = catchingSpeedThreshold * SteamVR_Utils.GetLossyScale(Player.instance.trackingOriginTransform);
+
                 GrabTypes bestGrabType = hand.GetBestGrabbingType();
 
                 if ( bestGrabType != GrabTypes.None )
 				{
-					if (rigidbody.velocity.magnitude >= catchSpeedThreshold )
+					if (rigidbody.velocity.magnitude >= catchingThreshold)
 					{
 						hand.AttachObject( gameObject, bestGrabType, attachmentFlags, attachmentPoint );
 						showHint = false;

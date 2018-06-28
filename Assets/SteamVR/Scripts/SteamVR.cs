@@ -289,7 +289,7 @@ public class SteamVR : System.IDisposable
 
         return string.Format(defaultUnityAppKeyTemplate, productName);
     }
-
+    
     private static string GetManifestFile()
     {
         string currentPath = Application.dataPath;
@@ -298,13 +298,27 @@ public class SteamVR : System.IDisposable
 
         string fullPath = Path.Combine(currentPath, "unityProject.vrmanifest");
 
+        if (File.Exists(fullPath))
+        {
+            string jsonText = File.ReadAllText(fullPath);
+            SteamVR_Input_ManifestFile existingFile = Valve.Newtonsoft.Json.JsonConvert.DeserializeObject<SteamVR_Input_ManifestFile>(jsonText);
+            if (existingFile != null && existingFile.applications != null && existingFile.applications.Count > 0 && existingFile.applications[0].app_key != SteamVR_Settings.instance.appKey)
+            {
+                Debug.Log("[SteamVR] Deleting existing VRManifest because it has a different app key.");
+                FileInfo existingInfo = new FileInfo(fullPath);
+                if (existingInfo.IsReadOnly)
+                    existingInfo.IsReadOnly = false;
+                existingInfo.Delete();
+            }
+        }
+
         if (File.Exists(fullPath) == false)
         {
             SteamVR_Input_ManifestFile manifestFile = new SteamVR_Input_ManifestFile();
             manifestFile.source = "Unity";
             SteamVR_Input_ManifestFile_Application manifestApplication = new SteamVR_Input_ManifestFile_Application();
             manifestApplication.app_key = SteamVR_Settings.instance.appKey;
-            manifestApplication.action_manifest_path = SteamVR_Settings.instance.actionsFilePath;
+            //manifestApplication.action_manifest_path = SteamVR_Settings.instance.actionsFilePath;
             manifestApplication.launch_type = "binary";
             manifestApplication.binary_path_windows = SteamVR_Utils.ConvertToForwardSlashes(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
             manifestApplication.binary_path_linux = SteamVR_Utils.ConvertToForwardSlashes(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);

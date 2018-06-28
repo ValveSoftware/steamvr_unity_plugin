@@ -13,7 +13,7 @@ using System.Reflection;
 using System.Linq;
 using Valve.Newtonsoft.Json;
 
-public partial class SteamVR_Input : MonoBehaviour
+public partial class SteamVR_Input
 {
     public const string defaultInputGameObjectName = "[SteamVR Input]";
     private const string localizationKeyName = "localization";
@@ -28,135 +28,41 @@ public partial class SteamVR_Input : MonoBehaviour
     public static Action InitializeActionSets;
     public static Action InitializeActions;
 
+    public static Action InitializeInstanceActionSets;
+    public static Action InitializeInstanceActions;
+
     public static event Action OnNonVisualActionsUpdated;
     public static event Action<bool> OnPosesUpdated;
     public static event Action<bool> OnSkeletonsUpdated;
-
-    protected static SteamVR_Input instance = null;
 
     protected static Type inputType = typeof(SteamVR_Input);
 
     protected static bool initializing = false;
 
-    #region instance and static array accessors
-    public SteamVR_Input_ActionSet[] instance_actionSets;
-    public static SteamVR_Input_ActionSet[] actionSets
-    {
-        get
-        {
-            return SteamVR_Input.instance.instance_actionSets;
-        }
-    }
+    #region array accessors
+    public static SteamVR_Input_ActionSet[] actionSets;
 
-    public SteamVR_Input_Action[] instance_actions;
+    public static SteamVR_Input_Action[] actions;
 
-    public SteamVR_Input_Action_In[] instance_actionsIn;
+    public static SteamVR_Input_Action_In[] actionsIn;
 
-    public SteamVR_Input_Action_Out[] instance_actionsOut;
+    public static SteamVR_Input_Action_Out[] actionsOut;
 
-    public SteamVR_Input_Action_Boolean[] instance_actionsBoolean;
+    public static SteamVR_Input_Action_Boolean[] actionsBoolean;
 
-    public SteamVR_Input_Action_Single[] instance_actionsSingle;
+    public static SteamVR_Input_Action_Single[] actionsSingle;
 
-    public SteamVR_Input_Action_Vector2[] instance_actionsVector2;
+    public static SteamVR_Input_Action_Vector2[] actionsVector2;
 
-    public SteamVR_Input_Action_Vector3[] instance_actionsVector3;
+    public static SteamVR_Input_Action_Vector3[] actionsVector3;
 
-    public SteamVR_Input_Action_Pose[] instance_actionsPose;
+    public static SteamVR_Input_Action_Pose[] actionsPose;
 
-    public SteamVR_Input_Action_Skeleton[] instance_actionsSkeleton;
+    public static SteamVR_Input_Action_Skeleton[] actionsSkeleton;
 
-    public SteamVR_Input_Action_Vibration[] instance_actionsVibration;
+    public static SteamVR_Input_Action_Vibration[] actionsVibration;
 
-    public SteamVR_Input_Action_In[] instance_actionsNonPoseNonSkeletonIn;
-
-    public static SteamVR_Input_Action[] actions
-    {
-        get
-        {
-            return SteamVR_Input.instance.instance_actions;
-        }
-    }
-
-    public static SteamVR_Input_Action_In[] actionsIn
-    {
-        get
-        {
-            return SteamVR_Input.instance.instance_actionsIn;
-        }
-    }
-
-    public static SteamVR_Input_Action_Out[] actionsOut
-    {
-        get
-        {
-            return SteamVR_Input.instance.instance_actionsOut;
-        }
-    }
-
-    public static SteamVR_Input_Action_Boolean[] actionsBoolean
-    {
-        get
-        {
-            return SteamVR_Input.instance.instance_actionsBoolean;
-        }
-    }
-
-    public static SteamVR_Input_Action_Single[] actionsSingle
-    {
-        get
-        {
-            return SteamVR_Input.instance.instance_actionsSingle;
-        }
-    }
-
-    public static SteamVR_Input_Action_Vector2[] actionsVector2
-    {
-        get
-        {
-            return SteamVR_Input.instance.instance_actionsVector2;
-        }
-    }
-
-    public static SteamVR_Input_Action_Vector3[] actionsVector3
-    {
-        get
-        {
-            return SteamVR_Input.instance.instance_actionsVector3;
-        }
-    }
-
-    public static SteamVR_Input_Action_Pose[] actionsPose
-    {
-        get
-        {
-            return SteamVR_Input.instance.instance_actionsPose;
-        }
-    }
-
-    public static SteamVR_Input_Action_Skeleton[] actionsSkeleton
-    {
-        get
-        {
-            return SteamVR_Input.instance.instance_actionsSkeleton;
-        }
-    }
-
-    public static SteamVR_Input_Action_Vibration[] actionsVibration
-    {
-        get
-        {
-            return SteamVR_Input.instance.instance_actionsVibration;
-        }
-    }
-
-    public static SteamVR_Input_Action_In[] actionsNonPoseNonSkeletonIn
-    {
-        get
-        {
-            return SteamVR_Input.instance.instance_actionsNonPoseNonSkeletonIn;
-        }
-    }
+    public static SteamVR_Input_Action_In[] actionsNonPoseNonSkeletonIn;
 
     protected static Dictionary<string, SteamVR_Input_ActionSet> actionSetsByPath = new Dictionary<string, SteamVR_Input_ActionSet>();
     protected static Dictionary<string, SteamVR_Input_Action> actionsByPath = new Dictionary<string, SteamVR_Input_Action>();
@@ -183,78 +89,28 @@ public partial class SteamVR_Input : MonoBehaviour
             Debug.Log("Successfully loaded action manifest into SteamVR");
     }
 
-    public static void InitializeMapping()
+    public static void Initialize()
     {
-        CheckSetup();
+        if (initialized)
+            return;
 
-        Type actionSetType = typeof(SteamVR_Input_ActionSet);
-        Type actionType = typeof(SteamVR_Input_Action);
-
-        FieldInfo[] fields = inputType.GetFields(BindingFlags.Instance | BindingFlags.Public);
-        FieldInfo[] actionSetFields = fields.Where(field => actionSetType.IsAssignableFrom(field.FieldType)).ToArray();
-        FieldInfo[] actionFields = fields.Where(field => actionType.IsAssignableFrom(field.FieldType)).ToArray();
-
-        for (int actionSetIndex = 0; actionSetIndex < actionSetFields.Length; actionSetIndex++)
-        {
-            string fieldName = actionSetFields[actionSetIndex].Name;
-
-            int setReferenceIndex = 0;
-            for (setReferenceIndex = 0; setReferenceIndex < SteamVR_Input_References.instance.actionSetNames.Length; setReferenceIndex++)
-            {
-                string currentName = SteamVR_Input_References.instance.actionSetNames[setReferenceIndex];
-                if (currentName == fieldName)
-                {
-                    break;
-                }
-            }
-
-            actionSetFields[actionSetIndex].SetValue(instance, SteamVR_Input_References.instance.actionSetObjects[setReferenceIndex]);
-        }
-
-
-        for (int actionIndex = 0; actionIndex < actionFields.Length; actionIndex++)
-        {
-            string fieldName = actionFields[actionIndex].Name;
-
-            int actionReferenceIndex = 0;
-            for (actionReferenceIndex = 0; actionReferenceIndex < SteamVR_Input_References.instance.actionNames.Length; actionReferenceIndex++)
-            {
-                string currentName = SteamVR_Input_References.instance.actionNames[actionReferenceIndex];
-                if (currentName == fieldName)
-                {
-                    break;
-                }
-            }
-
-            actionFields[actionIndex].SetValue(instance, SteamVR_Input_References.instance.actionObjects[actionReferenceIndex]);
-        }
-    }
-
-    public static void Initialize(GameObject inputObject)
-    {
         Debug.Log("Initializing steamvr input...");
         initializing = true;
-        //use the new instance of SteamVR_Input
-        SteamVR_Input newInstance = inputObject.GetComponent<SteamVR_Input>();
-        if (newInstance == null)
-            newInstance = inputObject.AddComponent<SteamVR_Input>();
 
-        if (instance != null && instance != newInstance)
-            Destroy(instance);
-        instance = newInstance;
-
-        InitializeMapping();
-
-        if (initialized == true && actions != null && actionSets != null)
-        {
-            Debug.LogError("Already initialized steamvr input. Continuing...");
-            return;
-        }
+#if UNITY_EDITOR
+        CheckSetup();
+#endif
 
         SteamVR_Input_Input_Source.Initialize();
 
         InitializeActionSets = GetMethod<Action>(SteamVR_Input_Generator_Names.initializeActionSetsMethodName) as Action;
         InitializeActions = GetMethod<Action>(SteamVR_Input_Generator_Names.initializeActionsMethodName) as Action;
+
+        InitializeInstanceActionSets = GetMethod<Action>(SteamVR_Input_Generator_Names.initializeInstanceActionSetsMethodName) as Action;
+        InitializeInstanceActions = GetMethod<Action>(SteamVR_Input_Generator_Names.initializeInstanceActionsMethodName) as Action;
+
+        InitializeInstanceActionSets();
+        InitializeInstanceActions();
 
         InitializeActionSets();
 
@@ -270,14 +126,13 @@ public partial class SteamVR_Input : MonoBehaviour
 
         InitializeActions();
 
-
         SteamVR_Input_Action_Pose.SetTrackingUniverseOrigin(SteamVR_Settings.instance.trackingSpace);
-        
 
         InitializeDictionaries();
 
-        initializing = false;
         initialized = true;
+
+        initializing = false;
         Debug.Log("Steamvr input initialization complete.");
     }
 
@@ -386,6 +241,7 @@ public partial class SteamVR_Input : MonoBehaviour
     public static Delegate GetMethod<T>(string methodName)
     {
         MethodInfo methodInfo = inputType.GetMethod(methodName);
+
         return Delegate.CreateDelegate(typeof(T), methodInfo);
     }
 
@@ -401,7 +257,7 @@ public partial class SteamVR_Input : MonoBehaviour
         UpdateSkeletonActions(skipStateAndEventUpdates);
     }
 
-    private void Update()
+    public static void Update()
     {
         if (initialized == false)
             return;
@@ -412,7 +268,7 @@ public partial class SteamVR_Input : MonoBehaviour
         }
     }
 
-    private void LateUpdate()
+    public static void LateUpdate()
     {
         if (initialized == false)
             return;
@@ -423,12 +279,7 @@ public partial class SteamVR_Input : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        initialized = false;
-    }
-
-    private void FixedUpdate()
+    public static void FixedUpdate()
     {
         if (initialized == false)
             return;
@@ -556,10 +407,7 @@ public partial class SteamVR_Input : MonoBehaviour
     {
         if (Application.isPlaying)
         {
-            if (instance != null)
-                return actionSets;
-            else
-                return null;
+            return actionSets;
         }
         else
         {
@@ -588,9 +436,6 @@ public partial class SteamVR_Input : MonoBehaviour
 
         if (Application.isPlaying)
         {
-            if (instance == null)
-                return null;
-
             if (type == typeof(SteamVR_Input_Action))
             {
                 return actions as T[];
@@ -723,9 +568,38 @@ public partial class SteamVR_Input : MonoBehaviour
         return true;
     }
 
+#if UNITY_EDITOR
+    public static string GetResourcesFolderPath(bool fromAssetsDirectory = false)
+    {
+        string inputFolder = string.Format("Assets/{0}", SteamVR_Settings.instance.steamVRInputPath);
+
+        string path = Path.Combine(inputFolder, "Resources");
+
+        bool createdDirectory = false;
+        if (Directory.Exists(inputFolder) == false)
+        {
+            Directory.CreateDirectory(inputFolder);
+            createdDirectory = true;
+        }
+
+
+        if (Directory.Exists(path) == false)
+        {
+            Directory.CreateDirectory(path);
+            createdDirectory = true;
+        }
+
+        if (createdDirectory)
+            UnityEditor.AssetDatabase.Refresh();
+
+        if (fromAssetsDirectory == false)
+            return path.Replace("Assets/", "");
+        else
+            return path;
+    }
+
     private static void CheckSetup()
     {
-#if UNITY_EDITOR
         if (SteamVR_Input_References.instance.actionSetObjects == null || SteamVR_Input_References.instance.actionSetObjects.Length == 0 || SteamVR_Input_References.instance.actionSetObjects.Any(set => set != null) == false)
         {
             Debug.Break();
@@ -742,10 +616,8 @@ public partial class SteamVR_Input : MonoBehaviour
                 }
             }
         }
-#endif
     }
-
-#if UNITY_EDITOR
+    
     private static Type FindType(string typeName)
     {
         var type = Type.GetType(typeName);
@@ -758,66 +630,5 @@ public partial class SteamVR_Input : MonoBehaviour
         }
         return null;
     }
-
-    private void Reset()
-    {
-        if (Application.isPlaying == false && initializing == false)
-        {
-            DestroyImmediate(this);
-            UnityEditor.EditorUtility.DisplayDialog("[SteamVR]", "This component gets added automatically at runtime.", "Ok");
-        }
-    }
 #endif
-}
-
-public enum SteamVR_UpdateModes
-{
-    Nothing = (1 << 0),
-    OnUpdate = (1 << 1),
-    OnFixedUpdate = (1 << 2),
-    OnPreCull = (1 << 3),
-    OnLateUpdate = (1 << 4),
-}
-
-public enum SteamVR_Input_ActionDirections
-{
-    In,
-    Out,
-}
-
-public enum SteamVR_Input_ActionScopes
-{
-    ActionSet,
-    Application,
-    Global,
-}
-
-public enum SteamVR_Input_ActionSetUsages
-{
-    LeftRight,
-    Single,
-    Hidden,
-}
-
-public class SteamVR_Input_Generator_Names
-{
-    public const string initializeActionSetsMethodName = "Dynamic_InitializeActionSets";
-    public const string initializeActionsMethodName = "Dynamic_InitializeActions";
-    public const string updateActionsMethodName = "Dynamic_UpdateActions";
-    public const string updateNonPoseNonSkeletonActionsMethodName = "Dynamic_UpdateNonPoseNonSkeletonActions";
-    public const string updatePoseActionsMethodName = "Dynamic_UpdatePoseActions";
-    public const string updateSkeletonActionsMethodName = "Dynamic_UpdateSkeletalActions";
-
-    public const string actionsFieldName = "actions";
-    public const string actionsInFieldName = "actionsIn";
-    public const string actionsOutFieldName = "actionsOut";
-    public const string actionsVibrationFieldName = "actionsVibration";
-    public const string actionsPoseFieldName = "actionsPose";
-    public const string actionsBooleanFieldName = "actionsBoolean";
-    public const string actionsSingleFieldName = "actionsSingle";
-    public const string actionsVector2FieldName = "actionsVector2";
-    public const string actionsVector3FieldName = "actionsVector3";
-    public const string actionsSkeletonFieldName = "actionsSkeleton";
-    public const string actionsNonPoseNonSkeletonIn = "actionsNonPoseNonSkeletonIn";
-    public const string actionSetsFieldName = "actionSets";
 }

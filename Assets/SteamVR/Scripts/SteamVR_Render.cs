@@ -29,7 +29,7 @@ public class SteamVR_Render : MonoBehaviour
 
                 if (SteamVR_Settings.instance.inputUpdateMode != SteamVR_UpdateModes.Nothing || SteamVR_Settings.instance.poseUpdateMode != SteamVR_UpdateModes.Nothing)
                 {
-                    SteamVR_Input.Initialize(_instance.gameObject);
+                    SteamVR_Input.Initialize();
                 }
 			}
 			return _instance;
@@ -375,6 +375,8 @@ public class SteamVR_Render : MonoBehaviour
 
     private void FixedUpdate()
     {
+        SteamVR_Input.FixedUpdate();
+
         if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnFixedUpdate))
         {
             UpdatePoses();
@@ -383,6 +385,8 @@ public class SteamVR_Render : MonoBehaviour
 
     private void LateUpdate()
     {
+        SteamVR_Input.LateUpdate();
+
         if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnLateUpdate))
         {
             UpdatePoses();
@@ -390,7 +394,9 @@ public class SteamVR_Render : MonoBehaviour
     }
 
     void Update()
-	{
+    {
+        SteamVR_Input.Update();
+
         if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnUpdate))
         {
             UpdatePoses();

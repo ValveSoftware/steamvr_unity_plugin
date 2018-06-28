@@ -23,26 +23,11 @@ public class SteamVR_Input_EditorWindow : EditorWindow
         GetWindow<SteamVR_Input_EditorWindow>(false, "SteamVR Input", true);
     }
 
-    private const string defaultSteamVRInputFolder = "/Assets/SteamVR_Input";
-    private const string defaultActionsSubFolder = "SteamVR_Input_ActionObjects";
-    private const string defaultActionsClass = "SteamVR_Input_Actions";
-    private const string defaultActionSetsClass = "SteamVR_Input_ActionSets";
     private const bool defaultOverwriteBuildOption = true;
     private const bool defaultDeleteUnusedOption = true;
 
     private static void InitializeEditorValues()
     {
-        if (EditorPrefs.HasKey(SteamVR_Input_Generator.steamVRInputPathKey) == false)
-            EditorPrefs.SetString(SteamVR_Input_Generator.steamVRInputPathKey, defaultSteamVRInputFolder);
-
-        if (EditorPrefs.HasKey(SteamVR_Input_Generator.steamVRInputSubFolderKey) == false)
-            EditorPrefs.SetString(SteamVR_Input_Generator.steamVRInputSubFolderKey, defaultActionsSubFolder);
-
-        if (EditorPrefs.HasKey(SteamVR_Input_Generator.steamVRInputActionsClassKey) == false)
-            EditorPrefs.SetString(SteamVR_Input_Generator.steamVRInputActionsClassKey, defaultActionsClass);
-
-        if (EditorPrefs.HasKey(SteamVR_Input_Generator.steamVRInputActionSetsClassKey) == false)
-            EditorPrefs.SetString(SteamVR_Input_Generator.steamVRInputActionSetsClassKey, defaultActionSetsClass);
 
         if (EditorPrefs.HasKey(SteamVR_Input_Generator.steamVRInputOverwriteBuildKey) == false)
             EditorPrefs.SetBool(SteamVR_Input_Generator.steamVRInputOverwriteBuildKey, defaultOverwriteBuildOption);
@@ -797,22 +782,8 @@ public class SteamVR_Input_SettingsEditor : EditorWindow
         EditorGUILayout.Space();
         EditorGUILayout.Space();
 
-        EditorGUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-        bool showSettings = GUILayout.Button("SteamVR Settings");
-        GUILayout.FlexibleSpace();
-        EditorGUILayout.EndHorizontal();
-
         EditorGUILayout.Space();
         EditorGUILayout.Space();
-
-        DrawFolderLocation();
-
-        DrawSubFolderLocation();
-
-        DrawActionsClass();
-
-        DrawActionSetsClass();
 
         DrawOverwriteOption();
 
@@ -823,6 +794,8 @@ public class SteamVR_Input_SettingsEditor : EditorWindow
         bool delete = GUILayout.Button("Delete input classes");
         GUILayout.FlexibleSpace();
         bool deleteActions = GUILayout.Button("Delete input actions");
+        GUILayout.FlexibleSpace();
+        bool showSettings = GUILayout.Button("SteamVR Settings");
         GUILayout.FlexibleSpace();
         EditorGUILayout.EndHorizontal();
 
@@ -871,66 +844,6 @@ public class SteamVR_Input_SettingsEditor : EditorWindow
         if (deleteUnused != newDeleteUnused)
         {
             EditorPrefs.SetBool(SteamVR_Input_Generator.steamVRInputDeleteUnusedKey, newDeleteUnused);
-        }
-
-        EditorGUILayout.EndHorizontal();
-    }
-
-    private void DrawFolderLocation()
-    {
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Input files path: ");
-        string path = EditorPrefs.GetString(SteamVR_Input_Generator.steamVRInputPathKey);
-        string newPath = EditorGUILayout.TextField(path);
-
-        if (path != newPath)
-        {
-            EditorPrefs.SetString(SteamVR_Input_Generator.steamVRInputPathKey, newPath);
-        }
-
-        EditorGUILayout.EndHorizontal();
-    }
-
-    private void DrawSubFolderLocation()
-    {
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Input action object folder: ");
-        string path = EditorPrefs.GetString(SteamVR_Input_Generator.steamVRInputSubFolderKey);
-        string newPath = EditorGUILayout.TextField(path);
-
-        if (path != newPath)
-        {
-            EditorPrefs.SetString(SteamVR_Input_Generator.steamVRInputSubFolderKey, newPath);
-        }
-
-        EditorGUILayout.EndHorizontal();
-    }
-
-    private void DrawActionsClass()
-    {
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Input action file name: ");
-        string filename = EditorPrefs.GetString(SteamVR_Input_Generator.steamVRInputActionsClassKey);
-        string newFilename = EditorGUILayout.TextField(filename);
-
-        if (filename != newFilename)
-        {
-            EditorPrefs.SetString(SteamVR_Input_Generator.steamVRInputActionsClassKey, newFilename);
-        }
-
-        EditorGUILayout.EndHorizontal();
-    }
-
-    private void DrawActionSetsClass()
-    {
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Input action sets file name: ");
-        string filename = EditorPrefs.GetString(SteamVR_Input_Generator.steamVRInputActionSetsClassKey);
-        string newFilename = EditorGUILayout.TextField(filename);
-
-        if (filename != newFilename)
-        {
-            EditorPrefs.SetString(SteamVR_Input_Generator.steamVRInputActionSetsClassKey, newFilename);
         }
 
         EditorGUILayout.EndHorizontal();
