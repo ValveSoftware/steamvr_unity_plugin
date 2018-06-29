@@ -150,7 +150,6 @@ public class SteamVR_RenderModel : MonoBehaviour
 		var s = buffer.ToString();
 		if (renderModelName != s)
 		{
-			renderModelName = s;
 			StartCoroutine(SetModelAsync(s));
 		}
 	}
@@ -265,6 +264,7 @@ public class SteamVR_RenderModel : MonoBehaviour
 		}
 
 		bool success = SetModel(renderModelName);
+		this.renderModelName = renderModelName;
 		SteamVR_Events.RenderModelLoaded.Send(this, success);
 	}
 
