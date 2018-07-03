@@ -4,6 +4,7 @@
 //
 //=============================================================================
 
+using System.Collections;
 using UnityEngine;
 using Valve.VR;
 
@@ -86,6 +87,8 @@ public class SteamVR_ControllerManager : MonoBehaviour
 		inputFocusAction.enabled = true;
 		deviceConnectedAction.enabled = true;
 		trackedDeviceRoleChangedAction.enabled = true;
+
+		StartCoroutine(HandleInitialInputFocus());
 	}
 
 	void OnDisable()
@@ -124,6 +127,16 @@ public class SteamVR_ControllerManager : MonoBehaviour
 					HideObject(obj.transform, hiddenPrefix + label + hiddenPostfix);
 				}
 			}
+		}
+	}
+
+	IEnumerator HandleInitialInputFocus()
+	{
+		yield return new WaitForEndOfFrame();
+
+		if (!OpenVR.System.IsInputAvailable())
+		{
+			OnInputFocus(false);
 		}
 	}
 
