@@ -23,6 +23,19 @@ public abstract class SteamVR_Input_Action_In : SteamVR_Input_Action
 
     protected Dictionary<SteamVR_Input_Input_Sources, InputOriginInfo_t> lastInputOriginInfo = new Dictionary<SteamVR_Input_Input_Sources, InputOriginInfo_t>(new SteamVR_Input_Sources_Comparer());
 
+    protected static uint inputOriginInfo_size = 0;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        if (inputOriginInfo_size == 0)
+        {
+            InputOriginInfo_t inputOriginInfo = new InputOriginInfo_t();
+            inputOriginInfo_size = (uint)Marshal.SizeOf(inputOriginInfo);
+        }
+    }
+
     protected override void InitializeDictionaries(SteamVR_Input_Input_Sources source)
     {
         base.InitializeDictionaries(source);
@@ -37,7 +50,7 @@ public abstract class SteamVR_Input_Action_In : SteamVR_Input_Action
         lastOriginGetFrame.Add(source, -1);
     }
 
-    public virtual string GetDeviceComponentName(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public virtual string GetDeviceComponentName(SteamVR_Input_Input_Sources inputSource)
     {
         if (GetActive(inputSource))
         {
@@ -49,7 +62,7 @@ public abstract class SteamVR_Input_Action_In : SteamVR_Input_Action
         return null;
     }
 
-    public virtual ulong GetDevicePath(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public virtual ulong GetDevicePath(SteamVR_Input_Input_Sources inputSource)
     {
         if (GetActive(inputSource))
         {
@@ -61,7 +74,7 @@ public abstract class SteamVR_Input_Action_In : SteamVR_Input_Action
         return 0;
     }
 
-    public virtual uint GetDeviceIndex(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public virtual uint GetDeviceIndex(SteamVR_Input_Input_Sources inputSource)
     {
         if (GetActive(inputSource))
         {
@@ -73,23 +86,23 @@ public abstract class SteamVR_Input_Action_In : SteamVR_Input_Action
         return 0;
     }
 
-    public virtual bool GetChanged(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public virtual bool GetChanged(SteamVR_Input_Input_Sources inputSource)
     {
         return changed[inputSource];
     }
 
-    public virtual bool GetActive(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public virtual bool GetActive(SteamVR_Input_Input_Sources inputSource)
     {
         return active[inputSource];
     }
 
     protected Dictionary<SteamVR_Input_Input_Sources, float> lastOriginGetFrame = new Dictionary<SteamVR_Input_Input_Sources, float>(new SteamVR_Input_Sources_Comparer());
-    protected void UpdateOriginTrackedDeviceInfo(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    protected void UpdateOriginTrackedDeviceInfo(SteamVR_Input_Input_Sources inputSource)
     {
         if (lastOriginGetFrame[inputSource] != Time.frameCount)
         {
             InputOriginInfo_t inputOriginInfo = new InputOriginInfo_t();
-            EVRInputError err = OpenVR.Input.GetOriginTrackedDeviceInfo(activeOrigin[inputSource], ref inputOriginInfo, (uint)Marshal.SizeOf(lastInputOriginInfo[inputSource]));
+            EVRInputError err = OpenVR.Input.GetOriginTrackedDeviceInfo(activeOrigin[inputSource], ref inputOriginInfo, inputOriginInfo_size);
 
             if (err != EVRInputError.None)
                 Debug.LogError("GetOriginTrackedDeviceInfo error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString() + " activeOrigin: " + activeOrigin[inputSource].ToString() + " active: " + active[inputSource]);
@@ -99,22 +112,22 @@ public abstract class SteamVR_Input_Action_In : SteamVR_Input_Action
         }
     }
 
-    public void AddOnChangeListener(Action<SteamVR_Input_Action_In> action, SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public void AddOnChangeListener(Action<SteamVR_Input_Action_In> action, SteamVR_Input_Input_Sources inputSource)
     {
         onChange[inputSource] += action;
     }
 
-    public void RemoveOnChangeListener(Action<SteamVR_Input_Action_In> action, SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public void RemoveOnChangeListener(Action<SteamVR_Input_Action_In> action, SteamVR_Input_Input_Sources inputSource)
     {
         onChange[inputSource] -= action;
     }
 
-    public void AddOnUpdateListener(Action<SteamVR_Input_Action_In> action, SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public void AddOnUpdateListener(Action<SteamVR_Input_Action_In> action, SteamVR_Input_Input_Sources inputSource)
     {
         onUpdate[inputSource] += action;
     }
 
-    public void RemoveOnUpdateListener(Action<SteamVR_Input_Action_In> action, SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public void RemoveOnUpdateListener(Action<SteamVR_Input_Action_In> action, SteamVR_Input_Input_Sources inputSource)
     {
         onUpdate[inputSource] -= action;
     }

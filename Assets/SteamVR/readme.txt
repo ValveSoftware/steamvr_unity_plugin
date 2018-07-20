@@ -1,10 +1,53 @@
-SteamVR plugin for Unity - v1.3b08
+SteamVR plugin for Unity - v1.3b10
 Copyright (c) Valve Corporation, All rights reserved.
 
 
 Requirements:
 
 The SteamVR runtime must be installed.  This can be found in Steam under Tools.
+
+Changes for v1.3b10:
+
+ * Fixed a couple issues that would cause tracking jitter or entire loss of input
+
+ * Fixed an issue with destroying held objects
+
+
+Changes for v1.3b09:
+
+ * Newly created action sets default to "single" mode allowing action mirroring in the binding UI.
+
+ * Added an example of blending unity animations with the skeleton input system. The sphere on the Equippable table can be grabbed and the hand will blend to an animation.
+
+ * Interactables now hand a hideHandOnAttach bool, a handAnimationOnPickup int that triggers an Animator.SetInt, and setRangeOfMotionOnPickup which will temporarily set the range of motion while an object is attached.
+
+ * Added a tool example for "With Controller" hand animation examples. Equippables can also be flipped depending on the hand that picks them up.
+
+ * Interactables now can tell hands to snap to them on attach. Specify a transform to snap to in Interactable.handFollowTransform and then check handFollowTransformPosition and/or handFollowTransformRotation
+
+ * Added Range of Motion blending to skeleton - Hand.SetSkeletonRangeOfMotion(rangeOfMotion, blendTime)
+
+ * Updated skeleton system to account for coordinate system changes
+
+ * Fixed some perf issues with the old render models (WIP)
+
+ * Fixed some bugs with button hints (WIP)
+
+ * Interactables should now auto detach on destroy.
+
+ * Added slim glove models, an example of an alien hand with 3 fingers, and an alien hand with floppy fingers
+
+ * Hands now initialize a RenderModel object which can contain a hand and a controller. These can be toggled on and off separately
+
+ * Fixed issue with controller highlighters not initializing correctly
+
+ * Added the ability to attach an object to a specific offset from the Hand - Hand.ObjectAttachmentPoint
+
+ * Fixed issue where render model would not show after bringing up compositor
+
+ * Fixed issue with default Throwables. HoverButton now works in local space
+
+ * Fixed issue with velocities and angular velocities not transforming properly
 
 
 Changes for v1.3b08:

@@ -36,11 +36,9 @@ public class SteamVR_Input_EditorWindow : EditorWindow
             EditorPrefs.SetBool(SteamVR_Input_Generator.steamVRInputDeleteUnusedKey, defaultDeleteUnusedOption);
     }
 
-    int selectedUsage;
-
-    ReorderableList inList;
-    ReorderableList outList;
-    ReorderableList localizationList;
+    private ReorderableList inList;
+    private ReorderableList outList;
+    private ReorderableList localizationList;
 
     private int selectedActionIndex = -1;
     private SteamVR_Input_ActionFile_Action selectedAction;
@@ -650,11 +648,26 @@ public class SteamVR_Input_EditorWindow : EditorWindow
                 }
 
                 EditorGUILayout.BeginHorizontal();
+
+                int selectedUsage = -1;
+                for (int valueIndex = 0; valueIndex < SteamVR_Input_ActionFile_ActionSet_Usages.listValues.Length; valueIndex++)
+                {
+                    if (SteamVR_Input_ActionFile_ActionSet_Usages.listValues[valueIndex] == SteamVR_Input.actionFile.action_sets[actionSetIndex].usage)
+                    {
+                        selectedUsage = valueIndex;
+                        break;
+                    }
+                }
+
                 int wasUsage = selectedUsage;
-                selectedUsage = EditorGUILayout.Popup(selectedUsage, SteamVR_Input_ActionFile_ActionSet_Usages.list);
+                if (selectedUsage == -1)
+                    selectedUsage = 1;
+
+                selectedUsage = EditorGUILayout.Popup(selectedUsage, SteamVR_Input_ActionFile_ActionSet_Usages.listDescriptions);
+
                 if (wasUsage != selectedUsage)
                 {
-                    SteamVR_Input.actionFile.action_sets[actionSetIndex].usage = SteamVR_Input_ActionFile_ActionSet_Usages.list[selectedUsage];
+                    SteamVR_Input.actionFile.action_sets[actionSetIndex].usage = SteamVR_Input_ActionFile_ActionSet_Usages.listValues[selectedUsage];
                 }
 
                 EditorGUILayout.Space();

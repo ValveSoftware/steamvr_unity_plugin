@@ -372,8 +372,13 @@ static public class SteamVR_Input_ActionFile_ActionTypes
 static public class SteamVR_Input_ActionFile_ActionSet_Usages
 {
     public static string leftright = "leftright";
-    public static string left = "left";
-    public static string right = "right";
+    public static string single = "single";
+    public static string hidden = "hidden";
 
-    public static string[] list = new string[] { leftright, left, right };
+    public static string leftrightDescription = "per hand";
+    public static string singleDescription = "mirrored";
+    public static string hiddenDescription = "hidden";
+
+    public static string[] listValues = new string[] { leftright, single, hidden };
+    public static string[] listDescriptions = new string[] { leftrightDescription, singleDescription, hiddenDescription };
 }

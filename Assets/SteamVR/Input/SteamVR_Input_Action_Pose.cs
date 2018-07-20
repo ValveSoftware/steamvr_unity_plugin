@@ -79,9 +79,16 @@ public class SteamVR_Input_Action_Pose : SteamVR_Input_Action_In
             return;
         }
 
+        if (tempPoseActionData.bActive && tempPoseActionData.activeOrigin != 0 && poseActionData[inputSource].activeOrigin != tempPoseActionData.activeOrigin)
+            Debug.Log("GetPoseActionData active origin changed. Action: " + fullPath + "::" + inputSource.ToString() + "(" + SteamVR_Input_Input_Source.GetHandle(inputSource) + ")" + " new origin: " + tempPoseActionData.activeOrigin.ToString());
+
         poseActionData[inputSource] = tempPoseActionData;
         active[inputSource] = tempPoseActionData.bActive;
         activeOrigin[inputSource] = tempPoseActionData.activeOrigin;
+
+        if (tempPoseActionData.bActive && tempPoseActionData.activeOrigin == 0)
+            Debug.LogError("GetPoseActionData active origin 0. Action: " + fullPath + "::" + inputSource.ToString() + "(" + SteamVR_Input_Input_Source.GetHandle(inputSource) + ")" + " handle: " + handle.ToString());
+
         updateTime[inputSource] = Time.time;
 
         if (Vector3.Distance(GetLocalPosition(inputSource), GetLastLocalPosition(inputSource)) > changeTolerance)
@@ -103,6 +110,58 @@ public class SteamVR_Input_Action_Pose : SteamVR_Input_Action_In
 
         if (onUpdate[inputSource] != null)
             onUpdate[inputSource].Invoke(this);
+    }
+
+    public bool GetVelocitiesAtTimeOffset(SteamVR_Input_Input_Sources inputSource, float secondsFromNow, out Vector3 velocity, out Vector3 angularVelocity)
+    {
+        EVRInputError err = OpenVR.Input.GetPoseActionData(handle, universeOrigin, secondsFromNow, ref tempPoseActionData, poseActionData_size, SteamVR_Input_Input_Source.GetHandle(inputSource));
+        if (err != EVRInputError.None)
+        {
+            if (err == EVRInputError.InvalidHandle)
+            {
+                //todo: ignoring this error for now since it throws while the dashboard is up
+            }
+            else
+            {
+                Debug.LogError("GetPoseActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString()); //todo: this should be an error
+            }
+            velocity = Vector3.zero;
+            angularVelocity = Vector3.zero;
+            return false;
+        }
+
+        velocity = new Vector3(tempPoseActionData.pose.vVelocity.v0, tempPoseActionData.pose.vVelocity.v1, -tempPoseActionData.pose.vVelocity.v2);
+        angularVelocity = new Vector3(-tempPoseActionData.pose.vAngularVelocity.v0, -tempPoseActionData.pose.vAngularVelocity.v1, tempPoseActionData.pose.vAngularVelocity.v2);
+
+        return true;
+    }
+
+    public bool GetPoseAtTimeOffset(SteamVR_Input_Input_Sources inputSource, float secondsFromNow, out Vector3 position, out Quaternion rotation, out Vector3 velocity, out Vector3 angularVelocity)
+    {
+        EVRInputError err = OpenVR.Input.GetPoseActionData(handle, universeOrigin, secondsFromNow, ref tempPoseActionData, poseActionData_size, SteamVR_Input_Input_Source.GetHandle(inputSource));
+        if (err != EVRInputError.None)
+        {
+            if (err == EVRInputError.InvalidHandle)
+            {
+                //todo: ignoring this error for now since it throws while the dashboard is up
+            }
+            else
+            {
+                Debug.LogError("GetPoseActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString()); //todo: this should be an error
+            }
+            velocity = Vector3.zero;
+            angularVelocity = Vector3.zero;
+            position = Vector3.zero;
+            rotation = Quaternion.identity;
+            return false;
+        }
+
+        velocity = new Vector3(tempPoseActionData.pose.vVelocity.v0, tempPoseActionData.pose.vVelocity.v1, -tempPoseActionData.pose.vVelocity.v2);
+        angularVelocity = new Vector3(-tempPoseActionData.pose.vAngularVelocity.v0, -tempPoseActionData.pose.vAngularVelocity.v1, tempPoseActionData.pose.vAngularVelocity.v2);
+        position = SteamVR_Utils.GetPosition(tempPoseActionData.pose.mDeviceToAbsoluteTracking);
+        rotation = SteamVR_Utils.GetRotation(tempPoseActionData.pose.mDeviceToAbsoluteTracking);
+
+        return true;
     }
 
     public void UpdateTransform(SteamVR_Input_Input_Sources inputSource, Transform transformToUpdate)
@@ -135,7 +194,7 @@ public class SteamVR_Input_Action_Pose : SteamVR_Input_Action_In
     }
 
 
-    public Vector3 GetLocalPosition(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public Vector3 GetLocalPosition(SteamVR_Input_Input_Sources inputSource)
     {
         // Convert the transform from SteamVR's coordinate system to Unity's coordinate system.
         // ie: flip the X axis
@@ -143,59 +202,59 @@ public class SteamVR_Input_Action_Pose : SteamVR_Input_Action_In
             poseActionData[inputSource].pose.mDeviceToAbsoluteTracking.m7, 
             -poseActionData[inputSource].pose.mDeviceToAbsoluteTracking.m11);
     }
-    public Quaternion GetLocalRotation(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public Quaternion GetLocalRotation(SteamVR_Input_Input_Sources inputSource)
     {
-        return SteamVR_Utils.GetQuaternion(poseActionData[inputSource].pose.mDeviceToAbsoluteTracking);
+        return SteamVR_Utils.GetRotation(poseActionData[inputSource].pose.mDeviceToAbsoluteTracking);
     }
-    public Vector3 GetVelocity(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public Vector3 GetVelocity(SteamVR_Input_Input_Sources inputSource)
     {
         return new Vector3(poseActionData[inputSource].pose.vVelocity.v0, poseActionData[inputSource].pose.vVelocity.v1, -poseActionData[inputSource].pose.vVelocity.v2);
     }
-    public Vector3 GetAngularVelocity(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public Vector3 GetAngularVelocity(SteamVR_Input_Input_Sources inputSource)
     {
         return new Vector3(-poseActionData[inputSource].pose.vAngularVelocity.v0, -poseActionData[inputSource].pose.vAngularVelocity.v1, poseActionData[inputSource].pose.vAngularVelocity.v2);
     }
-    public bool GetDeviceIsConnected(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public bool GetDeviceIsConnected(SteamVR_Input_Input_Sources inputSource)
     {
         return poseActionData[inputSource].pose.bDeviceIsConnected;
     }
-    public bool GetPoseIsValid(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public bool GetPoseIsValid(SteamVR_Input_Input_Sources inputSource)
     {
         return poseActionData[inputSource].pose.bPoseIsValid;
     }
-    public ETrackingResult GetTrackingResult(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public ETrackingResult GetTrackingResult(SteamVR_Input_Input_Sources inputSource)
     {
         return poseActionData[inputSource].pose.eTrackingResult;
     }
 
     
-    public Vector3 GetLastLocalPosition(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public Vector3 GetLastLocalPosition(SteamVR_Input_Input_Sources inputSource)
     {
         return new Vector3(lastPoseActionData[inputSource].pose.mDeviceToAbsoluteTracking.m3,
             lastPoseActionData[inputSource].pose.mDeviceToAbsoluteTracking.m7,
             -lastPoseActionData[inputSource].pose.mDeviceToAbsoluteTracking.m11);
     }
-    public Quaternion GetLastLocalRotation(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public Quaternion GetLastLocalRotation(SteamVR_Input_Input_Sources inputSource)
     {
-        return SteamVR_Utils.GetQuaternion(lastPoseActionData[inputSource].pose.mDeviceToAbsoluteTracking);
+        return SteamVR_Utils.GetRotation(lastPoseActionData[inputSource].pose.mDeviceToAbsoluteTracking);
     }
-    public Vector3 GetLastVelocity(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public Vector3 GetLastVelocity(SteamVR_Input_Input_Sources inputSource)
     {
         return new Vector3(lastPoseActionData[inputSource].pose.vVelocity.v0, lastPoseActionData[inputSource].pose.vVelocity.v1, -lastPoseActionData[inputSource].pose.vVelocity.v2);
     }
-    public Vector3 GetLastAngularVelocity(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public Vector3 GetLastAngularVelocity(SteamVR_Input_Input_Sources inputSource)
     {
         return new Vector3(-lastPoseActionData[inputSource].pose.vAngularVelocity.v0, -lastPoseActionData[inputSource].pose.vAngularVelocity.v1, lastPoseActionData[inputSource].pose.vAngularVelocity.v2);
     }
-    public bool GetLastDeviceIsConnected(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public bool GetLastDeviceIsConnected(SteamVR_Input_Input_Sources inputSource)
     {
         return lastPoseActionData[inputSource].pose.bDeviceIsConnected;
     }
-    public bool GetLastPoseIsValid(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public bool GetLastPoseIsValid(SteamVR_Input_Input_Sources inputSource)
     {
         return lastPoseActionData[inputSource].pose.bPoseIsValid;
     }
-    public ETrackingResult GetLastTrackingResult(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public ETrackingResult GetLastTrackingResult(SteamVR_Input_Input_Sources inputSource)
     {
         return lastPoseActionData[inputSource].pose.eTrackingResult;
     }

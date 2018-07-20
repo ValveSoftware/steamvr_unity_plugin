@@ -153,11 +153,23 @@ namespace Valve.VR.InteractionSystem
 			}
 		}
 
+        //-------------------------------------------------
+        // Get Player scale. Assumes it is scaled equally on all axes.
+        //-------------------------------------------------
 
-		//-------------------------------------------------
-		// Get the HMD transform. This might return the fallback camera transform if SteamVR is unavailable or disabled.
-		//-------------------------------------------------
-		public Transform hmdTransform
+        public float scale
+        {
+            get
+            {
+                return transform.lossyScale.x;
+            }
+        }
+
+
+        //-------------------------------------------------
+        // Get the HMD transform. This might return the fallback camera transform if SteamVR is unavailable or disabled.
+        //-------------------------------------------------
+        public Transform hmdTransform
 		{
 			get
 			{

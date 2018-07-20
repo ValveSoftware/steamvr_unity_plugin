@@ -43,7 +43,6 @@ namespace Valve.VR.InteractionSystem
 
 		[EnumFlags]
 		public Hand.AttachmentFlags attachmentFlags = Hand.defaultAttachmentFlags;
-		public string attachmentPoint;
 
 		public bool takeBackItem = false; // if a hand enters this trigger and has the item this spawner dispenses at the top of the stack, remove it from the stack
 
@@ -339,7 +338,7 @@ namespace Valve.VR.InteractionSystem
 
 			spawnedItem = GameObject.Instantiate( itemPackage.itemPrefab );
 			spawnedItem.SetActive( true );
-			hand.AttachObject( spawnedItem, grabType, attachmentFlags, attachmentPoint );
+			hand.AttachObject( spawnedItem, grabType, attachmentFlags );
 
 			if ( ( itemPackage.otherHandItemPrefab != null ) && ( hand.otherHand.isActive ) )
 			{

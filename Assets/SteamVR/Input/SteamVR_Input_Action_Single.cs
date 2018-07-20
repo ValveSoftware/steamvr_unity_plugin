@@ -57,19 +57,19 @@ public class SteamVR_Input_Action_Single : SteamVR_Input_Action_In
         }
     }
 
-    public float GetAxis(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public float GetAxis(SteamVR_Input_Input_Sources inputSource)
     {
         return actionData[inputSource].x;
     }
-    public float GetAxisDelta(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public float GetAxisDelta(SteamVR_Input_Input_Sources inputSource)
     {
         return actionData[inputSource].deltaX;
     }
-    public float GetLastAxis(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public float GetLastAxis(SteamVR_Input_Input_Sources inputSource)
     {
         return lastActionData[inputSource].x;
     }
-    public float GetLastAxisDelta(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public float GetLastAxisDelta(SteamVR_Input_Input_Sources inputSource)
     {
         return lastActionData[inputSource].deltaX;
     }

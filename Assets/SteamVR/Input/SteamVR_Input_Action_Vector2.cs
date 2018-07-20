@@ -57,19 +57,19 @@ public class SteamVR_Input_Action_Vector2 : SteamVR_Input_Action_In
         }
     }
 
-    public Vector2 GetAxis(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public Vector2 GetAxis(SteamVR_Input_Input_Sources inputSource)
     {
         return new Vector2(actionData[inputSource].x, actionData[inputSource].y);
     }
-    public Vector2 GetAxisDelta(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public Vector2 GetAxisDelta(SteamVR_Input_Input_Sources inputSource)
     {
         return new Vector2(actionData[inputSource].deltaX, actionData[inputSource].deltaY);
     }
-    public Vector2 GetLastAxis(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public Vector2 GetLastAxis(SteamVR_Input_Input_Sources inputSource)
     {
         return new Vector2(lastActionData[inputSource].x, lastActionData[inputSource].y);
     }
-    public Vector2 GetLastAxisDelta(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public Vector2 GetLastAxisDelta(SteamVR_Input_Input_Sources inputSource)
     {
         return new Vector2(lastActionData[inputSource].deltaX, lastActionData[inputSource].deltaY);
     }

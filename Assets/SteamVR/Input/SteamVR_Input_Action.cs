@@ -20,7 +20,7 @@ public abstract class SteamVR_Input_Action : ScriptableObject
     [NonSerialized]
     protected Dictionary<SteamVR_Input_Input_Sources, float> lastChanged = new Dictionary<SteamVR_Input_Input_Sources, float>(new SteamVR_Input_Sources_Comparer());
 
-    public float GetTimeLastChanged(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public float GetTimeLastChanged(SteamVR_Input_Input_Sources inputSource)
     {
         return lastChanged[inputSource];
     }

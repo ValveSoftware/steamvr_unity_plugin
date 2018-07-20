@@ -329,17 +329,27 @@ public static class SteamVR_Input_Generator
 
         processedScenes.Add(activeScene.path);
 
-        string[] interactionsSceneGUIDs = AssetDatabase.FindAssets("Interactions_Example");
+        string[] interactionsSceneGUIDs = AssetDatabase.FindAssets("Interactions_Example"); 
 
         for (int sceneIndex = 0; sceneIndex < interactionsSceneGUIDs.Length; sceneIndex++)
         {
             string path = AssetDatabase.GUIDToAssetPath(interactionsSceneGUIDs[sceneIndex]);
+            if (path.EndsWith(".unity") == false)
+                path += ".unity";
             if (processedScenes.Contains(path) == false)
             {
-                EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
-                AssignDefaultsInScene();
-                EditorSceneManager.SaveOpenScenes();
-                processedScenes.Add(path);
+                UnityEngine.SceneManagement.Scene scene = EditorSceneManager.GetSceneByPath(path);
+                if (string.IsNullOrEmpty(scene.name) == false)
+                {
+                    EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
+                    AssignDefaultsInScene();
+                    EditorSceneManager.SaveOpenScenes();
+                    processedScenes.Add(path);
+                }
+                else
+                {
+                    Debug.LogWarning("[SteamVR Input] Generation could not open scene at: " + path); 
+                }
             }
         }
 

@@ -134,12 +134,17 @@ public static class SteamVR_Utils
         return new Vector3(x, y, z);
     }
 
-    public static Quaternion GetQuaternion(HmdMatrix34_t matrix)
+    public static Quaternion GetRotation(HmdMatrix34_t matrix)
     {
-        if (matrix.m2 != 0 || matrix.m6 != 0 || matrix.m10 != 0 || matrix.m1 != 0 || matrix.m5 != 0 || matrix.m9 != 0)
+        if ((matrix.m2 != 0 || matrix.m6 != 0 || matrix.m10 != 0) && (matrix.m1 != 0 || matrix.m5 != 0 || matrix.m9 != 0))
             return Quaternion.LookRotation(new Vector3(-matrix.m2, -matrix.m6, matrix.m10), new Vector3(matrix.m1, matrix.m5, -matrix.m9));
         else
             return Quaternion.identity;
+    }
+
+    public static Vector3 GetPosition(HmdMatrix34_t matrix)
+    {
+        return new Vector3(matrix.m3, matrix.m7, matrix.m11);
     }
 
     [System.Serializable]
@@ -639,6 +644,16 @@ public static class SteamVR_Utils
         }
 
         return scale;
+    }
+
+    public static bool IsValid(Vector3 vector)
+    {
+        return (float.IsNaN(vector.x) == false && float.IsNaN(vector.y) == false && float.IsNaN(vector.z) == false);
+    }
+    public static bool IsValid(Quaternion rotation)
+    {
+        return (float.IsNaN(rotation.x) == false && float.IsNaN(rotation.y) == false && float.IsNaN(rotation.z) == false && float.IsNaN(rotation.w) == false) &&
+            (rotation.x != 0 || rotation.y != 0 || rotation.z != 0 || rotation.w != 0);
     }
 }
 

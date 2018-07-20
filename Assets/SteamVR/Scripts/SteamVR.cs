@@ -273,8 +273,8 @@ public class SteamVR : System.IDisposable
 #endif
 
 
-    public const string defaultUnityAppKeyTemplate = "system.generated.unity.{0}.exe";
-    public const string defaultAppKeyTemplate = "system.generated.{0}";
+    public const string defaultUnityAppKeyTemplate = "application.generated.unity.{0}.exe";
+    public const string defaultAppKeyTemplate = "application.generated.{0}";
 
     public static string GenerateAppKey()
     {
@@ -319,16 +319,17 @@ public class SteamVR : System.IDisposable
             SteamVR_Input_ManifestFile_Application manifestApplication = new SteamVR_Input_ManifestFile_Application();
             manifestApplication.app_key = SteamVR_Settings.instance.appKey;
             //manifestApplication.action_manifest_path = SteamVR_Settings.instance.actionsFilePath;
-            manifestApplication.launch_type = "binary";
-            manifestApplication.binary_path_windows = SteamVR_Utils.ConvertToForwardSlashes(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
-            manifestApplication.binary_path_linux = SteamVR_Utils.ConvertToForwardSlashes(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
-            manifestApplication.binary_path_osx = SteamVR_Utils.ConvertToForwardSlashes(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            manifestApplication.launch_type = "url";
+            //manifestApplication.binary_path_windows = SteamVR_Utils.ConvertToForwardSlashes(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            //manifestApplication.binary_path_linux = SteamVR_Utils.ConvertToForwardSlashes(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            //manifestApplication.binary_path_osx = SteamVR_Utils.ConvertToForwardSlashes(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            manifestApplication.url = "steam://launch/";
             manifestApplication.strings.Add("en_us", new SteamVR_Input_ManifestFile_ApplicationString() { name = string.Format("{0} [Testing]", Application.productName) });
             manifestFile.applications = new System.Collections.Generic.List<SteamVR_Input_ManifestFile_Application>();
             manifestFile.applications.Add(manifestApplication);
 
-            string json = Valve.Newtonsoft.Json.JsonConvert.SerializeObject(manifestFile, Valve.Newtonsoft.Json.Formatting.Indented, new Valve.Newtonsoft.Json.JsonSerializerSettings
-            { NullValueHandling = Valve.Newtonsoft.Json.NullValueHandling.Ignore });
+            string json = Valve.Newtonsoft.Json.JsonConvert.SerializeObject(manifestFile, Valve.Newtonsoft.Json.Formatting.Indented, 
+                new Valve.Newtonsoft.Json.JsonSerializerSettings { NullValueHandling = Valve.Newtonsoft.Json.NullValueHandling.Ignore });
 
             File.WriteAllText(fullPath, json);
         }

@@ -17,18 +17,23 @@ public class SteamVR_Input_Skeleton : MonoBehaviour
 
     public EVRSkeletalMotionRange rangeOfMotion = EVRSkeletalMotionRange.WithoutController;
 
+    public EVRSkeletalMotionRange? temporaryRangeOfMotion = null;
+
     [Tooltip("This needs to be in the order of: root -> thumb, index, middle, ring, pinky")]
     public Transform skeletonRoot;
 
     [Tooltip("If not set, relative to parent")]
     public Transform origin;
 
-    [Tooltip("Set to true if you want this script to update it's position and rotation. False if this will be handled elsewhere")]
+    [Tooltip("Set to true if you want this script to update its position and rotation. False if this will be handled elsewhere")]
     public bool updatePose = true;
 
     [Range(0, 1)]
     [Tooltip("Modify this to blend between animations setup on the hand")]
     public float skeletonBlend = 1f;
+
+    [Tooltip("Is this rendermodel a mirror of another one?")]
+    public MirrorType mirroring;
 
     public bool isActive { get { return skeletonAction.GetActive(inputSource); } }
 
@@ -71,7 +76,8 @@ public class SteamVR_Input_Skeleton : MonoBehaviour
     public Transform[] tips { get; protected set; }
     public Transform[] aux { get; protected set; }
 
-    private Coroutine blendRoutine;
+    protected Coroutine blendRoutine;
+    protected Coroutine rangeOfMotionBlendRoutine;
 
     public bool isBlending
     {
@@ -89,17 +95,17 @@ public class SteamVR_Input_Skeleton : MonoBehaviour
         aux = new Transform[] { thumbAux, indexAux, middleAux, ringAux, pinkyAux };
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         SteamVR_Input.OnSkeletonsUpdated += SteamVR_Input_OnSkeletonsUpdated;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         SteamVR_Input.OnSkeletonsUpdated -= SteamVR_Input_OnSkeletonsUpdated;
     }
 
-    private void SteamVR_Input_OnSkeletonsUpdated(bool obj)
+    protected virtual void SteamVR_Input_OnSkeletonsUpdated(bool obj)
     {
         UpdateSkeleton();
     }
@@ -109,20 +115,47 @@ public class SteamVR_Input_Skeleton : MonoBehaviour
         if (skeletonAction == null || skeletonAction.GetActive(inputSource) == false)
             return;
 
-        skeletonAction.SetRangeOfMotion(inputSource, this.rangeOfMotion); //this may be a frame behind
-
         if (updatePose)
             UpdatePose();
 
-        UpdateSkeletonTransforms();
+        if (rangeOfMotionBlendRoutine == null)
+        {
+            if (temporaryRangeOfMotion != null)
+                skeletonAction.SetRangeOfMotion(inputSource, temporaryRangeOfMotion.Value);
+            else
+                skeletonAction.SetRangeOfMotion(inputSource, rangeOfMotion); //this may be a frame behind
+
+            UpdateSkeletonTransforms();
+        }
     }
 
-    public void BlendToSkeleton(float overTime = 0.25f)
+    public void SetTemporaryRangeOfMotion(EVRSkeletalMotionRange newRangeOfMotion, float blendOverSeconds = 0.1f)
+    {
+        if (rangeOfMotion != newRangeOfMotion || temporaryRangeOfMotion != newRangeOfMotion)
+        {
+            TemporaryRangeOfMotionBlend(newRangeOfMotion, blendOverSeconds);
+        }
+    }
+
+    public void ResetTemporaryRangeOfMotion(float blendOverSeconds = 0.1f)
+    {
+        ResetTemporaryRangeOfMotionBlend(blendOverSeconds);
+    }
+
+    public void SetRangeOfMotion(EVRSkeletalMotionRange newRangeOfMotion, float blendOverSeconds = 0.1f)
+    {
+        if (rangeOfMotion != newRangeOfMotion)
+        {
+            RangeOfMotionBlend(newRangeOfMotion, blendOverSeconds);
+        }
+    }
+
+    public void BlendToSkeleton(float overTime = 0.1f)
     {
         BlendTo(1, overTime);
     }
 
-    public void BlendToAnimation(float overTime = 0.25f)
+    public void BlendToAnimation(float overTime = 0.1f)
     {
         BlendTo(0, overTime);
     }
@@ -136,7 +169,7 @@ public class SteamVR_Input_Skeleton : MonoBehaviour
             blendRoutine = StartCoroutine(DoBlendRoutine(blendToAmount, overTime));
     }
 
-    public IEnumerator DoBlendRoutine(float blendToAmount, float overTime)
+    protected IEnumerator DoBlendRoutine(float blendToAmount, float overTime)
     {
         float startTime = Time.time;
         float endTime = startTime + overTime;
@@ -153,13 +186,116 @@ public class SteamVR_Input_Skeleton : MonoBehaviour
         blendRoutine = null;
     }
 
+    protected void RangeOfMotionBlend(EVRSkeletalMotionRange newRangeOfMotion, float blendOverSeconds)
+    {
+        if (rangeOfMotionBlendRoutine != null)
+            StopCoroutine(rangeOfMotionBlendRoutine);
+
+        EVRSkeletalMotionRange oldRangeOfMotion = rangeOfMotion;
+        rangeOfMotion = newRangeOfMotion;
+
+        if (this.gameObject.activeInHierarchy)
+            rangeOfMotionBlendRoutine = StartCoroutine(DoRangeOfMotionBlend(oldRangeOfMotion, newRangeOfMotion, blendOverSeconds));
+    }
+
+    protected void TemporaryRangeOfMotionBlend(EVRSkeletalMotionRange newRangeOfMotion, float blendOverSeconds)
+    {
+        if (rangeOfMotionBlendRoutine != null)
+            StopCoroutine(rangeOfMotionBlendRoutine);
+
+        EVRSkeletalMotionRange oldRangeOfMotion = rangeOfMotion;
+        if (temporaryRangeOfMotion != null)
+            oldRangeOfMotion = temporaryRangeOfMotion.Value;
+
+        temporaryRangeOfMotion = newRangeOfMotion;
+
+        if (this.gameObject.activeInHierarchy)
+            rangeOfMotionBlendRoutine = StartCoroutine(DoRangeOfMotionBlend(oldRangeOfMotion, newRangeOfMotion, blendOverSeconds));
+    }
+
+    protected void ResetTemporaryRangeOfMotionBlend(float blendOverSeconds)
+    {
+        if (temporaryRangeOfMotion != null)
+        {
+            if (rangeOfMotionBlendRoutine != null)
+                StopCoroutine(rangeOfMotionBlendRoutine);
+
+            EVRSkeletalMotionRange oldRangeOfMotion = temporaryRangeOfMotion.Value;
+
+            EVRSkeletalMotionRange newRangeOfMotion = rangeOfMotion;
+
+            temporaryRangeOfMotion = null;
+
+            if (this.gameObject.activeInHierarchy)
+                rangeOfMotionBlendRoutine = StartCoroutine(DoRangeOfMotionBlend(oldRangeOfMotion, newRangeOfMotion, blendOverSeconds));
+        }
+    }
+
+    protected IEnumerator DoRangeOfMotionBlend(EVRSkeletalMotionRange oldRangeOfMotion, EVRSkeletalMotionRange newRangeOfMotion, float overTime)
+    {
+        float startTime = Time.time;
+        float endTime = startTime + overTime;
+
+        Vector3[] oldBonePositions;
+        Quaternion[] oldBoneRotations;
+
+        Vector3[] newBonePositions;
+        Quaternion[] newBoneRotations;
+
+        while (Time.time < endTime)
+        {
+            yield return null;
+            float lerp = (Time.time - startTime) / overTime;
+
+            if (skeletonBlend > 0)
+            {
+                skeletonAction.SetRangeOfMotion(inputSource, oldRangeOfMotion);
+                skeletonAction.UpdateValue(inputSource, true);
+                oldBonePositions = (Vector3[])GetBonePositions(inputSource).Clone();
+                oldBoneRotations = (Quaternion[])GetBoneRotations(inputSource).Clone();
+
+                skeletonAction.SetRangeOfMotion(inputSource, newRangeOfMotion);
+                skeletonAction.UpdateValue(inputSource, true);
+                newBonePositions = GetBonePositions(inputSource);
+                newBoneRotations = GetBoneRotations(inputSource);
+
+                for (int boneIndex = 0; boneIndex < bones.Length; boneIndex++)
+                {
+                    if (SteamVR_Utils.IsValid(newBoneRotations[boneIndex]) == false || SteamVR_Utils.IsValid(oldBoneRotations[boneIndex]) == false)
+                    {
+                        break;
+                    }
+
+                    Vector3 blendedRangeOfMotionPosition = Vector3.Lerp(oldBonePositions[boneIndex], newBonePositions[boneIndex], lerp);
+                    Quaternion blendedRangeOfMotionRotation = Quaternion.Lerp(oldBoneRotations[boneIndex], newBoneRotations[boneIndex], lerp);
+
+                    if (skeletonBlend < 1)
+                    {
+                        bones[boneIndex].localPosition = Vector3.Lerp(bones[boneIndex].localPosition, blendedRangeOfMotionPosition, skeletonBlend);
+                        bones[boneIndex].localRotation = Quaternion.Lerp(bones[boneIndex].localRotation, blendedRangeOfMotionRotation, skeletonBlend);
+                    }
+                    else
+                    {
+                        bones[boneIndex].localPosition = blendedRangeOfMotionPosition;
+                        bones[boneIndex].localRotation = blendedRangeOfMotionRotation;
+                    }
+                }
+            }
+        }
+
+
+        rangeOfMotionBlendRoutine = null;
+    }
+
     protected virtual void UpdateSkeletonTransforms()
     {
         if (skeletonBlend <= 0)
             return;
 
-        Vector3[] bonePositions = skeletonAction.GetBonePositions(inputSource);
-        Quaternion[] boneRotations = skeletonAction.GetBoneRotations(inputSource);
+        Vector3[] bonePositions = GetBonePositions(inputSource);
+        Quaternion[] boneRotations = GetBoneRotations(inputSource);
+
+
 
         if (skeletonBlend >= 1)
         {
@@ -178,6 +314,51 @@ public class SteamVR_Input_Skeleton : MonoBehaviour
             }
         }
     }
+    
+    protected Vector3[] GetBonePositions(SteamVR_Input_Input_Sources inputSource)
+    {
+        Vector3[] rawSkeleton = skeletonAction.GetBonePositions(inputSource);
+        if (mirroring == MirrorType.LeftToRight || mirroring == MirrorType.RightToLeft)
+        {
+            for (int boneIndex = 0; boneIndex < rawSkeleton.Length; boneIndex++)
+            {
+                if (boneIndex == SteamVR_Input_SkeletonJointIndexes.wrist || IsMetacarpal(boneIndex))
+                {
+                    rawSkeleton[boneIndex].Scale(new Vector3(-1, 1, 1));
+                }
+                else if (boneIndex != SteamVR_Input_SkeletonJointIndexes.root)
+                {
+                    rawSkeleton[boneIndex] = rawSkeleton[boneIndex] * -1;
+                }
+            }
+        }
+
+        return rawSkeleton;
+    }
+
+    protected Quaternion rightFlipAngle = Quaternion.AngleAxis(180, Vector3.right);
+    protected Quaternion[] GetBoneRotations(SteamVR_Input_Input_Sources inputSource)
+    {
+        Quaternion[] rawSkeleton = skeletonAction.GetBoneRotations(inputSource);
+        if (mirroring == MirrorType.LeftToRight || mirroring == MirrorType.RightToLeft)
+        {
+            for (int boneIndex = 0; boneIndex < rawSkeleton.Length; boneIndex++)
+            {
+                if (boneIndex == SteamVR_Input_SkeletonJointIndexes.wrist)
+                {
+                    rawSkeleton[boneIndex].y = rawSkeleton[boneIndex].y * -1;
+                    rawSkeleton[boneIndex].z = rawSkeleton[boneIndex].z * -1;
+                }
+
+                if (IsMetacarpal(boneIndex))
+                {
+                    rawSkeleton[boneIndex] = rightFlipAngle * rawSkeleton[boneIndex];
+                }
+            }
+        }
+
+        return rawSkeleton;
+    }
 
     protected virtual void UpdatePose()
     {
@@ -192,7 +373,25 @@ public class SteamVR_Input_Skeleton : MonoBehaviour
             this.transform.eulerAngles = origin.TransformDirection(skeletonAction.GetLocalRotation(inputSource).eulerAngles);
         }
     }
+
+    public enum MirrorType
+    {
+        None,
+        LeftToRight,
+        RightToLeft
+    }
+
+    protected bool IsMetacarpal(int boneIndex)
+    {
+        return (boneIndex == SteamVR_Input_SkeletonJointIndexes.indexMetacarpal || 
+            boneIndex == SteamVR_Input_SkeletonJointIndexes.middleMetacarpal || 
+            boneIndex == SteamVR_Input_SkeletonJointIndexes.ringMetacarpal || 
+            boneIndex == SteamVR_Input_SkeletonJointIndexes.pinkyMetacarpal || 
+            boneIndex == SteamVR_Input_SkeletonJointIndexes.thumbMetacarpal);
+    }
 }
+
+
 
 public class SteamVR_Input_SkeletonJointIndexes
 {

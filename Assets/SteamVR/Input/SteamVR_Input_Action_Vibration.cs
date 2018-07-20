@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 public class SteamVR_Input_Action_Vibration : SteamVR_Input_Action_Out
 {
-    public void Execute(float secondsFromNow, float durationSeconds, float frequency, float amplitude, SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public void Execute(float secondsFromNow, float durationSeconds, float frequency, float amplitude, SteamVR_Input_Input_Sources inputSource)
     {
         lastChanged[inputSource] = Time.time;
 

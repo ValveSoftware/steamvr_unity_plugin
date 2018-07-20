@@ -1150,7 +1150,7 @@ namespace Valve.VR.InteractionSystem
 			}
 			else
 			{
-				return pointerHand.GetAttachmentTransform( "Attach_ControllerTip" );
+				return hand.transform;
 			}
 		}
 	}

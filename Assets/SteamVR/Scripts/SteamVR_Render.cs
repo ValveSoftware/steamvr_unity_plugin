@@ -337,6 +337,7 @@ public class SteamVR_Render : MonoBehaviour
 #if UNITY_2017_1_OR_NEWER
 	void OnBeforeRender() 
     { 
+
         if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnPreCull))
         {
             UpdatePoses();
@@ -350,12 +351,18 @@ public class SteamVR_Render : MonoBehaviour
 #else
     void OnCameraPreCull(Camera cam)
 	{
-#if !( UNITY_5_4 )
+#if !(UNITY_5_4)
 		if (cam.cameraType != CameraType.VR)
 			return;
+#else
+        //custom code
+        if (!cam.stereoEnabled) //if not main camera (stereoEnabled isn't perfect, but it is the fast/easiest way to check this in Unity 5.4)
+        {
+            return;
+        }
 #endif
-		// Only update poses on the first camera per frame.
-		if (Time.frameCount != lastFrameCount)
+        // Only update poses on the first camera per frame.
+        if (Time.frameCount != lastFrameCount)
 		{
 			lastFrameCount = Time.frameCount;
 
@@ -390,6 +397,11 @@ public class SteamVR_Render : MonoBehaviour
         if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnLateUpdate))
         {
             UpdatePoses();
+        }
+        else
+        {
+            //force skeleton update so animation blending sticks
+            SteamVR_Input.UpdateSkeletonActions(true);
         }
     }
 

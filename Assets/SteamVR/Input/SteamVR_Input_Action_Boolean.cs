@@ -65,27 +65,27 @@ public class SteamVR_Input_Action_Boolean : SteamVR_Input_Action_In
             onUpdate[inputSource].Invoke(this);
     }
 
-    public bool GetStateDown(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public bool GetStateDown(SteamVR_Input_Input_Sources inputSource)
     {
         return actionData[inputSource].bState && actionData[inputSource].bChanged;
     }
-    public bool GetStateUp(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public bool GetStateUp(SteamVR_Input_Input_Sources inputSource)
     {
         return actionData[inputSource].bState == false && actionData[inputSource].bChanged;
     }
-    public bool GetState(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public bool GetState(SteamVR_Input_Input_Sources inputSource)
     {
         return actionData[inputSource].bState;
     }
-    public bool GetLastStateDown(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public bool GetLastStateDown(SteamVR_Input_Input_Sources inputSource)
     {
         return lastActionData[inputSource].bState && lastActionData[inputSource].bChanged;
     }
-    public bool GetLastStateUp(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public bool GetLastStateUp(SteamVR_Input_Input_Sources inputSource)
     {
         return lastActionData[inputSource].bState == false && lastActionData[inputSource].bChanged;
     }
-    public bool GetLastState(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public bool GetLastState(SteamVR_Input_Input_Sources inputSource)
     {
         return lastActionData[inputSource].bState;
     }

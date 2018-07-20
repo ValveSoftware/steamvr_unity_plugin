@@ -20,26 +20,25 @@ namespace Valve.VR.InteractionSystem
 		[Tooltip( "The flags used to attach this object to the hand." )]
 		public Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.ParentToHand | Hand.AttachmentFlags.DetachFromOtherHand | Hand.AttachmentFlags.TurnOnKinematic;
 
-		[Tooltip( "Name of the attachment transform under in the hand's hierarchy which the object should should snap to." )]
-		public string attachmentPoint;
+        [Tooltip("The local point which acts as a positional and rotational offset to use while held")]
+        public Transform attachmentOffset;
 
 		[Tooltip( "How fast must this object be moving to attach due to a trigger hold instead of a trigger press? (-1 to disable)" )]
         public float catchingSpeedThreshold = -1;
 
         public ReleaseStyle releaseVelocityStyle = ReleaseStyle.RawFromHand;
 
+        [Tooltip("The time offset used when releasing the object with the RawFromHand option")]
+        public float releaseVelocityTimeOffset = -0.011f;
+
+        public float scaleReleaseVelocity = 1.1f;
+
 		[Tooltip( "When detaching the object, should it return to its original parent?" )]
 		public bool restoreOriginalParent = false;
-
-        [Tooltip("Set the hand animation on pickup. 0 for none")]
-        public int handAnimationOnPickup = 0;
-
-        public bool displayHandWhileHeld = false;
 
         public bool attachEaseIn = false;
 		public AnimationCurve snapAttachEaseInCurve = AnimationCurve.EaseInOut( 0.0f, 0.0f, 1.0f, 1.0f );
 		public float snapAttachEaseInTime = 0.15f;
-		public string[] attachEaseInAttachmentNames;
 
 		protected VelocityEstimator velocityEstimator;
         protected bool attached = false;
@@ -57,11 +56,15 @@ namespace Valve.VR.InteractionSystem
 
         protected new Rigidbody rigidbody;
 
+        [HideInInspector]
+        public Interactable interactable;
+
 
         //-------------------------------------------------
         protected virtual void Awake()
 		{
 			velocityEstimator = GetComponent<VelocityEstimator>();
+            interactable = GetComponent<Interactable>();
 
 			if ( attachEaseIn )
 			{
@@ -70,6 +73,12 @@ namespace Valve.VR.InteractionSystem
 
             rigidbody = GetComponent<Rigidbody>();
             rigidbody.maxAngularVelocity = 50.0f;
+
+
+            if(attachmentOffset != null)
+            {
+                interactable.handFollowTransform = attachmentOffset;
+            }
 
 		}
 
@@ -92,7 +101,7 @@ namespace Valve.VR.InteractionSystem
 				{
 					if (rigidbody.velocity.magnitude >= catchingThreshold)
 					{
-						hand.AttachObject( gameObject, bestGrabType, attachmentFlags, attachmentPoint );
+						hand.AttachObject( gameObject, bestGrabType, attachmentFlags );
 						showHint = false;
 					}
 				}
@@ -119,7 +128,7 @@ namespace Valve.VR.InteractionSystem
             
             if (startingGrabType != GrabTypes.None)
             {
-				hand.AttachObject( gameObject, startingGrabType, attachmentFlags, attachmentPoint );
+				hand.AttachObject( gameObject, startingGrabType, attachmentFlags, attachmentOffset );
                 hand.HideGrabHint();
             }
 		}
@@ -128,12 +137,6 @@ namespace Valve.VR.InteractionSystem
         protected virtual void OnAttachedToHand( Hand hand )
 		{
             //Debug.Log("Pickup: " + hand.GetGrabStarting().ToString());
-
-            if (displayHandWhileHeld)
-                hand.Show();
-
-            if (handAnimationOnPickup != 0)
-                hand.SetAnimationState(handAnimationOnPickup);
 
             hadInterpolation = this.rigidbody.interpolation;
 
@@ -153,21 +156,7 @@ namespace Valve.VR.InteractionSystem
 
 			if ( attachEaseIn )
 			{
-				attachEaseInTransform = hand.transform;
-				if ( !Util.IsNullOrEmpty( attachEaseInAttachmentNames ) )
-				{
-					float smallestAngle = float.MaxValue;
-					for ( int i = 0; i < attachEaseInAttachmentNames.Length; i++ )
-					{
-						Transform t = hand.GetAttachmentTransform( attachEaseInAttachmentNames[i] );
-						float angle = Quaternion.Angle( t.rotation, attachRotation );
-						if ( angle < smallestAngle )
-						{
-							attachEaseInTransform = t;
-							smallestAngle = angle;
-						}
-					}
-				}
+                attachEaseInTransform = hand.objectAttachmentPoint;
 			}
 
 			snapAttachEaseInCompleted = false;
@@ -179,61 +168,60 @@ namespace Valve.VR.InteractionSystem
         {
             attached = false;
 
-            if (handAnimationOnPickup != 0)
-                hand.StopAnimation();
-
             onDetachFromHand.Invoke();
 
             hand.HoverUnlock(null);
             
             rigidbody.interpolation = hadInterpolation;
 
-            if (releaseVelocityStyle == ReleaseStyle.OldControllerStyle)
-            {
-                rigidbody.velocity = hand.GetOldControllerVelocity();
-                rigidbody.angularVelocity = hand.GetOldControllerAngularVelocity();
-            }
-            else if (releaseVelocityStyle == ReleaseStyle.EstimatedOnObject)
-            {
-                Vector3 position = Vector3.zero;
-                Vector3 velocity = Vector3.zero;
-                Vector3 angularVelocity = Vector3.zero;
+            Vector3 velocity;
+            Vector3 angularVelocity;
 
-                velocityEstimator.FinishEstimatingVelocity();
-                velocity = velocityEstimator.GetVelocityEstimate();
-                angularVelocity = velocityEstimator.GetAngularVelocityEstimate();
-                position = velocityEstimator.transform.position;
+            GetReleaseVelocities(hand, out velocity, out angularVelocity);
 
-                Vector3 r = transform.TransformPoint(rigidbody.centerOfMass) - position;
-                rigidbody.velocity = velocity + Vector3.Cross(angularVelocity, r);
-                rigidbody.angularVelocity = angularVelocity;
-
-                // Make the object travel at the release velocity for the amount
-                // of time it will take until the next fixed update, at which
-                // point Unity physics will take over
-                float timeUntilFixedUpdate = (Time.fixedDeltaTime + Time.fixedTime) - Time.time;
-                transform.position += timeUntilFixedUpdate * velocity;
-                float angle = Mathf.Rad2Deg * angularVelocity.magnitude;
-                Vector3 axis = angularVelocity.normalized;
-                transform.rotation *= Quaternion.AngleAxis(angle * timeUntilFixedUpdate, axis);
-            }
-            else if (releaseVelocityStyle == ReleaseStyle.RawFromHand)
-            {
-                rigidbody.velocity = hand.GetTrackedObjectVelocity();
-                rigidbody.angularVelocity = hand.GetTrackedObjectAngularVelocity();
-            }
-            else if (releaseVelocityStyle == ReleaseStyle.EstimatedOnHand)
-            {
-                Vector3 velocity;
-                Vector3 angularVelocity;
-
-                hand.GetEstimatedPeakVelocities(out velocity, out angularVelocity);
-
-                rigidbody.velocity = velocity;
-                rigidbody.angularVelocity = angularVelocity;
-            }
+            rigidbody.velocity = velocity;
+            rigidbody.angularVelocity = angularVelocity;
         }
 
+
+        public virtual void GetReleaseVelocities(Hand hand, out Vector3 velocity, out Vector3 angularVelocity)
+        {
+            switch (releaseVelocityStyle)
+            {
+                case ReleaseStyle.OldControllerStyle:
+                    velocity = hand.GetOldControllerVelocity();
+                    angularVelocity = hand.GetOldControllerAngularVelocity();
+                    break;
+                case ReleaseStyle.EstimatedOnObject:
+                    Vector3 position = Vector3.zero;
+                    velocity = Vector3.zero;
+                    angularVelocity = Vector3.zero;
+
+                    velocityEstimator.FinishEstimatingVelocity();
+                    velocity = velocityEstimator.GetVelocityEstimate();
+                    angularVelocity = velocityEstimator.GetAngularVelocityEstimate();
+                    position = velocityEstimator.transform.position;
+
+                    Vector3 r = transform.TransformPoint(rigidbody.centerOfMass) - position;
+                    velocity = velocity + Vector3.Cross(angularVelocity, r);
+                    break;
+                case ReleaseStyle.EstimatedOnHand:
+                    hand.GetEstimatedPeakVelocities(out velocity, out angularVelocity);
+                    break;
+                case ReleaseStyle.RawFromHand:
+                    velocity = hand.GetTrackedObjectVelocity(releaseVelocityTimeOffset);
+                    angularVelocity = hand.GetTrackedObjectAngularVelocity(releaseVelocityTimeOffset);
+                    break;
+                default:
+                case ReleaseStyle.NoChange:
+                    velocity = rigidbody.velocity;
+                    angularVelocity = rigidbody.angularVelocity;
+                    break;
+            }
+
+            if (releaseVelocityStyle != ReleaseStyle.NoChange)
+                velocity *= scaleReleaseVelocity;
+        }
 
         //-------------------------------------------------
         protected virtual void HandAttachedUpdate( Hand hand )

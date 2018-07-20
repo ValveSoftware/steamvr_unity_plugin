@@ -85,8 +85,8 @@ public class SteamVR_Input_Action_Skeleton : SteamVR_Input_Action_Pose
 
             for (int boneIndex = 0; boneIndex < tempBoneTransforms.Length; boneIndex++)
             {
-                // Convert the transform from SteamVR's coordinate system to Unity's coordinate system.
-                // ie: flip the X axis
+                // SteamVR's coordinate system is right handed, and Unity's is left handed.  The FBX data has its
+                // X axis flipped when Unity imports it, so here we need to flip the X axis as well
                 bonePositions[inputSourceInt][boneIndex].x = -tempBoneTransforms[boneIndex].position.v0;
                 bonePositions[inputSourceInt][boneIndex].y = tempBoneTransforms[boneIndex].position.v1;
                 bonePositions[inputSourceInt][boneIndex].z = tempBoneTransforms[boneIndex].position.v2;
@@ -96,6 +96,12 @@ public class SteamVR_Input_Action_Skeleton : SteamVR_Input_Action_Pose
                 boneRotations[inputSourceInt][boneIndex].z = -tempBoneTransforms[boneIndex].orientation.z;
                 boneRotations[inputSourceInt][boneIndex].w = tempBoneTransforms[boneIndex].orientation.w;
             }
+
+            // Now that we're in the same handedness as Unity, rotate the root bone around the Y axis
+            // so that forward is facing down +Z
+            Quaternion qFixUpRot = Quaternion.AngleAxis(Mathf.PI * Mathf.Rad2Deg, Vector3.up);
+
+            boneRotations[inputSourceInt][0] = qFixUpRot * boneRotations[inputSourceInt][0];
         }
 
         changed[inputSource] = changed[inputSource] || poseChanged;
@@ -125,19 +131,19 @@ public class SteamVR_Input_Action_Skeleton : SteamVR_Input_Action_Pose
     }
 
 
-    public Vector3[] GetBonePositions(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public Vector3[] GetBonePositions(SteamVR_Input_Input_Sources inputSource)
     {
         return bonePositions[(int)inputSource];
     }
-    public Quaternion[] GetBoneRotations(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public Quaternion[] GetBoneRotations(SteamVR_Input_Input_Sources inputSource)
     {
         return boneRotations[(int)inputSource];
     }
-    public Vector3[] GetLastBonePositions(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public Vector3[] GetLastBonePositions(SteamVR_Input_Input_Sources inputSource)
     {
         return lastBonePositions[(int)inputSource];
     }
-    public Quaternion[] GetLastBoneRotations(SteamVR_Input_Input_Sources inputSource = SteamVR_Input_Input_Sources.Any)
+    public Quaternion[] GetLastBoneRotations(SteamVR_Input_Input_Sources inputSource)
     {
         return lastBoneRotations[(int)inputSource];
     }
@@ -150,4 +156,11 @@ public class SteamVR_Input_Action_Skeleton : SteamVR_Input_Action_Pose
     {
         skeletalTransformSpace[inputSource] = space;
     }
+}
+
+public enum SkeletalMotionRangeChange
+{
+    None = -1,
+    WithController = 0,
+    WithoutController = 1,
 }

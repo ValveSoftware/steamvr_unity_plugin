@@ -21,7 +21,7 @@ public class SteamVR_TestThrow : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		var device = SteamVR_Controller.Input((int)trackedObj.poseAction.GetDeviceIndex());
+		var device = SteamVR_Controller.Input((int)trackedObj.GetDeviceIndex());
 		if (joint == null && spawn.GetStateDown(trackedObj.inputSource))
 		{
 			var go = GameObject.Instantiate(prefab);

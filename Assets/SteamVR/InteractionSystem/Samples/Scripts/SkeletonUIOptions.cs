@@ -4,6 +4,7 @@ using Valve.VR.InteractionSystem;
 
 public class SkeletonUIOptions : MonoBehaviour
 {
+    
     public void AnimateHandWithController()
     {
         for (int handIndex = 0; handIndex < Player.instance.hands.Length; handIndex++)
@@ -35,7 +36,22 @@ public class SkeletonUIOptions : MonoBehaviour
             Hand hand = Player.instance.hands[handIndex];
             if (hand != null)
             {
-                hand.ShowController(false);
+                hand.ShowController(true);
+            }
+        }
+    }
+
+    public void SetRenderModel(RenderModelHolder prefabs)
+    {
+        for (int handIndex = 0; handIndex < Player.instance.hands.Length; handIndex++)
+        {
+            Hand hand = Player.instance.hands[handIndex];
+            if (hand != null)
+            {
+                if(hand.handType == SteamVR_Input_Input_Sources.RightHand)
+                    hand.SetRenderModel(prefabs.rightPrefab);
+                if (hand.handType == SteamVR_Input_Input_Sources.LeftHand)
+                    hand.SetRenderModel(prefabs.leftPrefab);
             }
         }
     }

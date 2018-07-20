@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 490018}
   m_Layer: 26
-  m_Name: Attach_ControllerTip
+  m_Name: ObjectAttachmentPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -226,8 +226,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 476540}
   - 114: {fileID: 11450312}
+  - 114: {fileID: 114000011273627542}
   m_Layer: 26
-  m_Name: Hand1
+  m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -242,8 +243,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 485514}
   - 114: {fileID: 11401046}
+  - 114: {fileID: 114000011957598740}
   m_Layer: 26
-  m_Name: Hand2
+  m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -258,7 +260,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 480432}
   m_Layer: 26
-  m_Name: Attach_ControllerTip
+  m_Name: HoverPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,7 +388,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 476540}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &422332
 Transform:
   m_ObjectHideFlags: 1
@@ -425,7 +427,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 485514}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &447954
 Transform:
   m_ObjectHideFlags: 1
@@ -457,7 +459,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 476540}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &453574
 Transform:
   m_ObjectHideFlags: 1
@@ -549,7 +551,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 490018}
+  - {fileID: 4000012325712216}
+  - {fileID: 4000011474053580}
   - {fileID: 451882}
   - {fileID: 413580}
   m_Father: {fileID: 494198}
@@ -560,8 +563,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 165334}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.017, z: 0.0332}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.051999986, y: -0.015699983, z: -0.11630082}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -579,6 +582,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 480432}
+  - {fileID: 490018}
   - {fileID: 495400}
   - {fileID: 446772}
   m_Father: {fileID: 494198}
@@ -589,13 +593,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100470}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.017, z: 0.0332}
+  m_LocalRotation: {x: 0.32650563, y: 0.212631, z: -0.6272114, w: 0.67437977}
+  m_LocalPosition: {x: -0.05199999, y: -0.0157, z: -0.11630082}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 135, y: 170, z: 90}
   m_Children: []
-  m_Father: {fileID: 476540}
-  m_RootOrder: 0
+  m_Father: {fileID: 485514}
+  m_RootOrder: 1
 --- !u!4 &494198
 Transform:
   m_ObjectHideFlags: 1
@@ -627,7 +631,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 485514}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &496744
 Transform:
   m_ObjectHideFlags: 1
@@ -853,7 +857,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   otherHand: {fileID: 11450312}
   handType: 2
-  poseAction: {fileID: 11400000, guid: 0e754678c7d6c6b41854e69ae58e74ae, type: 2}
+  trackedObject: {fileID: 0}
   grabPinchAction: {fileID: 11400000, guid: bccf745dc5e5ece44b85e531c9d3569b, type: 2}
   grabGripAction: {fileID: 11400000, guid: 65460bf3025b7ef43b7771b4c0ff9a8b, type: 2}
   hapticAction: {fileID: 11400000, guid: 9ef77b3121cc90240af4f46ea2d1f342, type: 2}
@@ -864,10 +868,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   hoverUpdateInterval: 0.1
+  objectAttachmentPoint: {fileID: 490018}
   noSteamVRFallbackCamera: {fileID: 0}
   noSteamVRFallbackMaxDistanceNoItem: 10
   noSteamVRFallbackMaxDistanceWithItem: 0.5
-  controllerPrefab: {fileID: 1000012782440478, guid: cf4a852a7a390644ebea6643f5dc1872,
+  renderModelPrefab: {fileID: 1000012617731570, guid: d07386f0ec952ec409dc7753bcf5746b,
     type: 2}
   showDebugText: 0
   spewDebugText: 0
@@ -897,21 +902,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   otherHand: {fileID: 11401046}
   handType: 1
-  poseAction: {fileID: 11400000, guid: 0e754678c7d6c6b41854e69ae58e74ae, type: 2}
+  trackedObject: {fileID: 0}
   grabPinchAction: {fileID: 11400000, guid: bccf745dc5e5ece44b85e531c9d3569b, type: 2}
   grabGripAction: {fileID: 11400000, guid: 65460bf3025b7ef43b7771b4c0ff9a8b, type: 2}
   hapticAction: {fileID: 11400000, guid: 9ef77b3121cc90240af4f46ea2d1f342, type: 2}
   uiInteractAction: {fileID: 11400000, guid: 9affd786fb56acf468c8d1d9dfdca015, type: 2}
-  hoverSphereTransform: {fileID: 490018}
+  hoverSphereTransform: {fileID: 4000012325712216}
   hoverSphereRadius: 0.06
   hoverLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
   hoverUpdateInterval: 0.1
+  objectAttachmentPoint: {fileID: 4000011474053580}
   noSteamVRFallbackCamera: {fileID: 0}
   noSteamVRFallbackMaxDistanceNoItem: 10
   noSteamVRFallbackMaxDistanceWithItem: 0.5
-  controllerPrefab: {fileID: 1000012801256346, guid: d6ca068ee482b274a945aece6f541467,
+  renderModelPrefab: {fileID: 1000011547835092, guid: 8ade79fed86bbd141926d1cd94c98457,
     type: 2}
   showDebugText: 0
   spewDebugText: 0
@@ -1096,7 +1102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   otherHand: {fileID: 0}
   handType: 0
-  poseAction: {fileID: 0}
+  trackedObject: {fileID: 0}
   grabPinchAction: {fileID: 0}
   grabGripAction: {fileID: 0}
   hapticAction: {fileID: 0}
@@ -1107,10 +1113,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   hoverUpdateInterval: 0.1
+  objectAttachmentPoint: {fileID: 0}
   noSteamVRFallbackCamera: {fileID: 2083460}
   noSteamVRFallbackMaxDistanceNoItem: 10
   noSteamVRFallbackMaxDistanceWithItem: 0.5
-  controllerPrefab: {fileID: 0}
+  renderModelPrefab: {fileID: 0}
   showDebugText: 0
   spewDebugText: 0
 --- !u!124 &12440092
@@ -1243,6 +1250,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000013428287994
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000012325712216}
+  m_Layer: 26
+  m_Name: HoverPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000014277073068
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000011474053580}
+  m_Layer: 26
+  m_Name: ObjectAttachmentPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4000011044845102
 Transform:
   m_ObjectHideFlags: 1
@@ -1258,6 +1295,19 @@ Transform:
   - {fileID: 4000011699137176}
   m_Father: {fileID: 494198}
   m_RootOrder: 5
+--- !u!4 &4000011474053580
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014277073068}
+  m_LocalRotation: {x: 0.32650566, y: -0.21263102, z: 0.6272114, w: 0.67437977}
+  m_LocalPosition: {x: 0.051999986, y: -0.0157, z: -0.11630082}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 135, y: -170, z: -90}
+  m_Children: []
+  m_Father: {fileID: 476540}
+  m_RootOrder: 1
 --- !u!4 &4000011699137176
 Transform:
   m_ObjectHideFlags: 1
@@ -1284,6 +1334,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 447954}
   m_RootOrder: 5
+--- !u!4 &4000012325712216
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013428287994}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.051999986, y: -0.015699983, z: -0.11630082}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 476540}
+  m_RootOrder: 0
 --- !u!4 &4000013797098244
 Transform:
   m_ObjectHideFlags: 1
@@ -1360,6 +1423,36 @@ MonoBehaviour:
   mouseScale: {x: 1, y: 1}
   curvedRange: {x: 1, y: 2}
   inputMethod: 0
+--- !u!114 &114000011273627542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5fb0ca93b55ef4b8d54b512b103341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poseAction: {fileID: 11400000, guid: 0e754678c7d6c6b41854e69ae58e74ae, type: 2}
+  inputSource: 1
+  origin: {fileID: 0}
+  enableAdvancedVelocityEstimation: 1
+--- !u!114 &114000011957598740
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5fb0ca93b55ef4b8d54b512b103341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poseAction: {fileID: 11400000, guid: 0e754678c7d6c6b41854e69ae58e74ae, type: 2}
+  inputSource: 2
+  origin: {fileID: 0}
+  enableAdvancedVelocityEstimation: 1
 --- !u!114 &114000011983135080
 MonoBehaviour:
   m_ObjectHideFlags: 1
