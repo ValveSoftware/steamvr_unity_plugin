@@ -1,4 +1,4 @@
-SteamVR Unity Plugin
+# SteamVR Unity Plugin
 
 This is the source code for the plugin found on the Unity Asset Store here:
 http://u3d.as/content/valve-corporation/steam-vr-plugin
