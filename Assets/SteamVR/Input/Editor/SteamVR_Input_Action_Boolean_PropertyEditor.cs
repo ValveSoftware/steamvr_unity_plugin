@@ -13,7 +13,10 @@ using System.Linq.Expressions;
 using System;
 
 
-[CustomPropertyDrawer(typeof(SteamVR_Input_Action_Boolean))]
-public class SteamVR_Input_Action_Boolean_PropertyEditor : SteamVR_Input_Action_GenericPropertyEditor<SteamVR_Input_Action_Boolean>
+namespace Valve.VR
 {
+    [CustomPropertyDrawer(typeof(SteamVR_Action_Boolean))]
+    public class SteamVR_Input_Action_Boolean_PropertyEditor : SteamVR_Input_Action_GenericPropertyEditor<SteamVR_Action_Boolean>
+    {
+    }
 }

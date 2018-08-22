@@ -40,7 +40,6 @@ GameObject:
   - 4: {fileID: 4000013665258184}
   - 33: {fileID: 33000012902973200}
   - 23: {fileID: 23000013980400540}
-  - 95: {fileID: 95000013880895690}
   - 65: {fileID: 65000013550508472}
   m_Layer: 0
   m_Name: Flower (1)
@@ -224,23 +223,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &95000013880895690
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013831932218}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a3871f8445d0e6c42a079739574edb38, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114000010830299382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -266,6 +248,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b93b6a877adcbf94c89a9d6e0c0e844d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideHandOnAttach: 1
+  hideSkeletonOnAttach: 0
+  hideControllerOnAttach: 0
+  handAnimationOnPickup: 0
+  setRangeOfMotionOnPickup: -1
+  useHandObjectAttachmentPoint: 1
+  handFollowTransform: {fileID: 0}
+  handFollowTransformPosition: 1
+  handFollowTransformRotation: 1
+  highlightOnHover: 1
+  hideHighlight: []
 --- !u!114 &114000014078190628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -278,12 +271,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachmentFlags: 80
-  attachmentPoint: 
-  catchSpeedThreshold: 0
+  attachmentOffset: {fileID: 0}
+  catchingSpeedThreshold: -1
   releaseVelocityStyle: 3
+  releaseVelocityTimeOffset: -0.011
+  scaleReleaseVelocity: 1.1
   restoreOriginalParent: 0
-  handAnimationOnPickup: 0
-  displayHandWhileHeld: 0
   attachEaseIn: 0
   snapAttachEaseInCurve:
     serializedVersion: 2
@@ -302,7 +295,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   snapAttachEaseInTime: 0.15
-  attachEaseInAttachmentNames: []
   onPickUp:
     m_PersistentCalls:
       m_Calls: []
@@ -314,3 +306,4 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   snapAttachEaseInCompleted: 0
+  interactable: {fileID: 0}

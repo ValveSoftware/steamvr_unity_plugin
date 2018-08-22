@@ -13,7 +13,10 @@ using System.Linq.Expressions;
 using System;
 
 
-[CustomPropertyDrawer(typeof(SteamVR_Input_Action_Single))]
-public class SteamVR_Input_Action_Single_PropertyEditor : SteamVR_Input_Action_GenericPropertyEditor<SteamVR_Input_Action_Single>
+namespace Valve.VR
 {
+    [CustomPropertyDrawer(typeof(SteamVR_Action_Single))]
+    public class SteamVR_Input_Action_Single_PropertyEditor : SteamVR_Input_Action_GenericPropertyEditor<SteamVR_Action_Single>
+    {
+    }
 }

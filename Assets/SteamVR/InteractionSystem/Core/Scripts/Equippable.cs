@@ -31,14 +31,14 @@ namespace Valve.VR.InteractionSystem
         private Interactable interactable;
 
         [HideInInspector]
-        public SteamVR_Input_Input_Sources attachedHandType
+        public SteamVR_Input_Sources attachedHandType
         {
             get
             {
                 if (interactable.attachedToHand)
                     return interactable.attachedToHand.handType;
                 else
-                    return SteamVR_Input_Input_Sources.Any;
+                    return SteamVR_Input_Sources.Any;
             }
         }
         
@@ -53,7 +53,7 @@ namespace Valve.VR.InteractionSystem
             if (interactable.attachedToHand)
             {
                 Vector3 flipScale = initialScale;
-                if ((attachedHandType == SteamVR_Input_Input_Sources.RightHand && defaultHand == WhichHand.Right) || (attachedHandType == SteamVR_Input_Input_Sources.LeftHand && defaultHand == WhichHand.Left))
+                if ((attachedHandType == SteamVR_Input_Sources.RightHand && defaultHand == WhichHand.Right) || (attachedHandType == SteamVR_Input_Sources.LeftHand && defaultHand == WhichHand.Left))
                 {
                     flipScale.x *= 1;
                     for (int transformIndex = 0; transformIndex < antiFlip.Length; transformIndex++)

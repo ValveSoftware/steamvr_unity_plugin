@@ -55,4 +55,4 @@ MonoBehaviour:
   displayHandByDefault: 1
   controllerPrefab: {fileID: 1000011460529826, guid: e789c2cc0c98a4c4198a4033fb8ccf96,
     type: 2}
-  displayControllerByDefault: 0
+  displayControllerByDefault: 1

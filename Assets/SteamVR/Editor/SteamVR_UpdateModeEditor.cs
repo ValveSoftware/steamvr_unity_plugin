@@ -13,11 +13,14 @@ using System.Linq.Expressions;
 using System;
 
 
-[CustomPropertyDrawer(typeof(SteamVR_UpdateModes))]
-public class SteamVR_UpdateModesEditor : PropertyDrawer
+namespace Valve.VR
 {
-    public override void OnGUI(Rect _position, SerializedProperty _property, GUIContent _label)
+    [CustomPropertyDrawer(typeof(SteamVR_UpdateModes))]
+    public class SteamVR_UpdateModesEditor : PropertyDrawer
     {
-        _property.intValue = EditorGUI.MaskField(_position, _label, _property.intValue, _property.enumNames);
+        public override void OnGUI(Rect _position, SerializedProperty _property, GUIContent _label)
+        {
+            _property.intValue = EditorGUI.MaskField(_position, _label, _property.intValue, _property.enumNames);
+        }
     }
 }

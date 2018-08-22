@@ -13,8 +13,8 @@ namespace Valve.VR.InteractionSystem
 	//-------------------------------------------------------------------------
 	public class Teleport : MonoBehaviour
     {
-        [DefaultInputAction("Teleport")]
-        public SteamVR_Input_Action_Boolean teleportAction;
+        [SteamVR_DefaultAction("Teleport", "default")]
+        public SteamVR_Action_Boolean teleportAction;
 
         public LayerMask traceLayerMask;
 		public LayerMask floorFixupTraceLayerMask;

@@ -1,14 +1,6 @@
 {
   "actions": [
     {
-      "name": "/actions/default/in/Move",
-      "type": "vector2"
-    },
-    {
-      "name": "/actions/default/in/Use",
-      "type": "boolean"
-    },
-    {
       "name": "/actions/default/in/InteractUI",
       "type": "boolean"
     },
@@ -39,13 +31,50 @@
       "skeleton": "/skeleton/hand/right"
     },
     {
+      "name": "/actions/default/in/Squeeze",
+      "type": "vector1",
+      "requirement": "optional"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
+    },
+    {
+      "name": "/actions/platformer/in/Move",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/platformer/in/Jump",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/buggy/in/Steering",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/buggy/in/Throttle",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/buggy/in/Brake",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/buggy/in/Reset",
+      "type": "boolean"
     }
   ],
   "action_sets": [
     {
       "name": "/actions/default",
+      "usage": "single"
+    },
+    {
+      "name": "/actions/platformer",
+      "usage": "single"
+    },
+    {
+      "name": "/actions/buggy",
       "usage": "single"
     }
   ],
@@ -66,21 +95,20 @@
   "localization": [
     {
       "language_tag": "en_US",
-      "/actions/default/in/Move": "Move",
-      "/actions/default/in/Use": "Use",
       "/actions/default/in/InteractUI": "Interact With UI",
       "/actions/default/in/Teleport": "Teleport",
       "/actions/default/in/GrabPinch": "Grab Pinch",
       "/actions/default/in/GrabGrip": "Grab Grip",
-      "/actions/default/in/PoseLeftHand": "Pose (Left)",
-      "/actions/default/in/PoseRightHand": "Pose (Right)",
       "/actions/default/in/SkeletonLeftHand": "Skeleton (Left)",
       "/actions/default/in/SkeletonRightHand": "Skeleton (Right)",
-      "/actions/default/out/HapticLeftHand": "Haptic",
-      "/actions/default/out/HapticRightHand": "Haptic (Right)",
-      "/actions/default/in/Plant": "Plant",
       "/actions/default/in/Pose": "Pose",
-      "/actions/default/out/Haptic": "Haptic"
+      "/actions/default/out/Haptic": "Haptic",
+      "/actions/buggybuddy/in/Steering": "Steering",
+      "/actions/buggybuddy/in/Throttle": "Throttle",
+      "/actions/buggybuddy/in/Brake": "Brake",
+      "/actions/buggybuddy/in/Reset": "Reset",
+      "/actions/platformer/in/Move": "Move",
+      "/actions/platformer/in/Jump": "Jump"
     }
   ]
 }

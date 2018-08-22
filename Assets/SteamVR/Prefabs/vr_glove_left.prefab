@@ -1009,7 +1009,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 02d2c3f5b5ca1014c8fb700e729167ae, type: 3}
   m_Controller: {fileID: 9100000, guid: 42369a307decda842a4a92cfbad72afe, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -1033,6 +1033,7 @@ MonoBehaviour:
   skeletonRoot: {fileID: 4000012684619030}
   origin: {fileID: 0}
   updatePose: 1
+  onlySetRotations: 0
   skeletonBlend: 1
   mirroring: 2
 --- !u!137 &137000011342081356
@@ -1066,7 +1067,7 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 4300000, guid: 02d2c3f5b5ca1014c8fb700e729167ae, type: 3}
   m_Bones:

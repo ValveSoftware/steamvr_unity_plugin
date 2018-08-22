@@ -8,7 +8,7 @@ using UnityEngine;
 using System.Collections;
 using Valve.VR;
 
-namespace Valve.VR.InteractionSystem
+namespace Valve.VR.InteractionSystem.Sample
 {
 	//-------------------------------------------------------------------------
 	public class ControllerHintsExample : MonoBehaviour
@@ -72,11 +72,13 @@ namespace Valve.VR.InteractionSystem
             {
                 for (int actionIndex = 0; actionIndex < SteamVR_Input.actionsIn.Length; actionIndex++)
                 {
-                    SteamVR_Input_Action_In action = (SteamVR_Input_Action_In)SteamVR_Input.actionsIn[actionIndex];
+                    SteamVR_Action_In action = (SteamVR_Action_In)SteamVR_Input.actionsIn[actionIndex];
                     if (action.GetActive(hand.handType))
                     {
                         ControllerButtonHints.ShowButtonHint(hand, action);
                         yield return new WaitForSeconds(1.0f);
+                        ControllerButtonHints.HideButtonHint(hand, action);
+                        yield return new WaitForSeconds(0.5f);
                     }
                     yield return null;
                 }
@@ -98,11 +100,13 @@ namespace Valve.VR.InteractionSystem
             {
                 for (int actionIndex = 0; actionIndex < SteamVR_Input.actionsIn.Length; actionIndex++)
                 {
-                    SteamVR_Input_Action_In action = (SteamVR_Input_Action_In)SteamVR_Input.actionsIn[actionIndex];
+                    SteamVR_Action_In action = (SteamVR_Action_In)SteamVR_Input.actionsIn[actionIndex];
                     if (action.GetActive(hand.handType))
                     {
                         ControllerButtonHints.ShowTextHint(hand, action, action.GetShortName());
                         yield return new WaitForSeconds(3.0f);
+                        ControllerButtonHints.HideTextHint(hand, action);
+                        yield return new WaitForSeconds(0.5f);
                     }
                     yield return null;
                 }

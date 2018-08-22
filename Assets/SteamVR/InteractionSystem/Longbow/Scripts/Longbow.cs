@@ -262,7 +262,7 @@ namespace Valve.VR.InteractionSystem
 		{
             var handType = hand.handType;
 
-			if ( handType == SteamVR_Input_Input_Sources.LeftHand )// Bow hand is further left than arrow hand.
+			if ( handType == SteamVR_Input_Sources.LeftHand )// Bow hand is further left than arrow hand.
 			{
 				// We were considering a switch, but the current controller orientation matches our currently assigned handedness, so no longer consider a switch
 				if ( possibleHandSwitch && currentHandGuess == Handedness.Left )

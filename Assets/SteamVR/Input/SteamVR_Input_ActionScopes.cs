@@ -1,6 +1,12 @@
-﻿public enum SteamVR_Input_ActionScopes
+﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
+
+
+namespace Valve.VR
 {
-    ActionSet,
-    Application,
-    Global,
+    public enum SteamVR_Input_ActionScopes
+    {
+        ActionSet,
+        Application,
+        Global,
+    }
 }

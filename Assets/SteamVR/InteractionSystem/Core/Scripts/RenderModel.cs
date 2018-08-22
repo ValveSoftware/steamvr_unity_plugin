@@ -1,4 +1,6 @@
-﻿ using UnityEngine;
+﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
+
+using UnityEngine;
 using System.Collections;
 using System;
 
@@ -10,7 +12,7 @@ namespace Valve.VR.InteractionSystem
         protected GameObject handInstance;
         protected Renderer[] handRenderers;
         public bool displayHandByDefault = true;
-        protected SteamVR_Input_Skeleton handSkeleton;
+        protected SteamVR_Behaviour_Skeleton handSkeleton;
         protected Animator handAnimator;
 
         protected string animatorParameterStateName = "AnimationState";
@@ -29,6 +31,8 @@ namespace Valve.VR.InteractionSystem
 
         protected SteamVR_Events.Action renderModelLoadedAction;
 
+        protected SteamVR_Input_Sources inputSource;
+
         protected void Awake()
         {
             renderModelLoadedAction = SteamVR_Events.RenderModelLoadedAction(OnRenderModelLoaded);
@@ -40,7 +44,7 @@ namespace Valve.VR.InteractionSystem
                 handInstance.transform.localPosition = Vector3.zero;
                 handInstance.transform.localRotation = Quaternion.identity;
                 handInstance.transform.localScale = handPrefab.transform.localScale;
-                handSkeleton = handInstance.GetComponent<SteamVR_Input_Skeleton>();
+                handSkeleton = handInstance.GetComponent<SteamVR_Behaviour_Skeleton>();
                 handSkeleton.updatePose = false;
 
                 handRenderers = handInstance.GetComponentsInChildren<Renderer>();
@@ -71,8 +75,16 @@ namespace Valve.VR.InteractionSystem
             renderModelLoadedAction.enabled = false;
         }
 
+        public virtual void SetInputSource(SteamVR_Input_Sources newInputSource)
+        {
+            inputSource = newInputSource;
+            if (controllerRenderModel != null)
+                controllerRenderModel.SetInputSource(inputSource);
+        }
+
         public virtual void OnHandInitialized(int deviceIndex)
         {
+            controllerRenderModel.SetInputSource(inputSource);
             controllerRenderModel.SetDeviceIndex(deviceIndex);
         }
 
@@ -191,6 +203,64 @@ namespace Valve.VR.InteractionSystem
             {
                 handRenderers[rendererIndex].enabled = state;
             }
+        }
+
+        public bool IsHandVisibile()
+        {
+            if (handRenderers == null)
+                return false;
+
+            for (int rendererIndex = 0; rendererIndex < handRenderers.Length; rendererIndex++)
+            {
+                if (handRenderers[rendererIndex].enabled)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public bool IsControllerVisibile()
+        {
+            if (controllerRenderers == null)
+                return false;
+
+            for (int rendererIndex = 0; rendererIndex < controllerRenderers.Length; rendererIndex++)
+            {
+                if (controllerRenderers[rendererIndex].enabled)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public Transform GetBone(int boneIndex)
+        {
+            if (handSkeleton != null)
+            {
+                return handSkeleton.GetBone(boneIndex);
+            }
+
+            return null;
+        }
+
+        public Vector3 GetBonePosition(int boneIndex, bool local = false)
+        {
+            if (handSkeleton != null)
+            {
+                return handSkeleton.GetBonePosition(boneIndex, local);
+            }
+
+            return Vector3.zero;
+        }
+
+        public Quaternion GetBoneRotation(int boneIndex, bool local = false)
+        {
+            if (handSkeleton != null)
+            {
+                return handSkeleton.GetBoneRotation(boneIndex, local);
+            }
+
+            return Quaternion.identity;
         }
 
 

@@ -41,21 +41,21 @@ namespace Valve.VR.InteractionSystem
                                                               AttachmentFlags.SnapOnAttach;
 
         public Hand otherHand;
-        public SteamVR_Input_Input_Sources handType;
+        public SteamVR_Input_Sources handType;
 
-        public SteamVR_Input_TrackedObject trackedObject;
+        public SteamVR_Behaviour_Pose trackedObject;
 
-        [DefaultInputAction("GrabPinch")]
-        public SteamVR_Input_Action_Boolean grabPinchAction;
+        [SteamVR_DefaultAction("GrabPinch")]
+        public SteamVR_Action_Boolean grabPinchAction;
 
-        [DefaultInputAction("GrabGrip")]
-        public SteamVR_Input_Action_Boolean grabGripAction;
+        [SteamVR_DefaultAction("GrabGrip")]
+        public SteamVR_Action_Boolean grabGripAction;
 
-        [DefaultInputAction("Haptic")]
-        public SteamVR_Input_Action_Vibration hapticAction;
+        [SteamVR_DefaultAction("Haptic")]
+        public SteamVR_Action_Vibration hapticAction;
 
-        [DefaultInputAction("InteractUI")]
-        public SteamVR_Input_Action_Boolean uiInteractAction;
+        [SteamVR_DefaultAction("InteractUI")]
+        public SteamVR_Action_Boolean uiInteractAction;
 
         public Transform hoverSphereTransform;
         public float hoverSphereRadius = 0.05f;
@@ -220,7 +220,7 @@ namespace Valve.VR.InteractionSystem
             if (mainRenderModel != null)
                 mainRenderModel.SetControllerVisibility(true, permanent);
 
-            if (hoverhighlightRenderModel != null && permanent)
+            if (hoverhighlightRenderModel != null)
                 hoverhighlightRenderModel.SetControllerVisibility(true, permanent);
         }
 
@@ -229,8 +229,26 @@ namespace Valve.VR.InteractionSystem
             if (mainRenderModel != null)
                 mainRenderModel.SetControllerVisibility(false, permanent);
 
-            if (hoverhighlightRenderModel != null && permanent)
+            if (hoverhighlightRenderModel != null)
                 hoverhighlightRenderModel.SetControllerVisibility(false, permanent);
+        }
+
+        public void ShowSkeleton(bool permanent = false)
+        {
+            if (mainRenderModel != null)
+                mainRenderModel.SetHandVisibility(true, permanent);
+
+            if (hoverhighlightRenderModel != null)
+                hoverhighlightRenderModel.SetHandVisibility(true, permanent);
+        }
+
+        public void HideSkeleton(bool permanent = false)
+        {
+            if (mainRenderModel != null)
+                mainRenderModel.SetHandVisibility(false, permanent);
+
+            if (hoverhighlightRenderModel != null)
+                hoverhighlightRenderModel.SetHandVisibility(false, permanent);
         }
 
         public void Show()
@@ -352,6 +370,12 @@ namespace Valve.VR.InteractionSystem
                 if (attachedObject.interactable.hideHandOnAttach)
                     Hide();
 
+                if (attachedObject.interactable.hideSkeletonOnAttach && mainRenderModel != null && mainRenderModel.displayHandByDefault)
+                    HideSkeleton();
+
+                if (attachedObject.interactable.hideControllerOnAttach && mainRenderModel != null && mainRenderModel.displayControllerByDefault)
+                    HideController();
+
                 if (attachedObject.interactable.handAnimationOnPickup != 0)
                     SetAnimationState(attachedObject.interactable.handAnimationOnPickup);
 
@@ -398,7 +422,7 @@ namespace Valve.VR.InteractionSystem
                 }
 
                 Transform followPoint = objectToAttach.transform;
-                if (attachedObject.interactable != null && attachedObject.interactable.handFollowTransform != null) //todo: not sure this is right.
+                if (attachedObject.interactable != null && attachedObject.interactable.handFollowTransform != null)
                     followPoint = attachedObject.interactable.handFollowTransform;
 
                 attachedObject.initialPositionalOffset = attachedObject.handAttachmentPointTransform.InverseTransformPoint(followPoint.position);
@@ -484,6 +508,12 @@ namespace Valve.VR.InteractionSystem
                     if (attachedObjects[index].interactable.hideHandOnAttach)
                         Show();
 
+                    if (attachedObjects[index].interactable.hideSkeletonOnAttach && mainRenderModel != null && mainRenderModel.displayHandByDefault)
+                        ShowSkeleton();
+
+                    if (attachedObjects[index].interactable.hideControllerOnAttach && mainRenderModel != null && mainRenderModel.displayControllerByDefault)
+                        ShowController();
+
                     if (attachedObjects[index].interactable.handAnimationOnPickup != 0)
                         StopAnimation();
 
@@ -563,13 +593,7 @@ namespace Valve.VR.InteractionSystem
 
             return Vector3.zero;
         }
-
-
-        public Vector3 GetOldControllerVelocity()
-        {
-            SteamVR_Controller.Device controller = SteamVR_Controller.Input(trackedObject.GetDeviceIndex());
-            return Player.instance.trackingOriginTransform.TransformVector(controller.velocity);
-        }
+        
 
         //-------------------------------------------------
         // Get the world space angular velocity of the VR Hand.
@@ -592,12 +616,6 @@ namespace Valve.VR.InteractionSystem
             }
 
             return Vector3.zero;
-        }
-
-        public Vector3 GetOldControllerAngularVelocity()
-        {
-            SteamVR_Controller.Device controller = SteamVR_Controller.Input((int)trackedObject.GetDeviceIndex());
-            return Player.instance.trackingOriginTransform.TransformDirection(controller.angularVelocity);
         }
 
         public void GetEstimatedPeakVelocities(out Vector3 velocity, out Vector3 angularVelocity)
@@ -631,12 +649,12 @@ namespace Valve.VR.InteractionSystem
             applicationLostFocusObject.SetActive(false);
 
             if (trackedObject == null)
-                trackedObject = this.gameObject.GetComponent<SteamVR_Input_TrackedObject>();
+                trackedObject = this.gameObject.GetComponent<SteamVR_Behaviour_Pose>();
 
-            trackedObject.onTransformUpdated += OnTransformUpdated;
+            trackedObject.onTransformUpdated.AddListener(OnTransformUpdated);
         }
 
-        protected virtual void OnTransformUpdated()
+        protected virtual void OnTransformUpdated(SteamVR_Action_Pose pose)
         {
             HandFollowUpdate();
         }
@@ -694,24 +712,34 @@ namespace Valve.VR.InteractionSystem
             float closestDistance = float.MaxValue;
             Interactable closestInteractable = null;
 
+            float scaledHoverRadius = hoverSphereRadius * Mathf.Abs(SteamVR_Utils.GetLossyScale(hoverSphereTransform));
+
+            CheckHoveringForTransform(hoverSphereTransform.position, scaledHoverRadius, ref closestDistance, ref closestInteractable);
+
+            if (mainRenderModel != null && mainRenderModel.IsHandVisibile())
+                CheckHoveringForTransform(mainRenderModel.GetBonePosition(SteamVR_Skeleton_JointIndexes.indexTip), scaledHoverRadius/2f, ref closestDistance, ref closestInteractable);
+
+            // Hover on this one
+            hoveringInteractable = closestInteractable;
+        }
+
+        protected virtual void CheckHoveringForTransform(Vector3 hoverPosition, float hoverRadius, ref float closestDistance, ref Interactable closestInteractable)
+        {
             // null out old vals
             for (int i = 0; i < overlappingColliders.Length; ++i)
             {
                 overlappingColliders[i] = null;
             }
 
-            // Pick the closest hovering
-            float scaledHoverRadius = hoverSphereRadius * SteamVR_Utils.GetLossyScale(hoverSphereTransform);
-
-            int numColliding = Physics.OverlapSphereNonAlloc(hoverSphereTransform.position, scaledHoverRadius, overlappingColliders, hoverLayerMask.value);
+            int numColliding = Physics.OverlapSphereNonAlloc(hoverPosition, hoverRadius, overlappingColliders, hoverLayerMask.value);
 
             if (numColliding == ColliderArraySize)
                 Debug.LogWarning("This hand is overlapping the max number of colliders: " + ColliderArraySize + ". Some collisions may be missed. Increase ColliderArraySize on Hand.cs");
 
-
             // DebugVar
             int iActualColliderCount = 0;
 
+            // Pick the closest hovering
             for (int colliderIndex = 0; colliderIndex < overlappingColliders.Length; colliderIndex++)
             {
                 Collider collider = overlappingColliders[colliderIndex];
@@ -753,7 +781,7 @@ namespace Valve.VR.InteractionSystem
                     continue;
 
                 // Best candidate so far...
-                float distance = Vector3.Distance(contacting.transform.position, hoverSphereTransform.position);
+                float distance = Vector3.Distance(contacting.transform.position, hoverPosition);
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
@@ -761,9 +789,6 @@ namespace Valve.VR.InteractionSystem
                 }
                 iActualColliderCount++;
             }
-
-            // Hover on this one
-            hoveringInteractable = closestInteractable;
 
             if (iActualColliderCount > 0 && iActualColliderCount != prevOverlappingColliders)
             {
@@ -836,7 +861,7 @@ namespace Valve.VR.InteractionSystem
                     debugText.transform.localRotation = Quaternion.Euler(90.0f, 0.0f, 0.0f);
                 }
 
-                if (handType == SteamVR_Input_Input_Sources.RightHand)
+                if (handType == SteamVR_Input_Sources.RightHand)
                 {
                     debugText.transform.localPosition = new Vector3(-0.05f, 0.0f, 0.0f);
                     debugText.alignment = TextAlignment.Right;
@@ -1085,7 +1110,7 @@ namespace Valve.VR.InteractionSystem
 
         public void ShowGrabHint()
         {
-            ControllerButtonHints.HideButtonHint(this, grabGripAction); //todo: assess
+            ControllerButtonHints.ShowButtonHint(this, grabGripAction); //todo: assess
         }
 
         public void HideGrabHint()
@@ -1250,6 +1275,7 @@ namespace Valve.VR.InteractionSystem
             if (hadOldRendermodel)
                 mainRenderModel.SetSkeletonRangeOfMotion(oldRM_rom);
 
+            this.BroadcastMessage("SetInputSource", handType, SendMessageOptions.DontRequireReceiver); // let child objects know we've initialized
             this.BroadcastMessage("OnHandInitialized", deviceIndex, SendMessageOptions.DontRequireReceiver); // let child objects know we've initialized
         }
 
@@ -1299,17 +1325,17 @@ namespace Valve.VR.InteractionSystem
                     UnityEditor.EditorGUILayout.HelpBox("The otherHand of this Hand's otherHand is not this Hand.", UnityEditor.MessageType.Warning);
                 }
 
-                if (hand.handType == SteamVR_Input_Input_Sources.LeftHand && hand.otherHand.handType != SteamVR_Input_Input_Sources.RightHand)
+                if (hand.handType == SteamVR_Input_Sources.LeftHand && hand.otherHand.handType != SteamVR_Input_Sources.RightHand)
                 {
                     UnityEditor.EditorGUILayout.HelpBox("This is a left Hand but otherHand is not a right Hand.", UnityEditor.MessageType.Warning);
                 }
 
-                if (hand.handType == SteamVR_Input_Input_Sources.RightHand && hand.otherHand.handType != SteamVR_Input_Input_Sources.LeftHand)
+                if (hand.handType == SteamVR_Input_Sources.RightHand && hand.otherHand.handType != SteamVR_Input_Sources.LeftHand)
                 {
                     UnityEditor.EditorGUILayout.HelpBox("This is a right Hand but otherHand is not a left Hand.", UnityEditor.MessageType.Warning);
                 }
 
-                if (hand.handType == SteamVR_Input_Input_Sources.Any && hand.otherHand.handType != SteamVR_Input_Input_Sources.Any)
+                if (hand.handType == SteamVR_Input_Sources.Any && hand.otherHand.handType != SteamVR_Input_Sources.Any)
                 {
                     UnityEditor.EditorGUILayout.HelpBox("This is an any-handed Hand but otherHand is not an any-handed Hand.", UnityEditor.MessageType.Warning);
                 }

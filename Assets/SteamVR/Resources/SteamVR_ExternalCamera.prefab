@@ -42,6 +42,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 444732}
   m_Father: {fileID: 0}
@@ -55,6 +56,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 417074}
   m_RootOrder: 0
@@ -71,7 +73,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: -1
   origin: {fileID: 0}
-  isValid: 0
 --- !u!114 &11479102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -98,9 +99,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9da270df5147d24597cc106058c1fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {fileID: 0}
-  frontCam: {fileID: 0}
-  backCam: {fileID: 0}
+  config:
+    x: 0
+    y: 0
+    z: 0
+    rx: 0
+    ry: 0
+    rz: 0
+    fov: 0
+    near: 0
+    far: 0
+    sceneResolutionScale: 0
+    frameSkip: 0
+    nearOffset: 0
+    farOffset: 0
+    hmdOffset: 0
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+    disableStandardAssets: 0
+  configPath: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

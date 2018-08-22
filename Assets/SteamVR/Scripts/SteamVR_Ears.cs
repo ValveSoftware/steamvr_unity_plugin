@@ -7,46 +7,48 @@
 using UnityEngine;
 using Valve.VR;
 
-[RequireComponent(typeof(AudioListener))]
-public class SteamVR_Ears : MonoBehaviour
+namespace Valve.VR
 {
-	public SteamVR_Camera vrcam;
+    [RequireComponent(typeof(AudioListener))]
+    public class SteamVR_Ears : MonoBehaviour
+    {
+        public SteamVR_Camera vrcam;
 
-	bool usingSpeakers;
-	Quaternion offset;
+        bool usingSpeakers;
+        Quaternion offset;
 
-	private void OnNewPosesApplied()
-	{
-		var origin = vrcam.origin;
-		var baseRotation = origin != null ? origin.rotation : Quaternion.identity;
-		transform.rotation = baseRotation * offset;
-	}
+        private void OnNewPosesApplied()
+        {
+            var origin = vrcam.origin;
+            var baseRotation = origin != null ? origin.rotation : Quaternion.identity;
+            transform.rotation = baseRotation * offset;
+        }
 
-	void OnEnable()
-	{
-		usingSpeakers = false;
+        void OnEnable()
+        {
+            usingSpeakers = false;
 
-		var settings = OpenVR.Settings;
-		if (settings != null)
-		{
-			var error = EVRSettingsError.None;
-			if (settings.GetBool(OpenVR.k_pch_SteamVR_Section, OpenVR.k_pch_SteamVR_UsingSpeakers_Bool, ref error))
-			{
-				usingSpeakers = true;
+            var settings = OpenVR.Settings;
+            if (settings != null)
+            {
+                var error = EVRSettingsError.None;
+                if (settings.GetBool(OpenVR.k_pch_SteamVR_Section, OpenVR.k_pch_SteamVR_UsingSpeakers_Bool, ref error))
+                {
+                    usingSpeakers = true;
 
-				var yawOffset = settings.GetFloat(OpenVR.k_pch_SteamVR_Section, OpenVR.k_pch_SteamVR_SpeakersForwardYawOffsetDegrees_Float, ref error);
-				offset = Quaternion.Euler(0.0f, yawOffset, 0.0f);
-			}
-		}
+                    var yawOffset = settings.GetFloat(OpenVR.k_pch_SteamVR_Section, OpenVR.k_pch_SteamVR_SpeakersForwardYawOffsetDegrees_Float, ref error);
+                    offset = Quaternion.Euler(0.0f, yawOffset, 0.0f);
+                }
+            }
 
-		if (usingSpeakers)
-			SteamVR_Events.NewPosesApplied.Listen(OnNewPosesApplied);
-	}
+            if (usingSpeakers)
+                SteamVR_Events.NewPosesApplied.Listen(OnNewPosesApplied);
+        }
 
-	void OnDisable()
-	{
-		if (usingSpeakers)
-			SteamVR_Events.NewPosesApplied.Remove(OnNewPosesApplied);
-	}
+        void OnDisable()
+        {
+            if (usingSpeakers)
+                SteamVR_Events.NewPosesApplied.Remove(OnNewPosesApplied);
+        }
+    }
 }
-

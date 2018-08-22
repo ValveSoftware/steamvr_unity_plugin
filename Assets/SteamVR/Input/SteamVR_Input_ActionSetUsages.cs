@@ -1,6 +1,12 @@
-﻿public enum SteamVR_Input_ActionSetUsages
+﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
+
+
+namespace Valve.VR
 {
-    LeftRight,
-    Single,
-    Hidden,
+    public enum SteamVR_Input_ActionSetUsages
+    {
+        LeftRight,
+        Single,
+        Hidden,
+    }
 }

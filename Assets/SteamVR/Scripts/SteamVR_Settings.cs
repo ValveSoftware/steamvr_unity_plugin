@@ -1,78 +1,83 @@
-﻿using UnityEngine;
+﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
+
+using UnityEngine;
 using System.Collections;
 
-public class SteamVR_Settings : ScriptableObject
+namespace Valve.VR
 {
-    private static SteamVR_Settings _instance;
-    public static SteamVR_Settings instance
+    public class SteamVR_Settings : ScriptableObject
     {
-        get
+        private static SteamVR_Settings _instance;
+        public static SteamVR_Settings instance
         {
-            LoadInstance();
+            get
+            {
+                LoadInstance();
 
-            return _instance;
+                return _instance;
+            }
         }
-    }
 
-    private static void LoadInstance()
-    {
-        if (_instance == null)
+        private static void LoadInstance()
         {
-            _instance = Resources.Load<SteamVR_Settings>("SteamVR_Settings");
-
             if (_instance == null)
             {
-                _instance = SteamVR_Settings.CreateInstance<SteamVR_Settings>();
+                _instance = Resources.Load<SteamVR_Settings>("SteamVR_Settings");
+
+                if (_instance == null)
+                {
+                    _instance = SteamVR_Settings.CreateInstance<SteamVR_Settings>();
 
 #if UNITY_EDITOR
-                string folderPath = SteamVR.GetResourcesFolderPath(true);
-                string assetPath = System.IO.Path.Combine(folderPath, "SteamVR_Settings.asset");
+                    string folderPath = SteamVR.GetResourcesFolderPath(true);
+                    string assetPath = System.IO.Path.Combine(folderPath, "SteamVR_Settings.asset");
 
-                UnityEditor.AssetDatabase.CreateAsset(_instance, assetPath);
-                UnityEditor.AssetDatabase.SaveAssets();
+                    UnityEditor.AssetDatabase.CreateAsset(_instance, assetPath);
+                    UnityEditor.AssetDatabase.SaveAssets();
 #endif
-            }
+                }
 
-            if (string.IsNullOrEmpty(_instance.appKey))
-            {
-                _instance.appKey = SteamVR.GenerateAppKey();
-                Debug.Log("[SteamVR] Generated you an app key of: " + _instance.appKey + ". This can be changed in Assets/SteamVR/Resources/SteamVR_Settings");
+                if (string.IsNullOrEmpty(_instance.appKey))
+                {
+                    _instance.appKey = SteamVR.GenerateAppKey();
+                    Debug.Log("[SteamVR] Generated you an app key of: " + _instance.appKey + ". This can be changed in Assets/SteamVR/Resources/SteamVR_Settings");
 #if UNITY_EDITOR
-                UnityEditor.EditorUtility.SetDirty(_instance);
-                UnityEditor.AssetDatabase.SaveAssets();
+                    UnityEditor.EditorUtility.SetDirty(_instance);
+                    UnityEditor.AssetDatabase.SaveAssets();
 #endif
+                }
             }
         }
-    }
 
-    public bool pauseGameWhenDashboardVisible = true;
-    public bool lockPhysicsUpdateRateToRenderFrequency = true;
-    public Valve.VR.ETrackingUniverseOrigin trackingSpace = Valve.VR.ETrackingUniverseOrigin.TrackingUniverseStanding;
+        public bool pauseGameWhenDashboardVisible = true;
+        public bool lockPhysicsUpdateRateToRenderFrequency = true;
+        public Valve.VR.ETrackingUniverseOrigin trackingSpace = Valve.VR.ETrackingUniverseOrigin.TrackingUniverseStanding;
 
-    [Tooltip("Filename local to the project root (or executable, in a build)")]
-    public string actionsFilePath = "actions.json";
+        [Tooltip("Filename local to the project root (or executable, in a build)")]
+        public string actionsFilePath = "actions.json";
 
-    [Tooltip("Path local to the Assets folder")]
-    public string steamVRInputPath = "SteamVR_Input";
+        [Tooltip("Path local to the Assets folder")]
+        public string steamVRInputPath = "SteamVR_Input";
 
-    public SteamVR_UpdateModes inputUpdateMode = SteamVR_UpdateModes.OnUpdate;
-    public SteamVR_UpdateModes poseUpdateMode = SteamVR_UpdateModes.OnPreCull;
+        public SteamVR_UpdateModes inputUpdateMode = SteamVR_UpdateModes.OnUpdate;
+        public SteamVR_UpdateModes poseUpdateMode = SteamVR_UpdateModes.OnPreCull;
 
-    public bool activateFirstActionSetOnStart = true;
+        public bool activateFirstActionSetOnStart = true;
 
-    public string appKey;
+        public string appKey;
 
-    public bool IsInputUpdateMode(SteamVR_UpdateModes tocheck)
-    {
-        return (inputUpdateMode & tocheck) == inputUpdateMode;
-    }
-    public bool IsPoseUpdateMode(SteamVR_UpdateModes tocheck)
-    {
-        return (poseUpdateMode & tocheck) == poseUpdateMode;
-    }
+        public bool IsInputUpdateMode(SteamVR_UpdateModes tocheck)
+        {
+            return (inputUpdateMode & tocheck) == tocheck;
+        }
+        public bool IsPoseUpdateMode(SteamVR_UpdateModes tocheck)
+        {
+            return (poseUpdateMode & tocheck) == tocheck;
+        }
 
-    public static void VerifyScriptableObject()
-    {
-        LoadInstance();
+        public static void VerifyScriptableObject()
+        {
+            LoadInstance();
+        }
     }
 }

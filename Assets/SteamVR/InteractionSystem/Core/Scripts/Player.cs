@@ -116,7 +116,7 @@ namespace Valve.VR.InteractionSystem
 						continue;
 					}
 
-					if ( hands[j].handType != SteamVR_Input_Input_Sources.LeftHand)
+					if ( hands[j].handType != SteamVR_Input_Sources.LeftHand)
 					{
 						continue;
 					}
@@ -141,7 +141,7 @@ namespace Valve.VR.InteractionSystem
 						continue;
 					}
 
-					if ( hands[j].handType != SteamVR_Input_Input_Sources.RightHand)
+					if ( hands[j].handType != SteamVR_Input_Sources.RightHand)
 					{
 						continue;
 					}
@@ -249,6 +249,8 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		void Awake()
 		{
+            SteamVR.Initialize(true); //force openvr
+
 			if ( trackingOriginTransform == null )
 			{
 				trackingOriginTransform = this.transform;
@@ -257,9 +259,12 @@ namespace Valve.VR.InteractionSystem
 
 
 		//-------------------------------------------------
-		void OnEnable()
+		private IEnumerator Start()
 		{
 			_instance = this;
+
+            while (SteamVR_Behaviour.instance.forcingInitialization)
+                yield return null;
 
 			if ( SteamVR.instance != null )
 			{
@@ -308,11 +313,11 @@ namespace Valve.VR.InteractionSystem
 			{
 				Hand hand = GetHand( i );
 
-				if ( hand.handType == SteamVR_Input_Input_Sources.LeftHand)
+				if ( hand.handType == SteamVR_Input_Sources.LeftHand)
 				{
 					Gizmos.DrawIcon( hand.transform.position, "vr_interaction_system_left_hand.png" );
 				}
-				else if ( hand.handType == SteamVR_Input_Input_Sources.RightHand)
+				else if ( hand.handType == SteamVR_Input_Sources.RightHand)
 				{
 					Gizmos.DrawIcon( hand.transform.position, "vr_interaction_system_right_hand.png" );
 				}

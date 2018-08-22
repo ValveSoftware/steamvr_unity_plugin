@@ -3662,6 +3662,7 @@ public enum ETrackingResult
 	Calibrating_OutOfRange = 101,
 	Running_OK = 200,
 	Running_OutOfRange = 201,
+	Fallback_RotationOnly = 300,
 }
 public enum ETrackedDeviceClass
 {
@@ -3864,6 +3865,7 @@ public enum ETrackedPropertyError
 	TrackedProp_PermissionDenied = 10,
 	TrackedProp_InvalidOperation = 11,
 	TrackedProp_CannotWriteToWildcards = 12,
+	TrackedProp_IPCReadFailure = 13,
 }
 public enum EVRSubmitFlags
 {
@@ -3923,6 +3925,7 @@ public enum EVREventType
 	VREvent_Scroll = 305,
 	VREvent_TouchPadMove = 306,
 	VREvent_OverlayFocusChanged = 307,
+	VREvent_ReloadOverlays = 308,
 	VREvent_InputFocusCaptured = 400,
 	VREvent_InputFocusReleased = 401,
 	VREvent_SceneFocusLost = 402,
@@ -4632,6 +4635,7 @@ public enum EIOBufferMode
 	[FieldOffset(0)] public VREvent_WebConsole_t webConsole;
 	[FieldOffset(0)] public VREvent_InputBindingLoad_t inputBinding;
 	[FieldOffset(0)] public VREvent_SpatialAnchor_t spatialAnchor;
+	[FieldOffset(0)] public VREvent_InputActionManifestLoad_t actionManifest;
 	[FieldOffset(0)] public VREvent_Keyboard_t keyboard; // This has to be at the end due to a mono bug
 }
 
@@ -5640,6 +5644,7 @@ public class OpenVR
 	public const string k_pch_SteamVR_SupersampleScale_Float = "supersampleScale";
 	public const string k_pch_SteamVR_AllowAsyncReprojection_Bool = "allowAsyncCompositor";
 	public const string k_pch_SteamVR_MotionSmoothing_Bool = "motionSmoothing";
+	public const string k_pch_SteamVR_MotionSmoothingOverride_Int32 = "motionSmoothingOverride";
 	public const string k_pch_SteamVR_ForceFadeOnBadTracking_Bool = "forceFadeOnBadTracking";
 	public const string k_pch_SteamVR_DefaultMirrorView_Int32 = "mirrorView";
 	public const string k_pch_SteamVR_ShowMirrorView_Bool = "showMirrorView";
@@ -5673,6 +5678,7 @@ public class OpenVR
 	public const string k_pch_Lighthouse_DBHistory_Bool = "dbhistory";
 	public const string k_pch_Lighthouse_EnableBluetooth_Bool = "enableBluetooth";
 	public const string k_pch_Lighthouse_PowerManagedBaseStations_String = "PowerManagedBaseStations";
+	public const string k_pch_Lighthouse_EnableImuFallback_Bool = "enableImuFallback";
 	public const string k_pch_Null_Section = "driver_null";
 	public const string k_pch_Null_SerialNumber_String = "serialNumber";
 	public const string k_pch_Null_ModelNumber_String = "modelNumber";

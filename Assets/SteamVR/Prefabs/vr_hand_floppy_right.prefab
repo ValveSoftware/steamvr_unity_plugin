@@ -2579,7 +2579,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 395115150fc0faf40abd1994e7405303, type: 3}
   m_Controller: {fileID: 0}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -2698,6 +2698,7 @@ MonoBehaviour:
   skeletonRoot: {fileID: 4000010451325598}
   origin: {fileID: 0}
   updatePose: 1
+  onlySetRotations: 0
   skeletonBlend: 1
   mirroring: 0
 --- !u!137 &137000012549155492
@@ -2731,7 +2732,7 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 4300004, guid: 395115150fc0faf40abd1994e7405303, type: 3}
   m_Bones:
@@ -2778,7 +2779,7 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 4300004, guid: 395115150fc0faf40abd1994e7405303, type: 3}
   m_Bones:
@@ -2825,7 +2826,7 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 4300004, guid: 395115150fc0faf40abd1994e7405303, type: 3}
   m_Bones:
@@ -2872,7 +2873,7 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 4300004, guid: 395115150fc0faf40abd1994e7405303, type: 3}
   m_Bones:
@@ -2919,7 +2920,7 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 4300004, guid: 395115150fc0faf40abd1994e7405303, type: 3}
   m_Bones:

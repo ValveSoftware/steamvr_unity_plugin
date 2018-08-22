@@ -263,7 +263,8 @@ namespace Valve.VR.InteractionSystem
 
                 hand.HideGrabHint();
 			}
-			else if (isGrabEnding)
+
+            if (isGrabEnding)
 			{
 				// Trigger was just released
 				if ( hoverLock )

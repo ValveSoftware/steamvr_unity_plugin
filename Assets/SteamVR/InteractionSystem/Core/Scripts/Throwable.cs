@@ -26,7 +26,7 @@ namespace Valve.VR.InteractionSystem
 		[Tooltip( "How fast must this object be moving to attach due to a trigger hold instead of a trigger press? (-1 to disable)" )]
         public float catchingSpeedThreshold = -1;
 
-        public ReleaseStyle releaseVelocityStyle = ReleaseStyle.RawFromHand;
+        public ReleaseStyle releaseVelocityStyle = ReleaseStyle.GetFromHand;
 
         [Tooltip("The time offset used when releasing the object with the RawFromHand option")]
         public float releaseVelocityTimeOffset = -0.011f;
@@ -188,27 +188,15 @@ namespace Valve.VR.InteractionSystem
         {
             switch (releaseVelocityStyle)
             {
-                case ReleaseStyle.OldControllerStyle:
-                    velocity = hand.GetOldControllerVelocity();
-                    angularVelocity = hand.GetOldControllerAngularVelocity();
-                    break;
-                case ReleaseStyle.EstimatedOnObject:
-                    Vector3 position = Vector3.zero;
-                    velocity = Vector3.zero;
-                    angularVelocity = Vector3.zero;
-
+                case ReleaseStyle.ShortEstimation:
                     velocityEstimator.FinishEstimatingVelocity();
                     velocity = velocityEstimator.GetVelocityEstimate();
                     angularVelocity = velocityEstimator.GetAngularVelocityEstimate();
-                    position = velocityEstimator.transform.position;
-
-                    Vector3 r = transform.TransformPoint(rigidbody.centerOfMass) - position;
-                    velocity = velocity + Vector3.Cross(angularVelocity, r);
                     break;
-                case ReleaseStyle.EstimatedOnHand:
+                case ReleaseStyle.AdvancedEstimation:
                     hand.GetEstimatedPeakVelocities(out velocity, out angularVelocity);
                     break;
-                case ReleaseStyle.RawFromHand:
+                case ReleaseStyle.GetFromHand:
                     velocity = hand.GetTrackedObjectVelocity(releaseVelocityTimeOffset);
                     angularVelocity = hand.GetTrackedObjectAngularVelocity(releaseVelocityTimeOffset);
                     break;
@@ -284,9 +272,8 @@ namespace Valve.VR.InteractionSystem
     public enum ReleaseStyle
     {
         NoChange,
-        OldControllerStyle,
-        EstimatedOnObject,
-        EstimatedOnHand,
-        RawFromHand,
+        GetFromHand,
+        ShortEstimation,
+        AdvancedEstimation,
     }
 }

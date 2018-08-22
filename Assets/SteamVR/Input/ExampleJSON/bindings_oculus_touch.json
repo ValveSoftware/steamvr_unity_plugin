@@ -1,5 +1,100 @@
 {
+   "app_key" : "application.generated.unity.steamvr.exe",
    "bindings" : {
+      "/actions/buggy" : {
+         "sources" : [
+            {
+               "inputs" : {
+                  "pull" : {
+                     "output" : "/actions/buggy/in/throttle"
+                  }
+               },
+               "mode" : "trigger",
+               "path" : "/user/hand/left/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "pull" : {
+                     "output" : "/actions/buggy/in/throttle"
+                  }
+               },
+               "mode" : "trigger",
+               "path" : "/user/hand/right/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "position" : {
+                     "output" : "/actions/buggy/in/steering"
+                  }
+               },
+               "mode" : "joystick",
+               "path" : "/user/hand/left/input/joystick"
+            },
+            {
+               "inputs" : {
+                  "position" : {
+                     "output" : "/actions/buggy/in/steering"
+                  }
+               },
+               "mode" : "joystick",
+               "path" : "/user/hand/right/input/joystick"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/buggy/in/brake"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/x"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/buggy/in/brake"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/x"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/buggy/in/reset"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/y"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/buggy/in/reset"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/y"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/buggy/in/brake"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/a"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/buggy/in/reset"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/b"
+            }
+         ]
+      },
       "/actions/default" : {
          "chords" : [],
          "haptics" : [
@@ -36,7 +131,7 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/use"
+                     "output" : "/actions/default/in/interactui"
                   }
                },
                "mode" : "button",
@@ -45,30 +140,12 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/interactui"
+                     "output" : "/actions/default/in/teleport"
                   }
                },
                "mode" : "button",
-               "path" : "/user/hand/left/input/trigger"
+               "path" : "/user/hand/left/input/joystick"
             },
-          {
-            "inputs": {
-              "position": {
-                "output": "/actions/default/in/move"
-              }
-            },
-            "mode": "joystick",
-            "path": "/user/hand/left/input/joystick"
-          },
-          {
-            "inputs": {
-              "click": {
-                "output": "/actions/default/in/teleport"
-              }
-            },
-            "mode": "button",
-            "path": "/user/hand/left/input/joystick"
-          },
             {
                "inputs" : {
                   "click" : {
@@ -77,8 +154,8 @@
                },
                "mode" : "button",
                "parameters" : {
-                  "click_activate_threshold" : "0.05",
-                  "click_deactivate_threshold" : "0",
+                  "click_activate_threshold" : "0.8",
+                  "click_deactivate_threshold" : "0.7",
                   "force_input" : "force"
                },
                "path" : "/user/hand/left/input/grip"
@@ -91,20 +168,11 @@
                },
                "mode" : "button",
                "parameters" : {
-                  "click_activate_threshold" : "0.1",
-                  "click_deactivate_threshold" : "0.05",
+                  "click_activate_threshold" : "0.8",
+                  "click_deactivate_threshold" : "0.7",
                   "force_input" : "value"
                },
                "path" : "/user/hand/left/input/trigger"
-            },
-            {
-               "inputs" : {
-                  "click" : {
-                     "output" : "/actions/default/in/use"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/right/input/trigger"
             },
             {
                "inputs" : {
@@ -123,20 +191,11 @@
                },
                "mode" : "button",
                "parameters" : {
-                  "click_activate_threshold" : "0.1",
-                  "click_deactivate_threshold" : "0.05"
+                  "click_activate_threshold" : "0.8",
+                  "click_deactivate_threshold" : "0.7"
                },
                "path" : "/user/hand/right/input/trigger"
             },
-          {
-            "inputs": {
-              "position": {
-                "output": "/actions/default/in/move"
-              }
-            },
-            "mode": "joystick",
-            "path": "/user/hand/right/input/joystick"
-          },
             {
                "inputs" : {
                   "click" : {
@@ -154,11 +213,57 @@
                },
                "mode" : "button",
                "parameters" : {
-                  "click_activate_threshold" : "0.05",
-                  "click_deactivate_threshold" : "0",
+                  "click_activate_threshold" : "0.8",
+                  "click_deactivate_threshold" : "0.7",
                   "force_input" : "force"
                },
                "path" : "/user/hand/right/input/grip"
+            },
+            {
+               "inputs" : {
+                  "pull" : {
+                     "output" : "/actions/default/in/squeeze"
+                  }
+               },
+               "mode" : "trigger",
+               "path" : "/user/hand/left/input/grip"
+            },
+            {
+               "inputs" : {
+                  "pull" : {
+                     "output" : "/actions/default/in/squeeze"
+                  }
+               },
+               "mode" : "trigger",
+               "path" : "/user/hand/right/input/grip"
+            }
+         ]
+      },
+      "/actions/platformer" : {
+         "sources" : [
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/platformer/in/jump"
+                  },
+                  "position" : {
+                     "output" : "/actions/platformer/in/move"
+                  }
+               },
+               "mode" : "joystick",
+               "path" : "/user/hand/left/input/joystick"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/platformer/in/jump"
+                  },
+                  "position" : {
+                     "output" : "/actions/platformer/in/move"
+                  }
+               },
+               "mode" : "joystick",
+               "path" : "/user/hand/right/input/joystick"
             }
          ]
       }
