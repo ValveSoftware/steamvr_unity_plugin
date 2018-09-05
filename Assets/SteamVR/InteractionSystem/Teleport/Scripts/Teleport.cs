@@ -345,6 +345,7 @@ namespace Valve.VR.InteractionSystem
 
 			if ( hitTeleportMarker != null ) //Hit a teleport marker
 			{
+				hitTeleportMarker.ValidateLocation(hitInfo.point);
 				if ( hitTeleportMarker.locked )
 				{
 					teleportArc.SetColor( pointerLockedColor );
@@ -647,7 +648,10 @@ namespace Valve.VR.InteractionSystem
 			{
 				if ( teleportMarker != null && teleportMarker.markerActive && teleportMarker.gameObject != null )
 				{
-					teleportMarker.gameObject.SetActive( false );
+					if (teleportMarker.VisibleOnTeleportOnly)
+                    			{
+                        			teleportMarker.gameObject.SetActive(false);
+					}
 				}
 			}
 

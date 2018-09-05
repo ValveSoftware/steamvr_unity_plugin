@@ -13,6 +13,7 @@ namespace Valve.VR.InteractionSystem
 	{
 		public bool locked = false;
 		public bool markerActive = true;
+		public bool VisibleOnTeleportOnly = true;
 
 		//-------------------------------------------------
 		public virtual bool showReticle
@@ -36,6 +37,12 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		public virtual void TeleportPlayer( Vector3 pointedAtPosition )
 		{
+		}
+		
+		//-------------------------------------------------
+		public virtual void ValidateLocation( Vector3 pointedAtPosition )
+		{
+			return true;
 		}
 
 
