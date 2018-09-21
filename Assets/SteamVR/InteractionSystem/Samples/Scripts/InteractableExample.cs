@@ -7,7 +7,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace Valve.VR.InteractionSystem
+namespace Valve.VR.InteractionSystem.Sample
 {
 	//-------------------------------------------------------------------------
 	[RequireComponent( typeof( Interactable ) )]
@@ -19,13 +19,17 @@ namespace Valve.VR.InteractionSystem
 
 		private float attachTime;
 
-		private Hand.AttachmentFlags attachmentFlags = Hand.defaultAttachmentFlags & ( ~Hand.AttachmentFlags.SnapOnAttach ) & ( ~Hand.AttachmentFlags.DetachOthers );
+		private Hand.AttachmentFlags attachmentFlags = Hand.defaultAttachmentFlags & ( ~Hand.AttachmentFlags.SnapOnAttach ) & (~Hand.AttachmentFlags.DetachOthers) & (~Hand.AttachmentFlags.VelocityMovement);
+
+        private Interactable interactable;
 
 		//-------------------------------------------------
 		void Awake()
 		{
 			textMesh = GetComponentInChildren<TextMesh>();
 			textMesh.text = "No Hand Hovering";
+
+            interactable = this.GetComponent<Interactable>();
 		}
 
 
@@ -52,34 +56,34 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		private void HandHoverUpdate( Hand hand )
 		{
-			if ( hand.GetStandardInteractionButtonDown() || ( ( hand.controller != null ) && hand.controller.GetPressDown( Valve.VR.EVRButtonId.k_EButton_Grip ) ) )
-			{
-				if ( hand.currentAttachedObject != gameObject )
-				{
-					// Save our position/rotation so that we can restore it when we detach
-					oldPosition = transform.position;
-					oldRotation = transform.rotation;
+            GrabTypes startingGrabType = hand.GetGrabStarting();
+            bool isGrabEnding = hand.IsGrabEnding(this.gameObject);
 
-					// Call this to continue receiving HandHoverUpdate messages,
-					// and prevent the hand from hovering over anything else
-					hand.HoverLock( GetComponent<Interactable>() );
+            if (startingGrabType != GrabTypes.None)
+            {
+                // Save our position/rotation so that we can restore it when we detach
+                oldPosition = transform.position;
+                oldRotation = transform.rotation;
 
-					// Attach this object to the hand
-					hand.AttachObject( gameObject, attachmentFlags );
-				}
-				else
-				{
-					// Detach this object from the hand
-					hand.DetachObject( gameObject );
+                // Call this to continue receiving HandHoverUpdate messages,
+                // and prevent the hand from hovering over anything else
+                hand.HoverLock(interactable);
 
-					// Call this to undo HoverLock
-					hand.HoverUnlock( GetComponent<Interactable>() );
+                // Attach this object to the hand
+                hand.AttachObject(gameObject, startingGrabType, attachmentFlags);
+            }
+            else if (isGrabEnding)
+            {
+                // Detach this object from the hand
+                hand.DetachObject(gameObject);
 
-					// Restore position/rotation
-					transform.position = oldPosition;
-					transform.rotation = oldRotation;
-				}
-			}
+                // Call this to undo HoverLock
+                hand.HoverUnlock(interactable);
+
+                // Restore position/rotation
+                transform.position = oldPosition;
+                transform.rotation = oldRotation;
+            }
 		}
 
 

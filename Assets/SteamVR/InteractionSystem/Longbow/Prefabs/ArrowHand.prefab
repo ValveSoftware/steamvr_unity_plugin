@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d4cc6cf300b3e4bb1411c4e041030c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportAllowed: 1
+  teleportAllowed: 0
   overrideHoverLock: 1
 --- !u!114 &11426438
 MonoBehaviour:

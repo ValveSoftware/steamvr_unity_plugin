@@ -29,6 +29,7 @@ namespace Valve.VR.InteractionSystem
 
 		private bool allowArrowSpawn = true;
 		private bool nocked;
+        private GrabTypes nockedWithType = GrabTypes.None;
 
 		private bool inNockRange = false;
 		private bool arrowLerpComplete = false;
@@ -141,7 +142,7 @@ namespace Valve.VR.InteractionSystem
 					if ( !arrowLerpComplete )
 					{
 						arrowLerpComplete = true;
-						hand.controller.TriggerHapticPulse( 500 );
+						hand.TriggerHapticPulse( 500 );
 					}
 				}
 				else
@@ -169,8 +170,10 @@ namespace Valve.VR.InteractionSystem
 					}
 				}
 
-				// If arrow is close enough to the nock position and we're pressing the trigger, and we're not nocked yet, Nock
-				if ( ( distanceToNockPosition < nockDistance ) && hand.controller.GetPress( SteamVR_Controller.ButtonMask.Trigger ) && !nocked )
+                GrabTypes bestGrab = hand.GetBestGrabbingType(GrabTypes.Pinch, true);
+
+                // If arrow is close enough to the nock position and we're pressing the trigger, and we're not nocked yet, Nock
+                if ( ( distanceToNockPosition < nockDistance ) && bestGrab != GrabTypes.None && !nocked )
 				{
 					if ( currentArrow == null )
 					{
@@ -178,6 +181,7 @@ namespace Valve.VR.InteractionSystem
 					}
 
 					nocked = true;
+                    nockedWithType = bestGrab;
 					bow.StartNock( this );
 					hand.HoverLock( GetComponent<Interactable>() );
 					allowTeleport.teleportAllowed = false;
@@ -189,7 +193,7 @@ namespace Valve.VR.InteractionSystem
 
 
 			// If arrow is nocked, and we release the trigger
-			if ( nocked && ( !hand.controller.GetPress( SteamVR_Controller.ButtonMask.Trigger ) || hand.controller.GetPressUp( SteamVR_Controller.ButtonMask.Trigger ) ) )
+			if ( nocked && hand.IsGrabbingWithType(nockedWithType) == false )
 			{
 				if ( bow.pulled ) // If bow is pulled back far enough, fire arrow, otherwise reset arrow in arrowhand
 				{
@@ -201,6 +205,7 @@ namespace Valve.VR.InteractionSystem
 					currentArrow.transform.parent = arrowNockTransform;
 					Util.ResetTransform( currentArrow.transform );
 					nocked = false;
+                    nockedWithType = GrabTypes.None;
 					bow.ReleaseNock();
 					hand.HoverUnlock( GetComponent<Interactable>() );
 					allowTeleport.teleportAllowed = true;
@@ -236,6 +241,7 @@ namespace Valve.VR.InteractionSystem
 			arrow.arrowHeadRB.AddTorque( currentArrow.transform.forward * 10 );
 
 			nocked = false;
+            nockedWithType = GrabTypes.None;
 
 			currentArrow.GetComponent<Arrow>().ArrowReleased( bow.GetArrowVelocity() );
 			bow.ArrowReleased();
@@ -261,16 +267,16 @@ namespace Valve.VR.InteractionSystem
 		{
 			yield return new WaitForSeconds( 0.05f );
 
-			hand.otherHand.controller.TriggerHapticPulse( 1500 );
+			hand.otherHand.TriggerHapticPulse( 1500 );
 			yield return new WaitForSeconds( 0.05f );
 
-			hand.otherHand.controller.TriggerHapticPulse( 800 );
+			hand.otherHand.TriggerHapticPulse( 800 );
 			yield return new WaitForSeconds( 0.05f );
 
-			hand.otherHand.controller.TriggerHapticPulse( 500 );
+			hand.otherHand.TriggerHapticPulse( 500 );
 			yield return new WaitForSeconds( 0.05f );
 
-			hand.otherHand.controller.TriggerHapticPulse( 300 );
+			hand.otherHand.TriggerHapticPulse( 300 );
 		}
 
 

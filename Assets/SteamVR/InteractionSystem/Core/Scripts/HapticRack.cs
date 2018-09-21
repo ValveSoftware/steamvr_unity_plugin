@@ -71,10 +71,10 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		private void Pulse()
 		{
-			if ( hand && ( hand.controller != null ) && ( hand.GetStandardInteractionButton() ) )
+			if ( hand && (hand.isActive) && ( hand.GetBestGrabbingType() != GrabTypes.None ) )
 			{
 				ushort duration = (ushort)Random.Range( minimumPulseDuration, maximumPulseDuration + 1 );
-				hand.controller.TriggerHapticPulse( duration );
+				hand.TriggerHapticPulse( duration );
 
 				onPulse.Invoke();
 			}
