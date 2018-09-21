@@ -48,6 +48,8 @@ namespace Valve.VR
 
         public bool initializedAttachPoints { get; set; }
 
+        private Dictionary<string, Transform> componentAttachPoints = new Dictionary<string, Transform>();
+
         private List<MeshRenderer> meshRenderers = new List<MeshRenderer>();
 
         // If someone knows how to keep these from getting cleaned up every time
@@ -296,6 +298,8 @@ namespace Valve.VR
             {
                 if (createComponents)
                 {
+                    componentAttachPoints.Clear();
+
                     if (LoadComponents(holder, renderModelName))
                     {
                         UpdateComponents(holder.instance);
@@ -487,15 +491,29 @@ namespace Valve.VR
             }
         }
 
-        public Transform FindComponent(string componentName)
+        public Transform FindTransformByName(string componentName, Transform inTransform = null)
         {
-            var t = transform;
-            for (int i = 0; i < t.childCount; i++)
+            if (inTransform == null)
+                inTransform = this.transform;
+
+            for (int childIndex = 0; childIndex < inTransform.childCount; childIndex++)
             {
-                var child = t.GetChild(i);
+                Transform child = inTransform.GetChild(childIndex);
                 if (child.name == componentName)
                     return child;
             }
+
+            return null;
+        }
+
+        public Transform GetComponentTransform(string componentName)
+        {
+            if (componentName == null)
+                return this.transform;
+
+            if (componentAttachPoints.ContainsKey(componentName))
+                return componentAttachPoints[componentName];
+
             return null;
         }
 
@@ -515,9 +533,9 @@ namespace Valve.VR
             // Disable existing components (we will re-enable them if referenced by this new model).
             // Also strip mesh filter and renderer since these will get re-added if the new component needs them.
             var t = transform;
-            for (int i = 0; i < t.childCount; i++)
+            for (int childIndex = 0; childIndex < t.childCount; childIndex++)
             {
-                var child = t.GetChild(i);
+                var child = t.GetChild(childIndex);
                 child.gameObject.SetActive(false);
                 StripMesh(child.gameObject);
             }
@@ -547,10 +565,11 @@ namespace Valve.VR
                 string componentName = componentNameStringBuilder.ToString();
 
                 // Create (or reuse) a child object for this component (some components are dynamic and don't have meshes).
-                t = FindComponent(componentName);
+                t = FindTransformByName(componentName);
                 if (t != null)
                 {
                     t.gameObject.SetActive(true);
+                    componentAttachPoints[componentName] = FindTransformByName(k_localTransformName, t);
                 }
                 else
                 {
@@ -565,6 +584,8 @@ namespace Valve.VR
                     attach.localRotation = Quaternion.identity;
                     attach.localScale = Vector3.one;
                     attach.gameObject.layer = gameObject.layer;
+
+                    componentAttachPoints[componentName] = attach;
                 }
 
                 // Reset transform.

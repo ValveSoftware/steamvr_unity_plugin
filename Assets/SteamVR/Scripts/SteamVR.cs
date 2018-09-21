@@ -378,6 +378,36 @@ namespace Valve.VR
                 //manifestApplication.binary_path_osx = SteamVR_Utils.ConvertToForwardSlashes(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
                 manifestApplication.url = "steam://launch/";
                 manifestApplication.strings.Add("en_us", new SteamVR_Input_ManifestFile_ApplicationString() { name = string.Format("{0} [Testing]", Application.productName) });
+
+                /*
+                var bindings = new System.Collections.Generic.List<SteamVR_Input_ManifestFile_Application_Binding>();
+
+                SteamVR_Input.InitializeFile();
+                if (SteamVR_Input.actionFile != null)
+                {
+                    string[] bindingFiles = SteamVR_Input.actionFile.GetFilesToCopy(true);
+                    if (bindingFiles.Length == SteamVR_Input.actionFile.default_bindings.Count)
+                    {
+                        for (int bindingIndex = 0; bindingIndex < bindingFiles.Length; bindingIndex++)
+                        {
+                            SteamVR_Input_ManifestFile_Application_Binding binding = new SteamVR_Input_ManifestFile_Application_Binding();
+                            binding.binding_url = bindingFiles[bindingIndex];
+                            binding.controller_type = SteamVR_Input.actionFile.default_bindings[bindingIndex].controller_type;
+                            bindings.Add(binding);
+                        }
+                        manifestApplication.bindings = bindings;
+                    }
+                    else
+                    {
+                        Debug.LogError("[SteamVR] Mismatch in available binding files.");
+                    }
+                }
+                else
+                {
+                    Debug.LogError("[SteamVR] Could not load actions file.");
+                }
+                */
+
                 manifestFile.applications = new System.Collections.Generic.List<SteamVR_Input_ManifestFile_Application>();
                 manifestFile.applications.Add(manifestApplication);
 
@@ -392,12 +422,12 @@ namespace Valve.VR
 
         private static void IdentifyApplication()
         {
-            string manifestPath = GetManifestFile();
-
             bool isInstalled = OpenVR.Applications.IsApplicationInstalled(SteamVR_Settings.instance.appKey);
 
             if (isInstalled == false)
             {
+                string manifestPath = GetManifestFile();
+
                 var addManifestErr = OpenVR.Applications.AddApplicationManifest(manifestPath, true);
                 if (addManifestErr != EVRApplicationError.None)
                     Debug.LogError("Error adding vr manifest file: " + addManifestErr.ToString());

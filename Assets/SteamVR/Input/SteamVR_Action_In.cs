@@ -28,6 +28,9 @@ namespace Valve.VR
         protected Dictionary<SteamVR_Input_Sources, bool> changed = new Dictionary<SteamVR_Input_Sources, bool>(new SteamVR_Input_Sources_Comparer());
 
         [NonSerialized]
+        protected Dictionary<SteamVR_Input_Sources, Action<SteamVR_Action_In, bool>> onActiveChange = new Dictionary<SteamVR_Input_Sources, Action<SteamVR_Action_In, bool>>(new SteamVR_Input_Sources_Comparer());
+
+        [NonSerialized]
         protected Dictionary<SteamVR_Input_Sources, Action<SteamVR_Action_In>> onChange = new Dictionary<SteamVR_Input_Sources, Action<SteamVR_Action_In>>(new SteamVR_Input_Sources_Comparer());
 
         [NonSerialized]
@@ -64,6 +67,7 @@ namespace Valve.VR
             active.Add(source, false);
             changed.Add(source, false);
             onChange.Add(source, null);
+            onActiveChange.Add(source, null);
             onUpdate.Add(source, null);
             lastInputOriginInfo.Add(source, new InputOriginInfo_t());
             lastOriginGetFrame.Add(source, -1);
@@ -143,6 +147,18 @@ namespace Valve.VR
                 lastInputOriginInfo[inputSource] = inputOriginInfo;
                 lastOriginGetFrame[inputSource] = Time.frameCount;
             }
+        }
+
+        /// <param name="inputSource">The device you would like to get data from. Any if the action is not device specific.</param>
+        public void AddOnActiveChangeListener(Action<SteamVR_Action_In, bool> action, SteamVR_Input_Sources inputSource)
+        {
+            onActiveChange[inputSource] += action;
+        }
+
+        /// <param name="inputSource">The device you would like to get data from. Any if the action is not device specific.</param>
+        public void RemoveOnActiveChangeListener(Action<SteamVR_Action_In, bool> action, SteamVR_Input_Sources inputSource)
+        {
+            onActiveChange[inputSource] -= action;
         }
 
         /// <param name="inputSource">The device you would like to get data from. Any if the action is not device specific.</param>

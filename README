@@ -1,3 +1,13 @@
-SteamVR Unity Plugin Beta
+SteamVR Unity Plugin
 
-This is the beta source code for the plugin that CAN ONLY BE USED WITH STEAMVR BETA.
+This is the source code for the plugin found on the Unity Asset Store here:
+http://u3d.as/content/valve-corporation/steam-vr-plugin
+
+This version of the plugin has been tested and works with Unity versions 5.4.0 through 2018.3
+
+
+Quick Start:
+
+For the most simple example of VR with tracked controllers see the sample scene at ?SteamVR/Simple Sample
+
+For a more extensive example including picking up, throwing objects, and animated hands see the Interaction System example at ?SteamVR/Interaction System/Samples/Interactions_Example

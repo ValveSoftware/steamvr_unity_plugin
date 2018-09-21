@@ -54,6 +54,8 @@ namespace Valve.VR
                 SteamVR_Input_Sources source = sources[sourceIndex];
                 EditorGUILayout.LabelField(source.ToString());
 
+                EditorGUI.indentLevel++;
+
                 for (int actionSetIndex = 0; actionSetIndex < actionSets.Length; actionSetIndex++)
                 {
                     SteamVR_ActionSet set = actionSets[actionSetIndex];
@@ -156,6 +158,7 @@ namespace Valve.VR
                         GUI.backgroundColor = defaultColor;
                     }
 
+                    EditorGUI.indentLevel--;
                     EditorGUILayout.Space();
                 }
 

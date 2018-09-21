@@ -199,6 +199,9 @@ namespace Valve.VR
                 if (onChange[inputSource] != null)
                     onChange[inputSource].Invoke(this);
             }
+
+            if (onActiveChange[inputSource] != null && lastPoseActionData[inputSource].bActive != active[inputSource])
+                onActiveChange[inputSource].Invoke(this, active[inputSource]);
         }
         
         /// <param name="newUniverseOrigin">The origin of the universe. Don't get this wrong.</param>

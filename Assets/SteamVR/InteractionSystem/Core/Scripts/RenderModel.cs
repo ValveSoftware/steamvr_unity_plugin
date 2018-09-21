@@ -37,6 +37,13 @@ namespace Valve.VR.InteractionSystem
         {
             renderModelLoadedAction = SteamVR_Events.RenderModelLoadedAction(OnRenderModelLoaded);
 
+            InitializeHand();
+
+            InitializeController();
+        }
+
+        protected void InitializeHand()
+        {
             if (handPrefab != null)
             {
                 handInstance = GameObject.Instantiate(handPrefab);
@@ -53,7 +60,10 @@ namespace Valve.VR.InteractionSystem
 
                 handAnimator = handInstance.GetComponentInChildren<Animator>();
             }
+        }
 
+        protected void InitializeController()
+        {
             if (controllerPrefab != null)
             {
                 controllerInstance = GameObject.Instantiate(controllerPrefab);
@@ -62,6 +72,36 @@ namespace Valve.VR.InteractionSystem
                 controllerInstance.transform.localRotation = Quaternion.identity;
                 controllerInstance.transform.localScale = controllerPrefab.transform.localScale;
                 controllerRenderModel = controllerInstance.GetComponent<SteamVR_RenderModel>();
+            }
+        }
+
+        protected virtual void Update()
+        {
+            if (handSkeleton != null && handSkeleton.isActive == false)
+            {
+                handSkeleton.skeletonAction.RemoveOnActiveChangeListener(OnSkeletonActiveChange, handSkeleton.inputSource);
+                handSkeleton.skeletonAction.AddOnActiveChangeListener(OnSkeletonActiveChange, handSkeleton.inputSource); //watch for if it gets activated later
+                DestroyHand();
+            }
+        }
+
+        protected virtual void DestroyHand()
+        {
+            if (handInstance != null)
+            {
+                Destroy(handInstance);
+                handRenderers = null;
+                handInstance = null;
+                handSkeleton = null;
+                handAnimator = null;
+            }
+        }
+
+        protected virtual void OnSkeletonActiveChange(SteamVR_Action_In action, bool newState)
+        {
+            if (newState)
+            {
+                InitializeHand();
             }
         }
 
@@ -90,28 +130,47 @@ namespace Valve.VR.InteractionSystem
 
         public void MatchHandToTransform(Transform match)
         {
-            handInstance.transform.position = match.transform.position;
-            handInstance.transform.rotation = match.transform.rotation;
+            if (handInstance != null)
+            {
+                handInstance.transform.position = match.transform.position;
+                handInstance.transform.rotation = match.transform.rotation;
+            }
         }
 
         public void SetHandPosition(Vector3 newPosition)
         {
-            handInstance.transform.position = newPosition;
+            if (handInstance != null)
+            {
+                handInstance.transform.position = newPosition;
+            }
         }
 
         public void SetHandRotation(Quaternion newRotation)
         {
-            handInstance.transform.rotation = newRotation;
+            if (handInstance != null)
+            {
+                handInstance.transform.rotation = newRotation;
+            }
         }
 
         public Vector3 GetHandPosition()
         {
-            return handInstance.transform.position;
+            if (handInstance != null)
+            {
+                return handInstance.transform.position;
+            }
+
+            return Vector3.zero;
         }
 
         public Quaternion GetHandRotation()
         {
-            return handInstance.transform.rotation;
+            if (handInstance != null)
+            {
+                return handInstance.transform.rotation;
+            }
+
+            return Quaternion.identity;
         }
 
         private void OnRenderModelLoaded(SteamVR_RenderModel loadedRenderModel, bool success)
@@ -249,6 +308,14 @@ namespace Valve.VR.InteractionSystem
             {
                 return handSkeleton.GetBonePosition(boneIndex, local);
             }
+
+            return Vector3.zero;
+        }
+
+        public Vector3 GetControllerPosition(string componentName = null)
+        {
+            if (controllerRenderModel != null)
+                return controllerRenderModel.GetComponentTransform(componentName).position;
 
             return Vector3.zero;
         }

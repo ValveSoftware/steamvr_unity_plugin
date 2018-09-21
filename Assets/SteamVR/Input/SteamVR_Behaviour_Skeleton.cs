@@ -561,4 +561,40 @@ namespace Valve.VR
         public const int ringAux = 29;
         public const int pinkyAux = 30;
     }
+
+    public enum SteamVR_Skeleton_JointIndexEnum
+    {
+        root = SteamVR_Skeleton_JointIndexes.root,
+        wrist = SteamVR_Skeleton_JointIndexes.wrist,
+        thumbMetacarpal = SteamVR_Skeleton_JointIndexes.thumbMetacarpal,
+        thumbProximal = SteamVR_Skeleton_JointIndexes.thumbProximal,
+        thumbMiddle = SteamVR_Skeleton_JointIndexes.thumbMiddle,
+        thumbDistal = SteamVR_Skeleton_JointIndexes.thumbDistal,
+        thumbTip = SteamVR_Skeleton_JointIndexes.thumbTip,
+        indexMetacarpal = SteamVR_Skeleton_JointIndexes.indexMetacarpal,
+        indexProximal = SteamVR_Skeleton_JointIndexes.indexProximal,
+        indexMiddle = SteamVR_Skeleton_JointIndexes.indexMiddle,
+        indexDistal = SteamVR_Skeleton_JointIndexes.indexDistal,
+        indexTip = SteamVR_Skeleton_JointIndexes.indexTip,
+        middleMetacarpal = SteamVR_Skeleton_JointIndexes.middleMetacarpal,
+        middleProximal = SteamVR_Skeleton_JointIndexes.middleProximal,
+        middleMiddle = SteamVR_Skeleton_JointIndexes.middleMiddle,
+        middleDistal = SteamVR_Skeleton_JointIndexes.middleDistal,
+        middleTip = SteamVR_Skeleton_JointIndexes.middleTip,
+        ringMetacarpal = SteamVR_Skeleton_JointIndexes.ringMetacarpal,
+        ringProximal = SteamVR_Skeleton_JointIndexes.ringProximal,
+        ringMiddle = SteamVR_Skeleton_JointIndexes.ringMiddle,
+        ringDistal = SteamVR_Skeleton_JointIndexes.ringDistal,
+        ringTip = SteamVR_Skeleton_JointIndexes.ringTip,
+        pinkyMetacarpal = SteamVR_Skeleton_JointIndexes.pinkyMetacarpal,
+        pinkyProximal = SteamVR_Skeleton_JointIndexes.pinkyProximal,
+        pinkyMiddle = SteamVR_Skeleton_JointIndexes.pinkyMiddle,
+        pinkyDistal = SteamVR_Skeleton_JointIndexes.pinkyDistal,
+        pinkyTip = SteamVR_Skeleton_JointIndexes.pinkyTip,
+        thumbAux = SteamVR_Skeleton_JointIndexes.thumbAux,
+        indexAux = SteamVR_Skeleton_JointIndexes.indexAux,
+        middleAux = SteamVR_Skeleton_JointIndexes.middleAux,
+        ringAux = SteamVR_Skeleton_JointIndexes.ringAux,
+        pinkyAux = SteamVR_Skeleton_JointIndexes.pinkyAux,
+    }
 }

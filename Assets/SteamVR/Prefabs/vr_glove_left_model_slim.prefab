@@ -395,7 +395,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000013303659494}
-  - 95: {fileID: 95000011688095520}
   - 114: {fileID: 114000013038800862}
   m_Layer: 0
   m_Name: vr_glove_left_model_slim
@@ -1000,23 +999,6 @@ Transform:
   - {fileID: 4000010099813992}
   m_Father: {fileID: 4000013075688536}
   m_RootOrder: 0
---- !u!95 &95000011688095520
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013348574242}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 65d8eda911e0ba548a3674f65c43308b, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95000014108670334
 Animator:
   serializedVersion: 3
@@ -1045,7 +1027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f6c0d7b5a00aa4a8d38a09a0480032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonAction: {fileID: 11400000, guid: 4ef602488dffdb0419ae66d396ab4af7, type: 2}
+  skeletonAction: {fileID: 11400000, guid: 56df25ff935e9d34aba684b96a7e54e6, type: 2}
   inputSource: 1
   rangeOfMotion: 0
   skeletonRoot: {fileID: 4000010709239554}

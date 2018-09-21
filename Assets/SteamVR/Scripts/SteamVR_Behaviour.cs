@@ -40,10 +40,13 @@ namespace Valve.VR
         [HideInInspector]
         public SteamVR_Render steamvr_render;
 
+
+        private static bool initializing = false;
         public static void Initialize()
         {
-            if (_instance == null)
+            if (_instance == null && initializing == false)
             {
+                initializing = true;
                 GameObject steamVRObject = null;
 
                 SteamVR_Render renderInstance = GameObject.FindObjectOfType<SteamVR_Render>();
@@ -62,13 +65,22 @@ namespace Valve.VR
                 }
                 else
                 {
+                    behaviourInstance = steamVRObject.GetComponent<SteamVR_Behaviour>();
                     if (behaviourInstance == null)
                         behaviourInstance = steamVRObject.AddComponent<SteamVR_Behaviour>();
-                    if (renderInstance == null)
-                        behaviourInstance.steamvr_render = steamVRObject.AddComponent<SteamVR_Render>();
+
+                    if (renderInstance != null)
+                        behaviourInstance.steamvr_render = renderInstance;
+                    else
+                    {
+                        behaviourInstance.steamvr_render = steamVRObject.GetComponent<SteamVR_Render>();
+                        if (behaviourInstance.steamvr_render == null)
+                            behaviourInstance.steamvr_render = steamVRObject.AddComponent<SteamVR_Render>();
+                    }
 
                     _instance = behaviourInstance;
                 }
+                initializing = false;
             }
         }
 
@@ -101,12 +113,41 @@ namespace Valve.VR
         }
 
         private Coroutine initializeCoroutine;
+
+#if UNITY_2018_3_OR_NEWER
+        private bool loadedOpenVRDeviceSuccess = false;
+        private IEnumerator DoInitializeSteamVR(bool forceUnityVRToOpenVR = false)
+        {
+            XRDevice.deviceLoaded += XRDevice_deviceLoaded;
+            XRSettings.LoadDeviceByName(openVRDeviceName);
+            while (loadedOpenVRDeviceSuccess == false)
+            {
+                yield return null;
+            }
+            XRDevice.deviceLoaded -= XRDevice_deviceLoaded;
+            EnableOpenVR();
+        }
+
+        private void XRDevice_deviceLoaded(string deviceName)
+        {
+            if (deviceName == openVRDeviceName)
+            {
+                loadedOpenVRDeviceSuccess = true;
+            }
+            else
+            {
+                Debug.LogError("Tried to async load: " + openVRDeviceName + ". Loaded: " + deviceName);
+                loadedOpenVRDeviceSuccess = true; //try anyway
+            }
+        }
+#else
         private IEnumerator DoInitializeSteamVR(bool forceUnityVRToOpenVR = false)
         {
             XRSettings.LoadDeviceByName(openVRDeviceName);
             yield return null;
             EnableOpenVR();
         }
+#endif
 
         private void EnableOpenVR()
         {

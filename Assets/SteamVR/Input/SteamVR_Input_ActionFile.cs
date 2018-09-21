@@ -100,7 +100,7 @@ namespace Valve.VR
             return name;
         }
 
-        public string[] GetFilesToCopy()
+        public string[] GetFilesToCopy(bool throwErrors = false)
         {
             List<string> files = new List<string>();
 
@@ -115,6 +115,13 @@ namespace Valve.VR
 
                 if (File.Exists(bindingPath))
                     files.Add(bindingPath);
+                else
+                {
+                    if (throwErrors)
+                    {
+                        Debug.LogError("[SteamVR] Could not bind binding file specified by the actions.json manifest: " + bindingPath);
+                    }
+                }
             }
 
             return files.ToArray();
@@ -335,7 +342,7 @@ namespace Valve.VR
         public string binary_path_linux;
         public string binary_path_osx;
         public string action_manifest_path;
-        public List<SteamVR_Input_ManifestFile_Application_Binding> bindings = new List<SteamVR_Input_ManifestFile_Application_Binding>();
+        //public List<SteamVR_Input_ManifestFile_Application_Binding> bindings = new List<SteamVR_Input_ManifestFile_Application_Binding>();
         public string image_path;
         public Dictionary<string, SteamVR_Input_ManifestFile_ApplicationString> strings = new Dictionary<string, SteamVR_Input_ManifestFile_ApplicationString>();
     }

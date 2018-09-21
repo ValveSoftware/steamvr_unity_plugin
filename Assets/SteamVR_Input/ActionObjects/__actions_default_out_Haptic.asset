@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b01ecd7f9020044bab37ea4ac8fca3, type: 3}
+  m_Name: __actions_default_out_Haptic
+  m_EditorClassIdentifier: 
+  changeTolerance: 0.000001
+  fullPath: /actions/default/out/Haptic
+  actionSet: {fileID: 11400000, guid: 2b3745a49383eb94db122c6fc91f917c, type: 2}
+  direction: 1

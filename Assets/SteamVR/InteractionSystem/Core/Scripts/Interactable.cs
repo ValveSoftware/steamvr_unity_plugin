@@ -14,6 +14,9 @@ namespace Valve.VR.InteractionSystem
 	//-------------------------------------------------------------------------
 	public class Interactable : MonoBehaviour
     {
+        [Tooltip("Activates an action set on attach and deactivates on detach")]
+        public SteamVR_ActionSet activateActionSetOnAttach;
+
         [Tooltip("Hide the whole hand on attachment and show on detach")]
         public bool hideHandOnAttach = true;
 
@@ -231,6 +234,9 @@ namespace Valve.VR.InteractionSystem
         
         private void OnAttachedToHand( Hand hand )
         {
+            if (activateActionSetOnAttach != null)
+                activateActionSetOnAttach.ActivatePrimary();
+
             if ( onAttachedToHand != null )
 			{
 				onAttachedToHand.Invoke( hand );
@@ -240,8 +246,17 @@ namespace Valve.VR.InteractionSystem
         }
 
 		private void OnDetachedFromHand( Hand hand )
-		{
-			if ( onDetachedFromHand != null )
+        {
+            if (activateActionSetOnAttach != null)
+            {
+                if (hand.otherHand.currentAttachedObjectInfo.HasValue == false || (hand.otherHand.currentAttachedObjectInfo.Value.interactable != null || 
+                    hand.otherHand.currentAttachedObjectInfo.Value.interactable.activateActionSetOnAttach != this.activateActionSetOnAttach))
+                {
+                    activateActionSetOnAttach.Deactivate();
+                }
+            }
+
+            if ( onDetachedFromHand != null )
 			{
 				onDetachedFromHand.Invoke( hand );
 			}
@@ -255,6 +270,7 @@ namespace Valve.VR.InteractionSystem
 
             if (attachedToHand != null)
             {
+                attachedToHand.ForceHoverUnlock();
                 attachedToHand.DetachObject(this.gameObject, false);
             }
         }

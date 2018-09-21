@@ -702,7 +702,7 @@ namespace Valve.VR
             }
             else
             {
-                Debug.LogFormat("[SteamVR] Actions file does not exist in project root: ", actionsFilePath);
+                Debug.LogErrorFormat("[SteamVR] Actions file does not exist in project root: {0}", actionsFilePath);
                 return false;
             }
 
@@ -754,11 +754,14 @@ namespace Valve.VR
                 return path;
         }
 
+        private static bool checkingSetup = false;
         private static void CheckSetup()
         {
-            if (SteamVR_Input_References.instance.actionSetObjects == null || SteamVR_Input_References.instance.actionSetObjects.Length == 0 || SteamVR_Input_References.instance.actionSetObjects.Any(set => set != null) == false)
+            if (checkingSetup == false && (SteamVR_Input_References.instance.actionSetObjects == null || SteamVR_Input_References.instance.actionSetObjects.Length == 0 || SteamVR_Input_References.instance.actionSetObjects.Any(set => set != null) == false))
             {
+                checkingSetup = true;
                 Debug.Break();
+
                 bool open = UnityEditor.EditorUtility.DisplayDialog("[SteamVR]", "It looks like you haven't generated actions for SteamVR Input yet. Would you like to open the SteamVR Input window?", "Yes", "No");
                 if (open)
                 {
@@ -771,6 +774,7 @@ namespace Valve.VR
                             window.Show();
                     }
                 }
+                checkingSetup = false;
             }
         }
 

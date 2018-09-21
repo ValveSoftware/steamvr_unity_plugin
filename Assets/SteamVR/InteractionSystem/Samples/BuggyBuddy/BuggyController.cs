@@ -33,6 +33,9 @@ namespace Valve.VR.InteractionSystem.Sample
 
         public Transform resetToPoint;
 
+        [SteamVR_DefaultActionSet("buggy")]
+        public SteamVR_ActionSet actionSet;
+
         [SteamVR_DefaultAction("Steering", "buggy")]
         public SteamVR_Action_Vector2 a_steering;
 
@@ -44,9 +47,6 @@ namespace Valve.VR.InteractionSystem.Sample
 
         [SteamVR_DefaultAction("Reset", "buggy")]
         public SteamVR_Action_Boolean a_reset;
-
-        [SteamVR_DefaultActionSet("buggy")]
-        public SteamVR_ActionSet actionsetEnableOnGrab;
 
         private float usteer;
 
@@ -66,6 +66,8 @@ namespace Valve.VR.InteractionSystem.Sample
             trigSRot = modelTrigger.localRotation;
 
             interactable = GetComponent<Interactable>();
+            interactable.activateActionSetOnAttach = actionSet;
+
             StartCoroutine(DoBuzz());
             buggy.controllerReference = transform;
             initialScale = buggy.transform.localScale;
@@ -176,18 +178,6 @@ namespace Valve.VR.InteractionSystem.Sample
                     interactable.attachedToHand.TriggerHapticPulse((ushort)Mathf.RoundToInt(300 * Mathf.Lerp(1.0f, 0.6f, buggy.mvol)));
                 }
             }
-        }
-
-        private void OnAttachedToHand(Hand hand)
-        {
-            if (actionsetEnableOnGrab)
-                actionsetEnableOnGrab.ActivateSecondary();
-        }
-
-        private void OnDetachedFromHand(Hand hand)
-        {
-            if (actionsetEnableOnGrab)
-                actionsetEnableOnGrab.Deactivate();
         }
     }
 }

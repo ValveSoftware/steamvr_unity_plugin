@@ -1,11 +1,51 @@
-# SteamVR Unity Plugin - v2.0rc3
+﻿# SteamVR Unity Plugin - v2.0
 
 Copyright (c) Valve Corporation, All rights reserved.
 
 
 Requirements:
 
-The SteamVR runtime must be installed.  This can be found in Steam under Tools.
+The SteamVR runtime must be installed. This can be found in Steam under Tools.
+
+We strongly recommend you opt-in to the SteamVR Beta to make sure your application will work with future versions of SteamVR. Right-click SteamVR inside steam, click Properties, the beta tab, then select the beta branch.
+
+
+Quick Start:
+
+For the most simple example of VR with tracked controllers see the sample scene at ​SteamVR/Simple Sample
+
+For a more extensive example including picking up, throwing objects, and animated hands see the Interaction System example at ​SteamVR/Interaction System/Samples/Interactions_Example
+
+
+Changes for v2.0rc4:
+ 
+ * Support for Windows MR (no Skeletal input at this time - driver needs to be updated)
+
+ * Added SteamVR_ActionIn.onActiveChange event (most actions inherit from this class)
+
+ * Added Interactable.activateActionSetOnAttach to activate action sets when you grab an item and deactivate them when they're detached
+
+ * Fixed an issue in the SteamVR Input Live View that made it unreadable
+
+ * Fixed an issue that lead to duplicate SteamVR_Render components in some circumstances
+
+ * Removed Debug UI from release builds using the Interaction System
+
+ * Added ModalThrowable. Allowing different snap locations for grip and pinch pickups
+
+ * Added grenade as an example of the ModalThrowable
+
+ * Added a squishable object for a knuckles force example
+
+ * Fixed an order of operations error where the interactable detach event was being called after the attach event when an item changed hands
+
+ * Fixed an issue with pickup points being in odd places
+
+ * Forcing hover unlock on interactable destruction
+
+ * Added support for Unity 2018.3
+
+ * Fixed an issue with delayed init
 
 
 Changes for v2.0rc3:

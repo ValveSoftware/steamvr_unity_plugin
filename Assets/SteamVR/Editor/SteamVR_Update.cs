@@ -9,12 +9,16 @@ using UnityEditor;
 using System.IO;
 using System.Text.RegularExpressions;
 
+#if UNITY_2018_3_OR_NEWER
+#pragma warning disable CS0618
+#endif
+
 namespace Valve.VR
 {
     [InitializeOnLoad]
     public class SteamVR_Update : EditorWindow
     {
-        const string currentVersion = "1.2.3";
+        const string currentVersion = "2.0";
         const string versionUrl = "http://media.steampowered.com/apps/steamvr/unitypluginversion.txt";
         const string notesUrl = "http://media.steampowered.com/apps/steamvr/unityplugin-v{0}.txt";
         const string pluginUrl = "http://u3d.as/content/valve-corporation/steam-vr-plugin";
@@ -170,3 +174,7 @@ namespace Valve.VR
         }
     }
 }
+
+#if UNITY_2018_3_OR_NEWER
+#pragma warning restore CS0618
+#endif

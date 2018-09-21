@@ -218,7 +218,7 @@
                   }
                },
                "mode" : "button",
-               "path" : "/user/hand/left/input/trigger"
+               "path" : "/user/hand/left/input/trackpad"
             },
             {
                "inputs" : {
@@ -227,7 +227,7 @@
                   }
                },
                "mode" : "button",
-               "path" : "/user/hand/right/input/trigger"
+               "path" : "/user/hand/right/input/trackpad"
             },
             {
                "inputs" : {

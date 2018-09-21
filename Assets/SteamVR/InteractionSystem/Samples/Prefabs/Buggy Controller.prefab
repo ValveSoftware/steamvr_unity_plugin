@@ -939,12 +939,11 @@ MonoBehaviour:
   ui_steerangle: 60
   ui_fillAngles: {x: 0.29, y: 0.7}
   resetToPoint: {fileID: 0}
-  a_steering: {fileID: 11400000, guid: 085f9b227e44bcb4dac9a35997468a77, type: 2}
-  a_trigger: {fileID: 11400000, guid: 85af5c93e69e1644bb8b6e16ba41b5c3, type: 2}
-  a_brake: {fileID: 11400000, guid: 568f21d9d5a4de545bfe94878abd5492, type: 2}
-  a_reset: {fileID: 11400000, guid: 09b5b7cf5684e3a4f8c041baa7c88f41, type: 2}
-  actionsetEnableOnGrab: {fileID: 11400000, guid: 7bf34e9c59aa9784cbef5a805d617319,
-    type: 2}
+  actionSet: {fileID: 11400000, guid: a8744cd4a0b60924481c4e3a53c81e44, type: 2}
+  a_steering: {fileID: 11400000, guid: 91e0be1c6df40494f9982df0c60d81a0, type: 2}
+  a_trigger: {fileID: 11400000, guid: 30a8cf088dd62b24f959e332b161257a, type: 2}
+  a_brake: {fileID: 11400000, guid: 3c7d9a672906b2e45b08a4920fa83cdb, type: 2}
+  a_reset: {fileID: 11400000, guid: 3775129c51a35594e8ec458854d358c1, type: 2}
 --- !u!114 &114379823079474456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1046,6 +1045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b93b6a877adcbf94c89a9d6e0c0e844d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activateActionSetOnAttach: {fileID: 0}
   hideHandOnAttach: 1
   hideSkeletonOnAttach: 0
   hideControllerOnAttach: 1

@@ -90,6 +90,10 @@
     {
       "controller_type": "knuckles",
       "binding_url": "bindings_knuckles.json"
+    },
+    {
+      "controller_type": "holographic_controller",
+      "binding_url": "bindings_holographic_controller.json"
     }
   ],
   "localization": [

@@ -67,6 +67,9 @@ namespace Valve.VR
             {
                 onUpdate[inputSource].Invoke(this);
             }
+
+            if (onActiveChange[inputSource] != null && lastActionData[inputSource].bActive != active[inputSource])
+                onActiveChange[inputSource].Invoke(this, active[inputSource]);
         }
 
         /// <summary>The analog value</summary>

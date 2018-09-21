@@ -10,14 +10,15 @@ namespace Valve.VR.InteractionSystem.Sample
         public Transform Joystick;
         public float joyMove = 0.1f;
 
+        
+        [SteamVR_DefaultActionSet("platformer")]
+        public SteamVR_ActionSet actionSet;
+
         [SteamVR_DefaultAction("Move", "platformer")]
         public SteamVR_Action_Vector2 a_move;
 
         [SteamVR_DefaultAction("Jump", "platformer")]
         public SteamVR_Action_Boolean a_jump;
-
-        [SteamVR_DefaultActionSet("platformer")]
-        public SteamVR_ActionSet actionsetEnableOnGrab;
 
 
         public JoeJeff character;
@@ -34,6 +35,7 @@ namespace Valve.VR.InteractionSystem.Sample
         private void Start()
         {
             interactable = GetComponent<Interactable>();
+            interactable.activateActionSetOnAttach = actionSet;
         }
 
         private void Update()
@@ -63,18 +65,6 @@ namespace Valve.VR.InteractionSystem.Sample
             jumpHighlight.sharedMaterial.SetColor("_EmissionColor", Color.white * glow);
 
             character.Move(movement * 2, jump);
-        }
-
-        private void OnAttachedToHand(Hand hand)
-        {
-            if (actionsetEnableOnGrab)
-                actionsetEnableOnGrab.ActivateSecondary();
-        }
-
-        private void OnDetachedFromHand(Hand hand)
-        {
-            if (actionsetEnableOnGrab)
-                actionsetEnableOnGrab.Deactivate();
         }
     }
 }

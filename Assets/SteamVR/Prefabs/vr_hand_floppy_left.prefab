@@ -2626,7 +2626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f6c0d7b5a00aa4a8d38a09a0480032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonAction: {fileID: 11400000, guid: 4ef602488dffdb0419ae66d396ab4af7, type: 2}
+  skeletonAction: {fileID: 11400000, guid: 56df25ff935e9d34aba684b96a7e54e6, type: 2}
   inputSource: 1
   rangeOfMotion: 1
   skeletonRoot: {fileID: 4000011512971474}
@@ -2646,7 +2646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 158d046322c150348bfed00c688d3142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  squeezyAction: {fileID: 11400000, guid: df44fd5763d75b349a56a232637c7787, type: 2}
+  squeezyAction: {fileID: 11400000, guid: 13129127883fed442943313b543eec34, type: 2}
   inputSource: 1
   fingers:
   - mass: 1

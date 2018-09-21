@@ -79,6 +79,9 @@ namespace Valve.VR
 
             if (onUpdate[inputSource] != null)
                 onUpdate[inputSource].Invoke(this);
+
+            if (onActiveChange[inputSource] != null && lastActionData[inputSource].bActive != active[inputSource])
+                onActiveChange[inputSource].Invoke(this, active[inputSource]);
         }
 
         /// <summary>Returns true if the value of the action has been set to true (from false) in the most recent update.</summary>

@@ -170,6 +170,9 @@ namespace Valve.VR
 
         private void OnInputFocus(bool hasFocus)
         {
+            if (SteamVR.active == false)
+                return;
+
             if (hasFocus)
             {
                 if (SteamVR.settings.pauseGameWhenDashboardVisible)
@@ -246,12 +249,6 @@ namespace Valve.VR
 #else
             Camera.onPreCull += OnCameraPreCull;
 #endif
-            var vr = SteamVR.instance;
-            if (vr == null)
-            {
-                enabled = false;
-                return;
-            }
             var types = new EVRScreenshotType[] { EVRScreenshotType.StereoPanorama };
             OpenVR.Screenshots.HookScreenshot(types);
         }
@@ -295,16 +292,22 @@ namespace Valve.VR
         }
 
 #if UNITY_2017_1_OR_NEWER
-	void OnBeforeRender() 
-    { 
-        if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnPreCull))
-        {
-            UpdatePoses();
+	    void OnBeforeRender() 
+        { 
+            if (SteamVR.active == false)
+                return;
+
+            if (SteamVR.settings.IsPoseUpdateMode(SteamVR_UpdateModes.OnPreCull))
+            {
+                UpdatePoses();
+            }
         }
-    }
 #else
         void OnCameraPreCull(Camera cam)
         {
+            if (SteamVR.active == false)
+                return;
+
 #if UNITY_2017_1_OR_NEWER
 		if (cam.cameraType != CameraType.VR)
 			return;
@@ -331,6 +334,9 @@ namespace Valve.VR
 
         void Update()
         {
+            if (SteamVR.active == false)
+                return;
+
             UpdatePoses();
 
             // Dispatch any OpenVR events.

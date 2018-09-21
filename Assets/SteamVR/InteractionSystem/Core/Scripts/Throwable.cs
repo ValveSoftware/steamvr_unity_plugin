@@ -13,7 +13,7 @@ namespace Valve.VR.InteractionSystem
 	//-------------------------------------------------------------------------
 	[RequireComponent( typeof( Interactable ) )]
 	[RequireComponent( typeof( Rigidbody ) )]
-	[RequireComponent( typeof( VelocityEstimator ) )]
+    [RequireComponent( typeof(VelocityEstimator))]
 	public class Throwable : MonoBehaviour
 	{
 		[EnumFlags]
