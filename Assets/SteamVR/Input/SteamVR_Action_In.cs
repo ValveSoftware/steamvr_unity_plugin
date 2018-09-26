@@ -43,6 +43,9 @@ namespace Valve.VR
         protected Dictionary<SteamVR_Input_Sources, float> lastOriginGetFrame = new Dictionary<SteamVR_Input_Sources, float>(new SteamVR_Input_Sources_Comparer());
 
         [NonSerialized]
+        protected Dictionary<SteamVR_Input_Sources, bool> lastActive = new Dictionary<SteamVR_Input_Sources, bool>(new SteamVR_Input_Sources_Comparer());
+
+        [NonSerialized]
         protected static uint inputOriginInfo_size = 0;
 
         public abstract void UpdateValue(SteamVR_Input_Sources inputSource);
@@ -71,6 +74,7 @@ namespace Valve.VR
             onUpdate.Add(source, null);
             lastInputOriginInfo.Add(source, new InputOriginInfo_t());
             lastOriginGetFrame.Add(source, -1);
+            lastActive.Add(source, false);
         }
 
         /// <summary>

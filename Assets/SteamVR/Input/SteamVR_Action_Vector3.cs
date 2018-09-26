@@ -43,6 +43,7 @@ namespace Valve.VR
         public override void UpdateValue(SteamVR_Input_Sources inputSource)
         {
             lastActionData[inputSource] = actionData[inputSource];
+            lastActive[inputSource] = active[inputSource];
 
             EVRInputError err = OpenVR.Input.GetAnalogActionData(handle, ref tempActionData, actionData_size, SteamVR_Input_Source.GetHandle(inputSource));
             if (err != EVRInputError.None)
@@ -67,6 +68,9 @@ namespace Valve.VR
             {
                 onUpdate[inputSource].Invoke(this);
             }
+
+            if (onActiveChange[inputSource] != null && lastActive[inputSource] != active[inputSource])
+                onActiveChange[inputSource].Invoke(this, active[inputSource]);
         }
 
         /// <summary>The three axis value from the latest update</summary>

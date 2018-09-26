@@ -463,7 +463,7 @@ namespace Valve.VR
             }
 
             if (OnSkeletonsUpdated != null)
-                OnSkeletonsUpdated(false);
+                OnSkeletonsUpdated(skipStateAndEventUpdates);
         }
 
 

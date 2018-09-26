@@ -53,6 +53,7 @@ namespace Valve.VR
         public override void UpdateValue(SteamVR_Input_Sources inputSource)
         {
             lastActionData[inputSource] = actionData[inputSource];
+            lastActive[inputSource] = active[inputSource];
 
             EVRInputError err = OpenVR.Input.GetDigitalActionData(handle, ref tempActionData, actionData_size, SteamVR_Input_Source.GetHandle(inputSource));
             if (err != EVRInputError.None)
@@ -80,7 +81,7 @@ namespace Valve.VR
             if (onUpdate[inputSource] != null)
                 onUpdate[inputSource].Invoke(this);
 
-            if (onActiveChange[inputSource] != null && lastActionData[inputSource].bActive != active[inputSource])
+            if (onActiveChange[inputSource] != null && lastActive[inputSource] != active[inputSource])
                 onActiveChange[inputSource].Invoke(this, active[inputSource]);
         }
 

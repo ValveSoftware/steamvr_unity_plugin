@@ -38,6 +38,12 @@ namespace Valve.VR
         protected Dictionary<SteamVR_Input_Sources, InputPoseActionData_t> lastPoseActionData = new Dictionary<SteamVR_Input_Sources, InputPoseActionData_t>(new SteamVR_Input_Sources_Comparer());
 
         [NonSerialized]
+        protected Dictionary<SteamVR_Input_Sources, InputPoseActionData_t> lastRecordedPoseActionData = new Dictionary<SteamVR_Input_Sources, InputPoseActionData_t>(new SteamVR_Input_Sources_Comparer());
+
+        [NonSerialized]
+        protected Dictionary<SteamVR_Input_Sources, bool> lastRecordedActive = new Dictionary<SteamVR_Input_Sources, bool>(new SteamVR_Input_Sources_Comparer());
+
+        [NonSerialized]
         protected InputPoseActionData_t tempPoseActionData = new InputPoseActionData_t();
 
         [NonSerialized]
@@ -59,6 +65,8 @@ namespace Valve.VR
             onDeviceConnectedChanged.Add(source, null);
             poseActionData.Add(source, new InputPoseActionData_t());
             lastPoseActionData.Add(source, new InputPoseActionData_t());
+            lastRecordedPoseActionData.Add(source, new InputPoseActionData_t());
+            lastRecordedActive.Add(source, false);
         }
 
         /// <param name="inputSource">The device you would like to get data from. Any if the action is not device specific.</param>
@@ -69,7 +77,8 @@ namespace Valve.VR
 
         protected void ResetLastStates(SteamVR_Input_Sources inputSource)
         {
-            lastPoseActionData[inputSource] = poseActionData[inputSource];
+            lastPoseActionData[inputSource] = lastRecordedPoseActionData[inputSource];
+            lastActive[inputSource] = lastRecordedActive[inputSource];
         }
 
         /// <param name="inputSource">The device you would like to get data from. Any if the action is not device specific.</param>
@@ -84,10 +93,7 @@ namespace Valve.VR
             EVRInputError err = OpenVR.Input.GetPoseActionData(handle, universeOrigin, predictedSecondsFromNow, ref tempPoseActionData, poseActionData_size, SteamVR_Input_Source.GetHandle(inputSource));
             if (err != EVRInputError.None)
             {
-                Debug.LogError("GetPoseActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString()); //todo: this should be an error
-
-                active[inputSource] = false;
-                return;
+                Debug.LogError("GetPoseActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString());
             }
             
             poseActionData[inputSource] = tempPoseActionData;
@@ -114,6 +120,12 @@ namespace Valve.VR
 
             if (onUpdate[inputSource] != null)
                 onUpdate[inputSource].Invoke(this);
+
+            if (skipStateAndEventUpdates == false)
+            {
+                lastRecordedActive[inputSource] = active[inputSource];
+                lastRecordedPoseActionData[inputSource] = poseActionData[inputSource];
+            }
         }
 
         /// <summary>
@@ -200,8 +212,11 @@ namespace Valve.VR
                     onChange[inputSource].Invoke(this);
             }
 
-            if (onActiveChange[inputSource] != null && lastPoseActionData[inputSource].bActive != active[inputSource])
-                onActiveChange[inputSource].Invoke(this, active[inputSource]);
+            if (onActiveChange[inputSource] != null)
+            {
+                if (lastActive[inputSource] != active[inputSource])
+                    onActiveChange[inputSource].Invoke(this, active[inputSource]);
+            }
         }
         
         /// <param name="newUniverseOrigin">The origin of the universe. Don't get this wrong.</param>

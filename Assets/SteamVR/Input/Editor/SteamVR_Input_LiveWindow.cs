@@ -93,7 +93,11 @@ namespace Valve.VR
 
                         float timeSinceLastChanged = -1;
 
-                        if (actionLastChanged != -1)
+                        if (action is SteamVR_Action_In && ((SteamVR_Action_In)action).GetActive(source) == false)
+                        {
+                            GUI.backgroundColor = Color.red;
+                        }
+                        else if (actionLastChanged != -1)
                         {
                             timeSinceLastChanged = Time.time - actionLastChanged;
 
