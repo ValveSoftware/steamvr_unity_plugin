@@ -63,7 +63,7 @@ namespace Valve.VR
             EVRInputError err = OpenVR.Input.GetActionSetHandle(fullPath.ToLower(), ref handle);
 
             if (err != EVRInputError.None)
-                Debug.LogError("<b><color=#1b2838>[SteamVR]</color></b> GetActionSetHandle (" + fullPath + ") error: " + err.ToString());
+                Debug.LogError("<b><color=#1b2838>[SteamVR Input]</color></b> GetActionSetHandle (" + fullPath + ") error: " + err.ToString());
 
             activeActionSetSize = (uint)(Marshal.SizeOf(typeof(VRActiveActionSet_t)));
         }
@@ -175,13 +175,13 @@ namespace Valve.VR
                 {
                     EVRInputError err = OpenVR.Input.UpdateActionState(activeActionSets, activeActionSetSize);
                     if (err != EVRInputError.None)
-                        Debug.LogError("<b><color=#1b2838>[SteamVR]</color></b> UpdateActionState error: " + err.ToString());
-					//else Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> Action sets activated: " + activeActionSets.Length);
-				}
+                        Debug.LogError("<b><color=#1b2838>[SteamVR Input]</color></b> UpdateActionState error: " + err.ToString());
+                    //else Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Action sets activated: " + activeActionSets.Length);
+                }
                 else
                 {
-					//Debug.LogWarning("<b><color=#1b2838>[SteamVR]</color></b> No sets active");
-				}
+                    //Debug.LogWarning("<b><color=#1b2838>[SteamVR Input]</color></b> No sets active");
+                }
             }
         }
 

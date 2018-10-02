@@ -146,7 +146,7 @@ namespace Valve.VR
                 EVRInputError err = OpenVR.Input.GetOriginTrackedDeviceInfo(activeOrigin[inputSource], ref inputOriginInfo, inputOriginInfo_size);
 
                 if (err != EVRInputError.None)
-                    Debug.LogError("<b><color=#1b2838>[SteamVR]</color></b> GetOriginTrackedDeviceInfo error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString() + " activeOrigin: " + activeOrigin[inputSource].ToString() + " active: " + active[inputSource]);
+                    Debug.LogError("<b><color=#1b2838>[SteamVR Input]</color></b> GetOriginTrackedDeviceInfo error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString() + " activeOrigin: " + activeOrigin[inputSource].ToString() + " active: " + active[inputSource]);
 
                 lastInputOriginInfo[inputSource] = inputOriginInfo;
                 lastOriginGetFrame[inputSource] = Time.frameCount;

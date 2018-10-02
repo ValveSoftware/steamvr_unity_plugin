@@ -57,7 +57,7 @@ namespace Valve.VR
 
             EVRInputError err = OpenVR.Input.GetDigitalActionData(handle, ref tempActionData, actionData_size, SteamVR_Input_Source.GetHandle(inputSource));
             if (err != EVRInputError.None)
-                Debug.LogError("<b><color=#1b2838>[SteamVR]</color></b> GetDigitalActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString());
+                Debug.LogError("<b><color=#1b2838>[SteamVR Input]</color></b> GetDigitalActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString());
 
             actionData[inputSource] = tempActionData;
             changed[inputSource] = tempActionData.bChanged;

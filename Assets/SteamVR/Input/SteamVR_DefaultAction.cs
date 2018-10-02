@@ -134,7 +134,7 @@ namespace Valve.VR
                 {
                     if (action.GetType() != field.FieldType)
                     {
-                        Debug.LogWarning("<b><color=#1b2838>[SteamVR]</color></b> Could not assign default action for " + ((MonoBehaviour)onObject).gameObject.name + "::" + ((MonoBehaviour)onObject).name + "::" + field.Name
+                        Debug.LogWarning("<b><color=#1b2838>[SteamVR Input]</color></b> Could not assign default action for " + ((MonoBehaviour)onObject).gameObject.name + "::" + ((MonoBehaviour)onObject).name + "::" + field.Name
                             + ". Expected type: " + field.FieldType.Name + ", found action type: " + action.GetType().Name);
                     }
                     else
@@ -156,7 +156,7 @@ namespace Valve.VR
                 if (ShouldAssign(field, onObject))
                 {
                     field.SetValue(onObject, action);
-                    //Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> Assigned default action for " + ((MonoBehaviour)onObject).gameObject.name + "::" + ((MonoBehaviour)onObject).name + "::" + field.Name
+                    //Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Assigned default action for " + ((MonoBehaviour)onObject).gameObject.name + "::" + ((MonoBehaviour)onObject).name + "::" + field.Name
                     //    + ". Expected type: " + field.FieldType.Name + ", found action type: " + action.GetType().Name);   
                 }
             }
@@ -171,7 +171,7 @@ namespace Valve.VR
                 if (ShouldAssign(property, onObject))
                 {
                     property.SetValue(onObject, action, null);
-                    //Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> Assigned default action for " + ((MonoBehaviour)onObject).gameObject.name + "::" + ((MonoBehaviour)onObject).name + "::" + property.Name
+                    //Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Assigned default action for " + ((MonoBehaviour)onObject).gameObject.name + "::" + ((MonoBehaviour)onObject).name + "::" + property.Name
                     //    + ". Expected type: " + property.PropertyType.Name + ", found action type: " + action.GetType().Name);
                 }
             }
@@ -189,7 +189,7 @@ namespace Valve.VR
                 {
                     if (action.GetType() != property.PropertyType)
                     {
-                        Debug.LogWarning("<b><color=#1b2838>[SteamVR]</color></b> Could not assign default action for " + ((MonoBehaviour)onObject).gameObject.name + "::" + ((MonoBehaviour)onObject).name + "::" + property.Name
+                        Debug.LogWarning("<b><color=#1b2838>[SteamVR Input]</color></b> Could not assign default action for " + ((MonoBehaviour)onObject).gameObject.name + "::" + ((MonoBehaviour)onObject).name + "::" + property.Name
                             + ". Expected type: " + property.PropertyType.Name + ", found action type: " + action.GetType().Name);
                     }
                     else
@@ -198,7 +198,7 @@ namespace Valve.VR
                     }
                 }
                 else
-                    Debug.LogWarning("<b><color=#1b2838>[SteamVR]</color></b> Not assigning default because current action is not null. Could not assign default action for " + ((MonoBehaviour)onObject).gameObject.name + "::" + ((MonoBehaviour)onObject).name + "::" + property.Name
+                    Debug.LogWarning("<b><color=#1b2838>[SteamVR Input]</color></b> Not assigning default because current action is not null. Could not assign default action for " + ((MonoBehaviour)onObject).gameObject.name + "::" + ((MonoBehaviour)onObject).name + "::" + property.Name
                         + ". Expected type: " + property.PropertyType.Name + ", found action type: " + action.GetType().Name + ". " + ((SteamVR_Action)currentAction).fullPath);
             }
 
@@ -214,9 +214,9 @@ namespace Valve.VR
 
             if (action == null)
                 Debug.LogWarning("<b><color=#1b2838>[SteamVR Input]</color></b> Could not find action matching path: " + regex.Replace("\\", "").Replace(".+", "*"));
-			//else Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> Looking for: " + regex + ". Found: " + action.fullPath);
+            //else Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Looking for: " + regex + ". Found: " + action.fullPath);
 
-			return action;
+            return action;
         }
 
         private string GetInputSource(MonoBehaviour monoBehaviour, string inputSourceFieldName)
