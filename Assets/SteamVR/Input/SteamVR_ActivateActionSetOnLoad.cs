@@ -23,7 +23,7 @@ namespace Valve.VR
         {
             if (actionSet != null && activateOnStart)
             {
-                //Debug.Log(string.Format("[SteamVR] Activating {0} action set.", actionSet.fullPath));
+                //Debug.Log(string.Format("<b><color=#1b2838>[SteamVR]</color></b> Activating {0} action set.", actionSet.fullPath));
                 actionSet.ActivatePrimary(disableAllOtherActionSets);
             }
         }
@@ -32,7 +32,7 @@ namespace Valve.VR
         {
             if (actionSet != null && deactivateOnDestroy)
             {
-                //Debug.Log(string.Format("[SteamVR] Deactivating {0} action set.", actionSet.fullPath));
+                //Debug.Log(string.Format("<b><color=#1b2838>[SteamVR]</color></b> Deactivating {0} action set.", actionSet.fullPath));
                 actionSet.Deactivate();
             }
         }

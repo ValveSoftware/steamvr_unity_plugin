@@ -40,7 +40,7 @@ namespace Valve.VR
                 if (string.IsNullOrEmpty(_instance.editorAppKey))
                 {
                     _instance.editorAppKey = SteamVR.GenerateAppKey();
-                    Debug.Log("[SteamVR] Generated you an editor app key of: " + _instance.editorAppKey + ". This lets the editor tell SteamVR what project this is. Has no effect on builds. This can be changed in Assets/SteamVR/Resources/SteamVR_Settings");
+                    Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> Generated you an editor app key of: " + _instance.editorAppKey + ". This lets the editor tell SteamVR what project this is. Has no effect on builds. This can be changed in Assets/SteamVR/Resources/SteamVR_Settings");
 #if UNITY_EDITOR
                     UnityEditor.EditorUtility.SetDirty(_instance);
                     UnityEditor.AssetDatabase.SaveAssets();

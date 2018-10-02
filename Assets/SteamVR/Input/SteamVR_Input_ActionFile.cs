@@ -119,7 +119,7 @@ namespace Valve.VR
                 {
                     if (throwErrors)
                     {
-                        Debug.LogError("[SteamVR] Could not bind binding file specified by the actions.json manifest: " + bindingPath);
+                        Debug.LogError("<b><color=#1b2838>[SteamVR Input]</color></b> Could not bind binding file specified by the actions.json manifest: " + bindingPath);
                     }
                 }
             }
@@ -317,7 +317,7 @@ namespace Valve.VR
             if (dictionary.ContainsKey(languageTagKeyName))
                 language = (string)dictionary[languageTagKeyName];
             else
-                Debug.Log("[SteamVR] Input: Error in actions file, no language_tag in localization array item.");
+                Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Input: Error in actions file, no language_tag in localization array item.");
 
             foreach (KeyValuePair<string, string> item in dictionary)
             {

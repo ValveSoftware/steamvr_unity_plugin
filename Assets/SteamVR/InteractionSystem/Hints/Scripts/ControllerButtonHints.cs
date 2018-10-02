@@ -162,8 +162,8 @@ namespace Valve.VR.InteractionSystem
             //Only initialize when the render model for the controller hints has been loaded
             if (renderModel == this.renderModel)
             {
-                //Debug.Log("OnRenderModelLoaded: " + this.renderModel.renderModelName);
-                if (initialized)
+				//Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> OnRenderModelLoaded: " + this.renderModel.renderModelName);
+				if (initialized)
                 {
                     Destroy(textHintParent.gameObject);
                     componentTransformMap.Clear();
@@ -413,7 +413,7 @@ namespace Valve.VR.InteractionSystem
                 }
                 else
                 {
-                    Debug.LogWarning("Invalid end position for: " + hintInfo.Value.textStartAnchor.name, hintInfo.Value.textStartAnchor.gameObject);
+                    Debug.LogWarning("<b><color=#1b2838>[SteamVR Input]</color></b> Invalid end position for: " + hintInfo.Value.textStartAnchor.name, hintInfo.Value.textStartAnchor.gameObject);
                 }
 				hintInfo.Value.canvasOffset.localRotation = Quaternion.identity;
 			}

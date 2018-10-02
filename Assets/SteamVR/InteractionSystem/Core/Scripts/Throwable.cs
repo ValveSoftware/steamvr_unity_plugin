@@ -136,9 +136,9 @@ namespace Valve.VR.InteractionSystem
         //-------------------------------------------------
         protected virtual void OnAttachedToHand( Hand hand )
 		{
-            //Debug.Log("Pickup: " + hand.GetGrabStarting().ToString());
+			//Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Pickup: " + hand.GetGrabStarting().ToString());
 
-            hadInterpolation = this.rigidbody.interpolation;
+			hadInterpolation = this.rigidbody.interpolation;
 
             attached = true;
 

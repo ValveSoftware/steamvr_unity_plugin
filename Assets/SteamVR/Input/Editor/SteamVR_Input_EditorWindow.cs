@@ -776,7 +776,7 @@ namespace Valve.VR
 
             File.WriteAllText(SteamVR_Input.actionsFilePath, json);
 
-            Debug.Log("[SteamVR Input] Saved actions manifest successfully.");
+            Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Saved actions manifest successfully.");
 
             SteamVR_Input_Generator.BeginGeneration();
         }

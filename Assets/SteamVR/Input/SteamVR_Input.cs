@@ -114,17 +114,17 @@ namespace Valve.VR
 
             if (File.Exists(fullPath))
             {
-                Debug.Log("[SteamVR] Loading actions file: " + fullPath);
+                Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Loading actions file: " + fullPath);
 
                 var err = OpenVR.Input.SetActionManifestPath(fullPath);
                 if (err != EVRInputError.None)
-                    Debug.LogError("[SteamVR] Error loading action manifest into SteamVR: " + err.ToString());
+                    Debug.LogError("<b><color=#1b2838>[SteamVR Input]</color></b> Error loading action manifest into SteamVR: " + err.ToString());
                 else
-                    Debug.Log("[SteamVR] Successfully loaded action manifest into SteamVR");
+                    Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Successfully loaded action manifest into SteamVR");
             }
             else
             {
-                Debug.LogError("[SteamVR] Could not find actions file at: " + fullPath);
+                Debug.LogError("<b><color=#1b2838>[SteamVR Input]</color></b> Could not find actions file at: " + fullPath);
             }
         }
 
@@ -162,7 +162,7 @@ namespace Valve.VR
             if (initialized)
                 return;
 
-            Debug.Log("Initializing steamvr input...");
+            Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Initializing steamvr input...");
             initializing = true;
 
             SteamVR_Input_Source.Initialize();
@@ -178,7 +178,7 @@ namespace Valve.VR
                     actionSets[0].ActivatePrimary();
                 else
                 {
-                    Debug.LogError("No action sets.");
+                    Debug.LogError("<b><color=#1b2838>[SteamVR Input]</color></b> No action sets.");
                 }
             }
 
@@ -191,7 +191,7 @@ namespace Valve.VR
             initialized = true;
 
             initializing = false;
-            Debug.Log("Steamvr input initialization complete.");
+            Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Steamvr input initialization complete.");
         }
 
 
@@ -622,7 +622,7 @@ namespace Valve.VR
                 }
                 else
                 {
-                    Debug.Log("Wrong type.");
+                    Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Wrong type.");
                 }
             }
             else
@@ -702,7 +702,7 @@ namespace Valve.VR
             }
             else
             {
-                Debug.LogErrorFormat("[SteamVR] Actions file does not exist in project root: {0}", actionsFilePath);
+                Debug.LogErrorFormat("<b><color=#1b2838>[SteamVR Input]</color></b> Actions file does not exist in project root: {0}", actionsFilePath);
                 return false;
             }
 
@@ -762,7 +762,7 @@ namespace Valve.VR
                 checkingSetup = true;
                 Debug.Break();
 
-                bool open = UnityEditor.EditorUtility.DisplayDialog("[SteamVR]", "It looks like you haven't generated actions for SteamVR Input yet. Would you like to open the SteamVR Input window?", "Yes", "No");
+                bool open = UnityEditor.EditorUtility.DisplayDialog("[SteamVR Input]", "It looks like you haven't generated actions for SteamVR Input yet. Would you like to open the SteamVR Input window?", "Yes", "No");
                 if (open)
                 {
                     UnityEditor.EditorApplication.isPlaying = false;

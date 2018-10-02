@@ -91,7 +91,7 @@ namespace Valve.VR
             EVRInputError err = OpenVR.Input.GetSkeletalActionData(handle, ref tempSkeletonActionData, skeletonActionData_size, SteamVR_Input_Source.GetHandle(inputSource));
             if (err != EVRInputError.None)
             {
-                Debug.LogError("GetSkeletalActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString()); 
+                Debug.LogError("<b><color=#1b2838>[SteamVR]</color></b> GetSkeletalActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString()); 
                 active[inputSource] = false;
                 return;
             }
@@ -103,7 +103,7 @@ namespace Valve.VR
             {
                 err = OpenVR.Input.GetSkeletalBoneData(handle, skeletalTransformSpace[inputSource], rangeOfMotion[inputSource], tempBoneTransforms, SteamVR_Input_Source.GetHandle(inputSource));
                 if (err != EVRInputError.None)
-                    Debug.LogError("GetSkeletalBoneData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString());
+                    Debug.LogError("<b><color=#1b2838>[SteamVR]</color></b> GetSkeletalBoneData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString());
 
                 for (int boneIndex = 0; boneIndex < tempBoneTransforms.Length; boneIndex++)
                 {

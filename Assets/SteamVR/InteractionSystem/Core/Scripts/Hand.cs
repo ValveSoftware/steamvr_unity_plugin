@@ -710,7 +710,7 @@ namespace Valve.VR.InteractionSystem
             playerInstance = Player.instance;
             if (!playerInstance)
             {
-                Debug.LogError("No player instance found in Hand Start()");
+                Debug.LogError("<b><color=#1b2838>[SteamVR Input]</color></b> No player instance found in Hand Start()");
             }
 
             // allocate array for colliders
@@ -791,7 +791,7 @@ namespace Valve.VR.InteractionSystem
             int numColliding = Physics.OverlapSphereNonAlloc(hoverPosition, hoverRadius, overlappingColliders, hoverLayerMask.value);
 
             if (numColliding == ColliderArraySize)
-                Debug.LogWarning("This hand is overlapping the max number of colliders: " + ColliderArraySize + ". Some collisions may be missed. Increase ColliderArraySize on Hand.cs");
+                Debug.LogWarning("<b><color=#1b2838>[SteamVR Input]</color></b> This hand is overlapping the max number of colliders: " + ColliderArraySize + ". Some collisions may be missed. Increase ColliderArraySize on Hand.cs");
 
             // DebugVar
             int iActualColliderCount = 0;
@@ -1144,7 +1144,7 @@ namespace Valve.VR.InteractionSystem
         {
             if (spewDebugText)
             {
-                Debug.Log("Hand (" + this.name + "): " + msg);
+                Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Hand (" + this.name + "): " + msg);
             }
         }
 

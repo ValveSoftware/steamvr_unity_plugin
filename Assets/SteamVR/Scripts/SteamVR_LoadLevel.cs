@@ -331,23 +331,23 @@ namespace Valve.VR
 
             if (!string.IsNullOrEmpty(internalProcessPath))
             {
-                Debug.Log("Launching external application...");
+                Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> Launching external application...");
                 var applications = OpenVR.Applications;
                 if (applications == null)
                 {
-                    Debug.Log("Failed to get OpenVR.Applications interface!");
+                    Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> Failed to get OpenVR.Applications interface!");
                 }
                 else
                 {
                     var workingDirectory = Directory.GetCurrentDirectory();
                     var fullPath = Path.Combine(workingDirectory, internalProcessPath);
-                    Debug.Log("LaunchingInternalProcess");
-                    Debug.Log("ExternalAppPath = " + internalProcessPath);
-                    Debug.Log("FullPath = " + fullPath);
-                    Debug.Log("ExternalAppArgs = " + internalProcessArgs);
-                    Debug.Log("WorkingDirectory = " + workingDirectory);
+                    Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> LaunchingInternalProcess");
+                    Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> ExternalAppPath = " + internalProcessPath);
+                    Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> FullPath = " + fullPath);
+                    Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> ExternalAppArgs = " + internalProcessArgs);
+                    Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> WorkingDirectory = " + workingDirectory);
                     var error = applications.LaunchInternalProcess(fullPath, internalProcessArgs, workingDirectory);
-                    Debug.Log("LaunchInternalProcessError: " + error);
+                    Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> LaunchInternalProcessError: " + error);
 #if UNITY_EDITOR
                     UnityEditor.EditorApplication.isPlaying = false;
 #elif !UNITY_METRO
