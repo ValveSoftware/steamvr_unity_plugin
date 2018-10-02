@@ -30,7 +30,7 @@ namespace Valve.VR
             //Debug.Log(string.Format("haptic: {5}: {0}, {1}, {2}, {3}, {4}", secondsFromNow, durationSeconds, frequency, amplitude, inputSource, this.GetShortName()));
 
             if (err != EVRInputError.None)
-                Debug.LogError("TriggerHapticVibrationAction (" + fullPath + ") error: " + err.ToString() + " handle: " + handle.ToString());
+                Debug.LogError("<b><color=#1b2838>[SteamVR Input]</color></b> TriggerHapticVibrationAction (" + fullPath + ") error: " + err.ToString() + " handle: " + handle.ToString());
         }
     }
 }

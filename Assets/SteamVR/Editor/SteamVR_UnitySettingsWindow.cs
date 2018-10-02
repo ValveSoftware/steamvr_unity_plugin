@@ -164,7 +164,7 @@ namespace Valve.VR
                 }
 
                 if (updated)
-                    Debug.Log("Switching to native OpenVR support.");
+                    Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> Switching to native OpenVR support.");
             }
 
             var dlls = new string[]
@@ -179,7 +179,7 @@ namespace Valve.VR
                     continue;
 
                 if (AssetDatabase.DeleteAsset("Assets/" + path))
-                    Debug.Log("Deleting " + path);
+                    Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> Deleting " + path);
                 else
                 {
                     Debug.Log(path + " in use; cannot delete.  Please restart Unity to complete upgrade.");

@@ -47,7 +47,7 @@ namespace Valve.VR
 
             EVRInputError err = OpenVR.Input.GetAnalogActionData(handle, ref tempActionData, actionData_size, SteamVR_Input_Source.GetHandle(inputSource));
             if (err != EVRInputError.None)
-                Debug.LogError("GetAnalogActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString());
+                Debug.LogError("<b><color=#1b2838>[SteamVR Input]</color></b> GetAnalogActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString());
 
             active[inputSource] = tempActionData.bActive;
             activeOrigin[inputSource] = tempActionData.activeOrigin;

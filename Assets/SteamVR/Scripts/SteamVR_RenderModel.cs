@@ -96,7 +96,7 @@ namespace Valve.VR
                         _instance = OpenVR.RenderModels;
                         if (_instance == null)
                         {
-                            Debug.LogError("Failed to load IVRRenderModels interface version " + OpenVR.IVRRenderModels_Version);
+                            Debug.LogError("<b><color=#1b2838>[SteamVR]</color></b> Failed to load IVRRenderModels interface version " + OpenVR.IVRRenderModels_Version);
                             failedLoadInterface = true;
                         }
                     }
@@ -154,7 +154,7 @@ namespace Valve.VR
             var capacity = system.GetStringTrackedDeviceProperty((uint)index, ETrackedDeviceProperty.Prop_RenderModelName_String, null, 0, ref error);
             if (capacity <= 1)
             {
-                Debug.LogError("Failed to get render model name for tracked object " + index);
+                Debug.LogError("<b><color=#1b2838>[SteamVR]</color></b> Failed to get render model name for tracked object " + index);
                 return;
             }
 
@@ -246,9 +246,9 @@ namespace Valve.VR
                         var pRenderModel = System.IntPtr.Zero;
 
                         var error = renderModels.LoadRenderModel_Async(renderModelNames[renderModelNameIndex], ref pRenderModel);
-                        //Debug.Log("renderModels.LoadRenderModel_Async(" + renderModelNames[renderModelNameIndex] + ": " + error.ToString());
+						//Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> renderModels.LoadRenderModel_Async(" + renderModelNames[renderModelNameIndex] + ": " + error.ToString());
 
-                        if (error == EVRRenderModelError.Loading)
+						if (error == EVRRenderModelError.Loading)
                         {
                             loading = true;
                         }
@@ -264,9 +264,9 @@ namespace Valve.VR
                                 var pDiffuseTexture = System.IntPtr.Zero;
 
                                 error = renderModels.LoadTexture_Async(renderModel.diffuseTextureId, ref pDiffuseTexture);
-                                //Debug.Log("renderModels.LoadRenderModel_Async(" + renderModelNames[renderModelNameIndex] + ": " + error.ToString());
+								//Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> renderModels.LoadRenderModel_Async(" + renderModelNames[renderModelNameIndex] + ": " + error.ToString());
 
-                                if (error == EVRRenderModelError.Loading)
+								if (error == EVRRenderModelError.Loading)
                                 {
                                     loading = true;
                                 }
@@ -306,7 +306,7 @@ namespace Valve.VR
                         return true;
                     }
 
-                    Debug.Log("[" + gameObject.name + "] Render model does not support components, falling back to single mesh.");
+                    Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> [" + gameObject.name + "] Render model does not support components, falling back to single mesh.");
                 }
 
                 if (!string.IsNullOrEmpty(renderModelName))
@@ -319,7 +319,7 @@ namespace Valve.VR
                             return false;
 
                         if (verbose)
-                            Debug.Log("Loading render model " + renderModelName);
+                            Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> Loading render model " + renderModelName);
 
                         model = LoadRenderModel(renderModels, renderModelName, renderModelName);
                         if (model == null)
@@ -464,7 +464,7 @@ namespace Valve.VR
                 }
                 else
                 {
-                    Debug.Log("Failed to load render model texture for render model " + renderModelName + ". Error: " + error.ToString());
+                    Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> Failed to load render model texture for render model " + renderModelName + ". Error: " + error.ToString());
                 }
             }
 
@@ -608,7 +608,7 @@ namespace Valve.VR
                 if (model == null || model.mesh == null)
                 {
                     if (verbose)
-                        Debug.Log("Loading render model " + componentRenderModelName);
+                        Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> Loading render model " + componentRenderModelName);
 
                     model = LoadRenderModel(renderModels, componentRenderModelName, renderModelName);
                     if (model == null)

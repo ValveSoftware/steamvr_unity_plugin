@@ -13,7 +13,7 @@ namespace Valve.VR
     {
         void Awake()
         {
-            Debug.Log("SteamVR_CameraMask is deprecated in Unity 5.4 - REMOVING");
+            Debug.Log("<b><color=#1b2838>[SteamVR]</color></b> SteamVR_CameraMask is deprecated in Unity 5.4 - REMOVING");
             DestroyImmediate(this);
         }
     }

@@ -54,8 +54,8 @@ namespace Valve.VR
             EVRInputError err = OpenVR.Input.GetActionHandle(fullPath.ToLower(), ref handle);
 
             if (err != EVRInputError.None)
-                Debug.LogError("GetActionHandle (" + fullPath + ") error: " + err.ToString());
-            //else Debug.Log("handle: " + handle);
+                Debug.LogError("<b><color=#1b2838>[SteamVR Input]</color></b> GetActionHandle (" + fullPath + ") error: " + err.ToString());
+            //else <b><color=#1b2838>[SteamVR Input]</color></b> andle: " + handle);
         }
         
         protected virtual void InitializeDictionaries(SteamVR_Input_Sources source)

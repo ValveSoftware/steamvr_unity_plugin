@@ -42,11 +42,11 @@ namespace Valve.VR
                         //UpdateAppKey(newFilePath, fileInfo.Name);
                         RemoveAppKey(newFilePath, fileInfo.Name);
 
-                        Debug.Log("[SteamVR] Copied (overwrote) SteamVR Input file at build path: " + newFilePath);
+                        Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Copied (overwrote) SteamVR Input file at build path: " + newFilePath);
                     }
                     else
                     {
-                        Debug.Log("[SteamVR] Skipped writing existing file at build path: " + newFilePath);
+                        Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Skipped writing existing file at build path: " + newFilePath);
                     }
                 }
                 else
@@ -55,7 +55,7 @@ namespace Valve.VR
                     //UpdateAppKey(newFilePath, fileInfo.Name);
                     RemoveAppKey(newFilePath, fileInfo.Name);
 
-                    Debug.Log("[SteamVR] Copied SteamVR Input file to build folder: " + newFilePath);
+                    Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Copied SteamVR Input file to build folder: " + newFilePath);
                 }
 
             }

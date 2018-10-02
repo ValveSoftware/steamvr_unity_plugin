@@ -236,7 +236,7 @@ namespace Valve.VR
             var texture = overlay.texture as RenderTexture;
             if (texture == null)
             {
-                Debug.LogError("Menu requires overlay texture to be a render texture.");
+                Debug.LogError("<b><color=#1b2838>[SteamVR]</color></b> Menu requires overlay texture to be a render texture.");
                 return;
             }
 

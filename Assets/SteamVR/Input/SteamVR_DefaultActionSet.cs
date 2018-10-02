@@ -61,7 +61,7 @@ namespace Valve.VR
             var actionSet = SteamVR_Input_References.instance.actionSetObjects.FirstOrDefault(matchAction => System.Text.RegularExpressions.Regex.IsMatch(matchAction.fullPath, regex, System.Text.RegularExpressions.RegexOptions.IgnoreCase));
 
             if (actionSet == null)
-                Debug.Log("[SteamVR Input] Could not find action set matching path: " + regex.Replace("\\", "").Replace(".+", "*"));
+                Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Could not find action set matching path: " + regex.Replace("\\", "").Replace(".+", "*"));
 
             return actionSet;
         }

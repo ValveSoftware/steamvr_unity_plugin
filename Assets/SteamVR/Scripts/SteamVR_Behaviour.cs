@@ -136,12 +136,12 @@ namespace Valve.VR
             }
             else
             {
-                Debug.LogError("Tried to async load: " + openVRDeviceName + ". Loaded: " + deviceName);
+                Debug.LogError("<b><color=#1b2838>[SteamVR]</color></b> Tried to async load: " + openVRDeviceName + ". Loaded: " + deviceName);
                 loadedOpenVRDeviceSuccess = true; //try anyway
             }
         }
 #else
-        private IEnumerator DoInitializeSteamVR(bool forceUnityVRToOpenVR = false)
+		private IEnumerator DoInitializeSteamVR(bool forceUnityVRToOpenVR = false)
         {
             XRSettings.LoadDeviceByName(openVRDeviceName);
             yield return null;

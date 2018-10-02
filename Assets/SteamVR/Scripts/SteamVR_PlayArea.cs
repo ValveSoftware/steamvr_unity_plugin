@@ -47,7 +47,7 @@ namespace Valve.VR
                 var chaperone = OpenVR.Chaperone;
                 bool success = (chaperone != null) && chaperone.GetPlayAreaRect(ref pRect);
                 if (!success)
-                    Debug.LogWarning("Failed to get Calibrated Play Area bounds!  Make sure you have tracking first, and that your space is calibrated.");
+                    Debug.LogWarning("<b><color=#1b2838>[SteamVR]</color></b> Failed to get Calibrated Play Area bounds!  Make sure you have tracking first, and that your space is calibrated.");
 
                 if (initOpenVR)
                     OpenVR.Shutdown();

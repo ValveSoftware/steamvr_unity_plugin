@@ -90,7 +90,7 @@ namespace Valve.VR
 
             if (tryNumber > 1)
             {
-                Debug.LogError("[SteamVR] There was an error in input generation. Aborting.");
+                Debug.LogError("<b><color=#1b2838>[SteamVR Input]</color></b> There was an error in input generation. Aborting.");
                 CancelGeneration();
             }
 
@@ -159,7 +159,7 @@ namespace Valve.VR
 
                 if (tryNumber > 1)
                 {
-                    Debug.LogError("[SteamVR] There was an error in input generation. Aborting.");
+                    Debug.LogError("<b><color=#1b2838>[SteamVR Input]</color></b> There was an error in input generation. Aborting.");
                     CancelGeneration();
                 }
 
@@ -223,7 +223,7 @@ namespace Valve.VR
             string actionsFullpath = Path.Combine(GetClassPath(), steamVRInputActionsClass + ".cs");
             string actionSetsFullpath = Path.Combine(GetClassPath(), steamVRInputActionSetsClass + ".cs");
 
-            Debug.LogFormat("[SteamVR Input] Created input script main classes: {0} and {1}", actionsFullpath, actionSetsFullpath);
+            Debug.LogFormat("<b><color=#1b2838>[SteamVR Input]</color></b> Created input script main classes: {0} and {1}", actionsFullpath, actionSetsFullpath);
 
             SetNextGenerationStep(GenerationSteps.GeneratingActions);
         }
@@ -339,11 +339,11 @@ namespace Valve.VR
                         EditorSceneManager.SaveOpenScenes();
                         processedScenes.Add(path);
 
-                        Debug.Log("[SteamVR Input] Assigned default actions in scene: " + path);
+                        Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Assigned default actions in scene: " + path);
                     }
                     else
                     {
-                        Debug.LogWarning("[SteamVR Input] Generation could not open scene at: " + path);
+                        Debug.LogWarning("<b><color=#1b2838>[SteamVR Input]</color></b> Generation could not open scene at: " + path);
                     }
                 }
             }
@@ -364,11 +364,11 @@ namespace Valve.VR
                                 AssignDefaultsInScene();
                                 EditorSceneManager.SaveOpenScenes();
 
-                                Debug.Log("[SteamVR Input] Assigned default actions in scene: " + scenePath);
+                                Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Assigned default actions in scene: " + scenePath);
                             }
                             else
                             {
-                                Debug.LogWarning("[SteamVR Input] Scene in build settings could not be opened: " + scenePath);
+                                Debug.LogWarning("<b><color=#1b2838>[SteamVR Input]</color></b> Scene in build settings could not be opened: " + scenePath);
                             }
                         }
                     }
@@ -378,7 +378,7 @@ namespace Valve.VR
             if (string.IsNullOrEmpty(activeScenePath) == false)
             {
                 EditorSceneManager.OpenScene(activeScenePath, OpenSceneMode.Single);
-                Debug.Log("[SteamVR Input] Returning editor to previous scene: " + activeScenePath);
+                Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Returning editor to previous scene: " + activeScenePath);
             }
         }
 
@@ -592,7 +592,7 @@ namespace Valve.VR
 
             SteamVR_Input_EditorWindow.ClearProgressBar();
 
-            Debug.Log("[SteamVR Input] Action generation complete!");
+            Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Action generation complete!");
         }
 
         private static void CreateActionsSubFolder()
@@ -639,7 +639,7 @@ namespace Valve.VR
             AssetDatabase.SaveAssets();
 
             string folderPath = GetSubFolderPath();
-            Debug.LogFormat("[SteamVR Input] Created {0} action set objects and {1} action objects in: {2}", SteamVR_Input.actionFile.action_sets.Count, SteamVR_Input.actionFile.actions.Count, folderPath);
+            Debug.LogFormat("<b><color=#1b2838>[SteamVR Input]</color></b> Created {0} action set objects and {1} action objects in: {2}", SteamVR_Input.actionFile.action_sets.Count, SteamVR_Input.actionFile.actions.Count, folderPath);
         }
 
         private static SteamVR_Action CreateScriptableAction(SteamVR_Input_ActionFile_Action action, SteamVR_ActionSet set)
@@ -847,7 +847,7 @@ namespace Valve.VR
                 AssetDatabase.DeleteAsset(assets[assetIndex]);
             }
 
-            Debug.LogFormat("[SteamVR] Deleted {0} actions at path: {1}", assets.Length, folderPath);
+            Debug.LogFormat("<b><color=#1b2838>[SteamVR Input]</color></b> Deleted {0} actions at path: {1}", assets.Length, folderPath);
         }
 
         private static void DeleteActionClass(string className)
@@ -856,11 +856,11 @@ namespace Valve.VR
             if (File.Exists(filePath) == true)
             {
                 AssetDatabase.DeleteAsset(filePath);
-                Debug.Log("[SteamVR] Deleted: " + filePath);
+                Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Deleted: " + filePath);
             }
             else
             {
-                Debug.Log("[SteamVR] No file found at: " + filePath);
+                Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> No file found at: " + filePath);
             }
         }
 
@@ -941,7 +941,7 @@ namespace Valve.VR
 
             // Build the output file name.
             string fullSourceFilePath = fullPath;
-            //Debug.Log("[SteamVR] Writing class to: " + fullSourceFilePath);
+            //Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Writing class to: " + fullSourceFilePath);
 
             string path = GetClassPath();
             string[] parts = path.Split('/');
@@ -952,7 +952,7 @@ namespace Valve.VR
                 if (Directory.Exists(directoryPath) == false)
                 {
                     Directory.CreateDirectory(directoryPath);
-                    //Debug.Log("[SteamVR] Created directory: " + directoryPath);
+                    //Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Created directory: " + directoryPath);
                 }
             }
 
@@ -973,7 +973,7 @@ namespace Valve.VR
                 tw.Close();
             }
 
-            //Debug.Log("[SteamVR] Complete! Input class at: " + fullSourceFilePath);
+            //Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> Complete! Input class at: " + fullSourceFilePath);
         }
 
         private const string getActionMethodParamName = "path";
@@ -1302,7 +1302,7 @@ namespace Valve.VR
         private static CodeMemberField CreateField(CodeTypeDeclaration inputClass, string fieldName, Type fieldType, bool isStatic)
         {
             if (fieldType == null)
-                Debug.Log("null fieldType");
+                Debug.Log("<b><color=#1b2838>[SteamVR Input]</color></b> null fieldType");
 
             CodeMemberField field = new CodeMemberField();
             field.Name = fieldName;
