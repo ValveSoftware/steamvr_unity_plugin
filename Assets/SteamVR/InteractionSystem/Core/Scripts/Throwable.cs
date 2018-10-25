@@ -32,6 +32,10 @@ namespace Valve.VR.InteractionSystem
         public float releaseVelocityTimeOffset = -0.011f;
 
         public float scaleReleaseVelocity = 1.1f;
+		[Tooltip("The release velocity magnitude representing the end of the scale release velocity curve. (-1 to disable)")]
+        public float scaleReleaseVelocityThreshold = -1.0f;
+        [Tooltip("Use this curve to ease into the scaled release velocity based on the magnitude of the measured release velocity. This allows greater differentiation between a drop, toss, and throw.")]
+        public AnimationCurve scaleReleaseVelocityCurve = AnimationCurve.EaseInOut(0.0f, 0.1f, 1.0f, 1.0f);
 
 		[Tooltip( "When detaching the object, should it return to its original parent?" )]
 		public bool restoreOriginalParent = false;
@@ -208,7 +212,15 @@ namespace Valve.VR.InteractionSystem
             }
 
             if (releaseVelocityStyle != ReleaseStyle.NoChange)
-                velocity *= scaleReleaseVelocity;
+            {
+                float scaleFactor = 1.0f;
+                if (scaleReleaseVelocityThreshold > 0)
+                {
+                    scaleFactor = Mathf.Clamp01(scaleReleaseVelocityCurve.Evaluate(velocity.magnitude / scaleReleaseVelocityThreshold));
+                }
+
+                velocity *= scaleFactor * scaleReleaseVelocity;
+            }
         }
 
         //-------------------------------------------------
