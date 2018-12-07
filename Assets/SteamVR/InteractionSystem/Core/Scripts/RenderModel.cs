@@ -115,6 +115,12 @@ namespace Valve.VR.InteractionSystem
             renderModelLoadedAction.enabled = false;
         }
 
+        protected void OnDestroy()
+        {
+            handSkeleton.skeletonAction.RemoveOnActiveChangeListener(OnSkeletonActiveChange, handSkeleton.inputSource);
+            DestroyHand();
+        }
+
         public virtual void SetInputSource(SteamVR_Input_Sources newInputSource)
         {
             inputSource = newInputSource;
