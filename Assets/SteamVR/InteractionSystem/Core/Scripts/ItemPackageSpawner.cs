@@ -166,6 +166,7 @@ namespace Valve.VR.InteractionSystem
 				if ( takeBackItem && !requireTriggerPressToReturn ) // if we want to take back matching items and aren't waiting for a trigger press
 				{
 					TakeBackItem( hand );
+					return;
 				}
 			}
 
