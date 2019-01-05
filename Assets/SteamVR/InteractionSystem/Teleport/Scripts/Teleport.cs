@@ -7,16 +7,17 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using UnityEngine.AI;
 
 namespace Valve.VR.InteractionSystem
 {
 	//-------------------------------------------------------------------------
 	public class Teleport : MonoBehaviour
-    {
-        [SteamVR_DefaultAction("Teleport", "default")]
-        public SteamVR_Action_Boolean teleportAction;
+	{
+		[SteamVR_DefaultAction( "Teleport", "default" )]
+		public SteamVR_Action_Boolean teleportAction;
 
-        public LayerMask traceLayerMask;
+		public LayerMask traceLayerMask;
 		public LayerMask floorFixupTraceLayerMask;
 		public float floorFixupMaximumTraceDistance = 1.0f;
 		public Material areaVisibleMaterial;
@@ -38,6 +39,36 @@ namespace Valve.VR.InteractionSystem
 		public float meshFadeTime = 0.2f;
 
 		public float arcDistance = 10.0f;
+
+		[Header( "NavMesh Teleporting" )]
+
+		[SerializeField]
+		[Tooltip( "Allow teleportation to any reachable location on the NavMesh (slower performance compared to point/area teleport)" )]
+		private bool allowTeleportOnNavMesh = false;
+		public bool AllowTeleportOnNavMesh
+		{
+			get { return this.allowTeleportOnNavMesh; }
+			set
+			{
+				this.allowTeleportOnNavMesh = value;
+				if ( value )
+				{
+					InitializeNavMeshTeleport();
+				}
+			}
+		}
+
+		[Tooltip( "Maximum distance (meters) of calculated NavMesh path to allow. Player can't teleport if path to destination is longer than this." )]
+		[Range( 1, 50 )]
+		public int maxNavMeshPathDistance = 15; // TIP: Adjust dynamically based on mode (e.g., 10 for Walking, 20 for Sprinting)
+		[Tooltip( "Produce additional log warnings to help debug NavMesh path calculation." )]
+		public bool debugNavMeshPath = false;
+
+		// These are public so Developers can alter them if needed, but we don't need them exposed to Designers
+		[HideInInspector]
+		public NavMeshPath calculatedPath = null;
+		[HideInInspector]
+		public NavMeshQueryFilter navMeshQueryFilter;
 
 		[Header( "Effects" )]
 		public Transform onActivateObjectTransform;
@@ -76,6 +107,7 @@ namespace Valve.VR.InteractionSystem
 		private bool visible = false;
 
 		private TeleportMarkerBase[] teleportMarkers;
+		private TeleportMarkerBase navmeshTeleportMarker = null;
 		private TeleportMarkerBase pointedAtTeleportMarker;
 		private TeleportMarkerBase teleportingToMarker;
 		private Vector3 pointedAtPosition;
@@ -172,6 +204,12 @@ namespace Valve.VR.InteractionSystem
 		{
 			teleportMarkers = GameObject.FindObjectsOfType<TeleportMarkerBase>();
 
+			// Do this AFTER finding all teleport markers, since we don't want the NavMesh marker in teleportMarkers
+			if ( allowTeleportOnNavMesh )
+			{
+				InitializeNavMeshTeleport();
+			}
+
 			HidePointer();
 
 			player = InteractionSystem.Player.instance;
@@ -204,6 +242,12 @@ namespace Valve.VR.InteractionSystem
 			HidePointer();
 		}
 
+		//-------------------------------------------------
+		private void OnDestroy()
+		{
+			Destroy( navmeshTeleportMarker );
+			navmeshTeleportMarker = null;
+		}
 
 		//-------------------------------------------------
 		private void CheckForSpawnPoint()
@@ -227,6 +271,22 @@ namespace Valve.VR.InteractionSystem
 			if ( pointerHand != null )
 			{
 				HidePointer();
+			}
+		}
+
+
+		//-------------------------------------------------
+		private void InitializeNavMeshTeleport()
+		{
+			if ( navmeshTeleportMarker == null )
+			{
+				// We use this marker when we don't have a TeleportPoint or TeleportArea providing one
+				navmeshTeleportMarker = Instantiate<NavMeshTeleportMarker>( Resources.Load<NavMeshTeleportMarker>( "NavMeshTeleportMarker" ) );
+				navmeshTeleportMarker.gameObject.SetActive( false );
+
+				calculatedPath = new NavMeshPath();
+				navMeshQueryFilter = new NavMeshQueryFilter();
+				navMeshQueryFilter.areaMask = NavMesh.AllAreas; // Default to all, but users can change this since it is public
 			}
 		}
 
@@ -321,6 +381,9 @@ namespace Valve.VR.InteractionSystem
 
 			TeleportMarkerBase hitTeleportMarker = null;
 
+			bool hitReachableOnNavMesh = false;
+			navmeshTeleportMarker?.gameObject.SetActive( false ); // Expected to be null when NavMesh teleport is not enabled
+			
 			//Check pointer angle
 			float dotUp = Vector3.Dot( pointerDir, Vector3.up );
 			float dotForward = Vector3.Dot( pointerDir, player.hmdTransform.forward );
@@ -337,6 +400,41 @@ namespace Valve.VR.InteractionSystem
 			{
 				hitSomething = true;
 				hitTeleportMarker = hitInfo.collider.GetComponentInParent<TeleportMarkerBase>();
+
+				// Skip the NavMesh path calculations if we already hit a TeleportMarker (they have priority) or the pointer is at a bad angle
+				if ( allowTeleportOnNavMesh && hitTeleportMarker == null && !pointerAtBadAngle )
+				{
+					// Calculate whether there is a path to reach this point on the NavMesh, within the max distance specified
+					if ( NavMesh.CalculatePath( player.feetPositionGuess, hitInfo.point, navMeshQueryFilter, calculatedPath ) )
+					{
+						if ( calculatedPath.status == NavMeshPathStatus.PathComplete )
+						{
+							float totalPathDistance = 0.0f;
+							for ( int i = 0; i < calculatedPath.corners.Length - 1; i++ )
+							{
+								totalPathDistance += Vector3.Distance( calculatedPath.corners[i], calculatedPath.corners[i + 1] );
+							}
+							hitReachableOnNavMesh = ( (int)totalPathDistance <= maxNavMeshPathDistance );
+							if ( (int)totalPathDistance > maxNavMeshPathDistance )
+							{
+								if ( debugNavMeshPath )
+									Debug.LogWarning( $"Teleport: NavMesh calculated path length of {totalPathDistance}m exceeds max distance of {maxNavMeshPathDistance}m." );
+							}
+						}
+						else
+						{
+							// Status is PathPartial (PathInvalid would not have entered this code block)
+							if( debugNavMeshPath )
+								Debug.LogWarning( $"Teleport: NavMesh calculated only a partial path to destination." );
+						}
+					}
+
+					if ( hitReachableOnNavMesh )
+					{
+						// Adjust to the final waypoint of the calculated path in case there is a slight discrepancy that could move us off of the NavMesh
+						navmeshTeleportMarker.transform.position = calculatedPath.corners[calculatedPath.corners.Length-1];
+					}
+				}
 			}
 
 			if ( pointerAtBadAngle )
@@ -411,6 +509,21 @@ namespace Valve.VR.InteractionSystem
 				}
 
 				pointerEnd = hitInfo.point;
+			}
+			else if ( allowTeleportOnNavMesh && hitReachableOnNavMesh )
+			{
+				// Teleport destination is reachable on the NavMesh
+				teleportArc.SetColor( pointerValidColor );
+				pointerLineRenderer.startColor = pointerValidColor;
+				pointerLineRenderer.endColor = pointerValidColor;
+				navmeshTeleportMarker.gameObject.SetActive( true );
+				offsetReticleTransform.gameObject.SetActive( true );
+				destinationReticleTransform.gameObject.SetActive( false );
+				invalidReticleTransform.gameObject.SetActive( false );
+
+				pointedAtTeleportMarker = navmeshTeleportMarker;
+				pointedAtPosition = navmeshTeleportMarker.transform.position;
+				pointerEnd = navmeshTeleportMarker.transform.position;
 			}
 			else //Hit neither
 			{
@@ -657,6 +770,7 @@ namespace Valve.VR.InteractionSystem
 			destinationReticleTransform.gameObject.SetActive( false );
 			invalidReticleTransform.gameObject.SetActive( false );
 			offsetReticleTransform.gameObject.SetActive( false );
+			navmeshTeleportMarker?.gameObject.SetActive( false );  // Expected to be null when NavMesh teleport is not enabled 
 
 			if ( playAreaPreviewTransform != null )
 			{
@@ -954,9 +1068,9 @@ namespace Valve.VR.InteractionSystem
 		public void CancelTeleportHint()
 		{
 			if ( hintCoroutine != null )
-            {
-                ControllerButtonHints.HideTextHint(player.leftHand, teleportAction);
-                ControllerButtonHints.HideTextHint(player.rightHand, teleportAction);
+			{
+				ControllerButtonHints.HideTextHint( player.leftHand, teleportAction );
+				ControllerButtonHints.HideTextHint( player.rightHand, teleportAction );
 
 				StopCoroutine( hintCoroutine );
 				hintCoroutine = null;
@@ -1089,11 +1203,11 @@ namespace Valve.VR.InteractionSystem
 					return Input.GetKeyUp( KeyCode.T );
 				}
 				else
-                {
-                    return teleportAction.GetStateUp(hand.handType);
+				{
+					return teleportAction.GetStateUp( hand.handType );
 
-                    //return hand.controller.GetPressUp( SteamVR_Controller.ButtonMask.Touchpad );
-                }
+					//return hand.controller.GetPressUp( SteamVR_Controller.ButtonMask.Touchpad );
+				}
 			}
 
 			return false;
@@ -1109,10 +1223,10 @@ namespace Valve.VR.InteractionSystem
 					return Input.GetKey( KeyCode.T );
 				}
 				else
-                {
-                    return teleportAction.GetState(hand.handType);
+				{
+					return teleportAction.GetState( hand.handType );
 
-                    //return hand.controller.GetPress( SteamVR_Controller.ButtonMask.Touchpad );
+					//return hand.controller.GetPress( SteamVR_Controller.ButtonMask.Touchpad );
 				}
 			}
 
@@ -1130,10 +1244,10 @@ namespace Valve.VR.InteractionSystem
 					return Input.GetKeyDown( KeyCode.T );
 				}
 				else
-                {
-                    return teleportAction.GetStateDown(hand.handType);
+				{
+					return teleportAction.GetStateDown( hand.handType );
 
-                    //return hand.controller.GetPressDown( SteamVR_Controller.ButtonMask.Touchpad );
+					//return hand.controller.GetPressDown( SteamVR_Controller.ButtonMask.Touchpad );
 				}
 			}
 
