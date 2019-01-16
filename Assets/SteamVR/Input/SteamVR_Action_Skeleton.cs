@@ -91,12 +91,12 @@ namespace Valve.VR
             EVRInputError err = OpenVR.Input.GetSkeletalActionData(handle, ref tempSkeletonActionData, skeletonActionData_size, SteamVR_Input_Source.GetHandle(inputSource));
             if (err != EVRInputError.None)
             {
-                Debug.LogWarning("GetSkeletalActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString()); //todo: this should be an error
+                Debug.LogError("GetSkeletalActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString()); 
                 active[inputSource] = false;
                 return;
             }
 
-            active[inputSource] &= tempSkeletonActionData.bActive; //anding from the pose active state
+            active[inputSource] = active[inputSource] && tempSkeletonActionData.bActive; //anding from the pose active state
             activeOrigin[inputSource] = tempSkeletonActionData.activeOrigin;
 
             if (active[inputSource])
@@ -150,6 +150,12 @@ namespace Valve.VR
 
             if (changed[inputSource])
                 lastChanged[inputSource] = Time.time;
+
+            if (skipStateAndEventUpdates == false)
+            {
+                lastRecordedActive[inputSource] = active[inputSource];
+                lastRecordedPoseActionData[inputSource] = poseActionData[inputSource];
+            }
         }
 
         /// <summary>

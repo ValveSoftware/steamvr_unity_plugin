@@ -59,7 +59,7 @@ namespace Valve.VR.InteractionSystem.Sample
             GrabTypes startingGrabType = hand.GetGrabStarting();
             bool isGrabEnding = hand.IsGrabEnding(this.gameObject);
 
-            if (startingGrabType != GrabTypes.None)
+            if (interactable.attachedToHand == null && startingGrabType != GrabTypes.None)
             {
                 // Save our position/rotation so that we can restore it when we detach
                 oldPosition = transform.position;

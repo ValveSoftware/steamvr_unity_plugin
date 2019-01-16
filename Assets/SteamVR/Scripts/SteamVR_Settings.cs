@@ -37,10 +37,10 @@ namespace Valve.VR
 #endif
                 }
 
-                if (string.IsNullOrEmpty(_instance.appKey))
+                if (string.IsNullOrEmpty(_instance.editorAppKey))
                 {
-                    _instance.appKey = SteamVR.GenerateAppKey();
-                    Debug.Log("[SteamVR] Generated you a temporary app key of: " + _instance.appKey + ". Please change this to your real app key before publishing to steam. This can be changed in Assets/SteamVR/Resources/SteamVR_Settings");
+                    _instance.editorAppKey = SteamVR.GenerateAppKey();
+                    Debug.Log("[SteamVR] Generated you an editor app key of: " + _instance.editorAppKey + ". This lets the editor tell SteamVR what project this is. Has no effect on builds. This can be changed in Assets/SteamVR/Resources/SteamVR_Settings");
 #if UNITY_EDITOR
                     UnityEditor.EditorUtility.SetDirty(_instance);
                     UnityEditor.AssetDatabase.SaveAssets();
@@ -64,8 +64,8 @@ namespace Valve.VR
 
         public bool activateFirstActionSetOnStart = true;
 
-        [Tooltip("App keys are generally \"steam.app.appid\". If you don't have a steamworks app id yet you can use a generated id.")]
-        public string appKey;
+        [Tooltip("This is the app key the unity editor will use to identify your application. (can be \"steam.app.[appid]\" to persist bindings between editor steam)")]
+        public string editorAppKey;
 
         public bool IsInputUpdateMode(SteamVR_UpdateModes tocheck)
         {

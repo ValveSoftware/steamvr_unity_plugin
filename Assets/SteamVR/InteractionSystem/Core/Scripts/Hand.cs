@@ -93,6 +93,7 @@ namespace Valve.VR.InteractionSystem
             public GameObject attachedObject;
             public Interactable interactable;
             public Rigidbody attachedRigidbody;
+            public CollisionDetectionMode collisionDetectionMode;
             public bool attachedRigidbodyWasKinematic;
             public bool attachedRigidbodyUsedGravity;
             public GameObject originalParent;
@@ -389,14 +390,34 @@ namespace Valve.VR.InteractionSystem
                     SetTemporarySkeletonRangeOfMotion(attachedObject.interactable.setRangeOfMotionOnPickup);
             }
 
+            attachedObject.originalParent = objectToAttach.transform.parent != null ? objectToAttach.transform.parent.gameObject : null;
+
             attachedObject.attachedRigidbody = objectToAttach.GetComponent<Rigidbody>();
             if (attachedObject.attachedRigidbody != null)
             {
-                attachedObject.attachedRigidbodyWasKinematic = attachedObject.attachedRigidbody.isKinematic;
-                attachedObject.attachedRigidbodyUsedGravity = attachedObject.attachedRigidbody.useGravity;
+                if (attachedObject.interactable.attachedToHand != null) //already attached to another hand
+                {
+                    //if it was attached to another hand, get the flags from that hand
+                    
+                    for (int attachedIndex = 0; attachedIndex < attachedObject.interactable.attachedToHand.attachedObjects.Count; attachedIndex++)
+                    {
+                        AttachedObject attachedObjectInList = attachedObject.interactable.attachedToHand.attachedObjects[attachedIndex];
+                        if (attachedObjectInList.interactable == attachedObject.interactable)
+                        {
+                            attachedObject.attachedRigidbodyWasKinematic = attachedObjectInList.attachedRigidbodyWasKinematic;
+                            attachedObject.attachedRigidbodyUsedGravity = attachedObjectInList.attachedRigidbodyUsedGravity;
+                            attachedObject.originalParent = attachedObjectInList.originalParent;
+                        }
+                    }
+                }
+                else
+                {
+                    attachedObject.attachedRigidbodyWasKinematic = attachedObject.attachedRigidbody.isKinematic;
+                    attachedObject.attachedRigidbodyUsedGravity = attachedObject.attachedRigidbody.useGravity;
+                }
             }
+
             attachedObject.grabbedWithType = grabbedWithType;
-            attachedObject.originalParent = objectToAttach.transform.parent != null ? objectToAttach.transform.parent.gameObject : null;
 
             if (attachedObject.HasAttachFlag(AttachmentFlags.ParentToHand))
             {
@@ -461,6 +482,10 @@ namespace Valve.VR.InteractionSystem
             {
                 if (attachedObject.attachedRigidbody != null)
                 {
+                    attachedObject.collisionDetectionMode = attachedObject.attachedRigidbody.collisionDetectionMode;
+                    if (attachedObject.collisionDetectionMode == CollisionDetectionMode.Continuous)
+                        attachedObject.attachedRigidbody.collisionDetectionMode = CollisionDetectionMode.Discrete;
+
                     attachedObject.attachedRigidbody.isKinematic = true;
                 }
             }
@@ -469,7 +494,6 @@ namespace Valve.VR.InteractionSystem
             {
                 if (attachedObject.attachedRigidbody != null)
                 {
-                    attachedObject.attachedRigidbodyUsedGravity = attachedObject.attachedRigidbody.useGravity;
                     attachedObject.attachedRigidbody.useGravity = false;
                 }
             }
@@ -546,7 +570,10 @@ namespace Valve.VR.InteractionSystem
                 if (attachedObjects[index].HasAttachFlag(AttachmentFlags.TurnOnKinematic))
                 {
                     if (attachedObjects[index].attachedRigidbody != null)
+                    {
                         attachedObjects[index].attachedRigidbody.isKinematic = attachedObjects[index].attachedRigidbodyWasKinematic;
+                        attachedObjects[index].attachedRigidbody.collisionDetectionMode = attachedObjects[index].collisionDetectionMode;
+                    }
                 }
 
                 if (attachedObjects[index].HasAttachFlag(AttachmentFlags.TurnOffGravity))

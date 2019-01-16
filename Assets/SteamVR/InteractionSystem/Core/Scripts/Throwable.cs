@@ -212,36 +212,37 @@ namespace Valve.VR.InteractionSystem
         }
 
         //-------------------------------------------------
-        protected virtual void HandAttachedUpdate( Hand hand )
-		{
-			if ( hand.IsGrabEnding(this.gameObject) )
-			{
+        protected virtual void HandAttachedUpdate(Hand hand)
+        {
+            if (attachEaseIn)
+            {
+                float t = Util.RemapNumberClamped(Time.time, attachTime, attachTime + snapAttachEaseInTime, 0.0f, 1.0f);
+                if (t < 1.0f)
+                {
+                    t = snapAttachEaseInCurve.Evaluate(t);
+                    transform.position = Vector3.Lerp(attachPosition, attachEaseInTransform.position, t);
+                    transform.rotation = Quaternion.Lerp(attachRotation, attachEaseInTransform.rotation, t);
+                }
+                else if (!snapAttachEaseInCompleted)
+                {
+                    gameObject.SendMessage("OnThrowableAttachEaseInCompleted", hand, SendMessageOptions.DontRequireReceiver);
+                    snapAttachEaseInCompleted = true;
+                }
+            }
 
-				// Detach ourselves late in the frame.
-				// This is so that any vehicles the player is attached to
-				// have a chance to finish updating themselves.
-				// If we detach now, our position could be behind what it
-				// will be at the end of the frame, and the object may appear
-				// to teleport behind the hand when the player releases it.
-				StartCoroutine( LateDetach( hand ) );
-			}
+            if (hand.IsGrabEnding(this.gameObject))
+            {
+                hand.DetachObject(gameObject, restoreOriginalParent);
 
-			if ( attachEaseIn )
-			{
-				float t = Util.RemapNumberClamped( Time.time, attachTime, attachTime + snapAttachEaseInTime, 0.0f, 1.0f );
-				if ( t < 1.0f )
-				{
-					t = snapAttachEaseInCurve.Evaluate( t );
-					transform.position = Vector3.Lerp( attachPosition, attachEaseInTransform.position, t );
-					transform.rotation = Quaternion.Lerp( attachRotation, attachEaseInTransform.rotation, t );
-				}
-				else if ( !snapAttachEaseInCompleted )
-				{
-					gameObject.SendMessage( "OnThrowableAttachEaseInCompleted", hand, SendMessageOptions.DontRequireReceiver );
-					snapAttachEaseInCompleted = true;
-				}
-			}
-		}
+                // Uncomment to detach ourselves late in the frame.
+                // This is so that any vehicles the player is attached to
+                // have a chance to finish updating themselves.
+                // If we detach now, our position could be behind what it
+                // will be at the end of the frame, and the object may appear
+                // to teleport behind the hand when the player releases it.
+                //StartCoroutine( LateDetach( hand ) );
+            }
+        }
 
 
         //-------------------------------------------------

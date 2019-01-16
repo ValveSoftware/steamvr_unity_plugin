@@ -39,7 +39,8 @@ namespace Valve.VR
 
                         File.Copy(file, newFilePath);
 
-                        UpdateAppKey(newFilePath, fileInfo.Name);
+                        //UpdateAppKey(newFilePath, fileInfo.Name);
+                        RemoveAppKey(newFilePath, fileInfo.Name);
 
                         Debug.Log("[SteamVR] Copied (overwrote) SteamVR Input file at build path: " + newFilePath);
                     }
@@ -51,7 +52,8 @@ namespace Valve.VR
                 else
                 {
                     File.Copy(file, newFilePath);
-                    UpdateAppKey(newFilePath, fileInfo.Name);
+                    //UpdateAppKey(newFilePath, fileInfo.Name);
+                    RemoveAppKey(newFilePath, fileInfo.Name);
 
                     Debug.Log("[SteamVR] Copied SteamVR Input file to build folder: " + newFilePath);
                 }
@@ -82,14 +84,49 @@ namespace Valve.VR
 
                 int stringLength = stringEnd - stringStart;
 
-                string appKey = jsonText.Substring(stringStart, stringLength);
+                string currentAppKey = jsonText.Substring(stringStart, stringLength);
 
-                if (string.Equals(appKey, SteamVR_Settings.instance.appKey, System.StringComparison.CurrentCultureIgnoreCase) == false)
+                if (string.Equals(currentAppKey, SteamVR_Settings.instance.editorAppKey, System.StringComparison.CurrentCultureIgnoreCase) == false)
                 {
-                    jsonText = jsonText.Replace(appKey, SteamVR_Settings.instance.appKey);
+                    jsonText = jsonText.Replace(currentAppKey, SteamVR_Settings.instance.editorAppKey);
+
+                    FileInfo file = new FileInfo(newFilePath);
+                    file.IsReadOnly = false;
 
                     File.WriteAllText(newFilePath, jsonText);
                 }
+            }
+        }
+
+        private const string findString_appKeyStart = "\"app_key\"";
+        private const string findString_appKeyEnd = "\",";
+        private static void RemoveAppKey(string newFilePath, string executableName)
+        {
+            if (File.Exists(newFilePath))
+            {
+                string jsonText = System.IO.File.ReadAllText(newFilePath);
+
+                string findString = "\"app_key\"";
+                int stringStart = jsonText.IndexOf(findString);
+
+                if (stringStart == -1)
+                    return; //no app key
+
+                int stringEnd = jsonText.IndexOf("\",", stringStart);
+
+                if (stringEnd == -1)
+                    return; //no end?
+
+                stringEnd += findString_appKeyEnd.Length;
+
+                int stringLength = stringEnd - stringStart;
+
+                string newJsonText = jsonText.Remove(stringStart, stringLength);
+
+                FileInfo file = new FileInfo(newFilePath);
+                file.IsReadOnly = false;
+
+                File.WriteAllText(newFilePath, newJsonText);
             }
         }
     }
