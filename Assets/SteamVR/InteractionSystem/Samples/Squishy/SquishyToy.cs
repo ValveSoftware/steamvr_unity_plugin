@@ -12,12 +12,10 @@ namespace Valve.VR.InteractionSystem
         public new SkinnedMeshRenderer renderer;
 
         public bool affectMaterial = true;
-
-        [SteamVR_DefaultAction("Squeeze")]
-        public SteamVR_Action_Single gripSqueeze;
-
-        [SteamVR_DefaultAction("Squeeze")]
-        public SteamVR_Action_Single pinchSqueeze;
+        
+        public SteamVR_Action_Single gripSqueeze = SteamVR_Input.GetAction<SteamVR_Action_Single>("Squeeze");
+        
+        public SteamVR_Action_Single pinchSqueeze = SteamVR_Input.GetAction<SteamVR_Action_Single>("Squeeze");
 
 
         private new Rigidbody rigidbody;

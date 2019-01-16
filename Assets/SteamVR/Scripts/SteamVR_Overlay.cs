@@ -46,7 +46,7 @@ namespace Valve.VR
                 var error = overlay.CreateOverlay(key, gameObject.name, ref handle);
                 if (error != EVROverlayError.None)
                 {
-                    Debug.Log(overlay.GetOverlayErrorNameFromEnum(error));
+                    Debug.Log("<b>[SteamVR]</b> " + overlay.GetOverlayErrorNameFromEnum(error));
                     enabled = false;
                     return;
                 }

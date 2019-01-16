@@ -113,29 +113,11 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/use"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/left/input/trigger"
-            },
-            {
-               "inputs" : {
-                  "click" : {
                      "output" : "/actions/default/in/interactui"
                   }
                },
                "mode" : "button",
                "path" : "/user/hand/left/input/trigger"
-            },
-            {
-               "inputs" : {
-                  "position" : {
-                     "output" : "/actions/default/in/move"
-                  }
-               },
-               "mode" : "trackpad",
-               "path" : "/user/hand/left/input/trackpad"
             },
             {
                "inputs" : {
@@ -167,29 +149,11 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/use"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/right/input/trigger"
-            },
-            {
-               "inputs" : {
-                  "click" : {
                      "output" : "/actions/default/in/interactui"
                   }
                },
                "mode" : "button",
                "path" : "/user/hand/right/input/trigger"
-            },
-            {
-               "inputs" : {
-                  "position" : {
-                     "output" : "/actions/default/in/move"
-                  }
-               },
-               "mode" : "trackpad",
-               "path" : "/user/hand/right/input/trackpad"
             },
             {
                "inputs" : {

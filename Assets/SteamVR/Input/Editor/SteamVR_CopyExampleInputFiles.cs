@@ -55,11 +55,11 @@ namespace Valve.VR
                         try
                         {
                             File.Copy(file, newPath, false);
-                            Debug.Log("[SteamVR Input] Copied example input JSON to path: " + newPath);
+                            Debug.Log("<b>[SteamVR]</b> Copied example input JSON to path: " + newPath);
                         }
                         catch
                         {
-                            Debug.LogError("[SteamVR Input] Could not copy file: " + file + " to path: " + newPath);
+                            Debug.LogError("<b>[SteamVR]</b> Could not copy file: " + file + " to path: " + newPath);
                         }
                     }
 

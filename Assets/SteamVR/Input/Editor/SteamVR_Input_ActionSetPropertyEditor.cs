@@ -60,6 +60,14 @@ namespace Valve.VR
         // Draw the property inside the given rect
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
+            if (SteamVR_Input.actions == null || SteamVR_Input.actions.Length == 0)
+            {
+                EditorGUI.BeginProperty(position, label, property);
+                EditorGUI.LabelField(position, "Please generate SteamVR Input actions");
+                EditorGUI.EndProperty();
+                return;
+            }
+
             if (enumItems == null || enumItems.Length == 0)
             {
                 Awake();
@@ -69,18 +77,18 @@ namespace Valve.VR
             // prefab override logic works on the entire property.
             EditorGUI.BeginProperty(position, label, property);
 
+            SerializedProperty actionPathProperty = property.FindPropertyRelative("actionSetPath");
 
-            if (property.objectReferenceValue != null)
+            if (actionPathProperty != null)
             {
-                SteamVR_ActionSet actionSet = (SteamVR_ActionSet)property.objectReferenceValue;
-
-                if (string.IsNullOrEmpty(actionSet.fullPath) == false)
+                string currentPath = actionPathProperty.stringValue;
+                if (string.IsNullOrEmpty(currentPath) == false)
                 {
                     for (int actionSetIndex = 0; actionSetIndex < actionSets.Length; actionSetIndex++)
                     {
-                        if (actionSets[actionSetIndex].fullPath == actionSet.fullPath)
+                        if (actionSets[actionSetIndex].fullPath == currentPath)
                         {
-                            selectedIndex = actionSetIndex + 1;
+                            selectedIndex = actionSetIndex + 1; // account for none option
                             break;
                         }
                     }
@@ -103,15 +111,7 @@ namespace Valve.VR
             objectRect.x = fieldPosition.x + fieldPosition.width + 15;
             objectRect.width = 10;
 
-            if (property.objectReferenceValue != null)
-            {
-                bool selectObject = EditorGUI.Foldout(objectRect, false, GUIContent.none);
-                if (selectObject)
-                {
-                    Selection.activeObject = property.objectReferenceValue;
-                }
-            }
-
+            bool showInputWindow = false;
 
             int wasSelected = selectedIndex;
             selectedIndex = EditorGUI.Popup(fieldPosition, selectedIndex, enumItems);
@@ -120,20 +120,28 @@ namespace Valve.VR
                 if (selectedIndex == noneIndex || selectedIndex == notInitializedIndex)
                 {
                     selectedIndex = noneIndex;
-                    property.objectReferenceValue = null;
+
+                    actionPathProperty.stringValue = "";
                 }
                 else if (selectedIndex == addIndex)
                 {
                     selectedIndex = wasSelected; // don't change the index
-                    SteamVR_Input_EditorWindow.ShowWindow(); //show the input window so they can add one
+                    showInputWindow = true;
                 }
                 else
                 {
-                    property.objectReferenceValue = actionSets[selectedIndex - 1];
+                    actionPathProperty.stringValue = actionSets[selectedIndex - 1].fullPath;
+
+                    //property.objectReferenceValue = actionSets[selectedIndex - 1];
                 }
+
+                property.serializedObject.ApplyModifiedProperties();
             }
 
             EditorGUI.EndProperty();
+
+            if (showInputWindow)
+                SteamVR_Input_EditorWindow.ShowWindow(); //show the input window so they can add a new actionset
         }
     }
 }

@@ -37,20 +37,17 @@ namespace Valve.VR
         {
             if (size == Size.Calibrated)
             {
-                var initOpenVR = (!SteamVR.active && !SteamVR.usingNativeSupport);
-                if (initOpenVR)
-                {
-                    var error = EVRInitError.None;
-                    OpenVR.Init(ref error, EVRApplicationType.VRApplication_Utility);
-                }
+                bool temporarySession = false;
+                if (Application.isEditor && Application.isPlaying == false)
+                    temporarySession = SteamVR.InitializeTemporarySession();
 
                 var chaperone = OpenVR.Chaperone;
                 bool success = (chaperone != null) && chaperone.GetPlayAreaRect(ref pRect);
                 if (!success)
-                    Debug.LogWarning("Failed to get Calibrated Play Area bounds!  Make sure you have tracking first, and that your space is calibrated.");
+                    Debug.LogWarning("<b>[SteamVR]</b> Failed to get Calibrated Play Area bounds!  Make sure you have tracking first, and that your space is calibrated.");
 
-                if (initOpenVR)
-                    OpenVR.Shutdown();
+                if (temporarySession)
+                    SteamVR.ExitTemporarySession();
 
                 return success;
             }

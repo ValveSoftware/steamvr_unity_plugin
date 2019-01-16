@@ -18,8 +18,8 @@ namespace Valve.VR
 
         private static Type enumType = typeof(SteamVR_Input_Sources);
         private static Type descriptionType = typeof(DescriptionAttribute);
-
-        private static SteamVR_Input_Sources[] updateSources = new SteamVR_Input_Sources[] { SteamVR_Input_Sources.LeftHand, SteamVR_Input_Sources.RightHand, SteamVR_Input_Sources.Any };
+        
+        private static SteamVR_Input_Sources[] allSources;
 
         public static ulong GetHandle(SteamVR_Input_Sources inputSource)
         {
@@ -28,10 +28,20 @@ namespace Valve.VR
 
             return 0;
         }
-
-        public static SteamVR_Input_Sources[] GetUpdateSources()
+        public static SteamVR_Input_Sources GetSource(ulong handle)
         {
-            return updateSources;
+            if (inputSourceSourcesByHandle.ContainsKey(handle))
+                return inputSourceSourcesByHandle[handle];
+
+            return SteamVR_Input_Sources.Any;
+        }
+
+        public static SteamVR_Input_Sources[] GetAllSources()
+        {
+            if (allSources == null)
+                allSources = (SteamVR_Input_Sources[])System.Enum.GetValues(typeof(SteamVR_Input_Sources));
+
+            return allSources;
         }
 
         private static string GetPath(string inputSourceEnumName)
@@ -41,6 +51,7 @@ namespace Valve.VR
 
         public static void Initialize()
         {
+            List<SteamVR_Input_Sources> allSourcesList = new List<SteamVR_Input_Sources>();
             string[] enumNames = System.Enum.GetNames(enumType);
             inputSourceHandlesBySource = new Dictionary<SteamVR_Input_Sources, ulong>(new SteamVR_Input_Sources_Comparer());
             inputSourceSourcesByHandle = new Dictionary<ulong, SteamVR_Input_Sources>();
@@ -53,7 +64,7 @@ namespace Valve.VR
                 EVRInputError err = OpenVR.Input.GetInputSourceHandle(path, ref handle);
 
                 if (err != EVRInputError.None)
-                    Debug.LogError("GetInputSourceHandle (" + path + ") error: " + err.ToString());
+                    Debug.LogError("<b>[SteamVR]</b> GetInputSourceHandle (" + path + ") error: " + err.ToString());
 
                 if (enumNames[enumIndex] == SteamVR_Input_Sources.Any.ToString()) //todo: temporary hack
                 {
@@ -65,7 +76,11 @@ namespace Valve.VR
                     inputSourceHandlesBySource.Add((SteamVR_Input_Sources)enumIndex, handle);
                     inputSourceSourcesByHandle.Add(handle, (SteamVR_Input_Sources)enumIndex);
                 }
+
+                allSourcesList.Add((SteamVR_Input_Sources)enumIndex);
             }
+            
+            allSources = allSourcesList.ToArray();
         }
     }
 }

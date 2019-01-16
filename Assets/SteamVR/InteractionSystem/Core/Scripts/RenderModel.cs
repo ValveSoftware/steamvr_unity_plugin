@@ -52,7 +52,9 @@ namespace Valve.VR.InteractionSystem
                 handInstance.transform.localRotation = Quaternion.identity;
                 handInstance.transform.localScale = handPrefab.transform.localScale;
                 handSkeleton = handInstance.GetComponent<SteamVR_Behaviour_Skeleton>();
+                handSkeleton.origin = Player.instance.trackingOriginTransform;
                 handSkeleton.updatePose = false;
+                handSkeleton.skeletonAction.onActiveChange += OnSkeletonActiveChange;
 
                 handRenderers = handInstance.GetComponentsInChildren<Renderer>();
                 if (displayHandByDefault == false)
@@ -75,18 +77,11 @@ namespace Valve.VR.InteractionSystem
             }
         }
 
-        protected virtual void Update()
-        {
-            if (handSkeleton != null && handSkeleton.isActive == false)
-            {
-                handSkeleton.skeletonAction.RemoveOnActiveChangeListener(OnSkeletonActiveChange, handSkeleton.inputSource);
-                handSkeleton.skeletonAction.AddOnActiveChangeListener(OnSkeletonActiveChange, handSkeleton.inputSource); //watch for if it gets activated later
-                DestroyHand();
-            }
-        }
-
         protected virtual void DestroyHand()
         {
+            if (handSkeleton != null)
+                handSkeleton.skeletonAction.onActiveChange -= OnSkeletonActiveChange;
+
             if (handInstance != null)
             {
                 Destroy(handInstance);
@@ -97,11 +92,15 @@ namespace Valve.VR.InteractionSystem
             }
         }
 
-        protected virtual void OnSkeletonActiveChange(SteamVR_Action_In action, bool newState)
+        protected virtual void OnSkeletonActiveChange(SteamVR_Action_Skeleton changedAction, bool newState)
         {
             if (newState)
             {
                 InitializeHand();
+            }
+            else
+            {
+                DestroyHand();
             }
         }
 
@@ -113,6 +112,16 @@ namespace Valve.VR.InteractionSystem
         protected void OnDisable()
         {
             renderModelLoadedAction.enabled = false;
+        }
+
+        protected void OnDestroy()
+        {
+            DestroyHand();
+        }
+
+        public SteamVR_Behaviour_Skeleton GetSkeleton()
+        {
+            return handSkeleton;
         }
 
         public virtual void SetInputSource(SteamVR_Input_Sources newInputSource)

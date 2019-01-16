@@ -341,7 +341,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 2
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 0
 --- !u!54 &5425834
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -356,7 +356,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 0
 --- !u!65 &6557450
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1053,7 +1053,7 @@ ParticleSystem:
   moveWithTransform: 1
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: 1554474402
+  randomSeed: -471511767
   InitialModule:
     serializedVersion: 2
     enabled: 1

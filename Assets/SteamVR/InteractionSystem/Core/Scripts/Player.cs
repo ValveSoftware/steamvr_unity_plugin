@@ -37,6 +37,9 @@ namespace Valve.VR.InteractionSystem
 		[Tooltip( "The audio listener for this player" )]
 		public Transform audioListener;
 
+        [Tooltip("This action lets you know when the player has placed the headset on their head")]
+        public SteamVR_Action_Boolean headsetOnHead = SteamVR_Input.GetBooleanAction("HeadsetOnHead");
+
 		public bool allowToggleTo2D = true;
 
 
@@ -247,10 +250,8 @@ namespace Valve.VR.InteractionSystem
 
 
 		//-------------------------------------------------
-		void Awake()
+		private void Awake()
 		{
-            SteamVR.Initialize(true); //force openvr
-
 			if ( trackingOriginTransform == null )
 			{
 				trackingOriginTransform = this.transform;
@@ -263,7 +264,7 @@ namespace Valve.VR.InteractionSystem
 		{
 			_instance = this;
 
-            while (SteamVR_Behaviour.instance.forcingInitialization)
+            while (SteamVR.initializedState == SteamVR.InitializedStates.None || SteamVR.initializedState == SteamVR.InitializedStates.Initializing)
                 yield return null;
 
 			if ( SteamVR.instance != null )
@@ -276,8 +277,25 @@ namespace Valve.VR.InteractionSystem
 				ActivateRig( rig2DFallback );
 #endif
 			}
-		}
+        }
 
+        protected virtual void Update()
+        {
+            if (SteamVR.initializedState != SteamVR.InitializedStates.InitializeSuccess)
+                return;
+
+            if (headsetOnHead != null)
+            {
+                if (headsetOnHead.GetStateDown(SteamVR_Input_Sources.Head))
+                {
+                    Debug.Log("<b>SteamVR Interaction System</b> Headset placed on head");
+                }
+                else if (headsetOnHead.GetStateUp(SteamVR_Input_Sources.Head))
+                {
+                    Debug.Log("<b>SteamVR Interaction System</b> Headset removed");
+                }
+            }
+        }
 
 		//-------------------------------------------------
 		void OnDrawGizmos()

@@ -72,7 +72,7 @@ namespace Valve.VR.InteractionSystem.Sample
             {
                 for (int actionIndex = 0; actionIndex < SteamVR_Input.actionsIn.Length; actionIndex++)
                 {
-                    SteamVR_Action_In action = (SteamVR_Action_In)SteamVR_Input.actionsIn[actionIndex];
+                    ISteamVR_Action_In action = SteamVR_Input.actionsIn[actionIndex];
                     if (action.GetActive(hand.handType))
                     {
                         ControllerButtonHints.ShowButtonHint(hand, action);
@@ -100,7 +100,7 @@ namespace Valve.VR.InteractionSystem.Sample
             {
                 for (int actionIndex = 0; actionIndex < SteamVR_Input.actionsIn.Length; actionIndex++)
                 {
-                    SteamVR_Action_In action = (SteamVR_Action_In)SteamVR_Input.actionsIn[actionIndex];
+                    ISteamVR_Action_In action = SteamVR_Input.actionsIn[actionIndex];
                     if (action.GetActive(hand.handType))
                     {
                         ControllerButtonHints.ShowTextHint(hand, action, action.GetShortName());

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 36fa5b356bc9b9f4792bb2c38b8d8b5f
-timeCreated: 1532647035
+timeCreated: 1544852187
 licenseType: Pro
 MonoImporter:
   serializedVersion: 2
@@ -65,7 +65,7 @@ MonoImporter:
   - instance___actions_hands_in_PinkyCurlRight: {fileID: 11400000, guid: d747312e731775548a1e5d37c1ecc872,
       type: 2}
   executionOrder: -31000
-  icon: {fileID: 2800000, guid: 200a36575873a1d40baa790e18dafe5d, type: 3}
+  icon: {instanceID: 0}
   userData: 
   assetBundleName: 
   assetBundleVariant: 

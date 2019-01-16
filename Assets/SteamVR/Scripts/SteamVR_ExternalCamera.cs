@@ -30,6 +30,9 @@ namespace Valve.VR
         public Config config;
         public string configPath;
 
+        [Tooltip("This will automatically activate the action set the specified pose belongs to. And deactivate it when this component is disabled.")]
+        public bool autoEnableDisableActionSet = true;
+
         public void ReadConfig()
         {
             try
@@ -126,15 +129,32 @@ namespace Valve.VR
         GameObject clipQuad;
         Material clipMaterial;
 
-        public void AttachToCamera(SteamVR_Camera vrcam)
+        protected SteamVR_ActionSet activatedActionSet;
+        protected SteamVR_Input_Sources activatedInputSource;
+        public void AttachToCamera(SteamVR_Camera steamVR_Camera)
         {
-            if (target == vrcam.head)
-                return;
+            Camera vrcam;
+            if (steamVR_Camera == null)
+            {
+                vrcam = Camera.main;
 
-            target = vrcam.head;
+                if (target == vrcam.transform)
+                    return;
+                target = vrcam.transform;
+            }
+            else
+            {
+                vrcam = steamVR_Camera.camera;
+
+                if (target == steamVR_Camera.head)
+                    return;
+                target = steamVR_Camera.head;
+            }
+
+            
 
             var root = transform.parent;
-            var origin = vrcam.head.parent;
+            var origin = target.parent;
             root.parent = origin;
             root.localPosition = Vector3.zero;
             root.localRotation = Quaternion.identity;
@@ -154,6 +174,7 @@ namespace Valve.VR
             cam.fieldOfView = config.fov;
             cam.useOcclusionCulling = false;
             cam.enabled = false; // manually rendered
+            cam.rect = new Rect(0, 0, 1, 1); //fix order of operations issue
 
             colorMat = new Material(Shader.Find("Custom/SteamVR_ColorOut"));
             alphaMat = new Material(Shader.Find("Custom/SteamVR_AlphaOut"));
@@ -306,7 +327,7 @@ namespace Valve.VR
         void OnEnable()
         {
             // Move game view cameras to lower-right quadrant.
-            cameras = FindObjectsOfType<Camera>() as Camera[];
+            cameras = FindObjectsOfType<Camera>();
             if (cameras != null)
             {
                 var numCameras = cameras.Length;
@@ -334,10 +355,34 @@ namespace Valve.VR
                 sceneResolutionScale = SteamVR_Camera.sceneResolutionScale;
                 SteamVR_Camera.sceneResolutionScale = config.sceneResolutionScale;
             }
+
+            if (autoEnableDisableActionSet)
+            {
+                SteamVR_Behaviour_Pose pose = this.GetComponentInChildren<SteamVR_Behaviour_Pose>();
+                if (pose != null)
+                {
+                    if (pose.poseAction.actionSet.IsActive(pose.inputSource) == false)
+                    {
+                        activatedActionSet = pose.poseAction.actionSet; //automatically activate the actionset if it isn't active already. (will deactivate on component disable)
+                        activatedInputSource = pose.inputSource;
+                        pose.poseAction.actionSet.Activate(pose.inputSource);
+                    }
+                }
+            }
         }
 
         void OnDisable()
         {
+            if (autoEnableDisableActionSet)
+            {
+                if (activatedActionSet != null) //deactivate the action set we activated for this camera
+                {
+                    activatedActionSet.Deactivate(activatedInputSource);
+                    activatedActionSet = null;
+                }
+            }
+
+
             // Restore game view cameras.
             if (cameras != null)
             {
