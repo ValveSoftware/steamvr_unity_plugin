@@ -273,6 +273,10 @@ namespace Valve.VR.InteractionSystem
                 attachedToHand.ForceHoverUnlock();
                 attachedToHand.DetachObject(this.gameObject, false);
             }
+
+            if(highlightHolder != null){
+                Destroy(highlightHolder);
+            }
         }
     }
 }
