@@ -298,6 +298,10 @@ namespace Valve.VR.InteractionSystem
             {
                 attachedToHand.DetachObject(this.gameObject, false);
             }
+
+            if(highlightHolder != null){
+                Destroy(highlightHolder);
+            }
         }
 
 
