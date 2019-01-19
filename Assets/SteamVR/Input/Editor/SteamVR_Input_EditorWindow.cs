@@ -888,7 +888,7 @@ namespace Valve.VR
 
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            bool delete = GUILayout.Button("Delete input generated input folder");
+            bool delete = GUILayout.Button("Delete generated input folder");
             GUILayout.FlexibleSpace();
             bool showSettings = GUILayout.Button("SteamVR Settings");
             GUILayout.FlexibleSpace();

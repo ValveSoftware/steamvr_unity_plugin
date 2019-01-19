@@ -110,6 +110,12 @@ namespace Valve.VR
             set { sourceMap[SteamVR_Input_Sources.Any].skeletalTransformSpace = value; }
         }
 
+        /// <summary>
+        /// Get the accuracy level of the skeletal tracking data. 
+        /// <para/>* Estimated: Body part location can’t be directly determined by the device. Any skeletal pose provided by the device is estimated based on the active buttons, triggers, joysticks, or other input sensors. Examples include the Vive Controller and gamepads.
+        /// <para/>* Partial: Body part location can be measured directly but with fewer degrees of freedom than the actual body part.Certain body part positions may be unmeasured by the device and estimated from other input data.Examples include Knuckles or gloves that only measure finger curl
+        /// <para/>* Full: Body part location can be measured directly throughout the entire range of motion of the body part.Examples include hi-end mocap systems, or gloves that measure the rotation of each finger segment.
+        /// </summary>
         public EVRSkeletalTrackingLevel skeletalTrackingLevel
         {
             get { return sourceMap[SteamVR_Input_Sources.Any].skeletalTrackingLevel; }

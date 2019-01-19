@@ -130,7 +130,7 @@ Material:
       second: 0.02
     - first:
         name: _SeeThru
-      second: 0.25
+      second: 0.504
     - first:
         name: _SpecularMode
       second: 1

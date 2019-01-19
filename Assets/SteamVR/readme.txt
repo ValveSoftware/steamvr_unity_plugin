@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.2b5
+﻿# SteamVR Unity Plugin - v2.2RC1
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -32,6 +32,17 @@ Support:
 
  If you'd like to discuss features, post guides, and give general feedback please post on the steam forum here: https://steamcommunity.com/app/250820/discussions/7/
  
+ 
+ 
+Changes for v2.2RC1:
+
+ * Feature: Added SteamVR_Skeleton_Poser component that simplifies creating poses that are easily compatible with the SteamVR Skeletal System. Check the objects in the Interaction System scene for examples or add the component to an interactable. More documentation on this feature will come before release. Example poses will be improved before release.
+
+ * Copied skeletalTrackingLevel, arrays, and finger splays into the Skeleton Behaviour component
+ 
+ * Fixed some related skeleton docs
+
+ * Added an option to importing partial bindings to just replace the current actions instead of merging.
  
  
 Changes for v2.2b5:

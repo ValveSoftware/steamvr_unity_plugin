@@ -406,6 +406,7 @@ GameObject:
   - 114: {fileID: 11421682}
   - 95: {fileID: 9545886}
   - 114: {fileID: 11461100}
+  - 114: {fileID: 114000012997745504}
   m_Layer: 0
   m_Name: Longbow
   m_TagString: Untagged
@@ -1116,7 +1117,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 173346}
   m_LocalRotation: {x: -0, y: 0.81002146, z: 0.5864002, w: 0}
-  m_LocalPosition: {x: 2.235343, y: 1.6548, z: -2.9353}
+  m_LocalPosition: {x: 2.2414706, y: 1.533, z: -2.987}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: -71.781006, y: 180.00002, z: 0}
   m_Children:
@@ -1659,8 +1660,27 @@ MonoBehaviour:
   handAnimationOnPickup: 0
   setRangeOfMotionOnPickup: -1
   useHandObjectAttachmentPoint: 0
-  skeletonPose: {fileID: 11400000, guid: b11bd330216ce2944a1928a54925d7de, type: 2}
-  handFollowTransform: {fileID: 0}
+  attachEaseIn: 0
+  snapAttachEaseInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  snapAttachEaseInTime: 0.15
+  snapAttachEaseInCompleted: 0
+  skeletonPoser: {fileID: 0}
+  handFollowTransform: {fileID: 497004}
   handFollowTransformPosition: 1
   handFollowTransformRotation: 1
   highlightOnHover: 1
@@ -2056,3 +2076,30 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 173346}
   m_IsPrefabParent: 1
+--- !u!114 &114000012997745504
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7418c7dd8f977d4e969202d3fa7e926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poseEditorExpanded: 1
+  blendEditorExpanded: 0
+  poseNames:
+  - longbowPose (MAIN)
+  previewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
+    type: 2}
+  previewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
+    type: 2}
+  skeletonMainPose: {fileID: 11400000, guid: b11bd330216ce2944a1928a54925d7de, type: 2}
+  skeletonAdditionalPoses: []
+  showLeftPreview: 0
+  showRightPreview: 0
+  previewLeftInstance: {fileID: 0}
+  previewRightInstance: {fileID: 0}
+  previewPoseSelection: 0
+  blendingBehaviours: []

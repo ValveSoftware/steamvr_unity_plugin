@@ -605,6 +605,9 @@ namespace Valve.VR
         public static string holographic_controller = "holographic_controller";
         public static string vive = "vive";
         public static string vive_pro = "vive_pro";
+        public static string holographic_hmd = "holographic_hmd";
+        public static string rift = "rift";
+        public static string vive_tracker_camera = "vive_tracker_camera";
     }
 
     static public class SteamVR_Input_ActionFile_ActionTypes

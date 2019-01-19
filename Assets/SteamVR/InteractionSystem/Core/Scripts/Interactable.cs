@@ -42,8 +42,17 @@ namespace Valve.VR.InteractionSystem
         [Tooltip("Specify whether you want to snap to the hand's object attachment point, or just the raw hand")]
         public bool useHandObjectAttachmentPoint = true;
 
-        [Tooltip("The skeleton pose to apply when grabbing. Can only set this or handFollowTransform.")]
-        public SteamVR_Skeleton_Pose skeletonPose;
+        public bool attachEaseIn = false;
+        [HideInInspector]
+        public AnimationCurve snapAttachEaseInCurve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
+        public float snapAttachEaseInTime = 0.15f;
+
+        public bool snapAttachEaseInCompleted = false;
+
+
+        // [Tooltip("The skeleton pose to apply when grabbing. Can only set this or handFollowTransform.")]
+        [HideInInspector]
+        public SteamVR_Skeleton_Poser skeletonPoser;
 
         [Tooltip("If you want the hand to stick to an object while attached, set the transform to stick to here. Can only set this or skeletonPose.")]
         public Transform handFollowTransform;
@@ -67,9 +76,13 @@ namespace Valve.VR.InteractionSystem
         public Hand attachedToHand;
 
         public bool isDestroying { get; protected set; }
-
         public bool isHovering { get; protected set; }
         public bool wasHovering { get; protected set; }
+
+        private void Awake()
+        {
+            skeletonPoser = GetComponent<SteamVR_Skeleton_Poser>();
+        }
 
         protected virtual void Start()
         {
@@ -78,11 +91,11 @@ namespace Valve.VR.InteractionSystem
             if (highlightMat == null)
                 Debug.LogError("<b>[SteamVR Interaction]</b> Hover Highlight Material is missing. Please create a material named 'SteamVR_HoverHighlight' and place it in a Resources folder");
 
-            if (skeletonPose != null)
+            if (skeletonPoser != null)
             {
                 if (useHandObjectAttachmentPoint)
                 {
-                    Debug.LogWarning("<b>[SteamVR Interaction]</b> SkeletonPose and useHandObjectAttachmentPoint both set at the same time. Ignoring useHandObjectAttachmentPoint.");
+                    //Debug.LogWarning("<b>[SteamVR Interaction]</b> SkeletonPose and useHandObjectAttachmentPoint both set at the same time. Ignoring useHandObjectAttachmentPoint.");
                     useHandObjectAttachmentPoint = false;
                 }
             }
@@ -241,8 +254,8 @@ namespace Valve.VR.InteractionSystem
             }
         }
 
-        protected float blendToPoseTime = 0.25f;
-        protected float releasePoseBlendTime = 0.25f;
+        protected float blendToPoseTime = 0.1f;
+        protected float releasePoseBlendTime = 0.2f;
 
         protected virtual void OnAttachedToHand(Hand hand)
         {
@@ -254,10 +267,9 @@ namespace Valve.VR.InteractionSystem
                 onAttachedToHand.Invoke(hand);
             }
 
-            if (skeletonPose != null)
+            if (skeletonPoser != null && hand.skeleton != null)
             {
-                if (hand.skeleton != null)
-                    hand.skeleton.BlendToPose(skeletonPose, this.transform, blendToPoseTime);
+                hand.skeleton.BlendToPoser(skeletonPoser, this.transform, blendToPoseTime);
             }
 
             attachedToHand = hand;
@@ -281,7 +293,7 @@ namespace Valve.VR.InteractionSystem
             }
 
 
-            if (skeletonPose != null)
+            if (skeletonPoser != null)
             {
                 if (hand.skeleton != null)
                     hand.skeleton.BlendToSkeleton(releasePoseBlendTime, true);
@@ -298,6 +310,9 @@ namespace Valve.VR.InteractionSystem
             {
                 attachedToHand.DetachObject(this.gameObject, false);
             }
+            
+            if (highlightHolder != null)
+                Destroy(highlightHolder);
         }
 
 
@@ -309,6 +324,9 @@ namespace Valve.VR.InteractionSystem
             {
                 attachedToHand.ForceHoverUnlock();
             }
+
+            if (highlightHolder != null)
+                Destroy(highlightHolder);
         }
     }
 }

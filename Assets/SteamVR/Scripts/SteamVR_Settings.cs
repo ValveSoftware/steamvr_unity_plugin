@@ -88,6 +88,9 @@ namespace Valve.VR
         protected const string openVRString = "OpenVR";
         protected const string openVRPackageString = "com.unity.xr.openvr.standalone";
 
+#if UNITY_2018_1_OR_NEWER
+        private static UnityEditor.PackageManager.Requests.ListRequest listRequest;
+#endif
         public static void AutoEnableVR()
         {
 #if UNITY_EDITOR
@@ -138,13 +141,41 @@ namespace Valve.VR
                 }
 
 #if UNITY_2018_1_OR_NEWER
-                UnityEditor.PackageManager.Client.Add(openVRPackageString);
+                if (listRequest == null)
+                {
+                    UnityEditor.PackageManager.Client.Add(openVRPackageString);
+                    listRequest = UnityEditor.PackageManager.Client.List();
+                }
+                else
+                {
+                    if (listRequest.IsCompleted)
+                    {
+                        var packageCollection = listRequest.Result;
+
+                        bool found = false;
+                        foreach (var package in packageCollection)
+                        {
+                            if (package.name == openVRPackageString)
+                                found = true;
+                        }
+
+                        if (found == false)
+                        {
+                            Debug.Log("adding");
+                            UnityEditor.PackageManager.Client.Add(openVRPackageString);
+                        }
+                        else
+                        {
+                            Debug.Log("Found");
+                        }
+                    }
+                }
 #endif
 
                 if (updated)
                     Debug.Log("<b>[SteamVR]</b> Enabling VR in player settings.");
             }
 #endif
-                }
+        }
     }
 }

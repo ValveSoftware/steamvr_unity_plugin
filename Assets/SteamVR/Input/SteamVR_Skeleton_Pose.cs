@@ -47,6 +47,27 @@ namespace Valve.VR
         public SteamVR_Skeleton_FingerExtensionTypes ringFingerMovementType = SteamVR_Skeleton_FingerExtensionTypes.Static;
         public SteamVR_Skeleton_FingerExtensionTypes pinkyFingerMovementType = SteamVR_Skeleton_FingerExtensionTypes.Static;
 
+        /// <summary>
+        /// Get extension type for a particular finger. Thumb is 0, Index is 1, etc.
+        /// </summary>
+        public SteamVR_Skeleton_FingerExtensionTypes GetFingerExtensionType(int finger)
+        {
+            if (finger == 0)
+                return thumbFingerMovementType;
+            if (finger == 1)
+                return indexFingerMovementType;
+            if (finger == 2)
+                return middleFingerMovementType;
+            if (finger == 3)
+                return ringFingerMovementType;
+            if (finger == 4)
+                return pinkyFingerMovementType;
+
+            //default to static
+            Debug.LogWarning("Finger not in range!");
+            return SteamVR_Skeleton_FingerExtensionTypes.Static;
+        }
+
         public bool ignoreRootPoseData = true;
         public bool ignoreWristPoseData = true;
 

@@ -1328,20 +1328,27 @@ namespace Valve.VR
             return true;
         }
 
-        /// <summary>
-        /// Load from disk and deserialize the actions file
-        /// </summary>
-        /// <param name="force">Force a refresh of this file from disk</param>
-        public static bool InitializeFile(bool force = false, bool showErrors = true)
+        public static bool DoesActionsFileExist()
         {
             string projectPath = Application.dataPath;
             int lastIndex = projectPath.LastIndexOf("/");
             projectPath = projectPath.Remove(lastIndex, projectPath.Length - lastIndex);
             actionsFilePath = Path.Combine(projectPath, SteamVR_Settings.instance.actionsFilePath);
 
+            return File.Exists(actionsFilePath);
+        }      
+
+        /// <summary>
+        /// Load from disk and deserialize the actions file
+        /// </summary>
+        /// <param name="force">Force a refresh of this file from disk</param>
+        public static bool InitializeFile(bool force = false, bool showErrors = true)
+        {
+            bool actionsFileExists = DoesActionsFileExist();
+
             string jsonText = null;
 
-            if (File.Exists(actionsFilePath))
+            if (actionsFileExists)
             {
                 jsonText = System.IO.File.ReadAllText(actionsFilePath);
             }
@@ -1369,6 +1376,40 @@ namespace Valve.VR
             actionFile.InitializeHelperLists();
             fileInitialized = true;
             return true;
+        }
+
+        /// <summary>
+        /// Deletes the action manifest file and all the default bindings it had listed in the default bindings section
+        /// </summary>
+        /// <returns>True if we deleted an action file, false if not.</returns>
+        public static bool DeleteManifestAndBindings()
+        {
+            if (DoesActionsFileExist() == false)
+                return false;
+
+            InitializeFile();
+
+            string[] filesToDelete = actionFile.GetFilesToCopy();
+            foreach (string bindingFilePath in filesToDelete)
+            {
+                FileInfo bindingFileInfo = new FileInfo(bindingFilePath);
+                bindingFileInfo.IsReadOnly = false;
+                File.Delete(bindingFilePath);
+            }
+
+            if (File.Exists(actionsFilePath))
+            {
+                FileInfo actionFileInfo = new FileInfo(actionsFilePath);
+                actionFileInfo.IsReadOnly = false;
+                File.Delete(actionsFilePath);
+
+                actionFile = null;
+                fileInitialized = false;
+
+                return true;
+            }
+
+            return false;
         }
 
 #if UNITY_EDITOR

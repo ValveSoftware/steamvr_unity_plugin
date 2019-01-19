@@ -16,8 +16,8 @@ MonoBehaviour:
     thumbFingerMovementType: 0
     indexFingerMovementType: 0
     middleFingerMovementType: 0
-    ringFingerMovementType: 2
-    pinkyFingerMovementType: 2
+    ringFingerMovementType: 1
+    pinkyFingerMovementType: 1
     ignoreRootPoseData: 1
     ignoreWristPoseData: 1
     position: {x: -0.009968149, y: -0.05138908, z: 0.0017113946}
@@ -91,8 +91,8 @@ MonoBehaviour:
     thumbFingerMovementType: 0
     indexFingerMovementType: 0
     middleFingerMovementType: 0
-    ringFingerMovementType: 2
-    pinkyFingerMovementType: 2
+    ringFingerMovementType: 1
+    pinkyFingerMovementType: 1
     ignoreRootPoseData: 1
     ignoreWristPoseData: 1
     position: {x: 0.009968149, y: -0.05138908, z: 0.0017113946}

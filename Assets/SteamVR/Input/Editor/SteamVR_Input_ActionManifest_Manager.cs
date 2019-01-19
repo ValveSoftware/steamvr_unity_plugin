@@ -11,8 +11,15 @@ namespace Valve.VR
 {
     public class SteamVR_Input_ActionManifest_Manager : AssetPostprocessor
     {
+        private static bool importing = false;
+
         static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
         {
+            if (importing)
+                return;
+
+            importing = true;
+
             Dictionary<string, List<SteamVR_PartialInputBindings>> partials = ScanForPartials();
             if (partials != null)
             {
@@ -22,6 +29,8 @@ namespace Valve.VR
                         ConfirmImport(element.Value);
                 }
             }
+
+            importing = false;
         }
 
         public const string partialManifestFilename = "steamvr_partial_manifest.json";
@@ -508,6 +517,44 @@ namespace Valve.VR
             Debug.Log("<b>[SteamVR]</b> Reloaded actions file with additional actions from " + partialBinding.name);
         }
 
+        protected static void ReplaceBinding(SteamVR_PartialInputBindings partialBinding)
+        {
+            SteamVR_Input.DeleteManifestAndBindings();
+
+            string newActionsFilePath = partialBinding.GetActionsPath();
+            if (File.Exists(newActionsFilePath))
+            {
+                File.Copy(newActionsFilePath, SteamVR_Input.actionsFilePath);
+            }
+
+            SteamVR_Input_ActionFile newActionsFile = ReadJson<SteamVR_Input_ActionFile>(SteamVR_Input.actionsFilePath);
+            string partialBindingDirectory = partialBinding.GetDirectory();
+
+            foreach (var newDefaultPath in newActionsFile.default_bindings)
+            {
+                string bindingPath = Path.Combine(partialBindingDirectory, newDefaultPath.binding_url);
+                File.Copy(bindingPath, newDefaultPath.binding_url);
+            }
+
+            partialBinding.imported = true;
+            partialBinding.Save();
+
+            SteamVR_Input.InitializeFile(true);
+            SteamVR_Input_EditorWindow.ReopenWindow();
+
+            //todo: ask first?
+            /*string dialogText = string.Format("{0} new action sets, {1} new actions, and {2} new localization strings have been added. Would you like to regenerate SteamVR Input code files?", sets, actions, locs);
+
+            bool confirm = EditorUtility.DisplayDialog("SteamVR Input", dialogText, "Generate", "Cancel");
+            if (confirm)
+                SteamVR_Input_Generator.BeginGeneration();
+            */
+
+            SteamVR_Input_Generator.BeginGeneration();
+
+            Debug.Log("<b>[SteamVR Input]</b> Reloaded with new actions from " + partialBinding.name);
+        }
+
         protected static T ReadJson<T>(string path)
         {
             if (File.Exists(path))
@@ -726,34 +773,30 @@ namespace Valve.VR
             bool confirm = EditorUtility.DisplayDialog("SteamVR Input", dialogText, "Import", "Cancel");
             if (confirm)
             {
-                ImportPartialBinding(partialBindingList[0]);
+                bool actionsExists = SteamVR_Input.DoesActionsFileExist();
 
-                if (partialBindingList.Count > 1)
+                if (actionsExists)
                 {
-                    RemoveOldPartialBindings(partialBindingList);
-                }
-            }
-        }
+                    string mergeDialogText = "You have two options for importing this binding:\n Replace your current action file (delete all your actions)\n Merge the partial action file with your existing actions";
+                    bool shouldMerge = EditorUtility.DisplayDialog("SteamVR Input", mergeDialogText, "Merge", "Replace");
 
-        public static void ProcessPartials(Dictionary<string, List<SteamVR_PartialInputBindings>> partialManifestsDictionary)
-        {
-            foreach (var partialBindingList in partialManifestsDictionary)
-            {
-                if (partialBindingList.Value.Count == 1)
-                {
-                    SteamVR_PartialInputBindings partial = partialBindingList.Value[0];
-                    if (partial.imported == false)
+                    if (shouldMerge)
                     {
-                        ConfirmImport(partialBindingList.Value);
+                        ImportPartialBinding(partial);
+                    }
+                    else
+                    {
+                        ReplaceBinding(partial);
                     }
                 }
                 else
                 {
-                    SteamVR_PartialInputBindings partial = partialBindingList.Value[0];
-                    if (partial.imported == false)
-                    {
-                        ConfirmImport(partialBindingList.Value);
-                    }
+                    ReplaceBinding(partial);
+                }
+
+                if (partialBindingList.Count > 1)
+                {
+                    RemoveOldPartialBindings(partialBindingList);
                 }
             }
         }
