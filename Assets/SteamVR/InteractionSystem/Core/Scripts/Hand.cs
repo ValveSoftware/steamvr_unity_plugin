@@ -559,7 +559,7 @@ namespace Valve.VR.InteractionSystem
                 attachedObject.skeletonLockRotation = Quaternion.Inverse(attachedObject.attachedObject.transform.rotation) * skeleton.transform.rotation;
             }
 
-            if (attachedObject.interactable.attachEaseIn)
+            if (attachedObject.interactable != null && attachedObject.interactable.attachEaseIn)
             {
                 attachedObject.attachedObject.transform.position = attachedObject.easeSourcePosition;
                 attachedObject.attachedObject.transform.rotation = attachedObject.easeSourceRotation;
