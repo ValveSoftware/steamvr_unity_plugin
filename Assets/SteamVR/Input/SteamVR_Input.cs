@@ -46,6 +46,9 @@ namespace Valve.VR
         
         protected static bool initializing = false;
 
+        protected static int startupFrame = 0;
+        public static bool isStartupFrame { get { return Time.frameCount == startupFrame; } }
+
         #region array accessors
         /// <summary>An array of all action sets</summary>
         public static SteamVR_ActionSet[] actionSets;
@@ -143,6 +146,8 @@ namespace Valve.VR
             //Debug.Log("<b>[SteamVR]</b> Initializing SteamVR input...");
             initializing = true;
 
+            startupFrame = Time.frameCount;
+
             SteamVR_ActionSet_Manager.Initialize();
             SteamVR_Input_Source.Initialize();
 
@@ -215,7 +220,7 @@ namespace Valve.VR
         /// <summary>Gets called by SteamVR_Behaviour every Update and updates actions if the steamvr settings are configured to update then.</summary>
         public static void Update()
         {
-            if (initialized == false)
+            if (initialized == false || isStartupFrame)
                 return;
 
             if (SteamVR.settings.IsInputUpdateMode(SteamVR_UpdateModes.OnUpdate))
@@ -234,7 +239,7 @@ namespace Valve.VR
         /// </summary>
         public static void LateUpdate()
         {
-            if (initialized == false)
+            if (initialized == false || isStartupFrame)
                 return;
 
             if (SteamVR.settings.IsInputUpdateMode(SteamVR_UpdateModes.OnLateUpdate))
@@ -257,7 +262,7 @@ namespace Valve.VR
         /// <summary>Gets called by SteamVR_Behaviour every FixedUpdate and updates actions if the steamvr settings are configured to update then.</summary>
         public static void FixedUpdate()
         {
-            if (initialized == false)
+            if (initialized == false || isStartupFrame)
                 return;
 
             if (SteamVR.settings.IsInputUpdateMode(SteamVR_UpdateModes.OnFixedUpdate))
@@ -274,7 +279,7 @@ namespace Valve.VR
         /// <summary>Gets called by SteamVR_Behaviour every OnPreCull and updates actions if the steamvr settings are configured to update then.</summary>
         public static void OnPreCull()
         {
-            if (initialized == false)
+            if (initialized == false || isStartupFrame)
                 return;
 
             if (SteamVR.settings.IsInputUpdateMode(SteamVR_UpdateModes.OnPreCull))

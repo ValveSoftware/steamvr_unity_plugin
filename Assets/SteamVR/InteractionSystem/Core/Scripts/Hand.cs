@@ -1103,6 +1103,14 @@ namespace Valve.VR.InteractionSystem
             }
         }
 
+        /// <summary>
+        /// Returns true when the hand is currently hovering over the interactable passed in
+        /// </summary>
+        public bool IsStillHovering(Interactable interactable)
+        {
+            return hoveringInteractable == interactable;
+        }
+
         protected virtual void HandFollowUpdate()
         {
             GameObject attachedObject = currentAttachedObject;
@@ -1111,9 +1119,12 @@ namespace Valve.VR.InteractionSystem
                 if (currentAttachedObjectInfo.Value.interactable != null && currentAttachedObjectInfo.Value.interactable.handFollowTransform != null)
                 {
                     SteamVR_Skeleton_PoseSnapshot pose = null;
-                    
+
                     if (currentAttachedObjectInfo.Value.interactable.skeletonPoser != null)
+                    {
                         pose = currentAttachedObjectInfo.Value.interactable.skeletonPoser.GetBlendedPose(skeleton);
+                        
+                    }
 
                     if (currentAttachedObjectInfo.Value.interactable.handFollowTransformRotation)
                     {
@@ -1181,6 +1192,13 @@ namespace Valve.VR.InteractionSystem
                             skeleton.transform.position = attachedInfo.attachedObject.transform.TransformPoint(attachedInfo.skeletonLockPosition);
                             skeleton.transform.rotation = attachedInfo.attachedObject.transform.rotation * attachedInfo.skeletonLockRotation;
                         }
+                    }else
+                    {
+                        if (attachedInfo.HasAttachFlag(AttachmentFlags.ParentToHand))
+                        {
+                            attachedInfo.attachedObject.transform.position = TargetItemPosition(attachedInfo);
+                            attachedInfo.attachedObject.transform.rotation = TargetItemRotation(attachedInfo);
+                        }
                     }
 
 
@@ -1230,7 +1248,18 @@ namespace Valve.VR.InteractionSystem
 
         Vector3 TargetItemPosition(AttachedObject attachedObject)
         {
-            return currentAttachedObjectInfo.Value.handAttachmentPointTransform.TransformPoint(attachedObject.initialPositionalOffset);
+            if (attachedObject.interactable.skeletonPoser != null)
+            {
+                Vector3 tp = attachedObject.handAttachmentPointTransform.InverseTransformPoint(transform.TransformPoint(attachedObject.interactable.skeletonPoser.GetBlendedPose(skeleton).position));
+                tp.x *= -1;
+                return currentAttachedObjectInfo.Value.handAttachmentPointTransform.TransformPoint(tp);
+            }
+            else
+            {
+                //todo: this was throwing errors because we've established there is no attachedObject.interactable.skeletonPoser in this scenario.
+                //Quaternion tr = Quaternion.Inverse(attachedObject.handAttachmentPointTransform.rotation) * (transform.rotation * attachedObject.interactable.skeletonPoser.GetBlendedPose(skeleton).rotation);
+                return currentAttachedObjectInfo.Value.handAttachmentPointTransform.TransformPoint(attachedObject.initialPositionalOffset);
+            }
         }
 
         Quaternion TargetItemRotation(AttachedObject attachedObject)

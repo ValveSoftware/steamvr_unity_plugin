@@ -104,6 +104,9 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		public void UpdateVisualsInEditor()
 		{
+            if (Teleport.instance == null)
+                return;
+
 			areaMesh = GetComponent<MeshRenderer>();
 
 			if ( locked )

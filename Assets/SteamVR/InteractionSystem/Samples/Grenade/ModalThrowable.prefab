@@ -162,7 +162,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012099312676}
   m_LocalRotation: {x: -0.5000002, y: -0.49999997, z: -0.50000006, w: 0.49999994}
-  m_LocalPosition: {x: 0.3343, y: 1.021, z: -0.19}
+  m_LocalPosition: {x: 0.3343, y: 1.12, z: -0.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000013251070012}
@@ -354,7 +354,7 @@ MonoBehaviour:
   hideSkeletonOnAttach: 0
   hideControllerOnAttach: 1
   handAnimationOnPickup: 0
-  setRangeOfMotionOnPickup: 1
+  setRangeOfMotionOnPickup: 0
   useHandObjectAttachmentPoint: 0
   attachEaseIn: 0
   snapAttachEaseInCurve:
@@ -407,30 +407,7 @@ MonoBehaviour:
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
   previewPoseSelection: 0
-  blendingBehaviours:
-  - name: New Behaviour
-    enabled: 1
-    influence: 1
-    pose: 0
-    value: 0
-    action_single:
-      actionPath: 
-      needsReinit: 0
-    action_bool:
-      actionPath: 
-      needsReinit: 0
-    smoothingSpeed: 0
-    type: 0
-    useMask: 1
-    mask:
-      palm: 1
-      thumb: 1
-      index: 1
-      middle: 1
-      ring: 1
-      pinky: 1
-      values: 010101010101
-    previewEnabled: 1
+  blendingBehaviours: []
 --- !u!114 &114000012262138290
 MonoBehaviour:
   m_ObjectHideFlags: 1

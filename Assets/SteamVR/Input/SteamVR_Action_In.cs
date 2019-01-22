@@ -194,7 +194,7 @@ namespace Valve.VR
                 updatingSources.Add(inputSource);
                 sources[inputSource].isUpdating = true;
 
-                if (Time.frameCount > 1)
+                if (SteamVR_Input.isStartupFrame == false)
                     sources[inputSource].UpdateValue();
             }
         }

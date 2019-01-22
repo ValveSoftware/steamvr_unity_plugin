@@ -571,15 +571,7 @@ namespace Valve.VR
             EVRInputError err = OpenVR.Input.GetPoseActionData(handle, universeOrigin, predictedSecondsFromNow, ref poseActionData, poseActionData_size, inputSourceHandle);
             if (err != EVRInputError.None)
             {
-                if (err == EVRInputError.InvalidHandle && Time.realtimeSinceStartup < 5)
-                {
-                    //ignore. This is probably just steamvr input starting up.
-                    //todo: get this fixed
-                }
-                else
-                {
-                    Debug.LogError("<b>[SteamVR]</b> GetPoseActionData error (" + fullPath + "): " + err.ToString() + " Handle: " + handle.ToString() + ". Input source: " + inputSource.ToString());
-                }
+                Debug.LogError("<b>[SteamVR]</b> GetPoseActionData error (" + fullPath + "): " + err.ToString() + " Handle: " + handle.ToString() + ". Input source: " + inputSource.ToString());
             }
 
             SetCacheVariables();

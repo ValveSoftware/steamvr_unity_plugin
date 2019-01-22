@@ -62,12 +62,12 @@ namespace Valve.VR.InteractionSystem
 
         [Tooltip("Set whether or not you want this interactible to highlight when hovering over it")]
         public bool highlightOnHover = true;
-        private MeshRenderer[] highlightRenderers;
-        private MeshRenderer[] existingRenderers;
-        private GameObject highlightHolder;
-        private SkinnedMeshRenderer[] highlightSkinnedRenderers;
-        private SkinnedMeshRenderer[] existingSkinnedRenderers;
-        private static Material highlightMat;
+        protected MeshRenderer[] highlightRenderers;
+        protected MeshRenderer[] existingRenderers;
+        protected GameObject highlightHolder;
+        protected SkinnedMeshRenderer[] highlightSkinnedRenderers;
+        protected SkinnedMeshRenderer[] existingSkinnedRenderers;
+        protected static Material highlightMat;
         [Tooltip("An array of child gameObjects to not render a highlight for. Things like transparent parts, vfx, etc.")]
         public GameObject[] hideHighlight;
 
@@ -75,9 +75,13 @@ namespace Valve.VR.InteractionSystem
         [System.NonSerialized]
         public Hand attachedToHand;
 
+        [System.NonSerialized]
+        public Hand hoveringHand;
+
         public bool isDestroying { get; protected set; }
         public bool isHovering { get; protected set; }
         public bool wasHovering { get; protected set; }
+        
 
         private void Awake()
         {
@@ -105,6 +109,7 @@ namespace Valve.VR.InteractionSystem
         {
             return ShouldIgnore(component.gameObject);
         }
+
         protected virtual bool ShouldIgnore(GameObject check)
         {
             for (int ignoreIndex = 0; ignoreIndex < hideHighlight.Length; ignoreIndex++)
@@ -223,36 +228,47 @@ namespace Valve.VR.InteractionSystem
             }
         }
 
-        protected virtual void HandHoverUpdate()
+        /// <summary>
+        /// Called when a Hand starts hovering over this object
+        /// </summary>
+        protected virtual void OnHandHoverBegin(Hand hand)
         {
+            wasHovering = isHovering;
+            isHovering = true;
+
+            hoveringHand = hand;
+
             if (highlightOnHover == true)
             {
-                if (wasHovering == false)
-                {
-                    isHovering = true;
-                    CreateHighlightRenderers();
-                    UpdateHighlightRenderers();
-                }
-
+                CreateHighlightRenderers();
+                UpdateHighlightRenderers();
             }
-            isHovering = true;
         }
 
 
-        protected virtual void Update()
+        /// <summary>
+        /// Called when a Hand stops hovering over this object
+        /// </summary>
+        private void OnHandHoverEnd(Hand hand)
         {
             wasHovering = isHovering;
+            isHovering = false;
 
+            if (highlightOnHover && highlightHolder != null)
+                Destroy(highlightHolder);
+        }
+
+        protected virtual void Update()
+        {
             if (highlightOnHover)
             {
                 UpdateHighlightRenderers();
 
-                if (wasHovering == false && isHovering == false && highlightHolder != null)
+                if (isHovering == false && highlightHolder != null)
                     Destroy(highlightHolder);
-
-                isHovering = false;
             }
         }
+        
 
         protected float blendToPoseTime = 0.1f;
         protected float releasePoseBlendTime = 0.2f;

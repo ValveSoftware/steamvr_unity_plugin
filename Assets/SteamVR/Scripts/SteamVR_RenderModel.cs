@@ -145,7 +145,7 @@ namespace Valve.VR
         public void UpdateModel()
         {
             var system = OpenVR.System;
-            if (system == null)
+            if (system == null || index == SteamVR_TrackedObject.EIndex.None)
                 return;
 
             var error = ETrackedPropertyError.TrackedProp_Success;

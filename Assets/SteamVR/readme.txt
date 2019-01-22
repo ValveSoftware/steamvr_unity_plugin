@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.2RC1
+﻿# SteamVR Unity Plugin - v2.2RC2
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -33,6 +33,20 @@ Support:
  If you'd like to discuss features, post guides, and give general feedback please post on the steam forum here: https://steamcommunity.com/app/250820/discussions/7/
  
  
+Changes for v2.2RC2:
+
+ * Interactable.isHovering now correctly reports hovering when a hand is over it. There is a new associated field Interactable.hoveringHand.
+
+ * RenderModels should no longer throw an error on immediate reload.
+
+ * Added the SteamVR_Behaviour component to the Player prefab in the Interaction System so it's easier to set it's DoNotDestroy value.
+
+ * Fixed an issue with skeletons complaining that they were getting called too early. Initial action updates now happen a frame after SteamVR_Input initialization.
+
+ * Normalized the behaviours of the throwables in the Interaction System sample scene to do what their description says they should.
+
+ * Fixed an issue with TeleportArea throwing errors without a Teleport component in the scene.
+
  
 Changes for v2.2RC1:
 
