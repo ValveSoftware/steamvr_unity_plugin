@@ -54,10 +54,8 @@ namespace Valve.VR.InteractionSystem
         [HideInInspector]
         public SteamVR_Skeleton_Poser skeletonPoser;
 
-        [Tooltip("If you want the hand to stick to an object while attached, set the transform to stick to here. Can only set this or skeletonPose.")]
-        public Transform handFollowTransform;
-        public bool handFollowTransformPosition = true;
-        public bool handFollowTransformRotation = true;
+        [Tooltip("Should the rendered hand lock on to and follow the object")]
+        public bool handFollowTransform= true;
 
 
         [Tooltip("Set whether or not you want this interactible to highlight when hovering over it")]
@@ -325,10 +323,12 @@ namespace Valve.VR.InteractionSystem
             if (attachedToHand != null)
             {
                 attachedToHand.DetachObject(this.gameObject, false);
+                attachedToHand.skeleton.BlendToSkeleton(0.1f);
             }
             
             if (highlightHolder != null)
                 Destroy(highlightHolder);
+            
         }
 
 

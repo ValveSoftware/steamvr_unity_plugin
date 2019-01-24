@@ -189,16 +189,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b93b6a877adcbf94c89a9d6e0c0e844d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activateActionSetOnAttach: {fileID: 0}
-  hideHandOnAttach: 1
+  activateActionSetOnAttach:
+    actionSetPath: /actions/platformer
+  hideHandOnAttach: 0
   hideSkeletonOnAttach: 0
   hideControllerOnAttach: 1
   handAnimationOnPickup: 0
   setRangeOfMotionOnPickup: 0
   useHandObjectAttachmentPoint: 0
-  handFollowTransform: {fileID: 0}
-  handFollowTransformPosition: 1
-  handFollowTransformRotation: 1
+  attachEaseIn: 0
+  snapAttachEaseInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  snapAttachEaseInTime: 0.15
+  snapAttachEaseInCompleted: 0
+  skeletonPoser: {fileID: 0}
+  handFollowTransform: 1
   highlightOnHover: 1
   hideHighlight: []
 --- !u!114 &114000011677327570
@@ -219,24 +238,6 @@ MonoBehaviour:
   releaseVelocityTimeOffset: -0.011
   scaleReleaseVelocity: 1.1
   restoreOriginalParent: 0
-  attachEaseIn: 0
-  snapAttachEaseInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  snapAttachEaseInTime: 0.15
   onPickUp:
     m_PersistentCalls:
       m_Calls: []
@@ -247,7 +248,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  snapAttachEaseInCompleted: 0
   interactable: {fileID: 0}
 --- !u!114 &114000012529584996
 MonoBehaviour:
@@ -276,9 +276,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Joystick: {fileID: 4000013232486850}
   joyMove: 0.015
-  actionSet: {fileID: 11400000, guid: 97c362dedb69f8f49a85a791c7342d96, type: 2}
-  a_move: {fileID: 11400000, guid: 2f897a7a7b42f904ba30a1ba7e6e49c5, type: 2}
-  a_jump: {fileID: 11400000, guid: 04ed1d60b2c7cb246bd1a5954379a232, type: 2}
+  moveAction:
+    actionPath: /actions/platformer/in/Move
+    needsReinit: 0
+  jumpAction:
+    actionPath: /actions/platformer/in/Jump
+    needsReinit: 0
   character: {fileID: 0}
   jumpHighlight: {fileID: 23000012427665184}
 --- !u!114 &114000013789606070

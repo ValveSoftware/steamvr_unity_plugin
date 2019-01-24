@@ -146,9 +146,6 @@ namespace Valve.VR
                 Rect defaultLabelPosition = position;
                 defaultLabelPosition.y = position.y + fieldPosition.height / 2f;
 
-                if (defaultPathLabel == null)
-                    defaultPathLabel = string.Format(defaultPathTemplate, actionPathProperty.stringValue);
-
                 EditorGUI.LabelField(defaultLabelPosition, defaultPathLabel);
             }
 

@@ -550,8 +550,7 @@ namespace Valve.VR
         {
             get
             {
-                OnAccessSource(inputSource);
-                return sources[inputSource];
+                return GetSourceElementForIndexer(inputSource);
             }
         }
 
@@ -578,6 +577,13 @@ namespace Valve.VR
         {
             sources.Add(inputSource, new SourceElement());
             sources[inputSource].Preinitialize(wrappingAction, inputSource);
+        }
+
+        // Normally I'd just make the indexer virtual and override that but some unity versions don't like that
+        protected virtual SourceElement GetSourceElementForIndexer(SteamVR_Input_Sources inputSource)
+        {
+            OnAccessSource(inputSource);
+            return sources[inputSource];
         }
     }
 

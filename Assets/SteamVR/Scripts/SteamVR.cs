@@ -359,17 +359,16 @@ namespace Valve.VR
 
 #if UNITY_STANDALONE_WIN
             SteamVR_Windows_Editor_Helper.BrowserApplication browser = SteamVR_Windows_Editor_Helper.GetDefaultBrowser();
-            if (browser == SteamVR_Windows_Editor_Helper.BrowserApplication.Unknown || browser == SteamVR_Windows_Editor_Helper.BrowserApplication.Edge)
+            if (browser == SteamVR_Windows_Editor_Helper.BrowserApplication.Unknown)
             {
-                Debug.LogError("Unfortunately your browser " + browser.ToString() + " is not supported. Please manually open the controller binding UI from SteamVR. SteamVR Menu -> Devices -> Controller Input Binding. Press play in your application to get it running then select it under Current Application.");
+                Debug.LogError("<b>[SteamVR]</b> Unfortunately we were unable to detect your default browser. You may need to manually open the controller binding UI from SteamVR if it does not open successfully. SteamVR Menu -> Devices -> Controller Input Binding. Press play in your application to get it running then select it under Current Application.");
             }
-            else
+            else if (browser == SteamVR_Windows_Editor_Helper.BrowserApplication.Edge)
             {
-                Application.OpenURL(bindingurl); //todo: update with the actual call
+                Debug.LogError("<b>[SteamVR]</b> Microsoft Edge sometimes has issues with opening localhost webpages. You may need to manually open the controller binding UI from SteamVR if it did not load successfully. SteamVR Menu -> Devices -> Controller Input Binding. Press play in your application to get it running then select it under Current Application.");
             }
-#else
-            Application.OpenURL(bindingurl); //todo: update with the actual call
 #endif
+            Application.OpenURL(bindingurl); //todo: update with the actual api call
         }
 
 

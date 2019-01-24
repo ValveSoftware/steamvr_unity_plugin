@@ -308,9 +308,7 @@ MonoBehaviour:
   handAnimationOnPickup: 0
   setRangeOfMotionOnPickup: 0
   useHandObjectAttachmentPoint: 0
-  handFollowTransform: {fileID: 0}
-  handFollowTransformPosition: 1
-  handFollowTransformRotation: 1
+  handFollowTransform: 1
   highlightOnHover: 1
   hideHighlight: []
 --- !u!114 &114000012057973268

@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.2RC2
+﻿# SteamVR Unity Plugin - v2.2RC3
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -33,6 +33,40 @@ Support:
  If you'd like to discuss features, post guides, and give general feedback please post on the steam forum here: https://steamcommunity.com/app/250820/discussions/7/
  
  
+
+Changes for v2.2RC3:
+
+ * Minor Breaking Change: SteamVR_Behaviour_ActionType events were incorrectly sending the action instead of the behaviour component they came from.
+
+ * Minor Breaking Change: Simplified the handFollowTransform member to be one variable instead of three
+
+ * Fixed code generation so it deletes unused actionset classes (asks first)
+
+ * Fixed behaviour events disappearing from serialized objects in some unity versions
+
+ * Added a few events to SteamVR_Behaviour_Skeleton
+
+ * Added C# style events to the SteamVR_Behaviour_ActionType components.
+
+ * Added Happy Ball as an example of a complex blending pose that moves the held object
+
+ * Added scaling support for the skeleton poser
+ 
+ * Cleaned up the canvas elements on the Interaction System Sample scene.
+
+ * Skeleton poser is now able to snap/follow interactables
+
+ * Fixed the namespace on a couple small sample scene components
+
+ * When clicking the "Show binding UI" button we will now always try to launch the default browser, though it may fail sometimes (Edge) we have better error messages now
+
+ * Fixed some documentation errors
+
+ * Improved skeleton poser editor ui
+
+ * Fixed an issue with ActionSets not serializing defaults properly
+
+
 Changes for v2.2RC2:
 
  * Interactable.isHovering now correctly reports hovering when a hand is over it. There is a new associated field Interactable.hoveringHand.

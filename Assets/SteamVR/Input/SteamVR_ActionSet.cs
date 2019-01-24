@@ -198,6 +198,11 @@ namespace Valve.VR
             initialized = true;
         }
 
+        public string GetPath()
+        {
+            return actionSetPath;
+        }
+
         /// <summary>
         /// Returns whether the set is currently active or not.
         /// </summary>
@@ -277,7 +282,7 @@ namespace Valve.VR
             if (ReferenceEquals(null, other))
                 return false;
 
-            return actionSetPath == other.actionSetPath;
+            return this.actionSetPath == other.actionSetPath;
         }
 
         public override bool Equals(object other)
@@ -313,27 +318,17 @@ namespace Valve.VR
 
         public static bool operator ==(SteamVR_ActionSet set1, SteamVR_ActionSet set2)
         {
-            bool set1null = (ReferenceEquals(null, set1));
-            bool set2null = (ReferenceEquals(null, set2));
+            bool set1null = (ReferenceEquals(null, set1) || string.IsNullOrEmpty(set1.actionSetPath) || set1.GetActionSetData() == null);
+            bool set2null = (ReferenceEquals(null, set2) || string.IsNullOrEmpty(set2.actionSetPath) || set2.GetActionSetData() == null);
 
             if (set1null && set2null)
                 return true;
-            else if (set1null == false && set2null == true)
-            {
-                if (string.IsNullOrEmpty(set1.actionSetPath))
-                    return true; //if we haven't set a path, say this action set is equal to null
+            else if (set1null != set2null)
                 return false;
-            }
-            else if (set1null == true && set2null == false)
-            {
-                if (string.IsNullOrEmpty(set2.actionSetPath))
-                    return true; //if we haven't set a path, say this action set is equal to null
-                return false;
-            }
 
             return set1.Equals(set2);
         }
-        
+
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
         }

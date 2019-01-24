@@ -12,8 +12,8 @@ namespace Valve.VR
     public class SteamVR_Skeleton_Poser : MonoBehaviour
     {
         #region Editor Storage
-        public bool poseEditorExpanded;
-        public bool blendEditorExpanded;
+        public bool poseEditorExpanded = true;
+        public bool blendEditorExpanded = true;
         public string[] poseNames;
         #endregion
 
@@ -50,6 +50,8 @@ namespace Valve.VR
         private int boneCount;
 
         private bool poseUpdatedThisFrame;
+
+        public float scale;
 
 
         protected void Awake()
@@ -105,6 +107,7 @@ namespace Valve.VR
             }
             return behaviour.value;
         }
+
         /// <summary>
         /// Enable or disable a blending behaviour.
         /// </summary>
@@ -278,11 +281,11 @@ namespace Valve.VR
             {
                 if (inputSource == SteamVR_Input_Sources.LeftHand)
                 {
-                    return snapshotR;
+                    return snapshotL;
                 }
                 else
                 {
-                    return snapshotL;
+                    return snapshotR;
                 }
             }
 

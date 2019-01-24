@@ -29,7 +29,7 @@ namespace Valve.VR
         public event AxisHandler onAxis
         { add { sourceMap[SteamVR_Input_Sources.Any].onAxis += value; } remove { sourceMap[SteamVR_Input_Sources.Any].onAxis -= value; } }
 
-        /// <summary><strong>[Shortcut to: SteamVR_Input_Sources.Any]</strong> This event fires when the active state (ActionSet active & binding active) changes</summary>
+        /// <summary><strong>[Shortcut to: SteamVR_Input_Sources.Any]</strong> This event fires when the active state (ActionSet active and binding active) changes</summary>
         public event ActiveChangeHandler onActiveChange
         { add { sourceMap[SteamVR_Input_Sources.Any].onActiveChange += value; } remove { sourceMap[SteamVR_Input_Sources.Any].onActiveChange -= value; } }
 
@@ -191,7 +191,7 @@ namespace Valve.VR
         /// <summary>Event fires when the value of the action is non-zero</summary>
         public event SteamVR_Action_Single.AxisHandler onAxis;
 
-        /// <summary>Event fires when the active state (ActionSet active & binding active) changes</summary>
+        /// <summary>Event fires when the active state (ActionSet active and binding active) changes</summary>
         public event SteamVR_Action_Single.ActiveChangeHandler onActiveChange;
 
         /// <summary>Event fires when the active state of the binding changes</summary>

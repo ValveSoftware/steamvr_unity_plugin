@@ -32,6 +32,7 @@ namespace Valve.VR
         private SerializedProperty poseEditorExpanded;
         private SerializedProperty blendEditorExpanded;
 
+        private SerializedProperty poserScale;
 
 
 
@@ -65,6 +66,7 @@ namespace Valve.VR
             poseEditorExpanded = serializedObject.FindProperty("poseEditorExpanded");
             blendEditorExpanded = serializedObject.FindProperty("blendEditorExpanded");
 
+            poserScale = serializedObject.FindProperty("scale");
 
 
             blendingBehaviourArray = serializedObject.FindProperty("blendingBehaviours");
@@ -123,6 +125,7 @@ namespace Valve.VR
                 if (preview == null)
                 {
                     preview = GameObject.Instantiate<GameObject>((GameObject)prefabProperty.objectReferenceValue);
+                    preview.transform.localScale = Vector3.one * poserScale.floatValue;
                     preview.transform.parent = poser.transform;
                     preview.transform.localPosition = Vector3.zero;
                     preview.transform.localRotation = Quaternion.identity;
@@ -143,6 +146,9 @@ namespace Valve.VR
 
                         preview.transform.localPosition = Vector3.zero;
                         preview.transform.localRotation = Quaternion.identity;
+                        preview.transform.parent = null;
+                        preview.transform.localScale = Vector3.one * poserScale.floatValue;
+                        preview.transform.parent = poser.transform;
 
                         preview.transform.localRotation = Quaternion.Inverse(handData.rotation);
                         preview.transform.position = preview.transform.TransformPoint(-handData.position);
@@ -457,10 +463,9 @@ namespace Valve.VR
 
         public override void OnInspectorGUI()
         {
-            forceUpdateHands = false;
+
 
             serializedObject.Update();
-
 
             DrawPoseEditorMenu();
 
@@ -507,6 +512,7 @@ namespace Valve.VR
                 {
                     //show selectable menu of all poses, highlighting the one that is selected
                     EditorGUILayout.Space();
+
 
                     poser.poseNames = new string[skeletonAdditionalPosesProperty.arraySize + 1];
 
@@ -587,7 +593,7 @@ namespace Valve.VR
                     activePose = (SteamVR_Skeleton_Pose)activePoseProp.objectReferenceValue;
                     if (activePoseProp.objectReferenceValue == null)
                     {
-                        if(previewLeftInstanceProperty.objectReferenceValue != null)
+                        if (previewLeftInstanceProperty.objectReferenceValue != null)
                             DestroyImmediate(previewLeftInstanceProperty.objectReferenceValue);
                         if (previewRightInstanceProperty.objectReferenceValue != null)
                             DestroyImmediate(previewRightInstanceProperty.objectReferenceValue);
@@ -620,6 +626,8 @@ namespace Valve.VR
                         UpdatePreviewHand(previewLeftInstanceProperty, showLeftPreviewProperty, previewLeftHandPrefab, activePose.leftHand, activePose, forceUpdateHands);
                         UpdatePreviewHand(previewRightInstanceProperty, showRightPreviewProperty, previewRightHandPrefab, activePose.rightHand, activePose, forceUpdateHands);
 
+                        forceUpdateHands = false;
+
                         GUILayout.EndVertical();
 
 
@@ -643,7 +651,7 @@ namespace Valve.VR
                         if (GUILayout.Button(handTexL, GUI.skin.label, GUILayout.Width(64), GUILayout.Height(64)))
                         {
                             showLeftPreviewProperty.boolValue = !showLeftPreviewProperty.boolValue;
-                            forceUpdateHands = true;
+                            //forceUpdateHands = true;
                         }
                         GUI.color = Color.white;
 
@@ -677,7 +685,7 @@ namespace Valve.VR
                         if (GUILayout.Button(handTexR, GUI.skin.label, GUILayout.Width(64), GUILayout.Height(64)))
                         {
                             showRightPreviewProperty.boolValue = !showRightPreviewProperty.boolValue;
-                            forceUpdateHands = true;
+                            //forceUpdateHands = true;
                         }
                         GUI.color = Color.white;
                         EditorGUILayout.EndHorizontal();
@@ -735,27 +743,26 @@ namespace Valve.VR
                             }
                         }
                     */
-                        GUILayout.EndVertical();
+                    GUILayout.EndVertical();
                     EditorGUILayout.EndVertical();
                     GUILayout.EndHorizontal();
-                    }
 
-                    GUILayout.EndVertical();
 
-                if (createNew)
-                {
-                    string fullPath = EditorUtility.SaveFilePanelInProject("Create New Skeleton Pose", "newPose", "asset", "Save file");
-
-                    if (string.IsNullOrEmpty(fullPath) == false)
+                    EditorGUI.BeginChangeCheck();
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUIUtility.labelWidth = 120;
+                    poserScale.floatValue = EditorGUILayout.FloatField("Preview Pose Scale", poserScale.floatValue);
+                    if (poserScale.floatValue <= 0) poserScale.floatValue = 1;
+                    EditorGUIUtility.labelWidth = 0;
+                    GUILayout.FlexibleSpace();
+                    EditorGUILayout.EndHorizontal();
+                    if (EditorGUI.EndChangeCheck())
                     {
-                        SteamVR_Skeleton_Pose newPose = ScriptableObject.CreateInstance<SteamVR_Skeleton_Pose>();
-                        AssetDatabase.CreateAsset(newPose, fullPath);
-                        AssetDatabase.SaveAssets();
-
-                        activePoseProp.objectReferenceValue = newPose;
-                        serializedObject.ApplyModifiedProperties();
+                        forceUpdateHands = true;
                     }
                 }
+
+                GUILayout.EndVertical();
             }
         }
 
@@ -817,6 +824,7 @@ namespace Valve.VR
 
                     GUILayout.Space(10);
                     float bright = blenderEnabled.boolValue ? 0.6f : 0.9f; // grey out box when disabled
+                    if (EditorGUIUtility.isProSkin) bright = 1;
                     GUI.color = new Color(bright, bright, bright);
                     GUILayout.BeginVertical("box");
                     GUI.color = Color.white;

@@ -55,6 +55,7 @@ namespace Valve.VR
             GenerationStep_CreateHelperClasses();
             GenerationStep_CreateInitClass();
             GenerationStep_CreateAssemblyDefinition();
+            DeleteUnusedScripts();
 
             if (fileChanged)
                 EditorPrefs.SetBool(generationNeedsReloadKey, true);
@@ -171,11 +172,13 @@ namespace Valve.VR
         }
 
 
-        private static void DeleteUnusedScriptableObjects()
+        private static void DeleteUnusedScripts()
         {
             string folderPath = GetSubFolderPath();
 
             string[] files = Directory.GetFiles(folderPath);
+
+            List<string> toDelete = new List<string>();
 
             for (int fileIndex = 0; fileIndex < files.Length; fileIndex++)
             {
@@ -200,12 +203,25 @@ namespace Valve.VR
 
                     if (isSet == false && isAction == false)
                     {
-                        bool confirm = EditorUtility.DisplayDialog("Delete unused file", "Would you like to delete the unused input file: " + file.Name + "?", "Delete", "No");
-                        if (confirm)
-                        {
-                            file.IsReadOnly = false;
-                            file.Delete();
-                        }
+                        toDelete.Add(files[fileIndex]);
+                    }
+                }
+            }
+
+            if (toDelete.Count > 0)
+            {
+                string filesToDelete = "";
+                foreach (string file in toDelete)
+                    filesToDelete += file + "\n";
+
+                bool confirm = EditorUtility.DisplayDialog("SteamVR Input", "Would you like to delete the following unused input files:\n" + filesToDelete, "Delete", "No");
+                if (confirm)
+                {
+                    foreach (string fileName in toDelete)
+                    {
+                        FileInfo file = new FileInfo(fileName);
+                        file.IsReadOnly = false;
+                        file.Delete();
                     }
                 }
             }

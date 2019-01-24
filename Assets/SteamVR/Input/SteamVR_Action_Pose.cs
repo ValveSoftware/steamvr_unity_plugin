@@ -24,7 +24,7 @@ namespace Valve.VR
         public delegate void ValidPoseChangeHandler(SteamVR_Action_Pose fromAction, SteamVR_Input_Sources fromSource, bool validPose);
         public delegate void DeviceConnectedChangeHandler(SteamVR_Action_Pose fromAction, SteamVR_Input_Sources fromSource, bool deviceConnected);
 
-        /// <summary><strong>[Shortcut to: SteamVR_Input_Sources.Any]</strong> Event fires when the active state (ActionSet active & binding active) changes</summary>
+        /// <summary><strong>[Shortcut to: SteamVR_Input_Sources.Any]</strong> Event fires when the active state (ActionSet active and binding active) changes</summary>
         public event ActiveChangeHandler onActiveChange
         { add { sourceMap[SteamVR_Input_Sources.Any].onActiveChange += value; } remove { sourceMap[SteamVR_Input_Sources.Any].onActiveChange -= value; } }
 
@@ -417,7 +417,7 @@ namespace Valve.VR
         /// <summary>The distance the pose needs to move/rotate before a change is detected</summary>
         public float changeTolerance = Mathf.Epsilon;
 
-        /// <summary>Event fires when the active state (ActionSet active & binding active) changes</summary>
+        /// <summary>Event fires when the active state (ActionSet active and binding active) changes</summary>
         public event SteamVR_Action_Pose.ActiveChangeHandler onActiveChange;
 
         /// <summary>Event fires when the active state of the binding changes</summary>

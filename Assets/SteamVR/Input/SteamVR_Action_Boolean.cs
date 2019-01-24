@@ -42,7 +42,7 @@ namespace Valve.VR
         public event StateUpHandler onStateUp
         { add { sourceMap[SteamVR_Input_Sources.Any].onStateUp += value; } remove { sourceMap[SteamVR_Input_Sources.Any].onStateUp -= value; } }
 
-        /// <summary><strong>[Shortcut to: SteamVR_Input_Sources.Any]</strong> Event fires when the active state (ActionSet active & binding active) changes</summary>
+        /// <summary><strong>[Shortcut to: SteamVR_Input_Sources.Any]</strong> Event fires when the active state (ActionSet active and binding active) changes</summary>
         public event ActiveChangeHandler onActiveChange
         { add { sourceMap[SteamVR_Input_Sources.Any].onActiveChange += value; } remove { sourceMap[SteamVR_Input_Sources.Any].onActiveChange -= value; } }
 
@@ -240,7 +240,7 @@ namespace Valve.VR
         /// <summary>Event fires when the state of the action is true and the action gets updated</summary>
         public event SteamVR_Action_Boolean.StateHandler onState;
 
-        /// <summary>Event fires when the active state (ActionSet active & binding active) changes</summary>
+        /// <summary>Event fires when the active state (ActionSet active and binding active) changes</summary>
         public event SteamVR_Action_Boolean.ActiveChangeHandler onActiveChange;
 
         /// <summary>Event fires when the active state of the binding changes</summary>

@@ -19,17 +19,26 @@ namespace Valve.VR
         [Tooltip("The device this action should apply to. Any if the action is not device specific.")]
         public SteamVR_Input_Sources inputSource;
 
-        /// <summary>Fires whenever the action's value has changed since the last update.</summary>
+        /// <summary>Unity event that fires whenever the action's value has changed since the last update.</summary>
         [Tooltip("Fires whenever the action's value has changed since the last update.")]
         public SteamVR_Behaviour_Vector3Event onChange;
 
-        /// <summary>Fires whenever the action's value has been updated</summary>
+        /// <summary>Unity event that fires whenever the action's value has been updated</summary>
         [Tooltip("Fires whenever the action's value has been updated.")]
         public SteamVR_Behaviour_Vector3Event onUpdate;
 
-        /// <summary>Fires whenever the action's value has been updated and is non-zero</summary>
+        /// <summary>Unity event that fires whenever the action's value has been updated and is non-zero</summary>
         [Tooltip("Fires whenever the action's value has been updated and is non-zero.")]
         public SteamVR_Behaviour_Vector3Event onAxis;
+
+        /// <summary>C# event that fires whenever the action's value has changed since the last update.</summary>
+        public ChangeHandler onChangeEvent;
+
+        /// <summary>C# event that fires whenever the action's value has been updated</summary>
+        public UpdateHandler onUpdateEvent;
+
+        /// <summary>C# event that fires whenever the action's value has been updated and is non-zero</summary>
+        public AxisHandler onAxisEvent;
 
 
         /// <summary>Returns whether this action is bound and the action set is active</summary>
@@ -72,7 +81,11 @@ namespace Valve.VR
         {
             if (onUpdate != null)
             {
-                onUpdate.Invoke(fromAction, fromSource, newAxis, newDelta);
+                onUpdate.Invoke(this, fromSource, newAxis, newDelta);
+            }
+            if (onUpdateEvent != null)
+            {
+                onUpdateEvent.Invoke(this, fromSource, newAxis, newDelta);
             }
         }
 
@@ -80,7 +93,11 @@ namespace Valve.VR
         {
             if (onChange != null)
             {
-                onChange.Invoke(fromAction, fromSource, newAxis, newDelta);
+                onChange.Invoke(this, fromSource, newAxis, newDelta);
+            }
+            if (onChangeEvent != null)
+            {
+                onChangeEvent.Invoke(this, fromSource, newAxis, newDelta);
             }
         }
 
@@ -88,7 +105,11 @@ namespace Valve.VR
         {
             if (onAxis != null)
             {
-                onAxis.Invoke(fromAction, fromSource, newAxis, newDelta);
+                onAxis.Invoke(this, fromSource, newAxis, newDelta);
+            }
+            if (onAxisEvent != null)
+            {
+                onAxisEvent.Invoke(this, fromSource, newAxis, newDelta);
             }
         }
 
@@ -109,8 +130,9 @@ namespace Valve.VR
                 return vector3Action.GetLocalizedOriginPart(inputSource, localizedParts);
             return null;
         }
-    }
 
-    [Serializable]
-    public class SteamVR_Behaviour_Vector3Event : UnityEvent<SteamVR_Action_Vector3, SteamVR_Input_Sources, Vector3, Vector3> { }
+        public delegate void AxisHandler(SteamVR_Behaviour_Vector3 fromAction, SteamVR_Input_Sources fromSource, Vector3 newAxis, Vector3 newDelta);
+        public delegate void ChangeHandler(SteamVR_Behaviour_Vector3 fromAction, SteamVR_Input_Sources fromSource, Vector3 newAxis, Vector3 newDelta);
+        public delegate void UpdateHandler(SteamVR_Behaviour_Vector3 fromAction, SteamVR_Input_Sources fromSource, Vector3 newAxis, Vector3 newDelta);
+    }
 }

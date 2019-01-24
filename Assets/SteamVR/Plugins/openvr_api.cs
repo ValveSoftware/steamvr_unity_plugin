@@ -4106,6 +4106,8 @@ public enum EVREventType
 	VREvent_Compositor_DisplayDisconnected = 1412,
 	VREvent_Compositor_DisplayReconnected = 1413,
 	VREvent_Compositor_HDCPError = 1414,
+	VREvent_Compositor_ApplicationNotResponding = 1415,
+	VREvent_Compositor_ApplicationResumed = 1416,
 	VREvent_TrackedCamera_StartVideoStream = 1500,
 	VREvent_TrackedCamera_StopVideoStream = 1501,
 	VREvent_TrackedCamera_PauseVideoStream = 1502,

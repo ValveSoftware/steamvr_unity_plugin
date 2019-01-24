@@ -1383,9 +1383,7 @@ MonoBehaviour:
   snapAttachEaseInTime: 0.15
   snapAttachEaseInCompleted: 0
   skeletonPoser: {fileID: 0}
-  handFollowTransform: {fileID: 0}
-  handFollowTransformPosition: 1
-  handFollowTransformRotation: 1
+  handFollowTransform: 1
   highlightOnHover: 0
   hideHighlight: []
 --- !u!114 &114000012786783108

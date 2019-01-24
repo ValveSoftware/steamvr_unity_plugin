@@ -26,7 +26,7 @@ namespace Valve.VR
         public delegate void ValidPoseChangeHandler(SteamVR_Action_Skeleton fromAction, bool validPose);
         public delegate void DeviceConnectedChangeHandler(SteamVR_Action_Skeleton fromAction, bool deviceConnected);
 
-        /// <summary>Event fires when the active state (ActionSet active & binding active) changes</summary>
+        /// <summary>Event fires when the active state (ActionSet active and binding active) changes</summary>
         public event ActiveChangeHandler onActiveChange
         { add { sourceMap[SteamVR_Input_Sources.Any].onActiveChange += value; } remove { sourceMap[SteamVR_Input_Sources.Any].onActiveChange -= value; } }
 
@@ -187,6 +187,10 @@ namespace Valve.VR
 
         /// <summary>[Previous Update] 0-1 values representing how splayed the specified finger and it's next index'd finger is. For indexes see: SteamVR_Skeleton_FingerIndexes</summary>
         public float[] lastFingerSplays { get { return sourceMap[SteamVR_Input_Sources.Any].lastFingerSplays; } }
+
+        /// <summary>Separate from "changed". If the pose for this skeleton action has changed (root position/rotation)</summary>
+        public bool poseChanged { get { return sourceMap[SteamVR_Input_Sources.Any].poseChanged; } }
+
         #endregion  
 
         #region pose functions with SteamVR_Input_Sources.Any
@@ -498,7 +502,7 @@ namespace Valve.VR
         /// <summary>
         /// Returns a value indicating how the size of the gap between fingers.
         /// </summary>
-        /// <param name="fingerGapIndex">The index of the finger gap to return a splay value for. 0 being the gap between thumb and index, 1 being the gap between index and middle, 2 being the gap between middle and ring, and 3 being the gap between ring and pinky.
+        /// <param name="fingerGapIndex">The index of the finger gap to return a splay value for. 0 being the gap between thumb and index, 1 being the gap between index and middle, 2 being the gap between middle and ring, and 3 being the gap between ring and pinky.</param>
         /// <returns>0-1 value. 0 being no gap, 1 being "full" gap</returns>
         public float GetSplay(int fingerGapIndex)
         {
@@ -518,7 +522,7 @@ namespace Valve.VR
         /// <summary>
         /// Returns a value indicating how the size of the gap between fingers.
         /// </summary>
-        /// <param name="fingerGapIndex">The finger gap to return a splay value for. 
+        /// <param name="fingerGapIndex">The finger gap to return a splay value for.</param>
         /// <returns>0-1 value. 0 being no gap, 1 being "full" gap</returns>
         public float GetSplay(SteamVR_Skeleton_FingerSplayIndexEnum fingerSplay)
         {
@@ -538,7 +542,7 @@ namespace Valve.VR
         /// <summary>
         /// Returns a value indicating the size of the gap between fingers during the previous update
         /// </summary>
-        /// <param name="fingerGapIndex">The index of the finger gap to return a splay value for. 0 being the gap between thumb and index, 1 being the gap between index and middle, 2 being the gap between middle and ring, and 3 being the gap between ring and pinky.
+        /// <param name="fingerGapIndex">The index of the finger gap to return a splay value for. 0 being the gap between thumb and index, 1 being the gap between index and middle, 2 being the gap between middle and ring, and 3 being the gap between ring and pinky.</param>
         /// <returns>0-1 value. 0 being no gap, 1 being "full" gap</returns>
         public float GetLastSplay(int fingerGapIndex)
         {
@@ -558,7 +562,7 @@ namespace Valve.VR
         /// <summary>
         /// Returns a value indicating the size of the gap between fingers during the previous update
         /// </summary>
-        /// <param name="fingerGapIndex">The finger gap to return a splay value for. 
+        /// <param name="fingerGapIndex">The finger gap to return a splay value for. </param>
         /// <returns>0-1 value. 0 being no gap, 1 being "full" gap</returns>
         public float GetLastSplay(SteamVR_Skeleton_FingerSplayIndexEnum fingerSplay)
         {
@@ -681,13 +685,13 @@ namespace Valve.VR
 
         public static Quaternion steamVRFixUpRotation = Quaternion.AngleAxis(Mathf.PI * Mathf.Rad2Deg, Vector3.up);
     }
-
-
-    /// <summary>
-    /// Boolean actions are either true or false. There is an onStateUp and onStateDown event for the rising and falling edge.
-    /// </summary>
+    
     public class SteamVR_Action_Skeleton_Source_Map : SteamVR_Action_Pose_Source_Map<SteamVR_Action_Skeleton_Source>
     {
+        protected override SteamVR_Action_Skeleton_Source GetSourceElementForIndexer(SteamVR_Input_Sources inputSource)
+        {
+            return sources[SteamVR_Input_Sources.Any]; //just in case somebody tries to access a different element, redirect them to the correct one.
+        }
     }
 
     /// <summary>
@@ -698,7 +702,7 @@ namespace Valve.VR
     {
         protected static uint skeletonActionData_size = 0;
 
-        /// <summary>Event fires when the active state (ActionSet active & binding active) changes</summary>
+        /// <summary>Event fires when the active state (ActionSet active and binding active) changes</summary>
         public new event SteamVR_Action_Skeleton.ActiveChangeHandler onActiveChange;
 
         /// <summary>Event fires when the active state of the binding changes</summary>
@@ -816,6 +820,10 @@ namespace Valve.VR
         /// <summary>[Previous Update] 0-1 values representing how splayed the specified finger and it's next index'd finger is. For indexes see: SteamVR_Skeleton_FingerIndexes</summary>
         public float[] lastFingerSplays { get; protected set; }
 
+        /// <summary>Separate from "changed". If the pose for this skeleton action has changed (root position/rotation)</summary>
+        public bool poseChanged { get; protected set; }
+
+
         protected VRSkeletalSummaryData_t skeletalSummaryData = new VRSkeletalSummaryData_t();
         protected VRSkeletalSummaryData_t lastSkeletalSummaryData = new VRSkeletalSummaryData_t();
         protected SteamVR_Action_Skeleton skeletonAction;
@@ -894,6 +902,7 @@ namespace Valve.VR
             }
 
             base.UpdateValue(true);
+            poseChanged = changed;
 
             EVRInputError error = OpenVR.Input.GetSkeletalActionData(handle, ref skeletonActionData, skeletonActionData_size);
             if (error != EVRInputError.None)

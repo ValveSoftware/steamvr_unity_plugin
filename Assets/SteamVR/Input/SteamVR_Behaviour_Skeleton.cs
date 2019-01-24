@@ -3,6 +3,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using Valve.VR;
 
 namespace Valve.VR
@@ -56,6 +57,38 @@ namespace Valve.VR
         public float attachedTransformBlend = 0f;
 
         public Transform attachedToTransform;
+
+        /// <summary>This Unity event will fire whenever the position or rotation of the bones are updated.</summary>
+        public SteamVR_Behaviour_SkeletonEvent onBoneTransformsUpdated;
+
+        /// <summary>This Unity event will fire whenever the position or rotation of this transform is updated.</summary>
+        public SteamVR_Behaviour_SkeletonEvent onTransformUpdated;
+
+        /// <summary>This Unity event will fire whenever the position or rotation of this transform is changed.</summary>
+        public SteamVR_Behaviour_SkeletonEvent onTransformChanged;
+
+        /// <summary>This Unity event will fire whenever the device is connected or disconnected</summary>
+        public SteamVR_Behaviour_Skeleton_ConnectedChangedEvent onConnectedChanged;
+
+        /// <summary>This Unity event will fire whenever the device's tracking state changes</summary>
+        public SteamVR_Behaviour_Skeleton_TrackingChangedEvent onTrackingChanged;
+
+
+        /// <summary>This C# event will fire whenever the position or rotation of this transform is updated.</summary>
+        public UpdateHandler onBoneTransformsUpdatedEvent;
+
+        /// <summary>This C# event will fire whenever the position or rotation of this transform is updated.</summary>
+        public UpdateHandler onTransformUpdatedEvent;
+
+        /// <summary>This C# event will fire whenever the position or rotation of this transform is changed.</summary>
+        public ChangeHandler onTransformChangedEvent;
+
+        /// <summary>This C# event will fire whenever the device is connected or disconnected</summary>
+        public DeviceConnectedChangeHandler onConnectedChangedEvent;
+
+        /// <summary>This C# event will fire whenever the device's tracking state changes</summary>
+        public TrackingChangeHandler onTrackingChangedEvent;
+
 
         protected SteamVR_Skeleton_Poser blendPoser;
         protected SteamVR_Skeleton_PoseSnapshot blendSnapshot;
@@ -209,12 +242,41 @@ namespace Valve.VR
 
         protected virtual void OnEnable()
         {
+            CheckSkeletonAction();
             SteamVR_Input.onSkeletonsUpdated += SteamVR_Input_OnSkeletonsUpdated;
+            
+            if (skeletonAction != null)
+            {
+                skeletonAction.onDeviceConnectedChanged += OnDeviceConnectedChanged;
+                skeletonAction.onTrackingChanged += OnTrackingChanged;
+            }
         }
 
         protected virtual void OnDisable()
         {
             SteamVR_Input.onSkeletonsUpdated -= SteamVR_Input_OnSkeletonsUpdated;
+
+            if (skeletonAction != null)
+            {
+                skeletonAction.onDeviceConnectedChanged -= OnDeviceConnectedChanged;
+                skeletonAction.onTrackingChanged -= OnTrackingChanged;
+            }
+        }
+
+        private void OnDeviceConnectedChanged(SteamVR_Action_Skeleton fromAction, bool deviceConnected)
+        {
+            if (onConnectedChanged != null)
+                onConnectedChanged.Invoke(this, inputSource, deviceConnected);
+            if (onConnectedChangedEvent != null)
+                onConnectedChangedEvent.Invoke(this, inputSource, deviceConnected);
+        }
+
+        private void OnTrackingChanged(SteamVR_Action_Skeleton fromAction, ETrackingResult trackingState)
+        {
+            if (onTrackingChanged != null)
+                onTrackingChanged.Invoke(this, inputSource, trackingState);
+            if (onTrackingChangedEvent != null)
+                onTrackingChangedEvent.Invoke(this, inputSource, trackingState);
         }
 
         protected virtual void SteamVR_Input_OnSkeletonsUpdated(bool skipSendingEvents)
@@ -474,12 +536,17 @@ namespace Valve.VR
                         }
                     }
                 }
+
+                if (onBoneTransformsUpdated != null)
+                    onBoneTransformsUpdated.Invoke(this, inputSource);
+                if (onBoneTransformsUpdatedEvent != null)
+                    onBoneTransformsUpdatedEvent.Invoke(this, inputSource);
+
             }
 
             rangeOfMotionBlendRoutine = null;
         }
-
-        // TODO: Move this code to SteamvrSkeletonPoser
+        
         protected virtual Quaternion GetBlendPoseForBone(int boneIndex, Quaternion skeletonRotation)
         {
             Quaternion poseRotation = blendSnapshot.boneRotations[boneIndex];
@@ -560,6 +627,12 @@ namespace Valve.VR
                     }
                 }
             }
+
+
+            if (onBoneTransformsUpdated != null)
+                onBoneTransformsUpdated.Invoke(this, inputSource);
+            if (onBoneTransformsUpdatedEvent != null)
+                onBoneTransformsUpdatedEvent.Invoke(this, inputSource);
         }
 
         protected virtual void SetBonePosition(int boneIndex, Vector3 localPosition)
@@ -656,8 +729,7 @@ namespace Valve.VR
 
             return rawSkeleton;
         }
-
-        /*
+        
         protected virtual void UpdatePose()
         {
             if (skeletonAction == null)
@@ -679,71 +751,19 @@ namespace Valve.VR
                 skeletonRotation = origin.rotation * skeletonRotation;
             }
 
-            if (attachedTransformBlend <= 0)
+            if (skeletonAction.poseChanged)
             {
-                this.transform.position = skeletonPosition;
-                this.transform.rotation = skeletonRotation;
-            }
-            else
-            {
-                Vector3 attachedTransformPosition = attachedToTransform.position;
-                Quaternion attachedTransformRotation = attachedToTransform.rotation;
-
-                if (blendToPose != null)
-                {
-                    attachedTransformPosition = attachedToTransform.TransformPoint(blendToPose.position);
-                    attachedTransformRotation = attachedTransformRotation * blendToPose.rotation;
-                }
-
-                if (attachedTransformBlend >= 1)
-                {
-                    this.transform.position = attachedTransformPosition;
-                    this.transform.rotation = attachedTransformRotation;
-                }
-                else
-                {
-                    Vector3 targetPosition = Vector3.Lerp(skeletonPosition, attachedTransformPosition, attachedTransformBlend);
-                    Quaternion targetRotation = Quaternion.Lerp(skeletonRotation, attachedTransformRotation, attachedTransformBlend);
-
-                    if (attachRoutine != null)
-                    {
-                        this.transform.position = Vector3.Lerp(attachingStartPosition, targetPosition, attachedTransformBlend);
-                        this.transform.rotation = Quaternion.Lerp(attachingStartRotation, targetRotation, attachedTransformBlend);
-                    }
-                    else
-                    {
-                        this.transform.position = targetPosition;
-                        this.transform.rotation = targetRotation;
-                    }
-                }
-            }
-
-            attaching = attachRoutine != null;
-        }
-        */
-        protected virtual void UpdatePose()
-        {
-            if (skeletonAction == null)
-                return;
-
-            Vector3 skeletonPosition = skeletonAction.GetLocalPosition();
-            Quaternion skeletonRotation = skeletonAction.GetLocalRotation();
-            if (origin == null)
-            {
-                if (this.transform.parent != null)
-                {
-                    skeletonPosition = this.transform.parent.TransformPoint(skeletonPosition);
-                    skeletonRotation = this.transform.parent.rotation * skeletonRotation;
-                }
-            }
-            else
-            {
-                skeletonPosition = origin.TransformPoint(skeletonPosition);
-                skeletonRotation = origin.rotation * skeletonRotation;
+                if (onTransformChanged != null)
+                    onTransformChanged.Invoke(this, inputSource);
+                if (onTransformChangedEvent != null)
+                    onTransformChangedEvent.Invoke(this, inputSource);
             }
 
             this.transform.position = skeletonPosition;
             this.transform.rotation = skeletonRotation;
+
+            if (onTransformUpdated != null)
+                onTransformUpdated.Invoke(this, inputSource);
         }
 
         /// <summary>
@@ -757,8 +777,6 @@ namespace Valve.VR
             {
                 temporarySession = SteamVR.InitializeTemporarySession(true);
                 Awake();
-                //skeletonAction.Initialize(true);
-                //skeletonAction.actionSet.Initialize(true);
 
 #if UNITY_EDITOR
                 //gotta wait a bit for steamvr input to startup //todo: implement steamvr_input.isready
@@ -812,13 +830,6 @@ namespace Valve.VR
                 SteamVR.ExitTemporarySession();
         }
 
-        public enum MirrorType
-        {
-            None,
-            LeftToRight,
-            RightToLeft
-        }
-
         protected bool IsMetacarpal(int boneIndex)
         {
             return (boneIndex == SteamVR_Skeleton_JointIndexes.indexMetacarpal ||
@@ -827,5 +838,19 @@ namespace Valve.VR
                 boneIndex == SteamVR_Skeleton_JointIndexes.pinkyMetacarpal ||
                 boneIndex == SteamVR_Skeleton_JointIndexes.thumbMetacarpal);
         }
+
+        public enum MirrorType
+        {
+            None,
+            LeftToRight,
+            RightToLeft
+        }
+
+        public delegate void ActiveChangeHandler(SteamVR_Behaviour_Skeleton fromAction, SteamVR_Input_Sources inputSource, bool active);
+        public delegate void ChangeHandler(SteamVR_Behaviour_Skeleton fromAction, SteamVR_Input_Sources inputSource);
+        public delegate void UpdateHandler(SteamVR_Behaviour_Skeleton fromAction, SteamVR_Input_Sources inputSource);
+        public delegate void TrackingChangeHandler(SteamVR_Behaviour_Skeleton fromAction, SteamVR_Input_Sources inputSource, ETrackingResult trackingState);
+        public delegate void ValidPoseChangeHandler(SteamVR_Behaviour_Skeleton fromAction, SteamVR_Input_Sources inputSource, bool validPose);
+        public delegate void DeviceConnectedChangeHandler(SteamVR_Behaviour_Skeleton fromAction, SteamVR_Input_Sources inputSource, bool deviceConnected);
     }
 }

@@ -162,7 +162,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012099312676}
   m_LocalRotation: {x: -0.5000002, y: -0.49999997, z: -0.50000006, w: 0.49999994}
-  m_LocalPosition: {x: 0.3343, y: 1.12, z: -0.19}
+  m_LocalPosition: {x: 0.3343, y: 1.012, z: -0.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000013251070012}
@@ -376,9 +376,7 @@ MonoBehaviour:
   snapAttachEaseInTime: 0.1
   snapAttachEaseInCompleted: 0
   skeletonPoser: {fileID: 0}
-  handFollowTransform: {fileID: 0}
-  handFollowTransformPosition: 1
-  handFollowTransformRotation: 1
+  handFollowTransform: 1
   highlightOnHover: 1
   hideHighlight: []
 --- !u!114 &114000011668634522
@@ -396,18 +394,44 @@ MonoBehaviour:
   blendEditorExpanded: 1
   poseNames:
   - GrenadePose (MAIN)
+  - GrenadePose_pinch
   previewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
     type: 2}
   previewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
     type: 2}
   skeletonMainPose: {fileID: 11400000, guid: bd65db1a4d6b7894a8fccb2ebfda0fe2, type: 2}
-  skeletonAdditionalPoses: []
+  skeletonAdditionalPoses:
+  - {fileID: 11400000, guid: 99c9269b2d9df784c990f84ae9ae1e87, type: 2}
   showLeftPreview: 0
   showRightPreview: 0
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
-  previewPoseSelection: 0
-  blendingBehaviours: []
+  previewPoseSelection: 1
+  blendingBehaviours:
+  - name: PinchPose
+    enabled: 0
+    influence: 1
+    pose: 1
+    value: 1
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: 
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  scale: 1
 --- !u!114 &114000012262138290
 MonoBehaviour:
   m_ObjectHideFlags: 1

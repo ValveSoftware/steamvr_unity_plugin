@@ -26,6 +26,9 @@ namespace Valve.VR
         protected const int noneIndex = 0;
         protected int addIndex = 1;
 
+        protected const string defaultPathTemplate = "    \u26A0 Missing action set: {0}";
+        protected string defaultPathLabel = null;
+
         protected void Awake()
         {
             actionSets = SteamVR_Input.GetActionSets();
@@ -57,6 +60,20 @@ namespace Valve.VR
             */
         }
 
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            float height = base.GetPropertyHeight(property, label);
+
+            SerializedProperty actionPathProperty = property.FindPropertyRelative("actionSetPath");
+            if (string.IsNullOrEmpty(actionPathProperty.stringValue) == false)
+            {
+                if (selectedIndex == 0)
+                    return height * 2;
+            }
+
+            return height;
+        }
+
         // Draw the property inside the given rect
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -78,10 +95,11 @@ namespace Valve.VR
             EditorGUI.BeginProperty(position, label, property);
 
             SerializedProperty actionPathProperty = property.FindPropertyRelative("actionSetPath");
+            string currentPath = null;
 
             if (actionPathProperty != null)
             {
-                string currentPath = actionPathProperty.stringValue;
+                currentPath = actionPathProperty.stringValue;
                 if (string.IsNullOrEmpty(currentPath) == false)
                 {
                     for (int actionSetIndex = 0; actionSetIndex < actionSets.Length; actionSetIndex++)
@@ -107,6 +125,17 @@ namespace Valve.VR
             fieldPosition.x = (labelPosition.x + labelPosition.width);
             fieldPosition.width = EditorGUIUtility.currentViewWidth - (labelPosition.x + labelPosition.width) - 5 - 16;
 
+            if (selectedIndex == 0 && string.IsNullOrEmpty(currentPath) == false)
+            {
+                if (defaultPathLabel == null)
+                    defaultPathLabel = string.Format(defaultPathTemplate, currentPath);
+
+                Rect defaultLabelPosition = position;
+                defaultLabelPosition.y = position.y + fieldPosition.height / 2f;
+
+                EditorGUI.LabelField(defaultLabelPosition, defaultPathLabel);
+            }
+
             Rect objectRect = position;
             objectRect.x = fieldPosition.x + fieldPosition.width + 15;
             objectRect.width = 10;
@@ -121,7 +150,7 @@ namespace Valve.VR
                 {
                     selectedIndex = noneIndex;
 
-                    actionPathProperty.stringValue = "";
+                    actionPathProperty.stringValue = null;
                 }
                 else if (selectedIndex == addIndex)
                 {
@@ -130,9 +159,10 @@ namespace Valve.VR
                 }
                 else
                 {
-                    actionPathProperty.stringValue = actionSets[selectedIndex - 1].fullPath;
+                    int actionIndex = selectedIndex - 1; // account for none option
 
-                    //property.objectReferenceValue = actionSets[selectedIndex - 1];
+                    actionPathProperty.stringValue = actionSets[actionIndex].GetPath();
+                    //property.objectReferenceValue = actions[actionIndex];
                 }
 
                 property.serializedObject.ApplyModifiedProperties();

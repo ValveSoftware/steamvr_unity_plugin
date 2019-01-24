@@ -27,31 +27,31 @@ namespace Valve.VR
         public SteamVR_Behaviour_BooleanEvent onChange;
 
         /// <summary>This C# event fires whenever a change happens in the action</summary>
-        public event SteamVR_Action_Boolean.ChangeHandler onChangeEvent { add { booleanAction[inputSource].onChange += value; } remove { booleanAction[inputSource].onChange -= value; } }
+        public event ChangeHandler onChangeEvent;
 
         /// <summary>This UnityEvent fires whenever the action is updated</summary>
         public SteamVR_Behaviour_BooleanEvent onUpdate;
 
         /// <summary>This C# event fires whenever the action is updated</summary>
-        public event SteamVR_Action_Boolean.UpdateHandler onUpdateEvent { add { booleanAction[inputSource].onUpdate += value; } remove { booleanAction[inputSource].onUpdate -= value; } }
+        public event UpdateHandler onUpdateEvent;
 
         /// <summary>This UnityEvent will fire whenever the boolean action is true and gets updated</summary>
         public SteamVR_Behaviour_BooleanEvent onPress;
 
         /// <summary>This C# event will fire whenever the boolean action is true and gets updated</summary>
-        public event SteamVR_Action_Boolean.StateHandler onPressEvent { add { booleanAction[inputSource].onState += value; } remove { booleanAction[inputSource].onState -= value; } }
+        public event StateHandler onPressEvent;
 
         /// <summary>This UnityEvent will fire whenever the boolean action has changed from false to true in the last update</summary>
         public SteamVR_Behaviour_BooleanEvent onPressDown;
 
         /// <summary>This C# event will fire whenever the boolean action has changed from false to true in the last update</summary>
-        public event SteamVR_Action_Boolean.StateDownHandler onPressDownEvent { add { booleanAction[inputSource].onStateDown += value; } remove { booleanAction[inputSource].onStateDown -= value; } }
+        public event StateDownHandler onPressDownEvent;
 
         /// <summary>This UnityEvent will fire whenever the boolean action has changed from true to false in the last update</summary>
         public SteamVR_Behaviour_BooleanEvent onPressUp;
 
         /// <summary>This C# event will fire whenever the boolean action has changed from true to false in the last update</summary>
-        public event SteamVR_Action_Boolean.StateUpHandler onPressUpEvent { add { booleanAction[inputSource].onStateUp += value; } remove { booleanAction[inputSource].onStateUp -= value; } }
+        public event StateUpHandler onPressUpEvent;
 
         /// <summary>Returns true if this action is currently bound and its action set is active</summary>
         public bool isActive { get { return booleanAction[inputSource].active; } }
@@ -103,7 +103,12 @@ namespace Valve.VR
         {
             if (onPressUp != null)
             {
-                onPressUp.Invoke(fromAction, fromSource, false);
+                onPressUp.Invoke(this, fromSource, false);
+            }
+
+            if (onPressUpEvent != null)
+            {
+                onPressUpEvent.Invoke(this, fromSource);
             }
         }
 
@@ -111,7 +116,12 @@ namespace Valve.VR
         {
             if (onPressDown != null)
             {
-                onPressDown.Invoke(fromAction, fromSource, true);
+                onPressDown.Invoke(this, fromSource, true);
+            }
+
+            if (onPressDownEvent != null)
+            {
+                onPressDownEvent.Invoke(this, fromSource);
             }
         }
 
@@ -119,7 +129,12 @@ namespace Valve.VR
         {
             if (onPress != null)
             {
-                onPress.Invoke(fromAction, fromSource, true);
+                onPress.Invoke(this, fromSource, true);
+            }
+
+            if (onPressEvent != null)
+            {
+                onPressEvent.Invoke(this, fromSource);
             }
         }
 
@@ -127,7 +142,12 @@ namespace Valve.VR
         {
             if (onUpdate != null)
             {
-                onUpdate.Invoke(fromAction, fromSource, newState);
+                onUpdate.Invoke(this, fromSource, newState);
+            }
+
+            if (onUpdateEvent != null)
+            {
+                onUpdateEvent.Invoke(this, fromSource, newState);
             }
         }
 
@@ -135,7 +155,12 @@ namespace Valve.VR
         {
             if (onChange != null)
             {
-                onChange.Invoke(fromAction, fromSource, newState);
+                onChange.Invoke(this, fromSource, newState);
+            }
+
+            if (onChangeEvent != null)
+            {
+                onChangeEvent.Invoke(this, fromSource, newState);
             }
         }
 
@@ -156,8 +181,12 @@ namespace Valve.VR
                 return booleanAction.GetLocalizedOriginPart(inputSource, localizedParts);
             return null;
         }
-    }
 
-    [Serializable]
-    public class SteamVR_Behaviour_BooleanEvent : UnityEvent<SteamVR_Action_Boolean, SteamVR_Input_Sources, bool> { }
+        public delegate void StateDownHandler(SteamVR_Behaviour_Boolean fromAction, SteamVR_Input_Sources fromSource);
+        public delegate void StateUpHandler(SteamVR_Behaviour_Boolean fromAction, SteamVR_Input_Sources fromSource);
+        public delegate void StateHandler(SteamVR_Behaviour_Boolean fromAction, SteamVR_Input_Sources fromSource);
+        public delegate void ActiveChangeHandler(SteamVR_Behaviour_Boolean fromAction, SteamVR_Input_Sources fromSource, bool active);
+        public delegate void ChangeHandler(SteamVR_Behaviour_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState);
+        public delegate void UpdateHandler(SteamVR_Behaviour_Boolean fromAction, SteamVR_Input_Sources fromSource, bool newState);
+    }
 }

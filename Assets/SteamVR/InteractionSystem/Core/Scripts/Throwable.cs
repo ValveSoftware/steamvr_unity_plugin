@@ -72,7 +72,8 @@ namespace Valve.VR.InteractionSystem
 
             if(attachmentOffset != null)
             {
-                interactable.handFollowTransform = attachmentOffset;
+                // remove?
+                //interactable.handFollowTransform = attachmentOffset;
             }
 
 		}

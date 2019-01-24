@@ -132,7 +132,7 @@ namespace Valve.VR
 
     public class SteamVR_Action_Vibration_Source : SteamVR_Action_Out_Source
     {
-        /// <summary>Event fires when the active state (ActionSet active & binding active) changes</summary>
+        /// <summary>Event fires when the active state (ActionSet active and binding active) changes</summary>
         public event SteamVR_Action_Vibration.ActiveChangeHandler onActiveChange;
 
         /// <summary>Event fires when the active state of the binding changes</summary>
@@ -158,6 +158,9 @@ namespace Valve.VR
         /// <summary>The last time the execute method was called on this action</summary>
         public float timeLastExecuted { get; protected set; }
 
+        protected SteamVR_Action_Vibration vibrationAction;
+
+
         /// <summary>
         /// <strong>[Should not be called by user code]</strong> 
         /// Initializes the handle for the inputSource, and any other related SteamVR data.
@@ -167,6 +170,13 @@ namespace Valve.VR
             base.Initialize();
 
             lastActive = true;
+        }
+
+        public override void Preinitialize(SteamVR_Action wrappingAction, SteamVR_Input_Sources forInputSource)
+        {
+            base.Preinitialize(wrappingAction, forInputSource);
+
+            vibrationAction = (SteamVR_Action_Vibration)wrappingAction;
         }
 
 
@@ -188,6 +198,9 @@ namespace Valve.VR
 
             if (err != EVRInputError.None)
                 Debug.LogError("<b>[SteamVR]</b> TriggerHapticVibrationAction (" + fullPath + ") error: " + err.ToString() + " handle: " + handle.ToString());
+
+            if (onExecute != null)
+                onExecute.Invoke(vibrationAction, inputSource, secondsFromNow, durationSeconds, frequency, amplitude);
         }
     }
 

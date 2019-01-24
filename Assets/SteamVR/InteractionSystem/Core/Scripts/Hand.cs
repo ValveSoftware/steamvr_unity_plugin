@@ -32,15 +32,13 @@ namespace Valve.VR.InteractionSystem
             TurnOnKinematic = 1 << 5, // The object will not respond to external physics.
             TurnOffGravity = 1 << 6, // The object will not respond to external physics.
             AllowSidegrade = 1 << 7, // The object is able to switch from a pinch grab to a grip grab. Decreases likelyhood of a good throw but also decreases likelyhood of accidental drop
-            LockSkeletonToObject = 1 << 8, // The skeleton will follow the physics of the object it is holding. 
         };
 
         public const AttachmentFlags defaultAttachmentFlags = AttachmentFlags.ParentToHand |
                                                               AttachmentFlags.DetachOthers |
                                                               AttachmentFlags.DetachFromOtherHand |
                                                               AttachmentFlags.TurnOnKinematic |
-                                                              AttachmentFlags.SnapOnAttach |
-                                                              AttachmentFlags.LockSkeletonToObject;
+                                                              AttachmentFlags.SnapOnAttach;
 
         public Hand otherHand;
         public SteamVR_Input_Sources handType;
@@ -105,10 +103,6 @@ namespace Valve.VR.InteractionSystem
             public Vector3 easeSourcePosition;
             public Quaternion easeSourceRotation;
             public float attachTime;
-
-
-            public Vector3 skeletonLockPosition;
-            public Quaternion skeletonLockRotation;
 
             public bool HasAttachFlag(AttachmentFlags flag)
             {
@@ -465,7 +459,7 @@ namespace Valve.VR.InteractionSystem
                     SteamVR_Skeleton_PoseSnapshot pose = attachedObject.interactable.skeletonPoser.GetBlendedPose(skeleton);
 
                     //snap the object to the center of the attach point
-                    pose.position.x *= -1;
+                    //pose.position.x *= -1;
                     objectToAttach.transform.position = this.transform.TransformPoint(pose.position);
                     objectToAttach.transform.rotation = this.transform.rotation * pose.rotation;
 
@@ -491,8 +485,8 @@ namespace Valve.VR.InteractionSystem
                     }
 
                     Transform followPoint = objectToAttach.transform;
-                    if (attachedObject.interactable != null && attachedObject.interactable.handFollowTransform != null)
-                        followPoint = attachedObject.interactable.handFollowTransform;
+                    //if (attachedObject.interactable != null && attachedObject.interactable.handFollowTransform != null)
+                    //    followPoint = attachedObject.interactable.handFollowTransform;
 
                     attachedObject.initialPositionalOffset = attachedObject.handAttachmentPointTransform.InverseTransformPoint(followPoint.position);
                     attachedObject.initialRotationalOffset = Quaternion.Inverse(attachedObject.handAttachmentPointTransform.rotation) * followPoint.rotation;
@@ -551,12 +545,6 @@ namespace Valve.VR.InteractionSystem
                 {
                     attachedObject.attachedRigidbody.useGravity = false;
                 }
-            }
-
-            if (attachedObject.HasAttachFlag(AttachmentFlags.LockSkeletonToObject))
-            {
-                attachedObject.skeletonLockPosition = attachedObject.attachedObject.transform.InverseTransformPoint(skeleton.transform.position);
-                attachedObject.skeletonLockRotation = Quaternion.Inverse(attachedObject.attachedObject.transform.rotation) * skeleton.transform.rotation;
             }
 
             if (attachedObject.interactable != null && attachedObject.interactable.attachEaseIn)
@@ -656,7 +644,7 @@ namespace Valve.VR.InteractionSystem
                     }
                 }
 
-                if (attachedObjects[index].HasAttachFlag(AttachmentFlags.LockSkeletonToObject))
+                if (attachedObjects[index].interactable != null && attachedObjects[index].interactable.handFollowTransform)
                 {
                     skeleton.transform.localPosition = Vector3.zero;
                     skeleton.transform.localRotation = Quaternion.identity;
@@ -790,7 +778,7 @@ namespace Valve.VR.InteractionSystem
                 trackedObject = this.gameObject.GetComponent<SteamVR_Behaviour_Pose>();
 
                 if (trackedObject != null)
-                    trackedObject.onTransformUpdated.AddListener(OnTransformUpdated);
+                    trackedObject.onTransformUpdatedEvent += OnTransformUpdated;
             }
         }
 
@@ -798,11 +786,11 @@ namespace Valve.VR.InteractionSystem
         {
             if (trackedObject != null)
             {
-                trackedObject.onTransformUpdated.RemoveListener(OnTransformUpdated);
+                trackedObject.onTransformUpdatedEvent -= OnTransformUpdated;
             }
         }
 
-        protected virtual void OnTransformUpdated(SteamVR_Action_Pose updatedPose, SteamVR_Input_Sources updatedSource)
+        protected virtual void OnTransformUpdated(SteamVR_Behaviour_Pose updatedPose, SteamVR_Input_Sources updatedSource)
         {
             HandFollowUpdate();
         }
@@ -1116,54 +1104,50 @@ namespace Valve.VR.InteractionSystem
             GameObject attachedObject = currentAttachedObject;
             if (attachedObject != null)
             {
-                if (currentAttachedObjectInfo.Value.interactable != null && currentAttachedObjectInfo.Value.interactable.handFollowTransform != null)
+                if (currentAttachedObjectInfo.Value.interactable != null)
                 {
                     SteamVR_Skeleton_PoseSnapshot pose = null;
 
                     if (currentAttachedObjectInfo.Value.interactable.skeletonPoser != null)
                     {
                         pose = currentAttachedObjectInfo.Value.interactable.skeletonPoser.GetBlendedPose(skeleton);
-                        
                     }
 
-                    if (currentAttachedObjectInfo.Value.interactable.handFollowTransformRotation)
+                    if (currentAttachedObjectInfo.Value.interactable.handFollowTransform)
                     {
                         Quaternion targetHandRotation;
+                        Vector3 targetHandPosition;
 
                         if (pose == null)
                         {
                             Quaternion offset = Quaternion.Inverse(this.transform.rotation) * currentAttachedObjectInfo.Value.handAttachmentPointTransform.rotation;
-                            targetHandRotation = currentAttachedObjectInfo.Value.interactable.handFollowTransform.rotation * Quaternion.Inverse(offset);
+                            targetHandRotation = currentAttachedObjectInfo.Value.interactable.transform.rotation * Quaternion.Inverse(offset);
+
+                            Vector3 worldOffset = (this.transform.position - currentAttachedObjectInfo.Value.handAttachmentPointTransform.position);
+                            Quaternion rotationDiff = mainRenderModel.GetHandRotation() * Quaternion.Inverse(this.transform.rotation);
+                            Vector3 localOffset = rotationDiff * worldOffset;
+                            targetHandPosition = currentAttachedObjectInfo.Value.interactable.transform.position + localOffset;
                         }
                         else
                         {
-                            targetHandRotation = currentAttachedObjectInfo.Value.handAttachmentPointTransform.rotation * pose.rotation;
+                            Transform objectT = currentAttachedObjectInfo.Value.attachedObject.transform;
+                            Vector3 oldItemPos = objectT.position;
+                            Quaternion oldItemRot = objectT.transform.rotation;
+                            objectT.position = TargetItemPosition(currentAttachedObjectInfo.Value);
+                            objectT.rotation = TargetItemRotation(currentAttachedObjectInfo.Value);
+                            Vector3 localSkelePos = objectT.InverseTransformPoint(transform.position);
+                            Quaternion localSkeleRot = Quaternion.Inverse(objectT.rotation) * transform.rotation;
+                            objectT.position = oldItemPos;
+                            objectT.rotation = oldItemRot;
+
+                            targetHandPosition = objectT.TransformPoint(localSkelePos);
+                            targetHandRotation = objectT.rotation * localSkeleRot;
                         }
 
                         if (mainRenderModel != null)
                             mainRenderModel.SetHandRotation(targetHandRotation);
                         if (hoverhighlightRenderModel != null)
                             hoverhighlightRenderModel.SetHandRotation(targetHandRotation);
-                    }
-
-                    if (currentAttachedObjectInfo.Value.interactable.handFollowTransformPosition)
-                    {
-                        Vector3 targetHandPosition;
-
-                        if (pose == null)
-                        {
-                            Vector3 worldOffset = (this.transform.position - currentAttachedObjectInfo.Value.handAttachmentPointTransform.position);
-
-                            Quaternion rotationDiff = mainRenderModel.GetHandRotation() * Quaternion.Inverse(this.transform.rotation);
-
-                            Vector3 localOffset = rotationDiff * worldOffset;
-
-                            targetHandPosition = currentAttachedObjectInfo.Value.interactable.handFollowTransform.position + localOffset;
-                        }
-                        else
-                        {
-                            targetHandPosition = currentAttachedObjectInfo.Value.handAttachmentPointTransform.TransformPoint(pose.position);
-                        }
 
                         if (mainRenderModel != null)
                             mainRenderModel.SetHandPosition(targetHandPosition);
@@ -1173,7 +1157,6 @@ namespace Valve.VR.InteractionSystem
                 }
             }
         }
-
 
         protected virtual void FixedUpdate()
         {
@@ -1187,11 +1170,11 @@ namespace Valve.VR.InteractionSystem
                         if(attachedInfo.interactable.attachEaseIn == false || attachedInfo.interactable.snapAttachEaseInCompleted)
                             UpdateAttachedVelocity(attachedInfo);
 
-                        if (attachedInfo.HasAttachFlag(AttachmentFlags.LockSkeletonToObject))
+                        /*if (attachedInfo.interactable.handFollowTransformPosition)
                         {
-                            skeleton.transform.position = attachedInfo.attachedObject.transform.TransformPoint(attachedInfo.skeletonLockPosition);
+                            skeleton.transform.position = TargetSkeletonPosition(attachedInfo);
                             skeleton.transform.rotation = attachedInfo.attachedObject.transform.rotation * attachedInfo.skeletonLockRotation;
-                        }
+                        }*/
                     }else
                     {
                         if (attachedInfo.HasAttachFlag(AttachmentFlags.ParentToHand))
@@ -1251,21 +1234,55 @@ namespace Valve.VR.InteractionSystem
             if (attachedObject.interactable.skeletonPoser != null)
             {
                 Vector3 tp = attachedObject.handAttachmentPointTransform.InverseTransformPoint(transform.TransformPoint(attachedObject.interactable.skeletonPoser.GetBlendedPose(skeleton).position));
-                tp.x *= -1;
+                //tp.x *= -1;
                 return currentAttachedObjectInfo.Value.handAttachmentPointTransform.TransformPoint(tp);
             }
             else
             {
-                //todo: this was throwing errors because we've established there is no attachedObject.interactable.skeletonPoser in this scenario.
-                //Quaternion tr = Quaternion.Inverse(attachedObject.handAttachmentPointTransform.rotation) * (transform.rotation * attachedObject.interactable.skeletonPoser.GetBlendedPose(skeleton).rotation);
                 return currentAttachedObjectInfo.Value.handAttachmentPointTransform.TransformPoint(attachedObject.initialPositionalOffset);
             }
         }
 
         Quaternion TargetItemRotation(AttachedObject attachedObject)
         {
-            return currentAttachedObjectInfo.Value.handAttachmentPointTransform.rotation * attachedObject.initialRotationalOffset;
+            if (attachedObject.interactable.skeletonPoser != null)
+            {
+                Quaternion tr = Quaternion.Inverse(attachedObject.handAttachmentPointTransform.rotation) * (transform.rotation * attachedObject.interactable.skeletonPoser.GetBlendedPose(skeleton).rotation);
+                return currentAttachedObjectInfo.Value.handAttachmentPointTransform.rotation * tr;
+            }
+            else
+            {
+                return currentAttachedObjectInfo.Value.handAttachmentPointTransform.rotation * attachedObject.initialRotationalOffset;
+            }
         }
+/*
+        Vector3 TargetSkeletonPosition(AttachedObject attachedObject)
+        {
+            if (attachedObject.interactable.skeletonPoser != null)
+            {
+                Vector3 tp = attachedObject.attachedObject.transform.TransformPoint(attachedObject.interactable.skeletonPoser.GetBlendedPose(skeleton).position);
+                //tp.x *= -1;
+                return tp;
+            }
+            else
+            {
+                return currentAttachedObjectInfo.Value.handAttachmentPointTransform.position;
+            }
+        }
+        Quaternion TargetSkeletonRotation(AttachedObject attachedObject)
+        {
+            if (attachedObject.interactable.skeletonPoser != null)
+            {
+                attachedObject.attachedObject.transform.position = TargetItemPosition
+                Quaternion tq = attachedObject.attachedObject.transform.rotation;
+                return tq;
+            }
+            else
+            {
+                return currentAttachedObjectInfo.Value.handAttachmentPointTransform.rotation;
+            }
+            //currentAttachedObjectInfo.Value.handAttachmentPointTransform.rotation * pose.rotation;
+        }*/
 
         protected bool GetUpdatedAttachedVelocities(AttachedObject attachedObjectInfo, out Vector3 velocityTarget, out Vector3 angularTarget)
         {
