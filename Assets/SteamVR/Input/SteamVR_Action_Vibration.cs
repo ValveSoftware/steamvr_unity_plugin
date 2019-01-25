@@ -7,6 +7,8 @@ using Valve.VR;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 
+#pragma warning disable 0067
+
 namespace Valve.VR
 {
     [Serializable]
@@ -115,13 +117,13 @@ namespace Valve.VR
         {
             InitAfterDeserialize();
         }
-        
+
         public override bool IsUpdating(SteamVR_Input_Sources inputSource)
         {
             return sourceMap.IsUpdating(inputSource);
         }
     }
-    
+
     public class SteamVR_Action_Vibration_Source_Map : SteamVR_Action_Source_Map<SteamVR_Action_Vibration_Source>
     {
         public bool IsUpdating(SteamVR_Input_Sources inputSource)
@@ -190,6 +192,9 @@ namespace Valve.VR
         /// <param name="inputSource">The device you would like to execute the haptic action. Any if the action is not device specific.</param>
         public void Execute(float secondsFromNow, float durationSeconds, float frequency, float amplitude)
         {
+            if (SteamVR_Input.isStartupFrame)
+                return;
+
             timeLastExecuted = Time.realtimeSinceStartup;
 
             EVRInputError err = OpenVR.Input.TriggerHapticVibrationAction(handle, secondsFromNow, durationSeconds, frequency, amplitude, inputSourceHandle);
@@ -221,3 +226,5 @@ namespace Valve.VR
         void Execute(float secondsFromNow, float durationSeconds, float frequency, float amplitude, SteamVR_Input_Sources inputSource);
     }
 }
+
+#pragma warning restore 0067

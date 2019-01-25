@@ -47,7 +47,13 @@ namespace Valve.VR
         protected static bool initializing = false;
 
         protected static int startupFrame = 0;
-        public static bool isStartupFrame { get { return Time.frameCount == startupFrame; } }
+        public static bool isStartupFrame
+        {
+            get
+            {
+                return Time.frameCount >= (startupFrame-1) && Time.frameCount <= (startupFrame+1);
+            }
+        }
 
         #region array accessors
         /// <summary>An array of all action sets</summary>

@@ -119,24 +119,22 @@ namespace Valve.VR
                 //window.title = "SteamVR";
             }
 
-            SteamVR_Settings.AutoEnableVR();
-
-            var dlls = new string[]
+            string[] dlls = new string[]
             {
             "Plugins/x86/openvr_api.dll",
             "Plugins/x86_64/openvr_api.dll"
             };
 
-            foreach (var path in dlls)
+            foreach (string path in dlls)
             {
                 if (!File.Exists(Application.dataPath + "/" + path))
                     continue;
 
                 if (AssetDatabase.DeleteAsset("Assets/" + path))
-                    Debug.Log("<b>[SteamVR]</b> Deleting " + path);
+                    Debug.Log("<b>[SteamVR Setup]</b> Deleting " + path);
                 else
                 {
-                    Debug.Log("<b>[SteamVR]</b> " + path + " in use; cannot delete.  Please restart Unity to complete upgrade.");
+                    Debug.Log("<b>[SteamVR Setup]</b> " + path + " in use; cannot delete.  Please restart Unity to complete upgrade.");
                 }
             }
 
