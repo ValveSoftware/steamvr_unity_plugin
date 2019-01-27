@@ -433,14 +433,29 @@ namespace Valve.VR
 
             string fullPath = Path.Combine(currentPath, "unityProject.vrmanifest");
 
+            FileInfo fullManifestPath = new FileInfo(SteamVR_Settings.instance.actionsFilePath);
+
             if (File.Exists(fullPath))
             {
                 string jsonText = File.ReadAllText(fullPath);
                 SteamVR_Input_ManifestFile existingFile = Valve.Newtonsoft.Json.JsonConvert.DeserializeObject<SteamVR_Input_ManifestFile>(jsonText);
+
                 if (existingFile != null && existingFile.applications != null && existingFile.applications.Count > 0 &&
                     existingFile.applications[0].app_key != SteamVR_Settings.instance.editorAppKey)
                 {
                     Debug.Log("<b>[SteamVR]</b> Deleting existing VRManifest because it has a different app key.");
+                    FileInfo existingInfo = new FileInfo(fullPath);
+                    if (existingInfo.IsReadOnly)
+                        existingInfo.IsReadOnly = false;
+                    existingInfo.Delete();
+                }
+
+                if (existingFile != null && existingFile.applications != null && existingFile.applications.Count > 0 &&
+                    existingFile.applications[0].action_manifest_path != fullManifestPath.FullName)
+                {
+                    Debug.Log("<b>[SteamVR]</b> Deleting existing VRManifest because it has a different action manifest path:" +
+                        "\nExisting:" + existingFile.applications[0].action_manifest_path +
+                        "\nNew: " + fullManifestPath.FullName);
                     FileInfo existingInfo = new FileInfo(fullPath);
                     if (existingInfo.IsReadOnly)
                         existingInfo.IsReadOnly = false;
@@ -454,7 +469,7 @@ namespace Valve.VR
                 manifestFile.source = "Unity";
                 SteamVR_Input_ManifestFile_Application manifestApplication = new SteamVR_Input_ManifestFile_Application();
                 manifestApplication.app_key = SteamVR_Settings.instance.editorAppKey;
-                //manifestApplication.action_manifest_path = SteamVR_Settings.instance.actionsFilePath;
+                manifestApplication.action_manifest_path = fullManifestPath.FullName;
                 manifestApplication.launch_type = "url";
                 //manifestApplication.binary_path_windows = SteamVR_Utils.ConvertToForwardSlashes(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
                 //manifestApplication.binary_path_linux = SteamVR_Utils.ConvertToForwardSlashes(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
@@ -507,22 +522,19 @@ namespace Valve.VR
         {
             bool isInstalled = OpenVR.Applications.IsApplicationInstalled(SteamVR_Settings.instance.editorAppKey);
 
-            if (isInstalled == false)
-            {
-                string manifestPath = GetManifestFile();
+            string manifestPath = GetManifestFile();
 
-                var addManifestErr = OpenVR.Applications.AddApplicationManifest(manifestPath, true);
-                if (addManifestErr != EVRApplicationError.None)
-                    Debug.LogError("<b>[SteamVR]</b> Error adding vr manifest file: " + addManifestErr.ToString());
-                else
-                {
-                    if (showLogs)
-                        Debug.Log("<b>[SteamVR]</b> Successfully added VR manifest to SteamVR");
-                }
+            EVRApplicationError addManifestErr = OpenVR.Applications.AddApplicationManifest(manifestPath, true);
+            if (addManifestErr != EVRApplicationError.None)
+                Debug.LogError("<b>[SteamVR]</b> Error adding vr manifest file: " + addManifestErr.ToString());
+            else
+            {
+                if (showLogs)
+                    Debug.Log("<b>[SteamVR]</b> Successfully added VR manifest to SteamVR");
             }
 
             int processId = System.Diagnostics.Process.GetCurrentProcess().Id;
-            var applicationIdentifyErr = OpenVR.Applications.IdentifyApplication((uint)processId, SteamVR_Settings.instance.editorAppKey);
+            EVRApplicationError applicationIdentifyErr = OpenVR.Applications.IdentifyApplication((uint)processId, SteamVR_Settings.instance.editorAppKey);
 
             if (applicationIdentifyErr != EVRApplicationError.None)
                 Debug.LogError("<b>[SteamVR]</b> Error identifying application: " + applicationIdentifyErr.ToString());

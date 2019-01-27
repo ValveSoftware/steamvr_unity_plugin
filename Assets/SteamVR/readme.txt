@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.2RC4
+﻿# SteamVR Unity Plugin - v2.2RC5
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -33,13 +33,20 @@ Support:
  If you'd like to discuss features, post guides, and give general feedback please post on the steam forum here: https://steamcommunity.com/app/250820/discussions/7/
  
 
+Changes for v2.2RC5:
+ 
+ * Fix for controllers that don't support Skeleton Input yet (WinMR)
+ 
+ * Fixing issue where sometimes SteamVR would load legacy bindings for SteamVR Input projects while in the editor.
+ 
+
 Changes for v2.2RC4:
  
  * Changed SteamVR_Input.isStartupFrame to return true for the couple frames around startup. This fixes some startup errors temporarily until we have a SteamVR API to determine startup state.
 
  * Fixed an issue where builds would fail
 
- * Significantly reduced asset package file size 50%. Some psds were replaced with pngs, some png res was lowered. The old assets are still on the github repo under old plugin versions.
+ * Significantly reduced asset package file size (~50%). Some psds were replaced with pngs, some png res was lowered. The old assets are still on the github repo under old plugin versions.
 
  * Made Unity 2018.1+ OpenVR package detection and installation more robust.
 
