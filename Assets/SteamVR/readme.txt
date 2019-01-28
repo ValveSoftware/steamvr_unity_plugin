@@ -15,17 +15,13 @@ Documentation:
  Documentation can be found online here: https://valvesoftware.github.io/steamvr_unity_plugin/
 
 
-
 Quick Start:
-
- Follow the quickstart guide here: 
 
  If you want to explore the interaction scene you'll need to open the SteamVR Input window (under the Window Menu), click yes to copy example jsons, then click Save and Generate to create input actions.
 
  For the most simple example of VR with tracked controllers see the sample scene at ​SteamVR/Simple Sample
 
  For a more extensive example including picking up, throwing objects, and animated hands see the Interaction System example at ​SteamVR/Interaction System/Samples/Interactions_Example
-
 
 
 Support:
@@ -35,15 +31,16 @@ Support:
  If you'd like to discuss features, post guides, and give general feedback please post on the steam forum here: https://steamcommunity.com/app/250820/discussions/7/
  
 
-
-Changes for 2.2:
-
- * Removed some old functions/members in the skeleton behaviour
+Changes for v2.2:
+ 
+ * Removing some unused code
 
 
 Changes for v2.2RC5:
  
  * Fix for controllers that don't support Skeleton Input yet (WinMR)
+ 
+ * Fixing issue where sometimes SteamVR would load legacy bindings for SteamVR Input projects while in the editor.
  
 
 Changes for v2.2RC4:

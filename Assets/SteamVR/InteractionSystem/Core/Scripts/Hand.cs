@@ -748,13 +748,6 @@ namespace Valve.VR.InteractionSystem
             angularVelocity = Player.instance.trackingOriginTransform.TransformDirection(angularVelocity);
         }
 
-        public void GetRealPeakVelocities(out Vector3 velocity, out Vector3 angularVelocity)
-        {
-            trackedObject.GetRealPeakVelocities(out velocity, out angularVelocity);
-            velocity = Player.instance.trackingOriginTransform.TransformVector(velocity);
-            angularVelocity = Player.instance.trackingOriginTransform.TransformDirection(angularVelocity);
-        }
-
 
         //-------------------------------------------------
         private void CleanUpAttachedObjectStack()
