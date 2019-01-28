@@ -14543,22 +14543,6 @@ references:
   isSpec: "True"
   fullName: Valve.VR.InteractionSystem.Hand.GetGrabStarting
   nameWithType: Hand.GetGrabStarting
-- uid: Valve.VR.InteractionSystem.Hand.GetRealPeakVelocities(UnityEngine.Vector3@,UnityEngine.Vector3@)
-  name: GetRealPeakVelocities(out Vector3, out Vector3)
-  href: api/Valve.VR.InteractionSystem.Hand.html#Valve_VR_InteractionSystem_Hand_GetRealPeakVelocities_UnityEngine_Vector3__UnityEngine_Vector3__
-  commentId: M:Valve.VR.InteractionSystem.Hand.GetRealPeakVelocities(UnityEngine.Vector3@,UnityEngine.Vector3@)
-  name.vb: GetRealPeakVelocities(ByRef Vector3, ByRef Vector3)
-  fullName: Valve.VR.InteractionSystem.Hand.GetRealPeakVelocities(out UnityEngine.Vector3, out UnityEngine.Vector3)
-  fullName.vb: Valve.VR.InteractionSystem.Hand.GetRealPeakVelocities(ByRef UnityEngine.Vector3, ByRef UnityEngine.Vector3)
-  nameWithType: Hand.GetRealPeakVelocities(out Vector3, out Vector3)
-  nameWithType.vb: Hand.GetRealPeakVelocities(ByRef Vector3, ByRef Vector3)
-- uid: Valve.VR.InteractionSystem.Hand.GetRealPeakVelocities*
-  name: GetRealPeakVelocities
-  href: api/Valve.VR.InteractionSystem.Hand.html#Valve_VR_InteractionSystem_Hand_GetRealPeakVelocities_
-  commentId: Overload:Valve.VR.InteractionSystem.Hand.GetRealPeakVelocities
-  isSpec: "True"
-  fullName: Valve.VR.InteractionSystem.Hand.GetRealPeakVelocities
-  nameWithType: Hand.GetRealPeakVelocities
 - uid: Valve.VR.InteractionSystem.Hand.GetTrackedObjectAngularVelocity(System.Single)
   name: GetTrackedObjectAngularVelocity(Single)
   href: api/Valve.VR.InteractionSystem.Hand.html#Valve_VR_InteractionSystem_Hand_GetTrackedObjectAngularVelocity_System_Single_
@@ -34485,22 +34469,6 @@ references:
   isSpec: "True"
   fullName: Valve.VR.SteamVR_Behaviour_Pose.GetLocalizedName
   nameWithType: SteamVR_Behaviour_Pose.GetLocalizedName
-- uid: Valve.VR.SteamVR_Behaviour_Pose.GetRealPeakVelocities(UnityEngine.Vector3@,UnityEngine.Vector3@)
-  name: GetRealPeakVelocities(out Vector3, out Vector3)
-  href: api/Valve.VR.SteamVR_Behaviour_Pose.html#Valve_VR_SteamVR_Behaviour_Pose_GetRealPeakVelocities_UnityEngine_Vector3__UnityEngine_Vector3__
-  commentId: M:Valve.VR.SteamVR_Behaviour_Pose.GetRealPeakVelocities(UnityEngine.Vector3@,UnityEngine.Vector3@)
-  name.vb: GetRealPeakVelocities(ByRef Vector3, ByRef Vector3)
-  fullName: Valve.VR.SteamVR_Behaviour_Pose.GetRealPeakVelocities(out UnityEngine.Vector3, out UnityEngine.Vector3)
-  fullName.vb: Valve.VR.SteamVR_Behaviour_Pose.GetRealPeakVelocities(ByRef UnityEngine.Vector3, ByRef UnityEngine.Vector3)
-  nameWithType: SteamVR_Behaviour_Pose.GetRealPeakVelocities(out Vector3, out Vector3)
-  nameWithType.vb: SteamVR_Behaviour_Pose.GetRealPeakVelocities(ByRef Vector3, ByRef Vector3)
-- uid: Valve.VR.SteamVR_Behaviour_Pose.GetRealPeakVelocities*
-  name: GetRealPeakVelocities
-  href: api/Valve.VR.SteamVR_Behaviour_Pose.html#Valve_VR_SteamVR_Behaviour_Pose_GetRealPeakVelocities_
-  commentId: Overload:Valve.VR.SteamVR_Behaviour_Pose.GetRealPeakVelocities
-  isSpec: "True"
-  fullName: Valve.VR.SteamVR_Behaviour_Pose.GetRealPeakVelocities
-  nameWithType: SteamVR_Behaviour_Pose.GetRealPeakVelocities
 - uid: Valve.VR.SteamVR_Behaviour_Pose.GetVelocitiesAtTimeOffset(System.Single,UnityEngine.Vector3@,UnityEngine.Vector3@)
   name: GetVelocitiesAtTimeOffset(Single, out Vector3, out Vector3)
   href: api/Valve.VR.SteamVR_Behaviour_Pose.html#Valve_VR_SteamVR_Behaviour_Pose_GetVelocitiesAtTimeOffset_System_Single_UnityEngine_Vector3__UnityEngine_Vector3__
