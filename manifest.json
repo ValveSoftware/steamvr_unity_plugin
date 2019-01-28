@@ -1,0 +1,6522 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/perforce/vr/steamvr/main/unity/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      },
+      "is_incremental": false
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.AppOverrideKeys_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.AppOverrideKeys_t.html",
+          "hash": "3Yy07Cctm8ui/feVSxv4fQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.COpenVRContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.COpenVRContext.html",
+          "hash": "PujxkU410MdsVT6+WMPn2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVRApplications.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVRApplications.html",
+          "hash": "C4PDR4FagIyvyXzbjmM4CA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVRChaperone.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVRChaperone.html",
+          "hash": "V3fi+kZ0zXWhstKBW4nS3Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVRChaperoneSetup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVRChaperoneSetup.html",
+          "hash": "6shJhqwjjru7zl7s3ewGpQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVRCompositor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVRCompositor.html",
+          "hash": "DQUdS4VWiZF5MK571blngg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVRDriverManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVRDriverManager.html",
+          "hash": "U9DAx8YcJTUzzGfQ1A9RAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVRExtendedDisplay.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVRExtendedDisplay.html",
+          "hash": "Qvi93SXbyeX8dfq23lWesg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVRIOBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVRIOBuffer.html",
+          "hash": "Mibwt7L3t2BqqeUOem++ww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVRInput.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVRInput.html",
+          "hash": "zBtsVQ0ymozPaNX6inaFIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVRNotifications.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVRNotifications.html",
+          "hash": "2Be1oqazGpbHSfdI8PfZKQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVROverlay.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVROverlay.html",
+          "hash": "HF3DNoWwrzliD4f8P5xJpQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVRRenderModels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVRRenderModels.html",
+          "hash": "jOfAuBoZsB03bH7CzkHyBg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVRResources.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVRResources.html",
+          "hash": "46+YjgoL7StrCA+SZimknQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVRScreenshots.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVRScreenshots.html",
+          "hash": "UoZUetimjXe+1rIJyjdMiQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVRSettingHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVRSettingHelper.html",
+          "hash": "AL4sznlW9K5XhCjyWOekoA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVRSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVRSettings.html",
+          "hash": "s1/2vGsbSkVER1OHcCeX3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVRSpatialAnchors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVRSpatialAnchors.html",
+          "hash": "0w04PUxs3S6DEAHSI1yX7w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVRSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVRSystem.html",
+          "hash": "DZ+8F9rYV9wnSgXWF+MkIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CVRTrackedCamera.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CVRTrackedCamera.html",
+          "hash": "afYv6RQoqJPxCIQsBrNpTg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.CameraVideoStreamFrameHeader_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.CameraVideoStreamFrameHeader_t.html",
+          "hash": "8wdTTiaGa4rhb2hgbUF4DQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ChaperoneCalibrationState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ChaperoneCalibrationState.html",
+          "hash": "hy/oHjvB/EeWzfIXpvv4mw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.Compositor_CumulativeStats.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.Compositor_CumulativeStats.html",
+          "hash": "ReqpAOZFKUr6+kjW7vJiQg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.Compositor_FrameTiming.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.Compositor_FrameTiming.html",
+          "hash": "kAoQb4OrNwKSzS3tSNkLeQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.Compositor_OverlaySettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.Compositor_OverlaySettings.html",
+          "hash": "sddg+SjmVCccOFyrBMqeuw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.D3D12TextureData_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.D3D12TextureData_t.html",
+          "hash": "iXG4wFHjTSOWObEdi8hUrg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.DistortionCoordinates_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.DistortionCoordinates_t.html",
+          "hash": "dQa7pVQaHTXjS9AaCKrUmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.DriverDirectMode_FrameTiming.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.DriverDirectMode_FrameTiming.html",
+          "hash": "ACfQS//IqyGMRYmFejlw2w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EAdditionalRadioFeatures.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EAdditionalRadioFeatures.html",
+          "hash": "pQy9NceAXZo42UmsFqswNw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EChaperoneConfigFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EChaperoneConfigFile.html",
+          "hash": "lluR3XLdNMLQ9uG4dAScCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EChaperoneImportFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EChaperoneImportFlags.html",
+          "hash": "NpGM4SyUv4dJwS1sXU9S0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ECollisionBoundsStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ECollisionBoundsStyle.html",
+          "hash": "IJDlB6nhbToNU41x0EAmJg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EColorSpace.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EColorSpace.html",
+          "hash": "f79KRn+JrxCoR0j1N41cJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EDeviceActivityLevel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EDeviceActivityLevel.html",
+          "hash": "dVN4cNfdOspSAMkudbd6ZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EDualAnalogWhich.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EDualAnalogWhich.html",
+          "hash": "IA+53HMCXVdvJcC2ROOrEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EGamepadTextInputLineMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EGamepadTextInputLineMode.html",
+          "hash": "oEg3wZqfSeAiJL5cgtRY+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EGamepadTextInputMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EGamepadTextInputMode.html",
+          "hash": "bKDdBOfQ6AYpROLkntKEFg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EHDCPError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EHDCPError.html",
+          "hash": "1LKuInvOdTzVYGNfVk4fIw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EHiddenAreaMeshType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EHiddenAreaMeshType.html",
+          "hash": "oK4J5nx9z1qj1KAE9nGWlg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EIOBufferError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EIOBufferError.html",
+          "hash": "DzQDBGQIPSc3mhlT+ZO7hA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EIOBufferMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EIOBufferMode.html",
+          "hash": "nqu8o5RXQl12vM+CQnd2BA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EOverlayDirection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EOverlayDirection.html",
+          "hash": "o195n14A2yZMBnA0mO1o4A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EShowUIType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EShowUIType.html",
+          "hash": "Y5Nx6FQgYmvfpIJmWJyfbA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ETextureType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ETextureType.html",
+          "hash": "qL+P2GijmJqU4Y/+Axi4KQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ETrackedControllerRole.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ETrackedControllerRole.html",
+          "hash": "c6DIUE9EAH9lu5opNWl3MQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ETrackedDeviceClass.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ETrackedDeviceClass.html",
+          "hash": "EYc/LnBiPuC084MacJV9bA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ETrackedDeviceProperty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ETrackedDeviceProperty.html",
+          "hash": "ULOQepVxb6Qo47XeO5YLaQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ETrackedPropertyError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ETrackedPropertyError.html",
+          "hash": "mPc2XNprfAKILr+4NETWEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ETrackingResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ETrackingResult.html",
+          "hash": "v4mvGRR8yB7gRY5rBbFCCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ETrackingUniverseOrigin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ETrackingUniverseOrigin.html",
+          "hash": "vfCSd4mfQb/8LKH4siYPDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRApplicationError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRApplicationError.html",
+          "hash": "li+gOGKhJg7aW62rMd/j2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRApplicationProperty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRApplicationProperty.html",
+          "hash": "mMI0bDdz9R2jMOAsBgUIHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRApplicationTransitionState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRApplicationTransitionState.html",
+          "hash": "6/DE8c28vphwSW5LDeJxOQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRApplicationType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRApplicationType.html",
+          "hash": "/mwZ8ocsuP6gUuGP9desrw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRButtonId.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRButtonId.html",
+          "hash": "iTnNUmDszHOX3rRPefAFuQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRComponentProperty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRComponentProperty.html",
+          "hash": "n7abgPyQWArmJ3Pjj39UMQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRCompositorError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRCompositorError.html",
+          "hash": "1YwonPlUwCO2hoyL7LS1Hg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRCompositorTimingMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRCompositorTimingMode.html",
+          "hash": "q9ZXzYbBYUfpdqomCb5wfg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRControllerAxisType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRControllerAxisType.html",
+          "hash": "aQ292hCQttEGUD6sQWPF3Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRControllerEventOutputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRControllerEventOutputType.html",
+          "hash": "ROLYovCbN2bIwhwNYOYJsQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRDistortionFunctionType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRDistortionFunctionType.html",
+          "hash": "zBvSuB/JylF04Z6APrbcVQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVREventType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVREventType.html",
+          "hash": "I26YnDBG8YhXqtJDB5+XOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVREye.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVREye.html",
+          "hash": "V6D5bJBKQHO0ntOxmYhzKw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRFinger.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRFinger.html",
+          "hash": "tuIvfESICT+jX665nPKA0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRFingerSplay.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRFingerSplay.html",
+          "hash": "ZLa+Dunu6TdaM8hYqo3p2w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRFirmwareError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRFirmwareError.html",
+          "hash": "iMFBZRTlMveg5+VtnG/0fA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRInitError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRInitError.html",
+          "hash": "UHX21lM8y3tMRHN81XnZjw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRInputError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRInputError.html",
+          "hash": "PPUMesHhM00IW3cvNQrGIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRInputFilterCancelType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRInputFilterCancelType.html",
+          "hash": "/6QUHaslclUiH32m+/PEHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRInputStringBits.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRInputStringBits.html",
+          "hash": "r9VtY574QeDYgUmBHf0E2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRMouseButton.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRMouseButton.html",
+          "hash": "mY76M8Aa2dSGbzz4jRwIfg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRMuraCorrectionMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRMuraCorrectionMode.html",
+          "hash": "RqcQaK+phST05XVMJOO4qg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRNotificationError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRNotificationError.html",
+          "hash": "gJ5QVvK/mCPChi/qfV5orw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRNotificationStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRNotificationStyle.html",
+          "hash": "QikfXNbk2M8W989bU8fKXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRNotificationType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRNotificationType.html",
+          "hash": "Q8f4KK4jk/zftTPG7v7mLg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVROverlayError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVROverlayError.html",
+          "hash": "1Qd1Lp9GIbstenaK50qKEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVROverlayIntersectionMaskPrimitiveType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVROverlayIntersectionMaskPrimitiveType.html",
+          "hash": "laKpLuDaEUU75wmpozzPmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRRenderModelError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRRenderModelError.html",
+          "hash": "pX1YxbZkVIKyx7p+yNfAfg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRScreenshotError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRScreenshotError.html",
+          "hash": "rBEAAuLkvv1DIxZvf/h/hg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRScreenshotPropertyFilenames.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRScreenshotPropertyFilenames.html",
+          "hash": "Lisah2os+1r3u5IgnXHGkw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRScreenshotType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRScreenshotType.html",
+          "hash": "TRm3IwkaX8kqArrmlRBPjQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRSettingsError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRSettingsError.html",
+          "hash": "23JHOyS5ieGiOTaPCK86gQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRSkeletalMotionRange.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRSkeletalMotionRange.html",
+          "hash": "S9S9BLhLn5LDgZhUjyOcrQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRSkeletalReferencePose.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRSkeletalReferencePose.html",
+          "hash": "6hcKKhLFN8NlD889fzrmqA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRSkeletalTrackingLevel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRSkeletalTrackingLevel.html",
+          "hash": "HZTCuXlwSiVlLcLXv+RiyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRSkeletalTransformSpace.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRSkeletalTransformSpace.html",
+          "hash": "wxo6ujnBn9h7sSKJj++CIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRSpatialAnchorError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRSpatialAnchorError.html",
+          "hash": "jTgOiwp4X5V8DctxIq1DGg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRState.html",
+          "hash": "0QBRfY9omsXEo8EXVYxVfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRSubmitFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRSubmitFlags.html",
+          "hash": "QRRBwj+TYbPdcqMs0IUoUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRTrackedCameraError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRTrackedCameraError.html",
+          "hash": "GbFHi/JyMOmzJaNfQGXHhQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRTrackedCameraFrameLayout.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRTrackedCameraFrameLayout.html",
+          "hash": "BnawBICJ/fHd1DtZQPINUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVRTrackedCameraFrameType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVRTrackedCameraFrameType.html",
+          "hash": "8ijkDeq+wqq+bvPQLOYCDg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.EVSync.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.EVSync.html",
+          "hash": "kz6dlDQ/FyDnBDSzwtnj1Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.HiddenAreaMesh_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.HiddenAreaMesh_t.html",
+          "hash": "Cg7mWz/abQdph8yOOcYxPA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.HmdColor_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.HmdColor_t.html",
+          "hash": "DOl0aVNuA4mu8X1KoxI9gw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.HmdMatrix33_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.HmdMatrix33_t.html",
+          "hash": "BHSkNfSJI/KmC3vYd0ESAA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.HmdMatrix34_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.HmdMatrix34_t.html",
+          "hash": "H7KtJSdUNdV5WNa23a7m8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.HmdMatrix44_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.HmdMatrix44_t.html",
+          "hash": "x3RFyZXjTN6z21HdW0DJSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.HmdQuad_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.HmdQuad_t.html",
+          "hash": "lHLkqwnzE8uTQbb8CM/XqA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.HmdQuaternion_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.HmdQuaternion_t.html",
+          "hash": "6q6Z30Wl4I5IqXZWMKvF4w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.HmdQuaternionf_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.HmdQuaternionf_t.html",
+          "hash": "a83r82tnK/2y+d0T665kgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.HmdRect2_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.HmdRect2_t.html",
+          "hash": "KT3SQRaGshlAfTpo2YL6Aw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.HmdVector2_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.HmdVector2_t.html",
+          "hash": "fEWeHf1sZ++AZ66rkC9e9Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.HmdVector3_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.HmdVector3_t.html",
+          "hash": "HLHj4W4WMN7prPVyWEr31g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.HmdVector3d_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.HmdVector3d_t.html",
+          "hash": "UF4zeCby3RV4Cbc9SgD07Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.HmdVector4_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.HmdVector4_t.html",
+          "hash": "AYrwDUKvwdOQf5CL6bM5TQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ISteamVR_Action.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ISteamVR_Action.html",
+          "hash": "sjP+bHghvJrWhMt/KvGTPA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ISteamVR_ActionSet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ISteamVR_ActionSet.html",
+          "hash": "Y8i0xLYD/v0+AdfeMJ86fA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ISteamVR_Action_Boolean.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ISteamVR_Action_Boolean.html",
+          "hash": "0Jn7GIR+Ng5ud8alx44Jkg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ISteamVR_Action_In.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ISteamVR_Action_In.html",
+          "hash": "mJMv6v3fFAh/BqobW0OJ3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ISteamVR_Action_In_Source.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ISteamVR_Action_In_Source.html",
+          "hash": "3BZuSpTxZk9wiR+dyI9Knw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ISteamVR_Action_Out.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ISteamVR_Action_Out.html",
+          "hash": "tmPGxQW05Ln6VAtVbgQTag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ISteamVR_Action_Out_Source.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ISteamVR_Action_Out_Source.html",
+          "hash": "qmLDj8Ndf9yk58AuLC6WRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ISteamVR_Action_Pose.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ISteamVR_Action_Pose.html",
+          "hash": "WotILBfcnSslkY1FOVmCGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ISteamVR_Action_Single.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ISteamVR_Action_Single.html",
+          "hash": "TOMCiNWk80/3hXrrOzKznQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ISteamVR_Action_Skeleton_Source.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ISteamVR_Action_Skeleton_Source.html",
+          "hash": "07Dbp2MIjlX4zlE0kGSWMQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ISteamVR_Action_Source.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ISteamVR_Action_Source.html",
+          "hash": "ZMRWR1//gOb4ZCPyUThVag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ISteamVR_Action_Vector2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ISteamVR_Action_Vector2.html",
+          "hash": "zTg5+qI/ZrvRmsDPpvqfkQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ISteamVR_Action_Vector3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ISteamVR_Action_Vector3.html",
+          "hash": "A1uxV76XNJu5xyuQfNKnVw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ISteamVR_Action_Vibration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ISteamVR_Action_Vibration.html",
+          "hash": "pbKYNW5qg2Gb0hY50TkUvA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IVRApplications.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IVRApplications.html",
+          "hash": "7azCI8PaWorUHgBm46e+7Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IVRChaperone.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IVRChaperone.html",
+          "hash": "Hu5UaIS6ckPsuqxpA55XZw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IVRChaperoneSetup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IVRChaperoneSetup.html",
+          "hash": "dne9505LjMVu72mozFd1Yg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IVRCompositor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IVRCompositor.html",
+          "hash": "EP/FdS6xbcIPGTkiQfiw1g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IVRDriverManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IVRDriverManager.html",
+          "hash": "Q62f1ngneNapnEYMQ97l6A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IVRExtendedDisplay.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IVRExtendedDisplay.html",
+          "hash": "8WDAJO4Beubycn6ZFmK2zw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IVRIOBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IVRIOBuffer.html",
+          "hash": "aDCvhXTEBEsUMgs6KMj4Jg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IVRInput.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IVRInput.html",
+          "hash": "ywSRZmIz7SwRaZs2AJ9H5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IVRNotifications.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IVRNotifications.html",
+          "hash": "R3OJaWkV0kp9t89qtf5Zlw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IVROverlay.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IVROverlay.html",
+          "hash": "NS3V094A1WMiflehYY025w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IVRRenderModels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IVRRenderModels.html",
+          "hash": "VWLbky88p79V9NzC1KwGKA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IVRResources.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IVRResources.html",
+          "hash": "DvbU5mlr9mjJdK78in9IUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IVRScreenshots.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IVRScreenshots.html",
+          "hash": "64GofaIfLy2oBThzFRs7tQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IVRSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IVRSettings.html",
+          "hash": "SUsxR3AQCnaJyNT0KbcCFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IVRSpatialAnchors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IVRSpatialAnchors.html",
+          "hash": "Wk4/lMzAaX0b4ZCeXQwdpA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IVRSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IVRSystem.html",
+          "hash": "HKxAZjSxfdQKjz1FWhVyHw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IVRTrackedCamera.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IVRTrackedCamera.html",
+          "hash": "Uyj6JtbDoKkB4NSipwgm1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.ImuSample_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.ImuSample_t.html",
+          "hash": "OoC72fD1NG5dUXMPkdOdow=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.Imu_OffScaleFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.Imu_OffScaleFlags.html",
+          "hash": "qK+kLEMNNK2E02Bx9FW8Tg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InputAnalogActionData_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InputAnalogActionData_t.html",
+          "hash": "//Oh9tfTbfQLltRo7Sz56Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InputDigitalActionData_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InputDigitalActionData_t.html",
+          "hash": "3yHIkTi6wRyKchuJ6+raHA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InputOriginInfo_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InputOriginInfo_t.html",
+          "hash": "i0yrs3q83vjuITvyT2+r7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InputPoseActionData_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InputPoseActionData_t.html",
+          "hash": "2SnnOmRRool5i8MJ6KAcLg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InputSkeletalActionData_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InputSkeletalActionData_t.html",
+          "hash": "nZbf964mQCe9zmgQXlz3nw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.AfterTimer_Component.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.AfterTimer_Component.html",
+          "hash": "mrzNCvC/bseDzdyMyceBhA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.AllowTeleportWhileAttachedToHand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.AllowTeleportWhileAttachedToHand.html",
+          "hash": "m6HoYSjM4NDYZYRiw39Bhw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.ArcheryTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.ArcheryTarget.html",
+          "hash": "dUILB7aGjiEl9bhq/XrMoQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.Arrow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.Arrow.html",
+          "hash": "kPQIB4LNXH5yV3wuH8eTxQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.ArrowHand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.ArrowHand.html",
+          "hash": "USdTQnNeERxL2V+FiRNeFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.ArrowheadRotation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.ArrowheadRotation.html",
+          "hash": "FllLxi5Z0LP8JACsTbvulA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.Balloon.BalloonColor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.Balloon.BalloonColor.html",
+          "hash": "19AAeeEfYrp8neZO0CkuwQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.Balloon.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.Balloon.html",
+          "hash": "60Uqo0WzjeV9pgi4Bu1IeA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.BalloonColliders.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.BalloonColliders.html",
+          "hash": "8UHZexyBN0vRVnuWzk5HEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.BalloonHapticBump.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.BalloonHapticBump.html",
+          "hash": "I2S+R99G6nDkPWLLf2+s7Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.BalloonSpawner.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.BalloonSpawner.html",
+          "hash": "a9pDmjQtqnN7//gKdWrlbg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.BodyCollider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.BodyCollider.html",
+          "hash": "Hq1kyn6dKzSk5WsXd14A5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.ChaperoneInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.ChaperoneInfo.html",
+          "hash": "qlzZFJd9ktk+vTwhgXC3iw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.CircularDrive.Axis_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.CircularDrive.Axis_t.html",
+          "hash": "pjBCXeoN4S9bj+1MugpgMg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.CircularDrive.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.CircularDrive.html",
+          "hash": "oxAvr4p343GxxMe3pSuPdw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.ComplexThrowable.AttachMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.ComplexThrowable.AttachMode.html",
+          "hash": "LFZ0/o4nHaG1YoFHY2rUBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.ComplexThrowable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.ComplexThrowable.html",
+          "hash": "nEr0vHk3Ya45snQYzVYteA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.ControllerButtonHints.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.ControllerButtonHints.html",
+          "hash": "M2M53JsUS1B/v38j1MIH2Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.ControllerHoverHighlight.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.ControllerHoverHighlight.html",
+          "hash": "8weT9HSYdwRwv+Vk94gt7w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.CustomEvents.UnityEventHand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.CustomEvents.UnityEventHand.html",
+          "hash": "1GOX2IXpr4T/wG3+0yzCqg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.CustomEvents.UnityEventSingleFloat.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.CustomEvents.UnityEventSingleFloat.html",
+          "hash": "oNyqXsI8877cD5B/ZzntyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.CustomEvents.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.CustomEvents.html",
+          "hash": "fzOh9nY8So7VKslIm6sCZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.DebugUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.DebugUI.html",
+          "hash": "MBAzP3Am5K4u7VXh5LJyPg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.DestroyOnDetachedFromHand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.DestroyOnDetachedFromHand.html",
+          "hash": "8WeK+bHuH1l5rhf3hj4xrA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.DestroyOnParticleSystemDeath.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.DestroyOnParticleSystemDeath.html",
+          "hash": "ARiRw80TzzfxwV3RBK0nwQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.DestroyOnTriggerEnter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.DestroyOnTriggerEnter.html",
+          "hash": "Ko2mQ7NwgmOG1bsE4e9IFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.DistanceHaptics.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.DistanceHaptics.html",
+          "hash": "ht7M3OGGN4SiiuvrBsvNSg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.DontDestroyOnLoad.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.DontDestroyOnLoad.html",
+          "hash": "yEn9cZVmnV0ieQkuA2UfDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.EnumFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.EnumFlags.html",
+          "hash": "I+DSiLT2AuQB/qPPuMv6Mg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.EnumFlagsPropertyDrawer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.EnumFlagsPropertyDrawer.html",
+          "hash": "7rmVqfMxB/0KGaGWYmYDwA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.Equippable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.Equippable.html",
+          "hash": "nUIiJobvrhJZy9SFUqurxA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.ExplosionWobble.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.ExplosionWobble.html",
+          "hash": "gHBqfwQqMfj3FEBtT5e1PA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.FallbackCameraController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.FallbackCameraController.html",
+          "hash": "VL43srBOPJW+5b6fSlkRmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.FireSource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.FireSource.html",
+          "hash": "Tk1aKdFq+ThI8NDzQxIDwQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.GrabTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.GrabTypes.html",
+          "hash": "dYkPGlN2rjG1A7AQ5pQrgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.Hand.AttachedObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.Hand.AttachedObject.html",
+          "hash": "uDSva1zwjEV2FqFN9Cdh+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.Hand.AttachmentFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.Hand.AttachmentFlags.html",
+          "hash": "EdT8AhoaYGJQv1whNOaCIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.Hand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.Hand.html",
+          "hash": "sdDQflUNc2DLlULmkDwRwQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.HandEditor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.HandEditor.html",
+          "hash": "objeFS3uI7LTvt+a/6o90Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.HandEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.HandEvent.html",
+          "hash": "WBVYrCZmHWrtGiN3M4xquA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.HapticRack.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.HapticRack.html",
+          "hash": "fUnHqZU/7vdsqAs+0Znncg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.HideOnHandFocusLost.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.HideOnHandFocusLost.html",
+          "hash": "0DTroIDvZs2bgDBeQYA5sg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.HoverButton.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.HoverButton.html",
+          "hash": "sRjJZCy0ZzprLy/L87YXsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.IgnoreHovering.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.IgnoreHovering.html",
+          "hash": "jw/qDghUOoom9ZzIsR7Hqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.IgnoreTeleportTrace.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.IgnoreTeleportTrace.html",
+          "hash": "BjqO4q8q+m9zR2MFMM1vtQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.InputModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.InputModule.html",
+          "hash": "FeNiP6OBHIVJGVGQzPO3/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.Interactable.OnAttachedToHandDelegate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.Interactable.OnAttachedToHandDelegate.html",
+          "hash": "pItQN+FqkYmZ/iDAC9ju5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.Interactable.OnDetachedFromHandDelegate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.Interactable.OnDetachedFromHandDelegate.html",
+          "hash": "UhPwVcbN6IkgTYRF622qKA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.Interactable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.Interactable.html",
+          "hash": "4LoxJNdmMZYdC6AWqPkPXg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.InteractableDebug.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.InteractableDebug.html",
+          "hash": "xj1oXA8uu252BwngbfrVwA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.InteractableHoverEvents.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.InteractableHoverEvents.html",
+          "hash": "kHe6sEKauxPpoofvrku/BA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.ItemPackage.ItemPackageType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.ItemPackage.ItemPackageType.html",
+          "hash": "USa7475wbI0EoAyDpftnpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.ItemPackage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.ItemPackage.html",
+          "hash": "GHYXSVtyJtbKqHTJ42pKxw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.ItemPackageReference.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.ItemPackageReference.html",
+          "hash": "dN+xLGcHayzwkVaePROLXA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.ItemPackageSpawner.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.ItemPackageSpawner.html",
+          "hash": "MfNZlkBfE+eQgConrwdGfg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.LinearAnimation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.LinearAnimation.html",
+          "hash": "t2KBhf1Fk+9O/6M73DzZWA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.LinearAnimator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.LinearAnimator.html",
+          "hash": "w3DDRNhHejNbtwvFEmKMLg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.LinearAudioPitch.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.LinearAudioPitch.html",
+          "hash": "AbTa6eKlyv879TKAO59xrQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.LinearBlendshape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.LinearBlendshape.html",
+          "hash": "aBmgzBTULEMBOtWOFF0kPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.LinearDisplacement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.LinearDisplacement.html",
+          "hash": "xd9egPdqgA/2mYUDqidiLA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.LinearDrive.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.LinearDrive.html",
+          "hash": "kKkri1roOtFadYHjkyrLOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.LinearMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.LinearMapping.html",
+          "hash": "UOPwWg2mncRFt2LC5TO4fw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.Longbow.Handedness.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.Longbow.Handedness.html",
+          "hash": "VSQg/DMkIjAw5UAp/ELk9A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.Longbow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.Longbow.html",
+          "hash": "lRK+J54dqBOs56avdijSlg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.ModalThrowable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.ModalThrowable.html",
+          "hash": "ZqUP/XPSlQSfbr2eJYWWmQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.PlaySound.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.PlaySound.html",
+          "hash": "ZE+0egnsIPeicLCd5GiUvw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.Player.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.Player.html",
+          "hash": "JJD2IqWg+8U0QU1YifFWKQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.ReleaseStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.ReleaseStyle.html",
+          "hash": "iYcwcyUtAUNiHG+RZvjRbA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.RenderModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.RenderModel.html",
+          "hash": "uS7oUs9OA43olGknbVjiMw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.SeeThru.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.SeeThru.html",
+          "hash": "m+tR80nS8hNEKIRiClcEiQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.SleepOnAwake.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.SleepOnAwake.html",
+          "hash": "jZrXzFT+c46TEGZEJ+d8mQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.SoundBowClick.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.SoundBowClick.html",
+          "hash": "U+HCcRpzEHdzYY2rzW4tMg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.SoundDeparent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.SoundDeparent.html",
+          "hash": "nv9zxih49zmq65QVGTBV7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.SoundPlayOneshot.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.SoundPlayOneshot.html",
+          "hash": "QfUQIixdr9Y4S/u7SjaVfQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.SpawnAndAttachAfterControllerIsTracking.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.SpawnAndAttachAfterControllerIsTracking.html",
+          "hash": "LKmNlXMbc1lHTEOPpEl1zQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.SpawnAndAttachToHand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.SpawnAndAttachToHand.html",
+          "hash": "InvwiknxiBK6y9LZ/6XpOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.Teleport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.Teleport.html",
+          "hash": "KTtIjXaMqeU9Itiv5Occcg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.TeleportArc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.TeleportArc.html",
+          "hash": "S9WKyBSV60aPeNabDHPNng=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.TeleportArea.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.TeleportArea.html",
+          "hash": "p1fWvbiv3MMYfkP0KZOpzA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.TeleportAreaEditor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.TeleportAreaEditor.html",
+          "hash": "FhhonWApziXfc6qxbaTb+Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.TeleportMarkerBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.TeleportMarkerBase.html",
+          "hash": "Tf0Afyk1KwrgduVZ6fc44A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.TeleportPoint.TeleportPointType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.TeleportPoint.TeleportPointType.html",
+          "hash": "B9ggUs96PtEC9AwtzIphMg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.TeleportPoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.TeleportPoint.html",
+          "hash": "PfiOrfIh1NVXUk2zdnUoeQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.TeleportPointEditor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.TeleportPointEditor.html",
+          "hash": "0Q2Yc2oj5L2BPFSLegpWKw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.Throwable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.Throwable.html",
+          "hash": "dbsEDCBU8zi7FR3ojUS9Fg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.UIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.UIElement.html",
+          "hash": "wWyLsiC9+/fYRQFx0imV7w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.UIElementEditor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.UIElementEditor.html",
+          "hash": "bOE8hexmYpNZDlV+1kJDgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.Unparent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.Unparent.html",
+          "hash": "/R4GgmctMJcFvsLhrKPzkw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.Util.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.Util.html",
+          "hash": "TJ4h/gUvzbl1nPa7OJiAvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.VelocityEstimator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.VelocityEstimator.html",
+          "hash": "kYalbXG4G/Jw16ar83sOcg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.WhichHand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.WhichHand.html",
+          "hash": "W8XlUTc17sht1Cwes0NYug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.InteractionSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.InteractionSystem.html",
+          "hash": "jdPBzK69hn/lq+nNUBGNKQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IntersectionMaskCircle_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IntersectionMaskCircle_t.html",
+          "hash": "lEiSxHRpyfNebTH+vRKo2w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.IntersectionMaskRectangle_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.IntersectionMaskRectangle_t.html",
+          "hash": "kAYonGxbM1+Zb6MzBJtCZw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.NotificationBitmap_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.NotificationBitmap_t.html",
+          "hash": "QBKOPuYktyZ1bMk00y8pIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.OpenVR.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.OpenVR.html",
+          "hash": "LzrKWxqGZVfhpg8ZToBW5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.OpenVRInterop.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.OpenVRInterop.html",
+          "hash": "VT4IBX+IqgqCHd8fZcMVqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.RenderModel_ComponentState_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.RenderModel_ComponentState_t.html",
+          "hash": "oNSBJYc83p8/tJGNh19d6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.RenderModel_ControllerMode_State_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.RenderModel_ControllerMode_State_t.html",
+          "hash": "DUCghEWF8Hj0bP58eMtqSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.RenderModel_TextureMap_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.RenderModel_TextureMap_t.html",
+          "hash": "ivAUn3wj4htRXpbUE0f1Cg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.RenderModel_TextureMap_t_Packed.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.RenderModel_TextureMap_t_Packed.html",
+          "hash": "AkdqEAYms4SLiGnzlqrwmQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.RenderModel_Vertex_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.RenderModel_Vertex_t.html",
+          "hash": "K6WqAazodIj4EDoWmM4vaw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.RenderModel_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.RenderModel_t.html",
+          "hash": "ixAtBuVIj+BbvwaBPM4FLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.RenderModel_t_Packed.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.RenderModel_t_Packed.html",
+          "hash": "c0VaFY/fdOrUBTjZrTX/eQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SkeletalMotionRangeChange.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SkeletalMotionRangeChange.html",
+          "hash": "F+JyfppDjTl3I6OnfbGeIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SpatialAnchorPose_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SpatialAnchorPose_t.html",
+          "hash": "ftvXIxaCjr7kaJ/09jFdNw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR.InitializedStates.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR.InitializedStates.html",
+          "hash": "Qgr+2S7wgIH4U80NhpMU3A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR.html",
+          "hash": "foweZla8J7ukqy4rxpZ+zw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action-2.html",
+          "hash": "+z8sOAaVZmgXcaANkn813w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action.html",
+          "hash": "vnRRGxKdjkMpdGQgKGw4gg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_ActionDirections.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_ActionDirections.html",
+          "hash": "ffk+EMJy8z5w3yn5NEwgEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_ActionSet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_ActionSet.html",
+          "hash": "8DTIn+JAw0+hfj2muZ7SeQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_ActionSet_Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_ActionSet_Data.html",
+          "hash": "J4zVBw25jKDgxes62ruiAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_ActionSet_Manager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_ActionSet_Manager.html",
+          "hash": "UZzf/a7MYePiwSOt/lY9mQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Boolean.ActiveChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Boolean.ActiveChangeHandler.html",
+          "hash": "j3zFYmLfANBXSEtYQbRjGw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Boolean.ChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Boolean.ChangeHandler.html",
+          "hash": "C74FfjL6MbCdjPVodkQ93Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Boolean.StateDownHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Boolean.StateDownHandler.html",
+          "hash": "cd+PD2GP5ZsIv9HPsHL0GA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Boolean.StateHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Boolean.StateHandler.html",
+          "hash": "Jo6XSKQ7Anrm++ljXFdAYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Boolean.StateUpHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Boolean.StateUpHandler.html",
+          "hash": "wk3Ye3uSKPWZgjFimiQUag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Boolean.UpdateHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Boolean.UpdateHandler.html",
+          "hash": "F2eHWurf/WBqLGKhK66XYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Boolean.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Boolean.html",
+          "hash": "rCAeVHml2d5CicceNpkdCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Boolean_Source.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Boolean_Source.html",
+          "hash": "5jYbCKDGLc7jLRv/x2Cj5A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Boolean_Source_Map.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Boolean_Source_Map.html",
+          "hash": "6NZaonHnWeEiHH3I/+CHGg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_In-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_In-2.html",
+          "hash": "vChhWwkq6wtv0wHEPPlw7w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_In_Source.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_In_Source.html",
+          "hash": "uxq26ycftmbHHiVyG2tYJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_In_Source_Map-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_In_Source_Map-1.html",
+          "hash": "X7GUMlORtf08JEN2VQ42BQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Out-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Out-2.html",
+          "hash": "3C1kB+tafxtoVrYK1XC8mA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Out_Source.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Out_Source.html",
+          "hash": "D0AUbVc7b1bfMZnxrsxQvg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Pose.ActiveChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Pose.ActiveChangeHandler.html",
+          "hash": "7/raCI/B2JOR+n2FTCvw1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Pose.ChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Pose.ChangeHandler.html",
+          "hash": "i7Si2aBbKKkH2u1+GA912g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Pose.DeviceConnectedChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Pose.DeviceConnectedChangeHandler.html",
+          "hash": "+jyrftHy0vOVZbNuNY2+Ug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Pose.TrackingChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Pose.TrackingChangeHandler.html",
+          "hash": "q5IYi17GyKceYbs3eVklIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Pose.UpdateHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Pose.UpdateHandler.html",
+          "hash": "78VAG7ZW7kQSNb9o5o/9jA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Pose.ValidPoseChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Pose.ValidPoseChangeHandler.html",
+          "hash": "oJ6s6j9zDGfrrtlSxhrazQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Pose.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Pose.html",
+          "hash": "xJSaJjFU9Hu532guLrwK9Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Pose_Base-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Pose_Base-2.html",
+          "hash": "IjBmMFBfD2PL2n39AYk50Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Pose_Source.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Pose_Source.html",
+          "hash": "xar6EYji2QiIrTUYwSEnfQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Pose_Source_Map-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Pose_Source_Map-1.html",
+          "hash": "3zuo3k7lto0nUtOvKnJh1g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Single.ActiveChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Single.ActiveChangeHandler.html",
+          "hash": "eQtDBv2GaLvxBxiBsmpArw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Single.AxisHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Single.AxisHandler.html",
+          "hash": "5dVqEFRzO9gduqTFc4Sb7Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Single.ChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Single.ChangeHandler.html",
+          "hash": "4OkJdgOzCSzOogKRlF//vA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Single.UpdateHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Single.UpdateHandler.html",
+          "hash": "1qPMYntS4IZtpZsZr6XUIw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Single.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Single.html",
+          "hash": "CpN16DVzbUfT5pHEDKWTGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Single_Source.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Single_Source.html",
+          "hash": "jqk7mC6pjNoyjhEnEOJaQw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Single_Source_Map.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Single_Source_Map.html",
+          "hash": "PlwZTSR4oa1GRSeIkgcfLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Skeleton.ActiveChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Skeleton.ActiveChangeHandler.html",
+          "hash": "nyimNqtAAK6XwHm/+GfubQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Skeleton.ChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Skeleton.ChangeHandler.html",
+          "hash": "D3SXSZBd7vO/P88tLQg9oQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Skeleton.DeviceConnectedChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Skeleton.DeviceConnectedChangeHandler.html",
+          "hash": "z5usasfZ2/nZqRPfXFAK1g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Skeleton.TrackingChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Skeleton.TrackingChangeHandler.html",
+          "hash": "UYihodxFiT6YX+9E5TWeFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Skeleton.UpdateHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Skeleton.UpdateHandler.html",
+          "hash": "ZWYF0Cx00Q0F3JKC2IklHw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Skeleton.ValidPoseChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Skeleton.ValidPoseChangeHandler.html",
+          "hash": "G+iXlvFI5FBcxvsxKz3hAw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Skeleton.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Skeleton.html",
+          "hash": "Onpt6YCP5ZW/JnQcW5z41w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Skeleton_Source.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Skeleton_Source.html",
+          "hash": "v4JdlL194V5ylBEqr3C9YA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Skeleton_Source_Map.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Skeleton_Source_Map.html",
+          "hash": "UAtSk83AY+B6EIx0gCTnHw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Source.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Source.html",
+          "hash": "INF4xeOYF6u69niHR9Ckag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Source_Map-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Source_Map-1.html",
+          "hash": "JZ5HEaI5jV/AMeX2btUYtg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Source_Map.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Source_Map.html",
+          "hash": "jCYEFebxmH22B5O8rCOGLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vector2.ActiveChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vector2.ActiveChangeHandler.html",
+          "hash": "o7kDDgqIYVqI5LX5uo8WDg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vector2.AxisHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vector2.AxisHandler.html",
+          "hash": "TKQpWGmLs15bTCRVDXkzYg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vector2.ChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vector2.ChangeHandler.html",
+          "hash": "09jRZ/b8gkGoMTi4cIHaKg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vector2.UpdateHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vector2.UpdateHandler.html",
+          "hash": "7E0x9SdhXJ5s7pvyu1H9ZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vector2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vector2.html",
+          "hash": "cKC98HvwRPhE35BwQI0LNg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vector2_Source.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vector2_Source.html",
+          "hash": "ECIyanGfKTnCiMtGzAtZQg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vector2_Source_Map.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vector2_Source_Map.html",
+          "hash": "fQvWD252ole3o4syo7j8cw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vector3.ActiveChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vector3.ActiveChangeHandler.html",
+          "hash": "2tIFTIIvZ0zJUgh3Z1rwlw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vector3.AxisHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vector3.AxisHandler.html",
+          "hash": "03iRcFtJMVwfo500BzD1pQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vector3.ChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vector3.ChangeHandler.html",
+          "hash": "07ERy352UxfaNPmSKZxvyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vector3.UpdateHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vector3.UpdateHandler.html",
+          "hash": "j6V1opPSxOvcwpJ1QbaRsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vector3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vector3.html",
+          "hash": "RXGnrZngpm0588jWRoaIsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vector3_Source.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vector3_Source.html",
+          "hash": "s4METb3xDUAd3ELoNz8klg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vector3_Source_Map.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vector3_Source_Map.html",
+          "hash": "RhyfWyJFtJTB3fWiPftHlQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vibration.ActiveChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vibration.ActiveChangeHandler.html",
+          "hash": "qhV5kXt0XuuqMisMXt2EuQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vibration.ExecuteHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vibration.ExecuteHandler.html",
+          "hash": "lNrD/HEXmF1vIgWLVEsgig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vibration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vibration.html",
+          "hash": "dgWM4X5bMN1/iPFDscFJ+Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vibration_Source.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vibration_Source.html",
+          "hash": "AzH7cVroZQKWoB3T1bDwTg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Action_Vibration_Source_Map.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Action_Vibration_Source_Map.html",
+          "hash": "86+j2LdoRMgTCF4V8eGKSg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Actions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Actions.html",
+          "hash": "W0oMIAwTDPsenp6lPl+P9Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_ActivateActionSetOnLoad.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_ActivateActionSetOnLoad.html",
+          "hash": "pG3awszyT/MbikwKiEQxGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour.html",
+          "hash": "tB7f76z0myzN7jAaA1Loxw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Boolean.ActiveChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Boolean.ActiveChangeHandler.html",
+          "hash": "7GXhoLc424AhcCWQK3KynQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Boolean.ChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Boolean.ChangeHandler.html",
+          "hash": "oQ7gkRI4GukoCfN1q044lQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Boolean.StateDownHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Boolean.StateDownHandler.html",
+          "hash": "8TJMZqPw4AYBKSpVphXtcw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Boolean.StateHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Boolean.StateHandler.html",
+          "hash": "Ruoro7ysMaLU24U2CtVVxg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Boolean.StateUpHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Boolean.StateUpHandler.html",
+          "hash": "/jBGScGvVoySCotozsx3Eg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Boolean.UpdateHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Boolean.UpdateHandler.html",
+          "hash": "V+eU2/6nScTj5QAenp1KrQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Boolean.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Boolean.html",
+          "hash": "IE4R9wF9f2RHcDc5Ud2l9w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_BooleanEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_BooleanEvent.html",
+          "hash": "QSo+v9lun5+cG55H291CrA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose.ActiveChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose.ActiveChangeHandler.html",
+          "hash": "Q6/AgPOixS4uNiakJXm/rg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose.ChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose.ChangeHandler.html",
+          "hash": "XDVTdSzYIR5tEOS1NCnMxw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose.DeviceConnectedChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose.DeviceConnectedChangeHandler.html",
+          "hash": "ndt6XBSNcYHgzcG8YnpBCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose.DeviceIndexChangedHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose.DeviceIndexChangedHandler.html",
+          "hash": "8p869T2c3ZHzRH1FletESA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose.TrackingChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose.TrackingChangeHandler.html",
+          "hash": "Q1tAaTNnOulSxXmIjcdj9g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose.UpdateHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose.UpdateHandler.html",
+          "hash": "MQlTcKqAlrArQ+ThF6Lqlw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose.ValidPoseChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose.ValidPoseChangeHandler.html",
+          "hash": "XL1+imxw8nMH/lZG2cTu3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose.html",
+          "hash": "kGXK0VpSYy9kiwIz8wVPXQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_PoseEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_PoseEvent.html",
+          "hash": "bfwFDxZm3SKLrkAW/wBRjQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose_ConnectedChangedEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose_ConnectedChangedEvent.html",
+          "hash": "T6irroSjlHCL3ToqorsnIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose_DeviceIndexChangedEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose_DeviceIndexChangedEvent.html",
+          "hash": "i4bREFE2KO8C55Cq2ap3rw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose_TrackingChangedEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Pose_TrackingChangedEvent.html",
+          "hash": "mWuD1PcShzXHThLDvTMncw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Single.AxisHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Single.AxisHandler.html",
+          "hash": "CZF4qOlE1hB5/ChPh0oh3A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Single.ChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Single.ChangeHandler.html",
+          "hash": "K5fjbjnMPDKVbJgeuv6lyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Single.UpdateHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Single.UpdateHandler.html",
+          "hash": "W7k5LKMPpJy2sJhN6HaOjQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Single.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Single.html",
+          "hash": "e0x1vnyKCafLSKMPaA7kqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_SingleEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_SingleEvent.html",
+          "hash": "VuYIKdQkC/VP0BThwOMdvw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton.ActiveChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton.ActiveChangeHandler.html",
+          "hash": "iQm0876vMovRpx9h2Yk5CQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton.ChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton.ChangeHandler.html",
+          "hash": "pNJGntJ60Gkw0VFN0Mhypw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton.DeviceConnectedChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton.DeviceConnectedChangeHandler.html",
+          "hash": "4UJlnHKEbBeRcwE7FtaDHw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton.MirrorType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton.MirrorType.html",
+          "hash": "UxrxMXGYtMSQeIYJOhRV6A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton.TrackingChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton.TrackingChangeHandler.html",
+          "hash": "M5M/dT5iAELJkLFOpUmjFw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton.UpdateHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton.UpdateHandler.html",
+          "hash": "gxlNZ5HOF06QmHt9RkDHSA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton.ValidPoseChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton.ValidPoseChangeHandler.html",
+          "hash": "5DMCu3gkeTtjq7mD6KgpJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton.html",
+          "hash": "JWfQSXijQS8PSj09VId57Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_SkeletonCustom.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_SkeletonCustom.html",
+          "hash": "ojaAeZszjiOjIDhvMeaSdA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_SkeletonEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_SkeletonEvent.html",
+          "hash": "kCINytSkK/++/G3w7DvPQw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton_ConnectedChangedEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton_ConnectedChangedEvent.html",
+          "hash": "i4TUzr9PKs8kqN47O8UHRQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton_TrackingChangedEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Skeleton_TrackingChangedEvent.html",
+          "hash": "h1f0gzssfRHoYwrwSmJGBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector2.AxisHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector2.AxisHandler.html",
+          "hash": "wa6hqBy5PtJMspnplS7lhw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector2.ChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector2.ChangeHandler.html",
+          "hash": "/pBLL4msvji9HSWk5vJ5XA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector2.UpdateHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector2.UpdateHandler.html",
+          "hash": "+P7PKReHKzYXFzYIZa+wJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector2.html",
+          "hash": "vFNsBMg6HCE9jV63Hu01jw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector2Event.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector2Event.html",
+          "hash": "DyWE0Og6WfIx7kien92NLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector3.AxisHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector3.AxisHandler.html",
+          "hash": "2/jPs4t6IdAnf9LqSyVUIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector3.ChangeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector3.ChangeHandler.html",
+          "hash": "4YNSWv7doOCBBee7rK1YRA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector3.UpdateHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector3.UpdateHandler.html",
+          "hash": "YV6bkuXEYOOLRNj5B1elyA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector3.html",
+          "hash": "oYZpUCXZrg1io6RVdiWRQQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector3Event.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Behaviour_Vector3Event.html",
+          "hash": "C6CpX6Uuxj3WHmbhn8X+hQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Camera.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Camera.html",
+          "hash": "7sEAFizrkkUj9OXmFgH9ZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_CameraFlip.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_CameraFlip.html",
+          "hash": "GeDGCo6ep+wY5yHSaoGBjQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_CameraMask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_CameraMask.html",
+          "hash": "/HU08xXaPK4WYqq2IuWNdw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Ears.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Ears.html",
+          "hash": "w9/m6NHB1A5x2kvyTM2E0Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Events.Action-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Events.Action-1.html",
+          "hash": "w6gAr7pi414MGGmx3byEFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Events.Action-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Events.Action-2.html",
+          "hash": "tZM/VTJHTw53tiPWLJNuDA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Events.Action-3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Events.Action-3.html",
+          "hash": "eQ/3dl51qRJqmdI72iTNRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Events.Action.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Events.Action.html",
+          "hash": "Jxmn8JuUyh47gSDy07ueVg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Events.ActionNoArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Events.ActionNoArgs.html",
+          "hash": "uG7mSJfOncCJNmmyCrPz9A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Events.Event-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Events.Event-1.html",
+          "hash": "TaRnZ/gW6hMNXq1z9Cmn2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Events.Event-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Events.Event-2.html",
+          "hash": "LxVM81NZHsKf9Fk6aO3yEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Events.Event-3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Events.Event-3.html",
+          "hash": "SlxpTcAqUtlArUfIze7m9w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Events.Event.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Events.Event.html",
+          "hash": "LSrsaQoccESQlXwHFQ8bDw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Events.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Events.html",
+          "hash": "wPvBfl7mMbG5oLkmV58rwg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_ExternalCamera.Config.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_ExternalCamera.Config.html",
+          "hash": "h/DfacZANpUs2F3yvQ2O+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_ExternalCamera.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_ExternalCamera.html",
+          "hash": "ARAyJEZ8hBPwUgdxizGuNQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Fade.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Fade.html",
+          "hash": "R1v7Yzcl/6u3gtx9f/sLug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Frustum.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Frustum.html",
+          "hash": "HYffW77UW2tpsJeFx9YvRA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_HistoryBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_HistoryBuffer.html",
+          "hash": "a5vDA1b4Vb8a6m8zMJCmGg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_HistoryStep.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_HistoryStep.html",
+          "hash": "MQTMAlUiZjsZkxFZcvaGsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_IK.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_IK.html",
+          "hash": "zhUGPRnTuH3YRYtkm0MdJw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Input.PosesUpdatedHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Input.PosesUpdatedHandler.html",
+          "hash": "IGEAWhQXMqIyW7mlGepJJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Input.SkeletonsUpdatedHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Input.SkeletonsUpdatedHandler.html",
+          "hash": "rSTphrQlj2kSXkCAklYOVQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Input.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Input.html",
+          "hash": "Y6jtD8upf1diY1klPUG8Lw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Input_ActionSet_buggy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Input_ActionSet_buggy.html",
+          "hash": "qzGCjtDlGeqLfzcmyI2kSw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Input_ActionSet_default.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Input_ActionSet_default.html",
+          "hash": "HvB56Tp2pv+V8e7hFki4hQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Input_ActionSet_mixedreality.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Input_ActionSet_mixedreality.html",
+          "hash": "1pupay8BgB2v9gBqSmF0gg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Input_ActionSet_platformer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Input_ActionSet_platformer.html",
+          "hash": "KkvqdYJz4QPXT3H2E3IcGw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Input_Source.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Input_Source.html",
+          "hash": "AIwT+vB4/L/6B6H0nLr3cA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Input_Sources.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Input_Sources.html",
+          "hash": "4kEefPyqMIW7PVRp3R6diA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Input_Sources_Comparer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Input_Sources_Comparer.html",
+          "hash": "VJnSBs1+jlZlAj12Bbby2w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_LoadLevel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_LoadLevel.html",
+          "hash": "qFnRc6UhfaRE8b53GZG/+Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Menu.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Menu.html",
+          "hash": "KeDe8zh8Yg2i3GuaXoeAkA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Overlay.IntersectionResults.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Overlay.IntersectionResults.html",
+          "hash": "npR45vQmfkKyVrL1M6qtQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Overlay.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Overlay.html",
+          "hash": "cbUHC/ScafMvuHVc7RCpkA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_PlayArea.Size.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_PlayArea.Size.html",
+          "hash": "+h/3Nlk0kT2SQBpxTrX8sg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_PlayArea.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_PlayArea.html",
+          "hash": "n9D/qg7dZiTSIhCxmmDy7A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Render.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Render.html",
+          "hash": "/gwT3CUa7ebOPLTnYd2b8A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_RenderModel.RenderModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_RenderModel.RenderModel.html",
+          "hash": "2PkdKbp9y1ulZytOgIq3pg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_RenderModel.RenderModelInterfaceHolder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_RenderModel.RenderModelInterfaceHolder.html",
+          "hash": "IlN67n7iLG1lPBm5eOl5Uw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_RenderModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_RenderModel.html",
+          "hash": "2CcTisloKB8cl4/L8mnBMg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_RingBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_RingBuffer-1.html",
+          "hash": "tfARFSWcb6YiBBfT1R8IvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Settings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Settings.html",
+          "hash": "6yZR4lt/MhiYJW+tlfkwXg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skeleton_FingerExtensionTypeLists.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skeleton_FingerExtensionTypeLists.html",
+          "hash": "S61XiNqrCAaPwzSEwMBYUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skeleton_FingerExtensionTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skeleton_FingerExtensionTypes.html",
+          "hash": "UrSRcXrMW+CdJB3lQe7O7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skeleton_FingerIndexEnum.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skeleton_FingerIndexEnum.html",
+          "hash": "0dwPGA25ovZUJTyVXpPNsg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skeleton_FingerIndexes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skeleton_FingerIndexes.html",
+          "hash": "ca618HWWB1Sb0RzmouZ3hQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skeleton_FingerSplayIndexEnum.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skeleton_FingerSplayIndexEnum.html",
+          "hash": "J2SUV6xSJ49AEKWFcfchOQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skeleton_FingerSplayIndexes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skeleton_FingerSplayIndexes.html",
+          "hash": "8fI6IUROD60y8R2buYO7Rw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skeleton_HandMask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skeleton_HandMask.html",
+          "hash": "LLxCZjMKOcaA+6yRlzh1aA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skeleton_JointIndexEnum.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skeleton_JointIndexEnum.html",
+          "hash": "KLZWFYerX6ZvFyYg0DNOKw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skeleton_JointIndexes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skeleton_JointIndexes.html",
+          "hash": "d85BrzlRPqno//RzwnBHgg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skeleton_Pose.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skeleton_Pose.html",
+          "hash": "Ujwx2/qU+QJmYP4Uztfgag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skeleton_PoseSnapshot.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skeleton_PoseSnapshot.html",
+          "hash": "a0kWksde4GECmxDUof+tpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skeleton_Pose_Hand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skeleton_Pose_Hand.html",
+          "hash": "08ztXVgEBP18FT35PjZ3OA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skeleton_Poser.PoseBlendingBehaviour.BlenderTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skeleton_Poser.PoseBlendingBehaviour.BlenderTypes.html",
+          "hash": "+d3pRIbIaAHB2BlChoTR3A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skeleton_Poser.PoseBlendingBehaviour.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skeleton_Poser.PoseBlendingBehaviour.html",
+          "hash": "gRPkUmRSKqXb5VJ7Di7tMA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skeleton_Poser.SkeletonBlendablePose.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skeleton_Poser.SkeletonBlendablePose.html",
+          "hash": "7vMknDZoX/GVTgbPSHFgxw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skeleton_Poser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skeleton_Poser.html",
+          "hash": "GVlOwzEOH7bZ39RbC6R0Gw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skybox.CellSize.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skybox.CellSize.html",
+          "hash": "tL7Dyv2D0duDaspWvJmJrQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Skybox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Skybox.html",
+          "hash": "NITUzqLUTu7ZZLvDpSgPKg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_SphericalProjection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_SphericalProjection.html",
+          "hash": "p0oBOrpv4/lpEZ5cva6eoQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_TrackedCamera.VideoStreamTexture.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_TrackedCamera.VideoStreamTexture.html",
+          "hash": "D42z+Vip2LdcTAyQjIqkVw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_TrackedCamera.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_TrackedCamera.html",
+          "hash": "A6NlSKWPOqdt9rPKcyOZKg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_TrackedObject.EIndex.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_TrackedObject.EIndex.html",
+          "hash": "pyJBcmb1gEBo/ehN6odPwg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_TrackedObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_TrackedObject.html",
+          "hash": "+wuJuK6f/cHuAyMd8eySYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_UpdateModes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_UpdateModes.html",
+          "hash": "Kk+A5gABL19Guw1W9MUc+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Utils.RigidTransform.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Utils.RigidTransform.html",
+          "hash": "vBDZmvn2Scc4LY5BnWNP2w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Utils.SystemFn.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Utils.SystemFn.html",
+          "hash": "hnQ12z8VVl0mbgCCp5xbLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.SteamVR_Utils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.SteamVR_Utils.html",
+          "hash": "GX+I44fykkqb9JpbTEzqmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.Texture_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.Texture_t.html",
+          "hash": "KwkxUG1Wytkl2SFzVcPQJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.TrackedDevicePose_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.TrackedDevicePose_t.html",
+          "hash": "7fq9BNpjhoagR0QmqRuGJw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VRActiveActionSet_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VRActiveActionSet_t.html",
+          "hash": "Jqddu9RMf+k7gN2XsmU8JQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VRBoneTransform_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VRBoneTransform_t.html",
+          "hash": "mSMi0njEm20eqg53Cp16BQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VRControllerAxis_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VRControllerAxis_t.html",
+          "hash": "gx4VDEyfzCPP6R1abVslGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VRControllerState_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VRControllerState_t.html",
+          "hash": "M+Cym0/Sfhpo2nW3m7REqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VRControllerState_t_Packed.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VRControllerState_t_Packed.html",
+          "hash": "2MHOCA/LB+q3bVmlo5ErRQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_ApplicationLaunch_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_ApplicationLaunch_t.html",
+          "hash": "cw+d3RLaA0zKtd0AMor+nA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_Chaperone_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_Chaperone_t.html",
+          "hash": "3MX+QRpPdqh+7rhoxDe2rw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_Controller_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_Controller_t.html",
+          "hash": "8uDSbBFgff8o5EFfSM0+sQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_Data_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_Data_t.html",
+          "hash": "H0BbLwoSLvVLZskLqHOcfA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_DualAnalog_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_DualAnalog_t.html",
+          "hash": "J9xV7dPD/4Dbf2dRpY1n7A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_EditingCameraSurface_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_EditingCameraSurface_t.html",
+          "hash": "WAkt7IaHAygIXSpav1OHYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_HDCPError_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_HDCPError_t.html",
+          "hash": "9f34IKAbVoJ+t6PXMUt3vQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_HapticVibration_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_HapticVibration_t.html",
+          "hash": "AyacYCrylcaNnGYiYmHW3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_InputActionManifestLoad_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_InputActionManifestLoad_t.html",
+          "hash": "sDWH1r1vQKrXN+8d2JuIRg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_InputBindingLoad_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_InputBindingLoad_t.html",
+          "hash": "aKgEW2H+pBCDsQefigWlXQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_Ipd_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_Ipd_t.html",
+          "hash": "GuWLxjAW2hj3W06SGjD27A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_Keyboard_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_Keyboard_t.html",
+          "hash": "wqVT/03YHonEkbKmYuPsQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_MessageOverlay_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_MessageOverlay_t.html",
+          "hash": "RP0bCIpqBHwKsUv0wjeG2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_Mouse_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_Mouse_t.html",
+          "hash": "bjXD8Y7gG6Cyil9RxiPexg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_Notification_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_Notification_t.html",
+          "hash": "pkecUqHVOz7wlSe3nsTPHg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_Overlay_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_Overlay_t.html",
+          "hash": "6FhEILaRNGiufKLewVfN+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_PerformanceTest_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_PerformanceTest_t.html",
+          "hash": "1L8pM+5bHO2MOI5vCOCNBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_Process_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_Process_t.html",
+          "hash": "OVia5cBYGIEkgdclOrR4nQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_ProgressUpdate_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_ProgressUpdate_t.html",
+          "hash": "HlI3ItPVsubebIHE1v5PkA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_Property_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_Property_t.html",
+          "hash": "bWTiW2yPIWmS7sENt7Tzxw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_Reserved_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_Reserved_t.html",
+          "hash": "k81K8g+W3UKPNF/AHyhNLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_ScreenshotProgress_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_ScreenshotProgress_t.html",
+          "hash": "zkhVCs8Yn33RRzrg08px4A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_Screenshot_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_Screenshot_t.html",
+          "hash": "khA1xFeIjPfgDL356Bv8Uw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_Scroll_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_Scroll_t.html",
+          "hash": "niFektgRHIVP7btHMYvsiw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_SeatedZeroPoseReset_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_SeatedZeroPoseReset_t.html",
+          "hash": "NHGDx0nPgOs4txZkbMPCYg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_ShowDevTools_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_ShowDevTools_t.html",
+          "hash": "Y2n6TE+bnvYNJ17DBm4K2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_ShowUI_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_ShowUI_t.html",
+          "hash": "WSKGhLcSMTk7r892XHysuw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_SpatialAnchor_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_SpatialAnchor_t.html",
+          "hash": "LBl3Sg9M/tBF5DAmRSyNhA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_Status_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_Status_t.html",
+          "hash": "ZGbu3ghFn5CsWXcMH8kcqA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_TouchPadMove_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_TouchPadMove_t.html",
+          "hash": "f+mF94811xWX86MucZUdog=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_WebConsole_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_WebConsole_t.html",
+          "hash": "6OcBdnu+lHeCKlSn7NQ+Vw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_t.html",
+          "hash": "ec3hiszv0jxUxnRlXM12tA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VREvent_t_Packed.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VREvent_t_Packed.html",
+          "hash": "6ah7T5uIm9M4o5NJg2Oa/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VRMessageOverlayResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VRMessageOverlayResponse.html",
+          "hash": "WHjsYvsjsqV1bnVEFS97ag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VROverlayFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VROverlayFlags.html",
+          "hash": "iiqUrgRcxPRSHnI+K01QLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VROverlayInputMethod.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VROverlayInputMethod.html",
+          "hash": "goybtwsecCY3tjC9SjgBDA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VROverlayIntersectionMaskPrimitive_Data_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VROverlayIntersectionMaskPrimitive_Data_t.html",
+          "hash": "03SMrP2p8GtqyGluAlNmGg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VROverlayIntersectionMaskPrimitive_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VROverlayIntersectionMaskPrimitive_t.html",
+          "hash": "hEUXuNR2M52NkjAl46v/Lw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VROverlayIntersectionParams_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VROverlayIntersectionParams_t.html",
+          "hash": "/3U/ydNHXwLJEgNQZrrqTw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VROverlayIntersectionResults_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VROverlayIntersectionResults_t.html",
+          "hash": "MoRei3kVqgYNOT2dLn5sqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VROverlayTransformType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VROverlayTransformType.html",
+          "hash": "UmtFH2pSoSRjMpXO8nxbgw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VRSkeletalSummaryData_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VRSkeletalSummaryData_t.html",
+          "hash": "eAvWDHWZo+QDatoNt6qnmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VRTextureBounds_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VRTextureBounds_t.html",
+          "hash": "kCKJL+Sbm2CLwZ79uE+FCw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VRTextureDepthInfo_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VRTextureDepthInfo_t.html",
+          "hash": "hnKp0SyiDmFLdpJw3IfAlQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VRTextureWithDepth_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VRTextureWithDepth_t.html",
+          "hash": "t4nqwT9EOlOCCMExIE8K2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VRTextureWithPoseAndDepth_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VRTextureWithPoseAndDepth_t.html",
+          "hash": "7FmGvzQ52rIrKUffbWeoSA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VRTextureWithPose_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VRTextureWithPose_t.html",
+          "hash": "d4AhSiABrT3SOZnhGi3mdQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.VRVulkanTextureData_t.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.VRVulkanTextureData_t.html",
+          "hash": "GjssvDdIimmD3oMg4PI0LA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Valve.VR.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Valve.VR.html",
+          "hash": "RHs+L/4YXngN+HQukCYngQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "2ZfW7PADU4SYyV2YdhY/XQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "//Ctub+JhrQCek+hvMmAvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/Interaction-System.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/Interaction-System.html",
+          "hash": "XaHFROUptz11o5FN3ClJSA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/Quickstart.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/Quickstart.html",
+          "hash": "CJ2vwrhkhLDPAP134vGgWQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/Render-Models.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/Render-Models.html",
+          "hash": "ta0I1NcfKm4xCk42vcmMEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/Skeleton-Input.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/Skeleton-Input.html",
+          "hash": "LSavAUENg65BzKr9xRspHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/Skeleton-Poser.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/Skeleton-Poser.html",
+          "hash": "Z8y20Ov4uJ4kPR9G/RNZHw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/SteamVR-Input.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/SteamVR-Input.html",
+          "hash": "YvgnGI/sQ7d+4azRNPnjnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "1y6zQR50mo7wGcxAY6kFRQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "IuLFywP6759rqK2weIvocA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/Binding-UI.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/Binding-UI.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/InteractionSystem.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/InteractionSystem.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/InteractionSystemInAction.gif",
+      "output": {
+        "resource": {
+          "relative_path": "images/InteractionSystemInAction.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/InteractionSystemRC.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/InteractionSystemRC.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/SelectAction.gif",
+      "output": {
+        "resource": {
+          "relative_path": "images/SelectAction.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/SteamVR-Input-CopyJSON.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/SteamVR-Input-CopyJSON.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/SteamVR-Input-Interactions_Example.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/SteamVR-Input-Interactions_Example.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/SteamVR-Input-MenuItem.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/SteamVR-Input-MenuItem.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/SteamVR-Input-SaveAndGenerate.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/SteamVR-Input-SaveAndGenerate.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/SteamVR-Input-Window.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/SteamVR-Input-Window.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/codeActions.gif",
+      "output": {
+        "resource": {
+          "relative_path": "images/codeActions.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "images/favicon.ico"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/flowers.gif",
+      "output": {
+        "resource": {
+          "relative_path": "images/flowers.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/inputDebugger.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/inputDebugger.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "images/logo.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/poser_blendEditor.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "images/poser_blendEditor.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/poser_comp.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "images/poser_comp.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/poser_hierarchy.JPG",
+      "output": {
+        "resource": {
+          "relative_path": "images/poser_hierarchy.JPG"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/poser_icon_analog.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/poser_icon_analog.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/poser_icon_boolean.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/poser_icon_boolean.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/poser_icon_manual.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "images/poser_icon_manual.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/poser_icon_manual.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/poser_icon_manual.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/poser_mask.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "images/poser_mask.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/poser_poseEditor.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "images/poser_poseEditor.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/poser_scale.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "images/poser_scale.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/poser_sine.gif",
+      "output": {
+        "resource": {
+          "relative_path": "images/poser_sine.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/poser_squishy.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "images/poser_squishy.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/skeleton_knuckles_controller.gif",
+      "output": {
+        "resource": {
+          "relative_path": "images/skeleton_knuckles_controller.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/skeleton_knuckles_withoutcontroller.gif",
+      "output": {
+        "resource": {
+          "relative_path": "images/skeleton_knuckles_withoutcontroller.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "sW5EtIgD+zCtIqQ8FLfxyw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "z1FzRGH+2oqvbPcHFofRMA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "tutorials/Skeleton-Poser.md",
+      "output": {
+        ".html": {
+          "relative_path": "tutorials/Skeleton-Poser.html",
+          "hash": "omFNJW7ao/2wQg5NDlPlgw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "tutorials/SteamVR-Input.md",
+      "output": {
+        ".html": {
+          "relative_path": "tutorials/SteamVR-Input.html",
+          "hash": "14cMf/ClqVJzfb8q9aT3/g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "tutorials/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "tutorials/intro.html",
+          "hash": "iaOr6e5xMLqHX3u2D5UtlA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "tutorials/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "tutorials/toc.html",
+          "hash": "KXP26qK4k1ERBa6q5yKEkA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Disable incremental build by force rebuild option.",
+        "incrementalPhase": "build"
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build"
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build"
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "incrementalPhase": "postProcessing"
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

@@ -1,0 +1,903 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class SteamVR_Behaviour_Boolean
+   | SteamVR Unity Plugin </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class SteamVR_Behaviour_Boolean
+   | SteamVR Unity Plugin ">
+    <meta name="generator" content="docfx 2.40.7.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.jpg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Valve.VR.SteamVR_Behaviour_Boolean">
+  
+  
+  <h1 id="Valve_VR_SteamVR_Behaviour_Boolean" data-uid="Valve.VR.SteamVR_Behaviour_Boolean" class="text-break">Class SteamVR_Behaviour_Boolean
+  </h1>
+  <div class="markdown level0 summary"><p>This component simplifies using boolean actions.</p>
+<p>Provides editor accessible events: OnPress, OnPressDown, OnPressUp, OnChange, and OnUpdate.</p>
+<p>Provides script accessible events: OnPressEvent, OnPressDownEvent, OnPressUpEvent, OnChangeEvent, and OnUpdateEvent.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">UnityEngine.Object</span></div>
+    <div class="level2"><span class="xref">UnityEngine.Component</span></div>
+    <div class="level3"><span class="xref">UnityEngine.Behaviour</span></div>
+    <div class="level4"><span class="xref">UnityEngine.MonoBehaviour</span></div>
+    <div class="level5"><span class="xref">SteamVR_Behaviour_Boolean</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.Invoke(System.String, System.Single)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.InvokeRepeating(System.String, System.Single, System.Single)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.CancelInvoke()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.CancelInvoke(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.IsInvoking(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.IsInvoking()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StartCoroutine(System.Collections.IEnumerator)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StartCoroutine_Auto(System.Collections.IEnumerator)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StartCoroutine(System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StartCoroutine(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StopCoroutine(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StopCoroutine(System.Collections.IEnumerator)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StopCoroutine(UnityEngine.Coroutine)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StopAllCoroutines()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.print(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.useGUILayout</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Behaviour.enabled</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Behaviour.isActiveAndEnabled</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponent(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponent&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponent(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInChildren(System.Type, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInChildren(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInChildren&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInChildren&lt;T&gt;(System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren(System.Type, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren&lt;T&gt;(System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren&lt;T&gt;(System.Boolean, System.Collections.Generic.List&lt;T&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren&lt;T&gt;(System.Collections.Generic.List&lt;T&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInParent(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInParent&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInParent(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInParent(System.Type, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInParent&lt;T&gt;(System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInParent&lt;T&gt;(System.Boolean, System.Collections.Generic.List&lt;T&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInParent&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponents(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponents(System.Type, System.Collections.Generic.List&lt;UnityEngine.Component&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponents&lt;T&gt;(System.Collections.Generic.List&lt;T&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponents&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.CompareTag(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessageUpwards(System.String, System.Object, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessageUpwards(System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessageUpwards(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessageUpwards(System.String, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessage(System.String, System.Object, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessage(System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessage(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessage(System.String, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.BroadcastMessage(System.String, System.Object, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.BroadcastMessage(System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.BroadcastMessage(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.BroadcastMessage(System.String, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.transform</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.gameObject</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.tag</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.rigidbody</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.rigidbody2D</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.camera</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.light</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.animation</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.constantForce</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.renderer</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.audio</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.guiText</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.networkView</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.guiElement</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.guiTexture</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.collider</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.collider2D</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.hingeJoint</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.particleEmitter</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.particleSystem</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Destroy(UnityEngine.Object, System.Single)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Destroy(UnityEngine.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.DestroyImmediate(UnityEngine.Object, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.DestroyImmediate(UnityEngine.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectsOfType(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.DontDestroyOnLoad(UnityEngine.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.DestroyObject(UnityEngine.Object, System.Single)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.DestroyObject(UnityEngine.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindSceneObjectsOfType(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectsOfTypeIncludingAssets(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectsOfTypeAll(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.GetInstanceID()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate(UnityEngine.Object, UnityEngine.Vector3, UnityEngine.Quaternion)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate(UnityEngine.Object, UnityEngine.Vector3, UnityEngine.Quaternion, UnityEngine.Transform)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate(UnityEngine.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate(UnityEngine.Object, UnityEngine.Transform)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate(UnityEngine.Object, UnityEngine.Transform, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate&lt;T&gt;(T)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectsOfType&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectOfType(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectOfType&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.name</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.hideFlags</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Valve.VR.html">Valve.VR</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Valve_VR_SteamVR_Behaviour_Boolean_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SteamVR_Behaviour_Boolean : MonoBehaviour</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_booleanAction" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.booleanAction">booleanAction</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Tooltip(&quot;The SteamVR boolean action that this component should use&quot;)]
+public SteamVR_Action_Boolean booleanAction</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Action_Boolean.html">SteamVR_Action_Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_inputSource" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.inputSource">inputSource</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Tooltip(&quot;The device this action should apply to. Any if the action is not device specific.&quot;)]
+public SteamVR_Input_Sources inputSource</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Input_Sources.html">SteamVR_Input_Sources</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_onChange" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.onChange">onChange</h4>
+  <div class="markdown level1 summary"><p>This UnityEvent fires whenever a change happens in the action</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SteamVR_Behaviour_BooleanEvent onChange</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Behaviour_BooleanEvent.html">SteamVR_Behaviour_BooleanEvent</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_onPress" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.onPress">onPress</h4>
+  <div class="markdown level1 summary"><p>This UnityEvent will fire whenever the boolean action is true and gets updated</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SteamVR_Behaviour_BooleanEvent onPress</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Behaviour_BooleanEvent.html">SteamVR_Behaviour_BooleanEvent</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_onPressDown" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.onPressDown">onPressDown</h4>
+  <div class="markdown level1 summary"><p>This UnityEvent will fire whenever the boolean action has changed from false to true in the last update</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SteamVR_Behaviour_BooleanEvent onPressDown</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Behaviour_BooleanEvent.html">SteamVR_Behaviour_BooleanEvent</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_onPressUp" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.onPressUp">onPressUp</h4>
+  <div class="markdown level1 summary"><p>This UnityEvent will fire whenever the boolean action has changed from true to false in the last update</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SteamVR_Behaviour_BooleanEvent onPressUp</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Behaviour_BooleanEvent.html">SteamVR_Behaviour_BooleanEvent</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_onUpdate" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.onUpdate">onUpdate</h4>
+  <div class="markdown level1 summary"><p>This UnityEvent fires whenever the action is updated</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SteamVR_Behaviour_BooleanEvent onUpdate</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Behaviour_BooleanEvent.html">SteamVR_Behaviour_BooleanEvent</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="Valve_VR_SteamVR_Behaviour_Boolean_actionSet_" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.actionSet*"></a>
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_actionSet" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.actionSet">actionSet</h4>
+  <div class="markdown level1 summary"><p>Returns the action set that this action is in.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SteamVR_ActionSet actionSet { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_ActionSet.html">SteamVR_ActionSet</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Behaviour_Boolean_isActive_" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.isActive*"></a>
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_isActive" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.isActive">isActive</h4>
+  <div class="markdown level1 summary"><p>Returns true if this action is currently bound and its action set is active</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool isActive { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="Valve_VR_SteamVR_Behaviour_Boolean_AddHandlers_" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.AddHandlers*"></a>
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_AddHandlers" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.AddHandlers">AddHandlers()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void AddHandlers()</code></pre>
+  </div>
+  
+  
+  <a id="Valve_VR_SteamVR_Behaviour_Boolean_GetLocalizedName_" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.GetLocalizedName*"></a>
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_GetLocalizedName_Valve_VR_EVRInputStringBits___" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.GetLocalizedName(Valve.VR.EVRInputStringBits[])">GetLocalizedName(EVRInputStringBits[])</h4>
+  <div class="markdown level1 summary"><p>Gets the localized name of the device that the action corresponds to.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetLocalizedName(params EVRInputStringBits[] localizedParts)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.EVRInputStringBits.html">EVRInputStringBits</a>[]</td>
+        <td><span class="parametername">localizedParts</span></td>
+        <td><ul><li>VRInputString_Hand - Which hand the origin is in. E.g. &quot;Left Hand&quot;</li><li>VRInputString_ControllerType - What kind of controller the user has in that hand.E.g. &quot;Vive Controller&quot;</li><li>VRInputString_InputSource - What part of that controller is the origin. E.g. &quot;Trackpad&quot;</li><li>VRInputString_All - All of the above. E.g. &quot;Left Hand Vive Controller Trackpad&quot;</li></ul>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Behaviour_Boolean_OnDisable_" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.OnDisable*"></a>
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_OnDisable" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.OnDisable">OnDisable()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnDisable()</code></pre>
+  </div>
+  
+  
+  <a id="Valve_VR_SteamVR_Behaviour_Boolean_OnEnable_" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.OnEnable*"></a>
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_OnEnable" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.OnEnable">OnEnable()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnEnable()</code></pre>
+  </div>
+  
+  
+  <a id="Valve_VR_SteamVR_Behaviour_Boolean_RemoveHandlers_" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.RemoveHandlers*"></a>
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_RemoveHandlers" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.RemoveHandlers">RemoveHandlers()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void RemoveHandlers()</code></pre>
+  </div>
+  <h3 id="events">Events
+  </h3>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_onChangeEvent" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.onChangeEvent">onChangeEvent</h4>
+  <div class="markdown level1 summary"><p>This C# event fires whenever a change happens in the action</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SteamVR_Behaviour_Boolean.ChangeHandler onChangeEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Behaviour_Boolean.ChangeHandler.html">SteamVR_Behaviour_Boolean.ChangeHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_onPressDownEvent" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.onPressDownEvent">onPressDownEvent</h4>
+  <div class="markdown level1 summary"><p>This C# event will fire whenever the boolean action has changed from false to true in the last update</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SteamVR_Behaviour_Boolean.StateDownHandler onPressDownEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Behaviour_Boolean.StateDownHandler.html">SteamVR_Behaviour_Boolean.StateDownHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_onPressEvent" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.onPressEvent">onPressEvent</h4>
+  <div class="markdown level1 summary"><p>This C# event will fire whenever the boolean action is true and gets updated</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SteamVR_Behaviour_Boolean.StateHandler onPressEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Behaviour_Boolean.StateHandler.html">SteamVR_Behaviour_Boolean.StateHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_onPressUpEvent" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.onPressUpEvent">onPressUpEvent</h4>
+  <div class="markdown level1 summary"><p>This C# event will fire whenever the boolean action has changed from true to false in the last update</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SteamVR_Behaviour_Boolean.StateUpHandler onPressUpEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Behaviour_Boolean.StateUpHandler.html">SteamVR_Behaviour_Boolean.StateUpHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_Boolean_onUpdateEvent" data-uid="Valve.VR.SteamVR_Behaviour_Boolean.onUpdateEvent">onUpdateEvent</h4>
+  <div class="markdown level1 summary"><p>This C# event fires whenever the action is updated</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SteamVR_Behaviour_Boolean.UpdateHandler onUpdateEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Behaviour_Boolean.UpdateHandler.html">SteamVR_Behaviour_Boolean.UpdateHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright (c) Valve Corporation, All rights reserved.</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

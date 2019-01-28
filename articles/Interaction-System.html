@@ -1,0 +1,544 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interaction System from The Lab | SteamVR Unity Plugin </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interaction System from The Lab | SteamVR Unity Plugin ">
+    <meta name="generator" content="docfx 2.40.7.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.jpg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="interaction-system-from-the-lab">Interaction System from The Lab</h1>
+
+<p>The Interaction System is a series of scripts, prefabs and other assets that were the basis of all the minigames and other scenes in The Lab. This system was initially designed to be lightweight and flexible so that it could support all the experiments that we were working on at the time. Since then it has been updated to be an example of the new features we've added to SteamVR. Including SteamVR Input (actions / action sets) and Skeleton Input (hands). Hopefully it can serve as a good starting point for your own experiments and help you in developing your projects.</p>
+<h2 id="getting-started">Getting started</h2>
+<ul>
+<li>Create a new scene</li>
+<li>Delete the “Main Camera” object</li>
+<li>Drag in the “Player” prefab from Core/Prefabs into your scene. This prefab sets up the main Player component and the hands. It also hooks into all the relevant SteamVR Input actions needed.</li>
+<li>You should be able to see the scene in the headset now along with your controllers being tracked in the scene.</li>
+<li>If you have controllers that support Skeleton Input you'll also see hands that touch and press the buttons on your controllers.</li>
+<li>Add the “Interactable” component to any object in the scene. All the other components on this object will then start receiving relevant messages from the player’s hands. (Look at Samples/Scripts/InteractableExample.cs for example usage)</li>
+<li>We have included a few commonly used interactable classes such as the Throwable. Adding this component to your object will allow it to be picked up and thrown by the player.</li>
+<li>You can then add the Skeleton Poser component to a GameObject with an Interactable and pose how you want the hand to look when interacting with it.</li>
+<li>To add teleporting to your scene drag in the Teleporting prefab from Teleport/Prefabs into your scene. This will set up all the teleport logic.</li>
+<li>Drag in some TeleportPoint prefabs from Teleport/Prefabs to add locations that the player can teleport to.</li>
+<li>You can also add the TeleportArea component to any object in your scene. This will allow the player to teleport anywhere along the collider for that object.</li>
+</ul>
+<p>With these basic building blocks you can then go on and create some fairly complex objects. For some examples take a look at the Interactions_Example scene in Assets/SteamVR/InteractionSystem/Samples/Scenes.</p>
+<h2 id="sample-scene">Sample scene</h2>
+<p>The sample scene Interactions_Example in the Samples/Scenes folder includes all of the major
+components and is a good place to familiarize yourself with the system.
+The scene contains the following elements:</p>
+<ul>
+<li><strong>Player</strong>: The Player prefab is at the core of the entire system. Most of the other components
+depend on the player to be present in the scene.</li>
+<li><strong>Teleporting</strong>: The Teleporting prefab handles all the teleporting logic for the system.</li>
+<li><strong>InteractableExample</strong>: This shows a very simple interactable that shows the basic aspects of receiving messages from the hands and reacting to them.</li>
+<li><strong>Throwables</strong>: These show how to use the interaction system to create a variety of different types of throwable objects. Read the descriptions next to each table for more information.</li>
+<li><strong>Skeleton</strong>: There's a few different examples of hand models along with options for what extents the skeleton goes to.</li>
+<li><strong>Proximity Button</strong>: A common task is needing to hit a button. Physical buttons are more satisfying to use than flat interfaces but physical interaction systems can get complex fast. Without going too deep into that we've included a button that can be depressed just by being close to a controller.</li>
+<li><strong>Interesting Interactables</strong>: These are slightly more complex examples of using the Skeleton Poser system along with Throwables. With the grenades you get two different poses depending on how you pick them up. The Happy Ball moves in your hand with a squeeze and the Squeezable, well, squeezes.</li>
+<li><strong>UI &amp; Hints</strong>: This shows how hints are handled in the interaction system and how it can be used to interact with Unity UI widgets like buttons.</li>
+<li><strong>LinearDrive</strong>: This is a slightly more complex interactable that combines a few different pieces to create an animated object that can be controlled by simple interactions.</li>
+<li><strong>CircularDrive</strong>: This shows how interactions can be constrained and mapped differently to cause more complex motions.</li>
+<li><strong>Longbow</strong>: This was the actual Longbow used in The Lab. It's now been updated with the Input System and Skeleton Poser. It is one of the more complex objects that we've created using this system and shows how simple pieces can be combined to create an entire game mechanic.
+Going over the different objects in this sample scene should give you a good idea of the breadth of the interaction system and how to combine its different parts to create complex game objects.</li>
+</ul>
+<h2 id="documentation">Documentation</h2>
+<p>Now we'll go a little more in depth into some of the basic components included in the interaction system. The system is broken up into a few different parts:</p>
+<h3 id="core">Core:</h3>
+<p>At the core of the interaction system are the Player, Hand and Interactable classes. The provided Player prefab sets up the player object and the SteamVR camera for the scene.</p>
+<ul>
+<li>The interaction system works by sending messages to any object that the hands interact with. These objects then react to the messages and can attach themselves to the hands if wanted.</li>
+<li>To make any object receive messages from the hands just add the Interactable component to that object. This object will then be considered when the hand does its hovering checks.</li>
+<li>We have also included a few commonly used interactables such as the Throwable or the LinearDrive.</li>
+<li>The Player prefab also creates an InputModule which allows the hands to mimic mouse events to easily work with Unity UI widgets.</li>
+<li>The interaction system also includes a fallback mode which allows for typical first-person camera controls using the keyboard and mouse. This also allows the mouse to act like one of the player's hands. This mode is particularly useful when not everyone on the team has access to VR headset.</li>
+</ul>
+<h4 id="player">Player</h4>
+<p>The Player class acts like a singleton which means there should only be one Player object in the scene.</p>
+<ul>
+<li>The player itself doesn't do much except for keep track of the hands and the hmd.</li>
+<li>It can be accessed globally throughout the project and many aspects of the interaction system assume that the Player object always exists in the scene.</li>
+<li>It also keeps track of whether you are in VR mode or 2D fallback mode.</li>
+<li>Using the accessors through the Player class allows the other components to function similarly without knowing if the VR headset or mouse/keyboard is being used.</li>
+<li>The 2D fallback mode is useful but has its limitations. We mainly used this mode for testing out very simple interactions that only required 1 hand and the trigger button. It was mainly useful during development when not everyone on the team had a VR headset on controllers with them at all times.</li>
+<li>The Player also includes a few useful properties:
+<ul>
+<li>hmdTransform: This will always return the transform of the current camera. This could be the VR headset or the 2D fallback camera.</li>
+<li>feetPositionGuess: This guesses the position of the player's feet based on the where the hmd is. Since we don't actually know the position of their feet, this can be pretty inaccurate depending on how the player is standing.</li>
+<li>bodyDirectionGuess: This is similar to the feetPositionGuess in that it can be inaccurate depending on how the player is standing.</li>
+</ul>
+</li>
+<li>Note: The player class is set up to use icons to show the feet and hands in the editor scene view but due to the way Unity works these icons have to be located in a specific folder to work. These icons are provided under Core/Icons. Move them to a folder named &quot;Gizmos&quot; in the root of your projects Asset tree and they should work.</li>
+<li>The 2D fallback mode can be useful during testing but it’s probably not something that you want to ship with your finished game. There are 2 ways to disable it:
+<ul>
+<li>Uncheck the &quot;Allow Toggle To 2D&quot; bool on the player object in your scene before making your build.</li>
+<li>Add &quot;HIDE_DEBUG_UI&quot; to the list of Scripting Define Symbols in your project's PlayerSettings. This will only disable the 2D debug view in builds of your game while allowing you to keep using it in the editor.</li>
+</ul>
+</li>
+</ul>
+<h4 id="hand">Hand</h4>
+<ul>
+<li><p>The Hand class does most of the heavy lifting for the interaction system.</p>
+</li>
+<li><p>The Hand checks for objects (Interactables) that it is hovering over and sends them messages based on the current hover state.</p>
+</li>
+<li><p>The hand can only hover on 1 object at a time and only 1 hand can hover on an object at the same time.</p>
+</li>
+<li><p>Objects can be attached to and detached from the Hand. Only one object can be the object in focus of the hand but multiple objects can be attached to the hand at the same time.</p>
+</li>
+<li><p>Once an object is detached from the hand then the previous object attached to the hand (if it is still attached) becomes the object in focus on the hand</p>
+</li>
+<li><p>When nothing is attached to the hand it will always show the controller.</p>
+</li>
+<li><p>The attached object can set AttachmentFlags that determine the behavior of the hand and the object once it has been attached.</p>
+</li>
+<li><p>The hand can be locked from hovering over other objects or any object depending on the situation.</p>
+</li>
+<li><p>These are the messages the hand sends to objects that it is interacting with:</p>
+<ul>
+<li>OnHandHoverBegin: Sent when the hand first starts hovering over the object</li>
+<li>HandHoverUpdate: Sent every frame that the hand is hovering over the object</li>
+<li>OnHandHoverEnd: Sent when the hand stops hovering over the object</li>
+<li>OnAttachedToHand: Sent when the object gets attached to the hand</li>
+<li>HandAttachedUpdate: Sent every frame while the object is attached to the hand</li>
+<li>OnDetachedFromHand: Sent when the object gets detached from the hand</li>
+<li>OnHandFocusLost: Sent when an attached object loses focus because something else has been attached to the hand</li>
+<li>OnHandFocusAcquired: Sent when an attached object gains focus because the previous focus object has been detached from the hand</li>
+</ul>
+</li>
+<li><p>These are the messages that the hand sends to its child objects:</p>
+<ul>
+<li>OnHandInitialized: Sent when the hand first gets initialized by associating itself with the device ID of a SteamVR tracked controller</li>
+<li>OnParentHandHoverBegin: Sent when the hand starts hovering over something</li>
+<li>OnParentHandHoverEnd: Sent when the hand stops hovering over something</li>
+<li>OnParentHandInputFocusAcquired: Sent when the game window gains input focus</li>
+<li>OnParentHandInputFocusLost: Sent when the game window loses input focus</li>
+</ul>
+</li>
+<li><p>These members deal with attaching and detaching:</p>
+<ul>
+<li>AttachObject: Attaches the object from the hand using the passed in AttachmentFlags</li>
+<li>DetachObject: Detaches the object from the hand and optionally restores it to its original parent</li>
+<li>currentAttachedObject: This returns the in-focus attached object on the hand, if any</li>
+</ul>
+</li>
+<li><p>The Hand also has a few useful properties and functions that can be used to customize its
+behavior:</p>
+<ul>
+<li>OtherHand: This is the other hand on the player. This can be useful for objects that need to interact with both hands such as the longbow.</li>
+<li>HoverSphereTransform and Radius: This can be used to customize the hover range of the hand.</li>
+<li>HoverLayerMask: This can be changed so that the hand only hovers over objects in certain layers.</li>
+<li>HoverUpdateInterval: The hovering check can be done more or less frequently
+depending on the requirements of your game.</li>
+<li>HoverLock/Unlock: This is used to make the hand only hover over a certain object. Passing in null will make the hand not hover over anything while it is hover locked. This technique is used to make the hand not hover over objects while the teleport arc is active.</li>
+<li>GetGrabStarting/GetGrabEnding: These are used to determine if the boolean grab actions are being triggered at that time. There are two types of grabs - grip grab and pinch grab. These are generally associated with grip buttons and trigger buttons but serve special functions on the Knuckles controllers.</li>
+<li>GetAttachmentTransform: Objects can use &quot;attachment transforms&quot; on the hand to figure out how to snap on to the hand. These are just named children of the Hand object. The Player prefab contains &quot;Attach_ControllerTip&quot; as an example.</li>
+</ul>
+</li>
+</ul>
+<h4 id="interactable">Interactable</h4>
+<ul>
+<li>The Interactable class is more of an identifier. It identifies to the Hand that this object is interactable.</li>
+<li>Any object with this component will receive the relevant messages from the Hand.</li>
+<li>Using just these 3 components you should be able to create many different and complex interactive objects.</li>
+<li>A few commonly used interactable system components that show how the system can combine these basic mechanics to create more complicated objects have been provided:</li>
+</ul>
+<h4 id="throwable">Throwable</h4>
+<ul>
+<li>This is one of the most basic interactive objects.</li>
+<li>The player can pick up this object when a hand hovers over it and presses one of the grab buttons (usually trigger or grip).</li>
+<li>The object gets attached to the hand and is held there while the button is pressed.</li>
+<li>When the button is released then any velocity that was in the hand is given to thrown object.</li>
+<li>This lets you create basic objects that can be picked up and thrown.</li>
+</ul>
+<h4 id="lineardrive">LinearDrive</h4>
+<ul>
+<li>This allows an object to be moved by the hand between a starting and ending position.</li>
+<li>The object's current position is used to set a LinearMapping.</li>
+</ul>
+<h4 id="circulardrive">CircularDrive</h4>
+<ul>
+<li>This allows an object to be moved by the hand in a circular motion.</li>
+<li>The object's current position is used to set a LinearMapping.</li>
+</ul>
+<h4 id="linearmapping">LinearMapping</h4>
+<ul>
+<li>This is a number that is set by a LinearDrive or CircularDrive.</li>
+<li>The mapping can be used to map simple hand interactions into more complex behaviors.
+<ul>
+<li>An example of this is string in the Longbow which uses a LinearMapping to map the
+pulling of the bow string to the longbow pull-back animation.</li>
+</ul>
+</li>
+<li>The mapping is used by several other classes to interpolate their properties
+<ul>
+<li>LinearAnimation</li>
+<li>LinearAnimator</li>
+<li>LinearBlendShape</li>
+<li>LinearDisplacement</li>
+<li>HapticRack</li>
+</ul>
+</li>
+</ul>
+<h4 id="velocityestimator">VelocityEstimator</h4>
+<ul>
+<li>This class is useful for estimating the velocity and acceleration of an object based on a change in its position.</li>
+<li>In most cases you would get more accurate results if you get the velocity and acceleration from the actual controller but sometimes that isn't possible such as when using the 2D fallback hand.</li>
+</ul>
+<h4 id="ignorehovering">IgnoreHovering</h4>
+<ul>
+<li>This can be added to an object or specific collider if you want it to be ignored by the hand when doing its hovering checks.</li>
+</ul>
+<h4 id="uielement">UIElement</h4>
+<ul>
+<li>Adding this component to an existing UI widget will make it so that the hands can interact with it.</li>
+<li>This will generate mouse hover and click events based on hand interactions and send them through the Unity event system to work with existing UI widgets.</li>
+<li>In addition it will also generate an OnHandClick event which will also pass in the hand that clicked the element.</li>
+<li>Another big part of the interaction system is the concept of an ItemPackage</li>
+</ul>
+<h4 id="itempackage">ItemPackage</h4>
+<ul>
+<li>An ItemPackage is collection of objects that are meant to temporarily override the functionality of the hand.
+<ul>
+<li>An example of this is the Longbow. While the Longbow is attached to the hand it sort of takes over the base functionality of the hand.</li>
+</ul>
+</li>
+<li>ItemPackages have the concept of being able to be picked up and put back where they were picked up from.</li>
+<li>Once picked up they remain attached to the hand until they are put back. No button needs to be held for them to remain attached to the hand. The hand still passes along messages like normal but these objects usually disable some of the base functionality of the hand, such as hovering while they are attached.
+<ul>
+<li>Other examples of an ItemPackage from The Lab would be the balloon tool or the Xortex drone controller. Both these objects take over the hand's base functionality while they are attached.</li>
+</ul>
+</li>
+<li>An ItemPackage can be 1 or 2 handed.</li>
+</ul>
+<h4 id="itempackagespawner">ItemPackageSpawner</h4>
+<ul>
+<li>This handles the logic for when to spawn and put away the ItemPackage and how to attach the items to the hand once spawned.</li>
+<li>It also handles showing the preview of the item or the outline of the item when it is picked up.</li>
+</ul>
+<h4 id="itempackagereference">ItemPackageReference</h4>
+<ul>
+<li>This component can be added to item to indicate that it is a part of an item package.</li>
+<li>There are a few other helper classes included as a core part of the interaction system.</li>
+</ul>
+<h4 id="playsound">PlaySound</h4>
+<ul>
+<li>This class allows AudioClips to be played back with many more parameters</li>
+<li>It can take in many AudioClips and play back 1 at random each time</li>
+<li>It can also randomize how the clip is played back</li>
+</ul>
+<h4 id="soundplayoneshot">SoundPlayOneShot</h4>
+<ul>
+<li>This class is specifically for sounds that only play once and don't loop or need to be paused
+while playing</li>
+</ul>
+<h4 id="util">Util</h4>
+<ul>
+<li>This is a class full of small utility functions that are used throughout the interaction system.</li>
+</ul>
+<h4 id="interactablehoverevents">InteractableHoverEvents</h4>
+<ul>
+<li>This class generates UnityEvents when it receives messages from the hand.</li>
+</ul>
+<h4 id="interactablebuttonevents">InteractableButtonEvents</h4>
+<ul>
+<li>This class translates controller button input into UnityEvents.</li>
+</ul>
+<h4 id="complexthrowable">ComplexThrowable</h4>
+<ul>
+<li>This class attaches objects to the hand using a physics joint instead of simple parenting.</li>
+<li>This allows for more physics based interactions with the object once it is attached.</li>
+<li>Note: This class is a little experimental. Since we didn't actually use it in The Lab it might not be feature complete and may be buggy.</li>
+</ul>
+<h4 id="distancehaptics">DistanceHaptics</h4>
+<ul>
+<li>Triggers haptic pulses based on a distance between 2 transforms.</li>
+</ul>
+<h4 id="player-prefab">Player (Prefab)</h4>
+<ul>
+<li>This is the single piece of the interaction system that combines all its basic parts.</li>
+<li>This prefab arranges the player and hands in a way to make them all accessible easily.</li>
+<li>It also contains all the setup for SteamVR and the 2D fallback system</li>
+<li>Most of the other components of the interaction system depend on the player and some of them assume that the player and hands are set up in this way.</li>
+<li>There should only be 1 of these in a scene.</li>
+</ul>
+<h4 id="blankcontroller-prefab">BlankController (Prefab)</h4>
+<ul>
+<li>This is used by the Hand when it has nothing else attached.</li>
+<li>The render model for the controller is loaded through SteamVR and all its parts are articulated.</li>
+</ul>
+<h3 id="teleport">Teleport</h3>
+<ul>
+<li>The teleport system from The Lab supports teleporting to specific teleport points or a more general teleport area.</li>
+<li>The important classes are Teleport, TeleportPoint and TeleportArea.</li>
+<li>All the functionality is wrapped up in the Teleporting prefab in Teleport/Prefabs. This prefab includes all the logic for the teleport system to function.</li>
+<li>Add TeleportPoints or TeleportAreas to the scene to add spots where the player can teleport to.</li>
+</ul>
+<h4 id="teleport-1">Teleport</h4>
+<ul>
+<li>This class handles most of the logic of teleporting.</li>
+<li>When the touchpad is pressed, the teleport pointer shows up. If the pointer is pointing at a valid spot when the touchpad is released then the player teleports.
+<ul>
+<li>You can also press 'T' on the keyboard while in 2D fallback mode to bring up the teleport pointer.</li>
+</ul>
+</li>
+<li>There is a slight fade to black when the player teleports and then the game fades back in.</li>
+<li>This class keeps track of all the teleport markers in the scene and informs them to fade in/out depending on the state of the teleport pointer.</li>
+<li>In certain situations it can be useful to have a separate mesh for the floor the scene that is different from the teleport mesh. In these situations the teleport system will trace down from where it hit the teleport mesh and try to place the player on the floor mesh. The point of this is to try to match the visual floor in the scene with the physical floor in the player's play area.</li>
+<li>There are a few properties that will probably need to be tweaked:
+<ul>
+<li>tracerLayerMask: This is all the layers that the teleport pointer will try to hit</li>
+<li>floorFixupMask: The layer that the floor is on.</li>
+<li>floorFixupMaximumTraceDistance: The maximum distance to trace to try to look
+for the floor.</li>
+<li>ShowPlayAreaMarker: This toggles whether to show the rectangle of the player's play area while teleporting. This can help in orienting the players in their physical space.</li>
+<li>arcDistance: How far the teleport arc should go. Increasing this number will allow the player to teleport further in the scene. This value will probably need to be tweaked for each scene.</li>
+</ul>
+</li>
+</ul>
+<h4 id="teleportmarkerbase">TeleportMarkerBase</h4>
+<ul>
+<li>This is the base class for all the teleport markers.</li>
+<li>It contains methods that the Teleport class expects to be present in all the teleport markers.</li>
+<li>You can use this as your base class to create a new type of teleport marker.</li>
+<li>A teleport marker can be locked or unlocked. The player cannot teleport to locked markers.</li>
+</ul>
+<h4 id="teleportarea">TeleportArea</h4>
+<ul>
+<li>This is a teleport area that is made up of a mesh.</li>
+<li>When teleporting onto these, the player will teleport exactly where they are pointing (plus the floor fixup)</li>
+<li>Add this component to any object with a collider and a mesh renderer to allow the player to teleport on it.</li>
+</ul>
+<h4 id="teleportpoint">TeleportPoint</h4>
+<ul>
+<li>This is a teleport point that the player can teleport to.</li>
+<li>When teleporting onto these, the player will teleport at the origin of the point regardless of where on the point they were pointing.</li>
+<li>These points can be named</li>
+<li>The points also have the ability to teleport players to new scenes. (This isn't fully functional since you will have to hook it up to your scene loading system.)</li>
+</ul>
+<h4 id="teleportarc">TeleportArc</h4>
+<ul>
+<li>This draws the arc for the teleport pointer and does the physics trace for the teleport system.</li>
+</ul>
+<h4 id="allowteleportwhileattachedtohand">AllowTeleportWhileAttachedToHand</h4>
+<ul>
+<li>By default you can't teleport using a hand that has something attached to it. Adding this component to an attached object bypasses that rule.</li>
+<li>This is used by the BlankController and longbow Arrow objects so that the player can teleport even while they are attached to the hand.</li>
+</ul>
+<h4 id="ignoreteleporttrace">IgnoreTeleportTrace</h4>
+<ul>
+<li>Adding this to an object with a collider will allow the teleport trace to pass through it.</li>
+<li>A different way of dealing with this would be to put that object on a different layer that the TeleportArc doesn't check against.</li>
+<li>This is used on the longbow Arrow to allow the teleport trace to pass through the arrow tip.</li>
+</ul>
+<h4 id="teleporting-prefab">Teleporting (Prefab)</h4>
+<ul>
+<li>This prefab sets up the entire teleport system.</li>
+<li>Dragging this into your scene will give you the ability to bring up the teleport pointer in your game.</li>
+<li>All of the visuals and sounds of the teleport system can be changed by modifying the properties of this prefab.</li>
+</ul>
+<h4 id="teleportpoint-prefab">TeleportPoint (Prefab)</h4>
+<ul>
+<li>Add these to your scene to add locations that the player can teleport to.</li>
+<li>Note: The names of some of the objects in this scene are hard-coded and some of the code will need to be modified if you want to change the models.</li>
+</ul>
+<h3 id="render-model">Render Model</h3>
+<p>Unlike the SteamVR_Render_Model component this Render_Model component inside the Interaction System handles both controller models as well as hand models and enabling/disabling them individually.</p>
+<h3 id="hints">Hints</h3>
+<ul>
+<li>The hint system shows hints on the controllers.</li>
+<li>The hints are set up in a way where each button on the controller can be called out separately.</li>
+<li>There is also the ability to show text hints associated with each button.</li>
+</ul>
+<h4 id="controllerbuttonhints">ControllerButtonHints</h4>
+<ul>
+<li>The hints are set up based on the render model of the controller.</li>
+<li>SteamVR provides a mapping from render model components to button IDs. This mapping is used to figure out what part of the controller corresponds to which button.</li>
+<li>Once a hint for a button is activated, that button will keep flashing on the controller model until the hint is turned off.</li>
+<li>Hints can be for buttons only or with an optional text hint associated with the button.</li>
+<li>There are a few static methods that are used to interface with the hint system:
+<ul>
+<li>ShowButtonHint: Flashes the specified button on the specified hand.</li>
+<li>HideButtonHint: Stops flashing the specified button on the specified hand.</li>
+<li>HideAllButtonHints: Stops flashing all the buttons on the specified hand.</li>
+<li>IsButtonHintActive: Checked if a specified button is flashing on the specified hand.</li>
+<li>ShowTextHint: Shows a text hint with the passed in string associated with the specified button on the specified hand.</li>
+<li>HideTextHint: Hides the text hint for the specified hand on the specified button.</li>
+<li>HideAllTextHints: Hides all the text hints that are currently active on the specified hand.</li>
+<li>GetActiveHintText: Gets the active hint text for a specified button.</li>
+</ul>
+</li>
+</ul>
+<h4 id="longbow">Longbow</h4>
+<ul>
+<li>The Longbow is an example of a complex game mechanic created using the interaction system.</li>
+<li>The version included here is exactly the same one that we shipped in The Lab, including all the models, materials and sounds.</li>
+<li>The Longbow is built using the ItemPackage system. It is comprised of the
+LongbowItemPackage prefab which spawns the Longbow prefab in the main hand and the ArrowHand prefab in the other hand.</li>
+<li>The ArrowHand prefab then spawns a new arrow in the hand every time one is fired.</li>
+<li>All of the bow and arrow logic is present in the following scripts:</li>
+</ul>
+<h4 id="longbow-1">Longbow</h4>
+<ul>
+<li>It handles the logic of how the bow controls in nocked and un-nocked modes</li>
+<li>It also keeps track of how far the bow string is pulled</li>
+</ul>
+<h4 id="arrowhand">ArrowHand</h4>
+<ul>
+<li>Handles nocking and firing the arrow based on its position and the controller buttons</li>
+<li>Handles spawning an arrow in the hand when needed</li>
+</ul>
+<h4 id="arrow">Arrow</h4>
+<ul>
+<li>The actual arrow that gets fired</li>
+<li>This script handles all the in-flight logic for the arrow including collision detection and deciding when to stick in to targets</li>
+</ul>
+<h4 id="arrowheadrotation">ArrowheadRotation</h4>
+<ul>
+<li>Rotates the arrowhead randomly every time a new arrow is spawned</li>
+</ul>
+<h4 id="soundbowclick">SoundBowClick</h4>
+<ul>
+<li>Plays the sounds of the bow string being pulled.</li>
+<li>The other scripts in the Longbow folder handle the logic for the longbow targets</li>
+</ul>
+<h4 id="archerytarget">ArcheryTarget</h4>
+<ul>
+<li>This is the script for a generic archery target.</li>
+<li>It invokes a UnityEvent when hit by an arrow.</li>
+</ul>
+<h4 id="firesource">FireSource</h4>
+<ul>
+<li>Indicates an object that can be set on fire. Once on fire this object can then spread fire when it comes in contact with another FireSource.</li>
+</ul>
+<h4 id="explosionwobble">ExplosionWobble</h4>
+<ul>
+<li>Used to make the archery target wobble.</li>
+</ul>
+<h4 id="balloon">Balloon</h4>
+<h4 id="ballooncolliders">BalloonColliders</h4>
+<h4 id="balloonhapticbump">BalloonHapticBump</h4>
+<h4 id="balloonspawner">BalloonSpawner</h4>
+<ul>
+<li>These scripts handle the logic for the balloons that spawn when the weeble is hit with an arrow.</li>
+</ul>
+<h3 id="samples">Samples</h3>
+<ul>
+<li>There are a few classes that were created specifically to show some examples in the sample scene.</li>
+</ul>
+<h4 id="controllerhintsexample">ControllerHintsExample</h4>
+<ul>
+<li>This class shows how to use the hint system.</li>
+</ul>
+<h4 id="interactableexample">InteractableExample</h4>
+<ul>
+<li>This class shows a very simple example of receiving and responding to messages from the hand.</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright (c) Valve Corporation, All rights reserved.</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

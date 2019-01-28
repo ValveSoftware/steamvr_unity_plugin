@@ -1,0 +1,1950 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class SteamVR_Action_Skeleton_Source
+   | SteamVR Unity Plugin </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class SteamVR_Action_Skeleton_Source
+   | SteamVR Unity Plugin ">
+    <meta name="generator" content="docfx 2.40.7.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.jpg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source">
+  
+  
+  <h1 id="Valve_VR_SteamVR_Action_Skeleton_Source" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source" class="text-break">Class SteamVR_Action_Skeleton_Source
+  </h1>
+  <div class="markdown level0 summary"><p>Skeleton Actions are our best approximation of where your hands are while holding vr controllers and pressing buttons. We give you 31 bones to help you animate hand models.
+For more information check out this blog post: <a href="https://steamcommunity.com/games/250820/announcements/detail/1690421280625220068">https://steamcommunity.com/games/250820/announcements/detail/1690421280625220068</a></p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="Valve.VR.SteamVR_Action_Source.html">SteamVR_Action_Source</a></div>
+    <div class="level2"><a class="xref" href="Valve.VR.SteamVR_Action_In_Source.html">SteamVR_Action_In_Source</a></div>
+    <div class="level3"><a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html">SteamVR_Action_Pose_Source</a></div>
+    <div class="level4"><span class="xref">SteamVR_Action_Skeleton_Source</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Valve.VR.ISteamVR_Action_Pose.html">ISteamVR_Action_Pose</a></div>
+    <div><a class="xref" href="Valve.VR.ISteamVR_Action_In_Source.html">ISteamVR_Action_In_Source</a></div>
+    <div><a class="xref" href="Valve.VR.ISteamVR_Action_Source.html">ISteamVR_Action_Source</a></div>
+    <div><a class="xref" href="Valve.VR.ISteamVR_Action_Skeleton_Source.html">ISteamVR_Action_Skeleton_Source</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_universeOrigin">SteamVR_Action_Pose_Source.universeOrigin</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_poseActionData_size">SteamVR_Action_Pose_Source.poseActionData_size</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_predictedSecondsFromNow">SteamVR_Action_Pose_Source.predictedSecondsFromNow</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_changeTolerance">SteamVR_Action_Pose_Source.changeTolerance</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_changed">SteamVR_Action_Pose_Source.changed</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_lastChanged">SteamVR_Action_Pose_Source.lastChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_activeOrigin">SteamVR_Action_Pose_Source.activeOrigin</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_lastActiveOrigin">SteamVR_Action_Pose_Source.lastActiveOrigin</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_active">SteamVR_Action_Pose_Source.active</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_lastActive">SteamVR_Action_Pose_Source.lastActive</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_trackingState">SteamVR_Action_Pose_Source.trackingState</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_lastTrackingState">SteamVR_Action_Pose_Source.lastTrackingState</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_poseIsValid">SteamVR_Action_Pose_Source.poseIsValid</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_lastPoseIsValid">SteamVR_Action_Pose_Source.lastPoseIsValid</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_deviceIsConnected">SteamVR_Action_Pose_Source.deviceIsConnected</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_lastDeviceIsConnected">SteamVR_Action_Pose_Source.lastDeviceIsConnected</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_localPosition">SteamVR_Action_Pose_Source.localPosition</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_localRotation">SteamVR_Action_Pose_Source.localRotation</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_lastLocalPosition">SteamVR_Action_Pose_Source.lastLocalPosition</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_lastLocalRotation">SteamVR_Action_Pose_Source.lastLocalRotation</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_velocity">SteamVR_Action_Pose_Source.velocity</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_lastVelocity">SteamVR_Action_Pose_Source.lastVelocity</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_angularVelocity">SteamVR_Action_Pose_Source.angularVelocity</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_lastAngularVelocity">SteamVR_Action_Pose_Source.lastAngularVelocity</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_poseActionData">SteamVR_Action_Pose_Source.poseActionData</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_lastPoseActionData">SteamVR_Action_Pose_Source.lastPoseActionData</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_tempPoseActionData">SteamVR_Action_Pose_Source.tempPoseActionData</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_poseAction">SteamVR_Action_Pose_Source.poseAction</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_SetCacheVariables">SteamVR_Action_Pose_Source.SetCacheVariables()</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_GetChanged">SteamVR_Action_Pose_Source.GetChanged()</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_GetVelocitiesAtTimeOffset_System_Single_UnityEngine_Vector3__UnityEngine_Vector3__">SteamVR_Action_Pose_Source.GetVelocitiesAtTimeOffset(Single, Vector3, Vector3)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_GetPoseAtTimeOffset_System_Single_UnityEngine_Vector3__UnityEngine_Quaternion__UnityEngine_Vector3__UnityEngine_Vector3__">SteamVR_Action_Pose_Source.GetPoseAtTimeOffset(Single, Vector3, Quaternion, Vector3, Vector3)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_UpdateTransform_UnityEngine_Transform_">SteamVR_Action_Pose_Source.UpdateTransform(Transform)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_GetUnityCoordinateVelocity_Valve_VR_HmdVector3_t_">SteamVR_Action_Pose_Source.GetUnityCoordinateVelocity(HmdVector3_t)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_GetUnityCoordinateAngularVelocity_Valve_VR_HmdVector3_t_">SteamVR_Action_Pose_Source.GetUnityCoordinateAngularVelocity(HmdVector3_t)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_GetUnityCoordinateVelocity_System_Single_System_Single_System_Single_">SteamVR_Action_Pose_Source.GetUnityCoordinateVelocity(Single, Single, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_GetUnityCoordinateAngularVelocity_System_Single_System_Single_System_Single_">SteamVR_Action_Pose_Source.GetUnityCoordinateAngularVelocity(Single, Single, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_In_Source.html#Valve_VR_SteamVR_Action_In_Source_inputOriginInfo_size">SteamVR_Action_In_Source.inputOriginInfo_size</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_In_Source.html#Valve_VR_SteamVR_Action_In_Source_isUpdating">SteamVR_Action_In_Source.isUpdating</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_In_Source.html#Valve_VR_SteamVR_Action_In_Source_updateTime">SteamVR_Action_In_Source.updateTime</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_In_Source.html#Valve_VR_SteamVR_Action_In_Source_activeDevice">SteamVR_Action_In_Source.activeDevice</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_In_Source.html#Valve_VR_SteamVR_Action_In_Source_trackedDeviceIndex">SteamVR_Action_In_Source.trackedDeviceIndex</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_In_Source.html#Valve_VR_SteamVR_Action_In_Source_renderModelComponentName">SteamVR_Action_In_Source.renderModelComponentName</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_In_Source.html#Valve_VR_SteamVR_Action_In_Source_localizedOriginName">SteamVR_Action_In_Source.localizedOriginName</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_In_Source.html#Valve_VR_SteamVR_Action_In_Source_changedTime">SteamVR_Action_In_Source.changedTime</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_In_Source.html#Valve_VR_SteamVR_Action_In_Source_lastOriginGetFrame">SteamVR_Action_In_Source.lastOriginGetFrame</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_In_Source.html#Valve_VR_SteamVR_Action_In_Source_inputOriginInfo">SteamVR_Action_In_Source.inputOriginInfo</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_In_Source.html#Valve_VR_SteamVR_Action_In_Source_lastInputOriginInfo">SteamVR_Action_In_Source.lastInputOriginInfo</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_In_Source.html#Valve_VR_SteamVR_Action_In_Source_UpdateOriginTrackedDeviceInfo">SteamVR_Action_In_Source.UpdateOriginTrackedDeviceInfo()</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_In_Source.html#Valve_VR_SteamVR_Action_In_Source_GetLocalizedOriginPart_Valve_VR_EVRInputStringBits___">SteamVR_Action_In_Source.GetLocalizedOriginPart(EVRInputStringBits[])</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_In_Source.html#Valve_VR_SteamVR_Action_In_Source_GetLocalizedOrigin">SteamVR_Action_In_Source.GetLocalizedOrigin()</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Source.html#Valve_VR_SteamVR_Action_Source_fullPath">SteamVR_Action_Source.fullPath</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Source.html#Valve_VR_SteamVR_Action_Source_handle">SteamVR_Action_Source.handle</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Source.html#Valve_VR_SteamVR_Action_Source_actionSet">SteamVR_Action_Source.actionSet</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Source.html#Valve_VR_SteamVR_Action_Source_direction">SteamVR_Action_Source.direction</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Source.html#Valve_VR_SteamVR_Action_Source_inputSource">SteamVR_Action_Source.inputSource</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Source.html#Valve_VR_SteamVR_Action_Source_setActive">SteamVR_Action_Source.setActive</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Source.html#Valve_VR_SteamVR_Action_Source_inputSourceHandle">SteamVR_Action_Source.inputSourceHandle</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Action_Source.html#Valve_VR_SteamVR_Action_Source_action">SteamVR_Action_Source.action</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Valve.VR.html">Valve.VR</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Valve_VR_SteamVR_Action_Skeleton_Source_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SteamVR_Action_Skeleton_Source : SteamVR_Action_Pose_Source, ISteamVR_Action_Pose, ISteamVR_Action_In_Source, ISteamVR_Action_Source, ISteamVR_Action_Skeleton_Source</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_lastSkeletalSummaryData" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastSkeletalSummaryData">lastSkeletalSummaryData</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected VRSkeletalSummaryData_t lastSkeletalSummaryData</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.VRSkeletalSummaryData_t.html">VRSkeletalSummaryData_t</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_lastSkeletonActionData" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastSkeletonActionData">lastSkeletonActionData</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected InputSkeletalActionData_t lastSkeletonActionData</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.InputSkeletalActionData_t.html">InputSkeletalActionData_t</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_skeletalSummaryData" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.skeletalSummaryData">skeletalSummaryData</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected VRSkeletalSummaryData_t skeletalSummaryData</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.VRSkeletalSummaryData_t.html">VRSkeletalSummaryData_t</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_skeletonAction" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.skeletonAction">skeletonAction</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected SteamVR_Action_Skeleton skeletonAction</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Action_Skeleton.html">SteamVR_Action_Skeleton</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_skeletonActionData" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.skeletonActionData">skeletonActionData</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected InputSkeletalActionData_t skeletonActionData</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.InputSkeletalActionData_t.html">InputSkeletalActionData_t</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_skeletonActionData_size" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.skeletonActionData_size">skeletonActionData_size</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected static uint skeletonActionData_size</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_tempBoneTransforms" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.tempBoneTransforms">tempBoneTransforms</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected VRBoneTransform_t[] tempBoneTransforms</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.VRBoneTransform_t.html">VRBoneTransform_t</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_tempSkeletonActionData" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.tempSkeletonActionData">tempSkeletonActionData</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected InputSkeletalActionData_t tempSkeletonActionData</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.InputSkeletalActionData_t.html">InputSkeletalActionData_t</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_activeBinding_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.activeBinding*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_activeBinding" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.activeBinding">activeBinding</h4>
+  <div class="markdown level1 summary"><p>True if the action is bound</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool activeBinding { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_activeBinding">SteamVR_Action_Pose_Source.activeBinding</a></div>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_boneCount_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.boneCount*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_boneCount" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.boneCount">boneCount</h4>
+  <div class="markdown level1 summary"><p>The number of bones in the skeleton for this action</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int boneCount { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_boneHierarchy_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.boneHierarchy*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_boneHierarchy" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.boneHierarchy">boneHierarchy</h4>
+  <div class="markdown level1 summary"><p>Gets the ordering of the bone hierarchy</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int[] boneHierarchy { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_bonePositions_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.bonePositions*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_bonePositions" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.bonePositions">bonePositions</h4>
+  <div class="markdown level1 summary"><p>An array of the positions of the bones from the most recent update. Relative to skeletalTransformSpace. See SteamVR_Skeleton_JointIndexes for bone indexes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3[] bonePositions { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Vector3</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_boneRotations_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.boneRotations*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_boneRotations" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.boneRotations">boneRotations</h4>
+  <div class="markdown level1 summary"><p>An array of the rotations of the bones from the most recent update. Relative to skeletalTransformSpace. See SteamVR_Skeleton_JointIndexes for bone indexes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Quaternion[] boneRotations { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Quaternion</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_fingerCurls_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.fingerCurls*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_fingerCurls" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.fingerCurls">fingerCurls</h4>
+  <div class="markdown level1 summary"><p>0-1 values representing how curled the specified finger is. 0 being straight, 1 being fully curled. For indexes see: SteamVR_Skeleton_FingerIndexes</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float[] fingerCurls { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_fingerSplays_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.fingerSplays*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_fingerSplays" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.fingerSplays">fingerSplays</h4>
+  <div class="markdown level1 summary"><p>0-1 values representing how splayed the specified finger and it's next index'd finger is. For indexes see: SteamVR_Skeleton_FingerIndexes</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float[] fingerSplays { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_indexCurl_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.indexCurl*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_indexCurl" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.indexCurl">indexCurl</h4>
+  <div class="markdown level1 summary"><p>A 0-1 value representing how curled the index finger is. 0 being straight, 1 being fully curled.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float indexCurl { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_indexMiddleSplay_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.indexMiddleSplay*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_indexMiddleSplay" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.indexMiddleSplay">indexMiddleSplay</h4>
+  <div class="markdown level1 summary"><p>A 0-1 value representing the size of the gap between the index and middle fingers</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float indexMiddleSplay { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_lastActiveBinding_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastActiveBinding*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_lastActiveBinding" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastActiveBinding">lastActiveBinding</h4>
+  <div class="markdown level1 summary"><p>True if the action's binding was active during the previous update</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool lastActiveBinding { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_lastActiveBinding">SteamVR_Action_Pose_Source.lastActiveBinding</a></div>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_lastBonePositions_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastBonePositions*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_lastBonePositions" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastBonePositions">lastBonePositions</h4>
+  <div class="markdown level1 summary"><p>From the previous update: An array of the positions of the bones from the most recent update. Relative to skeletalTransformSpace. See SteamVR_Skeleton_JointIndexes for bone indexes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3[] lastBonePositions { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Vector3</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_lastBoneRotations_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastBoneRotations*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_lastBoneRotations" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastBoneRotations">lastBoneRotations</h4>
+  <div class="markdown level1 summary"><p>From the previous update: An array of the rotations of the bones from the most recent update. Relative to skeletalTransformSpace. See SteamVR_Skeleton_JointIndexes for bone indexes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Quaternion[] lastBoneRotations { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Quaternion</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_lastFingerCurls_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastFingerCurls*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_lastFingerCurls" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastFingerCurls">lastFingerCurls</h4>
+  <div class="markdown level1 summary"><p>[Previous Update] 0-1 values representing how curled the specified finger is. 0 being straight, 1 being fully curled. For indexes see: SteamVR_Skeleton_FingerIndexes</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float[] lastFingerCurls { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_lastFingerSplays_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastFingerSplays*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_lastFingerSplays" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastFingerSplays">lastFingerSplays</h4>
+  <div class="markdown level1 summary"><p>[Previous Update] 0-1 values representing how splayed the specified finger and it's next index'd finger is. For indexes see: SteamVR_Skeleton_FingerIndexes</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float[] lastFingerSplays { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_lastIndexCurl_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastIndexCurl*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_lastIndexCurl" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastIndexCurl">lastIndexCurl</h4>
+  <div class="markdown level1 summary"><p>[Previous Update] A 0-1 value representing how curled the index finger is. 0 being straight, 1 being fully curled.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float lastIndexCurl { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_lastIndexMiddleSplay_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastIndexMiddleSplay*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_lastIndexMiddleSplay" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastIndexMiddleSplay">lastIndexMiddleSplay</h4>
+  <div class="markdown level1 summary"><p>[Previous Update] A 0-1 value representing the size of the gap between the index and middle fingers</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float lastIndexMiddleSplay { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_lastMiddleCurl_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastMiddleCurl*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_lastMiddleCurl" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastMiddleCurl">lastMiddleCurl</h4>
+  <div class="markdown level1 summary"><p>[Previous Update] A 0-1 value representing how curled the middle finger is. 0 being straight, 1 being fully curled.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float lastMiddleCurl { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_lastMiddleRingSplay_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastMiddleRingSplay*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_lastMiddleRingSplay" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastMiddleRingSplay">lastMiddleRingSplay</h4>
+  <div class="markdown level1 summary"><p>[Previous Update] A 0-1 value representing the size of the gap between the middle and ring fingers</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float lastMiddleRingSplay { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_lastPinkyCurl_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastPinkyCurl*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_lastPinkyCurl" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastPinkyCurl">lastPinkyCurl</h4>
+  <div class="markdown level1 summary"><p>[Previous Update] A 0-1 value representing how curled the pinky finger is. 0 being straight, 1 being fully curled.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float lastPinkyCurl { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_lastRingCurl_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastRingCurl*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_lastRingCurl" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastRingCurl">lastRingCurl</h4>
+  <div class="markdown level1 summary"><p>[Previous Update] A 0-1 value representing how curled the ring finger is. 0 being straight, 1 being fully curled.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float lastRingCurl { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_lastRingPinkySplay_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastRingPinkySplay*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_lastRingPinkySplay" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastRingPinkySplay">lastRingPinkySplay</h4>
+  <div class="markdown level1 summary"><p>[Previous Update] A 0-1 value representing the size of the gap between the ring and pinky fingers</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float lastRingPinkySplay { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_lastThumbCurl_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastThumbCurl*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_lastThumbCurl" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastThumbCurl">lastThumbCurl</h4>
+  <div class="markdown level1 summary"><p>[Previous Update] A 0-1 value representing how curled the thumb is. 0 being straight, 1 being fully curled.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float lastThumbCurl { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_lastThumbIndexSplay_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastThumbIndexSplay*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_lastThumbIndexSplay" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.lastThumbIndexSplay">lastThumbIndexSplay</h4>
+  <div class="markdown level1 summary"><p>[Previous Update] A 0-1 value representing the size of the gap between the thumb and index fingers</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float lastThumbIndexSplay { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_middleCurl_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.middleCurl*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_middleCurl" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.middleCurl">middleCurl</h4>
+  <div class="markdown level1 summary"><p>A 0-1 value representing how curled the middle finger is. 0 being straight, 1 being fully curled.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float middleCurl { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_middleRingSplay_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.middleRingSplay*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_middleRingSplay" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.middleRingSplay">middleRingSplay</h4>
+  <div class="markdown level1 summary"><p>A 0-1 value representing the size of the gap between the middle and ring fingers</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float middleRingSplay { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_pinkyCurl_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.pinkyCurl*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_pinkyCurl" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.pinkyCurl">pinkyCurl</h4>
+  <div class="markdown level1 summary"><p>A 0-1 value representing how curled the pinky finger is. 0 being straight, 1 being fully curled.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float pinkyCurl { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_poseChanged_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.poseChanged*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_poseChanged" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.poseChanged">poseChanged</h4>
+  <div class="markdown level1 summary"><p>Separate from &quot;changed&quot;. If the pose for this skeleton action has changed (root position/rotation)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool poseChanged { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_rangeOfMotion_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.rangeOfMotion*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_rangeOfMotion" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.rangeOfMotion">rangeOfMotion</h4>
+  <div class="markdown level1 summary"><p>The range of motion the we're using to get bone data from. With Controller being your hand while holding the controller.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EVRSkeletalMotionRange rangeOfMotion { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.EVRSkeletalMotionRange.html">EVRSkeletalMotionRange</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_ringCurl_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.ringCurl*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_ringCurl" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.ringCurl">ringCurl</h4>
+  <div class="markdown level1 summary"><p>A 0-1 value representing how curled the ring finger is. 0 being straight, 1 being fully curled.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ringCurl { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_ringPinkySplay_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.ringPinkySplay*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_ringPinkySplay" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.ringPinkySplay">ringPinkySplay</h4>
+  <div class="markdown level1 summary"><p>A 0-1 value representing the size of the gap between the ring and pinky fingers</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ringPinkySplay { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_skeletalTrackingLevel_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.skeletalTrackingLevel*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_skeletalTrackingLevel" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.skeletalTrackingLevel">skeletalTrackingLevel</h4>
+  <div class="markdown level1 summary"><p>Get the accuracy level of the skeletal tracking data.</p>
+<p>* Estimated: Body part location can’t be directly determined by the device. Any skeletal pose provided by the device is estimated based on the active buttons, triggers, joysticks, or other input sensors. Examples include the Vive Controller and gamepads.
+<p>* Partial: Body part location can be measured directly but with fewer degrees of freedom than the actual body part.Certain body part positions may be unmeasured by the device and estimated from other input data.Examples include Knuckles or gloves that only measure finger curl
+<p>* Full: Body part location can be measured directly throughout the entire range of motion of the body part.Examples include hi-end mocap systems, or gloves that measure the rotation of each finger segment.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EVRSkeletalTrackingLevel skeletalTrackingLevel { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.EVRSkeletalTrackingLevel.html">EVRSkeletalTrackingLevel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_skeletalTransformSpace_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.skeletalTransformSpace*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_skeletalTransformSpace" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.skeletalTransformSpace">skeletalTransformSpace</h4>
+  <div class="markdown level1 summary"><p>The space to get bone data in. Parent space by default</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EVRSkeletalTransformSpace skeletalTransformSpace { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.EVRSkeletalTransformSpace.html">EVRSkeletalTransformSpace</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_thumbCurl_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.thumbCurl*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_thumbCurl" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.thumbCurl">thumbCurl</h4>
+  <div class="markdown level1 summary"><p>A 0-1 value representing how curled the thumb is. 0 being straight, 1 being fully curled.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float thumbCurl { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_thumbIndexSplay_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.thumbIndexSplay*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_thumbIndexSplay" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.thumbIndexSplay">thumbIndexSplay</h4>
+  <div class="markdown level1 summary"><p>A 0-1 value representing the size of the gap between the thumb and index fingers</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float thumbIndexSplay { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_CheckAndSendEvents_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.CheckAndSendEvents*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_CheckAndSendEvents" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.CheckAndSendEvents">CheckAndSendEvents()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void CheckAndSendEvents()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_CheckAndSendEvents">SteamVR_Action_Pose_Source.CheckAndSendEvents()</a></div>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_GetBoneCount_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.GetBoneCount*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_GetBoneCount" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.GetBoneCount">GetBoneCount()</h4>
+  <div class="markdown level1 summary"><p>Gets the number of bones in the skeleton for this action</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public uint GetBoneCount()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_GetBoneHierarchy_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.GetBoneHierarchy*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_GetBoneHierarchy" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.GetBoneHierarchy">GetBoneHierarchy()</h4>
+  <div class="markdown level1 summary"><p>Gets the ordering of the bone hierarchy</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int[] GetBoneHierarchy()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_GetBoneName_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.GetBoneName*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_GetBoneName_System_Int32_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.GetBoneName(System.Int32)">GetBoneName(Int32)</h4>
+  <div class="markdown level1 summary"><p>Gets the name for a bone at the specified index</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetBoneName(int boneIndex)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">boneIndex</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_GetReferenceTransforms_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.GetReferenceTransforms*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_GetReferenceTransforms_Valve_VR_EVRSkeletalTransformSpace_Valve_VR_EVRSkeletalReferencePose_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.GetReferenceTransforms(Valve.VR.EVRSkeletalTransformSpace,Valve.VR.EVRSkeletalReferencePose)">GetReferenceTransforms(EVRSkeletalTransformSpace, EVRSkeletalReferencePose)</h4>
+  <div class="markdown level1 summary"><p>Returns an array of positions/rotations that represent the state of each bone in a reference pose.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SteamVR_Utils.RigidTransform[] GetReferenceTransforms(EVRSkeletalTransformSpace transformSpace, EVRSkeletalReferencePose referencePose)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.EVRSkeletalTransformSpace.html">EVRSkeletalTransformSpace</a></td>
+        <td><span class="parametername">transformSpace</span></td>
+        <td><p>What to get the position/rotation data relative to, the model, or the bone's parent</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Valve.VR.EVRSkeletalReferencePose.html">EVRSkeletalReferencePose</a></td>
+        <td><span class="parametername">referencePose</span></td>
+        <td><p>Which reference pose to return</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Utils.RigidTransform.html">SteamVR_Utils.RigidTransform</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_GetSkeletalSummaryData_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.GetSkeletalSummaryData*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_GetSkeletalSummaryData_System_Boolean_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.GetSkeletalSummaryData(System.Boolean)">GetSkeletalSummaryData(Boolean)</h4>
+  <div class="markdown level1 summary"><p>Get the skeletal summary data structure from OpenVR.
+Contains curl and splay data in finger order: thumb, index, middlg, ring, pinky.
+Easier access at named members: indexCurl, ringSplay, etc.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected VRSkeletalSummaryData_t GetSkeletalSummaryData(bool force = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">force</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.VRSkeletalSummaryData_t.html">VRSkeletalSummaryData_t</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_GetSkeletalTrackingLevel_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.GetSkeletalTrackingLevel*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_GetSkeletalTrackingLevel" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.GetSkeletalTrackingLevel">GetSkeletalTrackingLevel()</h4>
+  <div class="markdown level1 summary"><p>Get the accuracy level of the skeletal tracking data.</p>
+<p>* Estimated: Body part location can’t be directly determined by the device. Any skeletal pose provided by the device is estimated based on the active buttons, triggers, joysticks, or other input sensors. Examples include the Vive Controller and gamepads.
+<p>* Partial: Body part location can be measured directly but with fewer degrees of freedom than the actual body part.Certain body part positions may be unmeasured by the device and estimated from other input data.Examples include Knuckles or gloves that only measure finger curl
+<p>* Full: Body part location can be measured directly throughout the entire range of motion of the body part.Examples include hi-end mocap systems, or gloves that measure the rotation of each finger segment.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EVRSkeletalTrackingLevel GetSkeletalTrackingLevel()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.EVRSkeletalTrackingLevel.html">EVRSkeletalTrackingLevel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_Initialize_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.Initialize*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_Initialize" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.Initialize">Initialize()</h4>
+  <div class="markdown level1 summary"><p><strong>[Should not be called by user code]</strong>
+Initializes the handle for the inputSource, the skeletal action data size, and any other related SteamVR data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Initialize()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_Initialize">SteamVR_Action_Pose_Source.Initialize()</a></div>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_Preinitialize_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.Preinitialize*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_Preinitialize_Valve_VR_SteamVR_Action_Valve_VR_SteamVR_Input_Sources_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.Preinitialize(Valve.VR.SteamVR_Action,Valve.VR.SteamVR_Input_Sources)">Preinitialize(SteamVR_Action, SteamVR_Input_Sources)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Preinitialize(SteamVR_Action wrappingAction, SteamVR_Input_Sources forInputSource)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Action.html">SteamVR_Action</a></td>
+        <td><span class="parametername">wrappingAction</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Input_Sources.html">SteamVR_Input_Sources</a></td>
+        <td><span class="parametername">forInputSource</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_Preinitialize_Valve_VR_SteamVR_Action_Valve_VR_SteamVR_Input_Sources_">SteamVR_Action_Pose_Source.Preinitialize(SteamVR_Action, SteamVR_Input_Sources)</a></div>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_UpdateValue_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.UpdateValue*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_UpdateValue" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.UpdateValue">UpdateValue()</h4>
+  <div class="markdown level1 summary"><p><strong>[Should not be called by user code]</strong>
+Updates the data for this action and this input source. Sends related events.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void UpdateValue()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_UpdateValue">SteamVR_Action_Pose_Source.UpdateValue()</a></div>
+  
+  
+  <a id="Valve_VR_SteamVR_Action_Skeleton_Source_UpdateValue_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.UpdateValue*"></a>
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_UpdateValue_System_Boolean_" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.UpdateValue(System.Boolean)">UpdateValue(Boolean)</h4>
+  <div class="markdown level1 summary"><p><strong>[Should not be called by user code]</strong>
+Updates the data for this action and this input source. Sends related events.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void UpdateValue(bool skipStateAndEventUpdates)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">skipStateAndEventUpdates</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Valve.VR.SteamVR_Action_Pose_Source.html#Valve_VR_SteamVR_Action_Pose_Source_UpdateValue_System_Boolean_">SteamVR_Action_Pose_Source.UpdateValue(Boolean)</a></div>
+  <h3 id="events">Events
+  </h3>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_onActiveBindingChange" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.onActiveBindingChange">onActiveBindingChange</h4>
+  <div class="markdown level1 summary"><p>Event fires when the active state of the binding changes</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SteamVR_Action_Skeleton.ActiveChangeHandler onActiveBindingChange</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Action_Skeleton.ActiveChangeHandler.html">SteamVR_Action_Skeleton.ActiveChangeHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_onActiveChange" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.onActiveChange">onActiveChange</h4>
+  <div class="markdown level1 summary"><p>Event fires when the active state (ActionSet active and binding active) changes</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SteamVR_Action_Skeleton.ActiveChangeHandler onActiveChange</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Action_Skeleton.ActiveChangeHandler.html">SteamVR_Action_Skeleton.ActiveChangeHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_onChange" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.onChange">onChange</h4>
+  <div class="markdown level1 summary"><p>Event fires when the orientation of the pose or bones changes more than the changeTolerance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SteamVR_Action_Skeleton.ChangeHandler onChange</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Action_Skeleton.ChangeHandler.html">SteamVR_Action_Skeleton.ChangeHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_onDeviceConnectedChanged" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.onDeviceConnectedChanged">onDeviceConnectedChanged</h4>
+  <div class="markdown level1 summary"><p>Event fires when the device bound to this action is connected or disconnected</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SteamVR_Action_Skeleton.DeviceConnectedChangeHandler onDeviceConnectedChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Action_Skeleton.DeviceConnectedChangeHandler.html">SteamVR_Action_Skeleton.DeviceConnectedChangeHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_onTrackingChanged" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.onTrackingChanged">onTrackingChanged</h4>
+  <div class="markdown level1 summary"><p>Event fires when the state of the tracking system that is used to create pose data (position, rotation, etc) changes</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SteamVR_Action_Skeleton.TrackingChangeHandler onTrackingChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Action_Skeleton.TrackingChangeHandler.html">SteamVR_Action_Skeleton.TrackingChangeHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_onUpdate" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.onUpdate">onUpdate</h4>
+  <div class="markdown level1 summary"><p>Event fires when the action is updated</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SteamVR_Action_Skeleton.UpdateHandler onUpdate</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Action_Skeleton.UpdateHandler.html">SteamVR_Action_Skeleton.UpdateHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Action_Skeleton_Source_onValidPoseChanged" data-uid="Valve.VR.SteamVR_Action_Skeleton_Source.onValidPoseChanged">onValidPoseChanged</h4>
+  <div class="markdown level1 summary"><p>Event fires when the state of the pose data retrieved for this action changes validity (good/bad data from the tracking source)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SteamVR_Action_Skeleton.ValidPoseChangeHandler onValidPoseChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Action_Skeleton.ValidPoseChangeHandler.html">SteamVR_Action_Skeleton.ValidPoseChangeHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Valve.VR.ISteamVR_Action_Pose.html">ISteamVR_Action_Pose</a>
+  </div>
+  <div>
+      <a class="xref" href="Valve.VR.ISteamVR_Action_In_Source.html">ISteamVR_Action_In_Source</a>
+  </div>
+  <div>
+      <a class="xref" href="Valve.VR.ISteamVR_Action_Source.html">ISteamVR_Action_Source</a>
+  </div>
+  <div>
+      <a class="xref" href="Valve.VR.ISteamVR_Action_Skeleton_Source.html">ISteamVR_Action_Skeleton_Source</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright (c) Valve Corporation, All rights reserved.</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

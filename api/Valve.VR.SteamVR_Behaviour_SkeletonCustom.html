@@ -1,0 +1,1568 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class SteamVR_Behaviour_SkeletonCustom
+   | SteamVR Unity Plugin </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class SteamVR_Behaviour_SkeletonCustom
+   | SteamVR Unity Plugin ">
+    <meta name="generator" content="docfx 2.40.7.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.jpg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom">
+  
+  
+  <h1 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom" class="text-break">Class SteamVR_Behaviour_SkeletonCustom
+  </h1>
+  <div class="markdown level0 summary"><p>The major difference between this component and the standard SteamVR_Behaviour_Skeleton is this one lets you
+only use the joints you care about. You can set the transforms you're concerned with and ignore the ones you're not.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">UnityEngine.Object</span></div>
+    <div class="level2"><span class="xref">UnityEngine.Component</span></div>
+    <div class="level3"><span class="xref">UnityEngine.Behaviour</span></div>
+    <div class="level4"><span class="xref">UnityEngine.MonoBehaviour</span></div>
+    <div class="level5"><a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html">SteamVR_Behaviour_Skeleton</a></div>
+    <div class="level6"><span class="xref">SteamVR_Behaviour_SkeletonCustom</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_skeletonAction">SteamVR_Behaviour_Skeleton.skeletonAction</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_inputSource">SteamVR_Behaviour_Skeleton.inputSource</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_rangeOfMotion">SteamVR_Behaviour_Skeleton.rangeOfMotion</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_skeletonRoot">SteamVR_Behaviour_Skeleton.skeletonRoot</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_origin">SteamVR_Behaviour_Skeleton.origin</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_updatePose">SteamVR_Behaviour_Skeleton.updatePose</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_onlySetRotations">SteamVR_Behaviour_Skeleton.onlySetRotations</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_skeletonBlend">SteamVR_Behaviour_Skeleton.skeletonBlend</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_onBoneTransformsUpdated">SteamVR_Behaviour_Skeleton.onBoneTransformsUpdated</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_onTransformUpdated">SteamVR_Behaviour_Skeleton.onTransformUpdated</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_onTransformChanged">SteamVR_Behaviour_Skeleton.onTransformChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_onConnectedChanged">SteamVR_Behaviour_Skeleton.onConnectedChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_onTrackingChanged">SteamVR_Behaviour_Skeleton.onTrackingChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_onBoneTransformsUpdatedEvent">SteamVR_Behaviour_Skeleton.onBoneTransformsUpdatedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_onTransformUpdatedEvent">SteamVR_Behaviour_Skeleton.onTransformUpdatedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_onTransformChangedEvent">SteamVR_Behaviour_Skeleton.onTransformChangedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_onConnectedChangedEvent">SteamVR_Behaviour_Skeleton.onConnectedChangedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_onTrackingChangedEvent">SteamVR_Behaviour_Skeleton.onTrackingChangedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_blendPoser">SteamVR_Behaviour_Skeleton.blendPoser</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_blendSnapshot">SteamVR_Behaviour_Skeleton.blendSnapshot</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_mirroring">SteamVR_Behaviour_Skeleton.mirroring</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_isActive">SteamVR_Behaviour_Skeleton.isActive</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_fingerCurls">SteamVR_Behaviour_Skeleton.fingerCurls</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_thumbCurl">SteamVR_Behaviour_Skeleton.thumbCurl</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_indexCurl">SteamVR_Behaviour_Skeleton.indexCurl</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_middleCurl">SteamVR_Behaviour_Skeleton.middleCurl</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_ringCurl">SteamVR_Behaviour_Skeleton.ringCurl</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_pinkyCurl">SteamVR_Behaviour_Skeleton.pinkyCurl</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_root">SteamVR_Behaviour_Skeleton.root</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_wrist">SteamVR_Behaviour_Skeleton.wrist</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_indexMetacarpal">SteamVR_Behaviour_Skeleton.indexMetacarpal</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_indexProximal">SteamVR_Behaviour_Skeleton.indexProximal</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_indexMiddle">SteamVR_Behaviour_Skeleton.indexMiddle</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_indexDistal">SteamVR_Behaviour_Skeleton.indexDistal</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_indexTip">SteamVR_Behaviour_Skeleton.indexTip</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_middleMetacarpal">SteamVR_Behaviour_Skeleton.middleMetacarpal</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_middleProximal">SteamVR_Behaviour_Skeleton.middleProximal</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_middleMiddle">SteamVR_Behaviour_Skeleton.middleMiddle</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_middleDistal">SteamVR_Behaviour_Skeleton.middleDistal</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_middleTip">SteamVR_Behaviour_Skeleton.middleTip</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_pinkyMetacarpal">SteamVR_Behaviour_Skeleton.pinkyMetacarpal</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_pinkyProximal">SteamVR_Behaviour_Skeleton.pinkyProximal</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_pinkyMiddle">SteamVR_Behaviour_Skeleton.pinkyMiddle</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_pinkyDistal">SteamVR_Behaviour_Skeleton.pinkyDistal</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_pinkyTip">SteamVR_Behaviour_Skeleton.pinkyTip</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_ringMetacarpal">SteamVR_Behaviour_Skeleton.ringMetacarpal</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_ringProximal">SteamVR_Behaviour_Skeleton.ringProximal</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_ringMiddle">SteamVR_Behaviour_Skeleton.ringMiddle</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_ringDistal">SteamVR_Behaviour_Skeleton.ringDistal</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_ringTip">SteamVR_Behaviour_Skeleton.ringTip</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_thumbMetacarpal">SteamVR_Behaviour_Skeleton.thumbMetacarpal</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_thumbProximal">SteamVR_Behaviour_Skeleton.thumbProximal</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_thumbMiddle">SteamVR_Behaviour_Skeleton.thumbMiddle</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_thumbDistal">SteamVR_Behaviour_Skeleton.thumbDistal</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_thumbTip">SteamVR_Behaviour_Skeleton.thumbTip</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_thumbAux">SteamVR_Behaviour_Skeleton.thumbAux</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_indexAux">SteamVR_Behaviour_Skeleton.indexAux</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_middleAux">SteamVR_Behaviour_Skeleton.middleAux</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_ringAux">SteamVR_Behaviour_Skeleton.ringAux</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_pinkyAux">SteamVR_Behaviour_Skeleton.pinkyAux</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_proximals">SteamVR_Behaviour_Skeleton.proximals</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_middles">SteamVR_Behaviour_Skeleton.middles</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_distals">SteamVR_Behaviour_Skeleton.distals</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_tips">SteamVR_Behaviour_Skeleton.tips</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_auxs">SteamVR_Behaviour_Skeleton.auxs</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_blendRoutine">SteamVR_Behaviour_Skeleton.blendRoutine</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_rangeOfMotionBlendRoutine">SteamVR_Behaviour_Skeleton.rangeOfMotionBlendRoutine</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_attachRoutine">SteamVR_Behaviour_Skeleton.attachRoutine</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_bones">SteamVR_Behaviour_Skeleton.bones</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_temporaryRangeOfMotion">SteamVR_Behaviour_Skeleton.temporaryRangeOfMotion</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_skeletalTrackingLevel">SteamVR_Behaviour_Skeleton.skeletalTrackingLevel</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_isBlending">SteamVR_Behaviour_Skeleton.isBlending</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_predictedSecondsFromNow">SteamVR_Behaviour_Skeleton.predictedSecondsFromNow</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_actionSet">SteamVR_Behaviour_Skeleton.actionSet</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_direction">SteamVR_Behaviour_Skeleton.direction</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_Awake">SteamVR_Behaviour_Skeleton.Awake()</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_CheckSkeletonAction">SteamVR_Behaviour_Skeleton.CheckSkeletonAction()</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_OnEnable">SteamVR_Behaviour_Skeleton.OnEnable()</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_OnDisable">SteamVR_Behaviour_Skeleton.OnDisable()</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_SteamVR_Input_OnSkeletonsUpdated_System_Boolean_">SteamVR_Behaviour_Skeleton.SteamVR_Input_OnSkeletonsUpdated(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_UpdateSkeleton">SteamVR_Behaviour_Skeleton.UpdateSkeleton()</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_SetTemporaryRangeOfMotion_Valve_VR_EVRSkeletalMotionRange_System_Single_">SteamVR_Behaviour_Skeleton.SetTemporaryRangeOfMotion(EVRSkeletalMotionRange, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_ResetTemporaryRangeOfMotion_System_Single_">SteamVR_Behaviour_Skeleton.ResetTemporaryRangeOfMotion(Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_SetRangeOfMotion_Valve_VR_EVRSkeletalMotionRange_System_Single_">SteamVR_Behaviour_Skeleton.SetRangeOfMotion(EVRSkeletalMotionRange, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_BlendToSkeleton_System_Single_">SteamVR_Behaviour_Skeleton.BlendToSkeleton(Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_BlendToPoser_Valve_VR_SteamVR_Skeleton_Poser_System_Single_">SteamVR_Behaviour_Skeleton.BlendToPoser(SteamVR_Skeleton_Poser, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_BlendToAnimation_System_Single_">SteamVR_Behaviour_Skeleton.BlendToAnimation(Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_BlendTo_System_Single_System_Single_">SteamVR_Behaviour_Skeleton.BlendTo(Single, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_DoBlendRoutine_System_Single_System_Single_">SteamVR_Behaviour_Skeleton.DoBlendRoutine(Single, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_RangeOfMotionBlend_Valve_VR_EVRSkeletalMotionRange_System_Single_">SteamVR_Behaviour_Skeleton.RangeOfMotionBlend(EVRSkeletalMotionRange, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_TemporaryRangeOfMotionBlend_Valve_VR_EVRSkeletalMotionRange_System_Single_">SteamVR_Behaviour_Skeleton.TemporaryRangeOfMotionBlend(EVRSkeletalMotionRange, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_ResetTemporaryRangeOfMotionBlend_System_Single_">SteamVR_Behaviour_Skeleton.ResetTemporaryRangeOfMotionBlend(Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_DoRangeOfMotionBlend_Valve_VR_EVRSkeletalMotionRange_Valve_VR_EVRSkeletalMotionRange_System_Single_">SteamVR_Behaviour_Skeleton.DoRangeOfMotionBlend(EVRSkeletalMotionRange, EVRSkeletalMotionRange, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_GetBlendPoseForBone_System_Int32_UnityEngine_Quaternion_">SteamVR_Behaviour_Skeleton.GetBlendPoseForBone(Int32, Quaternion)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_UpdateSkeletonTransforms">SteamVR_Behaviour_Skeleton.UpdateSkeletonTransforms()</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_SetBonePosition_System_Int32_UnityEngine_Vector3_">SteamVR_Behaviour_Skeleton.SetBonePosition(Int32, Vector3)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_SetBoneRotation_System_Int32_UnityEngine_Quaternion_">SteamVR_Behaviour_Skeleton.SetBoneRotation(Int32, Quaternion)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_GetBone_System_Int32_">SteamVR_Behaviour_Skeleton.GetBone(Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_GetBonePosition_System_Int32_System_Boolean_">SteamVR_Behaviour_Skeleton.GetBonePosition(Int32, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_GetBoneRotation_System_Int32_System_Boolean_">SteamVR_Behaviour_Skeleton.GetBoneRotation(Int32, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_GetBonePositions">SteamVR_Behaviour_Skeleton.GetBonePositions()</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_rightFlipAngle">SteamVR_Behaviour_Skeleton.rightFlipAngle</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_GetBoneRotations">SteamVR_Behaviour_Skeleton.GetBoneRotations()</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_UpdatePose">SteamVR_Behaviour_Skeleton.UpdatePose()</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_ForceToReferencePose_Valve_VR_EVRSkeletalReferencePose_">SteamVR_Behaviour_Skeleton.ForceToReferencePose(EVRSkeletalReferencePose)</a>
+    </div>
+    <div>
+      <a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_IsMetacarpal_System_Int32_">SteamVR_Behaviour_Skeleton.IsMetacarpal(Int32)</a>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.Invoke(System.String, System.Single)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.InvokeRepeating(System.String, System.Single, System.Single)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.CancelInvoke()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.CancelInvoke(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.IsInvoking(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.IsInvoking()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StartCoroutine(System.Collections.IEnumerator)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StartCoroutine_Auto(System.Collections.IEnumerator)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StartCoroutine(System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StartCoroutine(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StopCoroutine(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StopCoroutine(System.Collections.IEnumerator)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StopCoroutine(UnityEngine.Coroutine)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StopAllCoroutines()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.print(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.useGUILayout</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Behaviour.enabled</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Behaviour.isActiveAndEnabled</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponent(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponent&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponent(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInChildren(System.Type, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInChildren(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInChildren&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInChildren&lt;T&gt;(System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren(System.Type, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren&lt;T&gt;(System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren&lt;T&gt;(System.Boolean, System.Collections.Generic.List&lt;T&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren&lt;T&gt;(System.Collections.Generic.List&lt;T&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInParent(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInParent&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInParent(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInParent(System.Type, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInParent&lt;T&gt;(System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInParent&lt;T&gt;(System.Boolean, System.Collections.Generic.List&lt;T&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInParent&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponents(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponents(System.Type, System.Collections.Generic.List&lt;UnityEngine.Component&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponents&lt;T&gt;(System.Collections.Generic.List&lt;T&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponents&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.CompareTag(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessageUpwards(System.String, System.Object, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessageUpwards(System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessageUpwards(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessageUpwards(System.String, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessage(System.String, System.Object, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessage(System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessage(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessage(System.String, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.BroadcastMessage(System.String, System.Object, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.BroadcastMessage(System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.BroadcastMessage(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.BroadcastMessage(System.String, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.transform</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.gameObject</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.tag</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.rigidbody</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.rigidbody2D</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.camera</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.light</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.animation</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.constantForce</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.renderer</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.audio</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.guiText</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.networkView</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.guiElement</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.guiTexture</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.collider</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.collider2D</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.hingeJoint</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.particleEmitter</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.particleSystem</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Destroy(UnityEngine.Object, System.Single)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Destroy(UnityEngine.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.DestroyImmediate(UnityEngine.Object, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.DestroyImmediate(UnityEngine.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectsOfType(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.DontDestroyOnLoad(UnityEngine.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.DestroyObject(UnityEngine.Object, System.Single)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.DestroyObject(UnityEngine.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindSceneObjectsOfType(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectsOfTypeIncludingAssets(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectsOfTypeAll(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.GetInstanceID()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate(UnityEngine.Object, UnityEngine.Vector3, UnityEngine.Quaternion)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate(UnityEngine.Object, UnityEngine.Vector3, UnityEngine.Quaternion, UnityEngine.Transform)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate(UnityEngine.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate(UnityEngine.Object, UnityEngine.Transform)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate(UnityEngine.Object, UnityEngine.Transform, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate&lt;T&gt;(T)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectsOfType&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectOfType(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectOfType&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.name</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.hideFlags</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Valve.VR.html">Valve.VR</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SteamVR_Behaviour_SkeletonCustom : SteamVR_Behaviour_Skeleton</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__indexAux" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._indexAux">_indexAux</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _indexAux</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__indexDistal" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._indexDistal">_indexDistal</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _indexDistal</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__indexMetacarpal" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._indexMetacarpal">_indexMetacarpal</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _indexMetacarpal</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__indexMiddle" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._indexMiddle">_indexMiddle</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _indexMiddle</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__indexProximal" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._indexProximal">_indexProximal</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _indexProximal</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__indexTip" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._indexTip">_indexTip</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _indexTip</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__middleAux" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._middleAux">_middleAux</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _middleAux</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__middleDistal" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._middleDistal">_middleDistal</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _middleDistal</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__middleMetacarpal" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._middleMetacarpal">_middleMetacarpal</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _middleMetacarpal</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__middleMiddle" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._middleMiddle">_middleMiddle</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _middleMiddle</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__middleProximal" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._middleProximal">_middleProximal</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _middleProximal</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__middleTip" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._middleTip">_middleTip</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _middleTip</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__pinkyAux" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._pinkyAux">_pinkyAux</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _pinkyAux</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__pinkyDistal" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._pinkyDistal">_pinkyDistal</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _pinkyDistal</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__pinkyMetacarpal" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._pinkyMetacarpal">_pinkyMetacarpal</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _pinkyMetacarpal</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__pinkyMiddle" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._pinkyMiddle">_pinkyMiddle</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _pinkyMiddle</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__pinkyProximal" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._pinkyProximal">_pinkyProximal</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _pinkyProximal</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__pinkyTip" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._pinkyTip">_pinkyTip</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _pinkyTip</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__ringAux" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._ringAux">_ringAux</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _ringAux</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__ringDistal" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._ringDistal">_ringDistal</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _ringDistal</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__ringMetacarpal" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._ringMetacarpal">_ringMetacarpal</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _ringMetacarpal</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__ringMiddle" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._ringMiddle">_ringMiddle</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _ringMiddle</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__ringProximal" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._ringProximal">_ringProximal</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _ringProximal</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__ringTip" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._ringTip">_ringTip</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _ringTip</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__thumbAux" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._thumbAux">_thumbAux</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _thumbAux</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__thumbDistal" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._thumbDistal">_thumbDistal</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _thumbDistal</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__thumbMetacarpal" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._thumbMetacarpal">_thumbMetacarpal</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _thumbMetacarpal</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__thumbMiddle" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._thumbMiddle">_thumbMiddle</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _thumbMiddle</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__thumbProximal" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._thumbProximal">_thumbProximal</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _thumbProximal</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__thumbTip" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._thumbTip">_thumbTip</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _thumbTip</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom__wrist" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom._wrist">_wrist</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SerializeField]
+protected Transform _wrist</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="Valve_VR_SteamVR_Behaviour_SkeletonCustom_AssignBonesArray_" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom.AssignBonesArray*"></a>
+  <h4 id="Valve_VR_SteamVR_Behaviour_SkeletonCustom_AssignBonesArray" data-uid="Valve.VR.SteamVR_Behaviour_SkeletonCustom.AssignBonesArray">AssignBonesArray()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void AssignBonesArray()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Valve.VR.SteamVR_Behaviour_Skeleton.html#Valve_VR_SteamVR_Behaviour_Skeleton_AssignBonesArray">SteamVR_Behaviour_Skeleton.AssignBonesArray()</a></div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright (c) Valve Corporation, All rights reserved.</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

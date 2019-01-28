@@ -1,0 +1,1291 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class SteamVR_ActionSet
+   | SteamVR Unity Plugin </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class SteamVR_ActionSet
+   | SteamVR Unity Plugin ">
+    <meta name="generator" content="docfx 2.40.7.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.jpg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Valve.VR.SteamVR_ActionSet">
+  
+  
+  <h1 id="Valve_VR_SteamVR_ActionSet" data-uid="Valve.VR.SteamVR_ActionSet" class="text-break">Class SteamVR_ActionSet
+  </h1>
+  <div class="markdown level0 summary"><p>Action sets are logical groupings of actions. Multiple sets can be active at one time.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">SteamVR_ActionSet</span></div>
+      <div class="level2"><a class="xref" href="Valve.VR.SteamVR_Input_ActionSet_buggy.html">SteamVR_Input_ActionSet_buggy</a></div>
+      <div class="level2"><a class="xref" href="Valve.VR.SteamVR_Input_ActionSet_default.html">SteamVR_Input_ActionSet_default</a></div>
+      <div class="level2"><a class="xref" href="Valve.VR.SteamVR_Input_ActionSet_mixedreality.html">SteamVR_Input_ActionSet_mixedreality</a></div>
+      <div class="level2"><a class="xref" href="Valve.VR.SteamVR_Input_ActionSet_platformer.html">SteamVR_Input_ActionSet_platformer</a></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Valve.VR.SteamVR_ActionSet.html">SteamVR_ActionSet</a>&gt;</div>
+    <div><a class="xref" href="Valve.VR.ISteamVR_ActionSet.html">ISteamVR_ActionSet</a></div>
+    <div><span class="xref">UnityEngine.ISerializationCallbackReceiver</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Valve.VR.html">Valve.VR</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Valve_VR_SteamVR_ActionSet_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class SteamVR_ActionSet : IEquatable&lt;SteamVR_ActionSet&gt;, ISteamVR_ActionSet, ISerializationCallbackReceiver</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet__ctor_" data-uid="Valve.VR.SteamVR_ActionSet.#ctor*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet__ctor" data-uid="Valve.VR.SteamVR_ActionSet.#ctor">SteamVR_ActionSet()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SteamVR_ActionSet()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="Valve_VR_SteamVR_ActionSet_initialized" data-uid="Valve.VR.SteamVR_ActionSet.initialized">initialized</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[NonSerialized]
+protected bool initialized</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_SteamVR_ActionSet_setData" data-uid="Valve.VR.SteamVR_ActionSet.setData">setData</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[NonSerialized]
+protected SteamVR_ActionSet_Data setData</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_ActionSet_Data.html">SteamVR_ActionSet_Data</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_allActions_" data-uid="Valve.VR.SteamVR_ActionSet.allActions*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_allActions" data-uid="Valve.VR.SteamVR_ActionSet.allActions">allActions</h4>
+  <div class="markdown level1 summary"><p>All actions within this set (including out actions)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SteamVR_Action[] allActions { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Action.html">SteamVR_Action</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_fullPath_" data-uid="Valve.VR.SteamVR_ActionSet.fullPath*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_fullPath" data-uid="Valve.VR.SteamVR_ActionSet.fullPath">fullPath</h4>
+  <div class="markdown level1 summary"><p>The full path to this action set (ex: /actions/in/default)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string fullPath { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_handle_" data-uid="Valve.VR.SteamVR_ActionSet.handle*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_handle" data-uid="Valve.VR.SteamVR_ActionSet.handle">handle</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ulong handle { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt64</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_nonVisualInActions_" data-uid="Valve.VR.SteamVR_ActionSet.nonVisualInActions*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_nonVisualInActions" data-uid="Valve.VR.SteamVR_ActionSet.nonVisualInActions">nonVisualInActions</h4>
+  <div class="markdown level1 summary"><p>All IN actions within this set that are NOT pose or skeleton actions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ISteamVR_Action_In[] nonVisualInActions { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.ISteamVR_Action_In.html">ISteamVR_Action_In</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_outActionArray_" data-uid="Valve.VR.SteamVR_ActionSet.outActionArray*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_outActionArray" data-uid="Valve.VR.SteamVR_ActionSet.outActionArray">outActionArray</h4>
+  <div class="markdown level1 summary"><p>All out actions within this set</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ISteamVR_Action_Out[] outActionArray { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.ISteamVR_Action_Out.html">ISteamVR_Action_Out</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_poseActions_" data-uid="Valve.VR.SteamVR_ActionSet.poseActions*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_poseActions" data-uid="Valve.VR.SteamVR_ActionSet.poseActions">poseActions</h4>
+  <div class="markdown level1 summary"><p>All pose actions within this set</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SteamVR_Action_Pose[] poseActions { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Action_Pose.html">SteamVR_Action_Pose</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_skeletonActions_" data-uid="Valve.VR.SteamVR_ActionSet.skeletonActions*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_skeletonActions" data-uid="Valve.VR.SteamVR_ActionSet.skeletonActions">skeletonActions</h4>
+  <div class="markdown level1 summary"><p>All skeleton actions within this set</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SteamVR_Action_Skeleton[] skeletonActions { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Action_Skeleton.html">SteamVR_Action_Skeleton</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_usage_" data-uid="Valve.VR.SteamVR_ActionSet.usage*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_usage" data-uid="Valve.VR.SteamVR_ActionSet.usage">usage</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string usage { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_visualActions_" data-uid="Valve.VR.SteamVR_ActionSet.visualActions*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_visualActions" data-uid="Valve.VR.SteamVR_ActionSet.visualActions">visualActions</h4>
+  <div class="markdown level1 summary"><p>All pose and skeleton actions within this set</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ISteamVR_Action_In[] visualActions { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.ISteamVR_Action_In.html">ISteamVR_Action_In</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_Activate_" data-uid="Valve.VR.SteamVR_ActionSet.Activate*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_Activate_Valve_VR_SteamVR_Input_Sources_System_Int32_System_Boolean_" data-uid="Valve.VR.SteamVR_ActionSet.Activate(Valve.VR.SteamVR_Input_Sources,System.Int32,System.Boolean)">Activate(SteamVR_Input_Sources, Int32, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Activate this set so its actions can be called</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Activate(SteamVR_Input_Sources activateForSource = SteamVR_Input_Sources.Any, int priority = 0, bool disableAllOtherActionSets = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Input_Sources.html">SteamVR_Input_Sources</a></td>
+        <td><span class="parametername">activateForSource</span></td>
+        <td><p>Will activate this action set only for the specified source. Any if you want to activate for everything</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">priority</span></td>
+        <td><p>The priority of this action set. If you have two actions bound to the same input (button) the higher priority set will override the lower priority. If they are the same priority both will execute.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">disableAllOtherActionSets</span></td>
+        <td><p>Disable all other action sets at the same time</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_Create_" data-uid="Valve.VR.SteamVR_ActionSet.Create*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_Create__1_System_String_" data-uid="Valve.VR.SteamVR_ActionSet.Create``1(System.String)">Create&lt;CreateType&gt;(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static CreateType Create&lt;CreateType&gt;(string newSetPath)
+    where CreateType : SteamVR_ActionSet, new()</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">newSetPath</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">CreateType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">CreateType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_CreateFromName_" data-uid="Valve.VR.SteamVR_ActionSet.CreateFromName*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_CreateFromName__1_System_String_" data-uid="Valve.VR.SteamVR_ActionSet.CreateFromName``1(System.String)">CreateFromName&lt;CreateType&gt;(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static CreateType CreateFromName&lt;CreateType&gt;(string newSetName)
+    where CreateType : SteamVR_ActionSet, new()</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">newSetName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">CreateType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">CreateType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_Deactivate_" data-uid="Valve.VR.SteamVR_ActionSet.Deactivate*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_Deactivate_Valve_VR_SteamVR_Input_Sources_" data-uid="Valve.VR.SteamVR_ActionSet.Deactivate(Valve.VR.SteamVR_Input_Sources)">Deactivate(SteamVR_Input_Sources)</h4>
+  <div class="markdown level1 summary"><p>Deactivate the action set so its actions can no longer be called</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Deactivate(SteamVR_Input_Sources forSource = SteamVR_Input_Sources.Any)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Input_Sources.html">SteamVR_Input_Sources</a></td>
+        <td><span class="parametername">forSource</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_Equals_" data-uid="Valve.VR.SteamVR_ActionSet.Equals*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_Equals_System_Object_" data-uid="Valve.VR.SteamVR_ActionSet.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">other</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_Equals_" data-uid="Valve.VR.SteamVR_ActionSet.Equals*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_Equals_Valve_VR_SteamVR_ActionSet_" data-uid="Valve.VR.SteamVR_ActionSet.Equals(Valve.VR.SteamVR_ActionSet)">Equals(SteamVR_ActionSet)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(SteamVR_ActionSet other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_ActionSet.html">SteamVR_ActionSet</a></td>
+        <td><span class="parametername">other</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_FinishPreInitialize_" data-uid="Valve.VR.SteamVR_ActionSet.FinishPreInitialize*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_FinishPreInitialize" data-uid="Valve.VR.SteamVR_ActionSet.FinishPreInitialize">FinishPreInitialize()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void FinishPreInitialize()</code></pre>
+  </div>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_GetActionSetData_" data-uid="Valve.VR.SteamVR_ActionSet.GetActionSetData*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_GetActionSetData" data-uid="Valve.VR.SteamVR_ActionSet.GetActionSetData">GetActionSetData()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SteamVR_ActionSet_Data GetActionSetData()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_ActionSet_Data.html">SteamVR_ActionSet_Data</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_GetCopy_" data-uid="Valve.VR.SteamVR_ActionSet.GetCopy*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_GetCopy__1" data-uid="Valve.VR.SteamVR_ActionSet.GetCopy``1">GetCopy&lt;CreateType&gt;()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateType GetCopy&lt;CreateType&gt;()
+    where CreateType : SteamVR_ActionSet, new()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">CreateType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">CreateType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_GetHashCode_" data-uid="Valve.VR.SteamVR_ActionSet.GetHashCode*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_GetHashCode" data-uid="Valve.VR.SteamVR_ActionSet.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_GetPath_" data-uid="Valve.VR.SteamVR_ActionSet.GetPath*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_GetPath" data-uid="Valve.VR.SteamVR_ActionSet.GetPath">GetPath()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetPath()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_GetShortName_" data-uid="Valve.VR.SteamVR_ActionSet.GetShortName*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_GetShortName" data-uid="Valve.VR.SteamVR_ActionSet.GetShortName">GetShortName()</h4>
+  <div class="markdown level1 summary"><p>Gets the last part of the path for this action. Removes &quot;actions&quot; and direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetShortName()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_GetTimeLastChanged_" data-uid="Valve.VR.SteamVR_ActionSet.GetTimeLastChanged*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_GetTimeLastChanged_Valve_VR_SteamVR_Input_Sources_" data-uid="Valve.VR.SteamVR_ActionSet.GetTimeLastChanged(Valve.VR.SteamVR_Input_Sources)">GetTimeLastChanged(SteamVR_Input_Sources)</h4>
+  <div class="markdown level1 summary"><p>Returns the last time this action set was changed (set to active or inactive)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float GetTimeLastChanged(SteamVR_Input_Sources source = SteamVR_Input_Sources.Any)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Input_Sources.html">SteamVR_Input_Sources</a></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The device to check. Any means all devices here (not left or right, but all)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_Initialize_" data-uid="Valve.VR.SteamVR_ActionSet.Initialize*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_Initialize_System_Boolean_System_Boolean_" data-uid="Valve.VR.SteamVR_ActionSet.Initialize(System.Boolean,System.Boolean)">Initialize(Boolean, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Initializes the handle for the action</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Initialize(bool createNew = false, bool throwErrors = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">createNew</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">throwErrors</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_IsActive_" data-uid="Valve.VR.SteamVR_ActionSet.IsActive*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_IsActive_Valve_VR_SteamVR_Input_Sources_" data-uid="Valve.VR.SteamVR_ActionSet.IsActive(Valve.VR.SteamVR_Input_Sources)">IsActive(SteamVR_Input_Sources)</h4>
+  <div class="markdown level1 summary"><p>Returns whether the set is currently active or not.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsActive(SteamVR_Input_Sources source = SteamVR_Input_Sources.Any)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Input_Sources.html">SteamVR_Input_Sources</a></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The device to check. Any means all devices here (not left or right, but all)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_PreInitialize_" data-uid="Valve.VR.SteamVR_ActionSet.PreInitialize*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_PreInitialize_System_String_" data-uid="Valve.VR.SteamVR_ActionSet.PreInitialize(System.String)">PreInitialize(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void PreInitialize(string newActionPath)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">newActionPath</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_ReadRawSetActive_" data-uid="Valve.VR.SteamVR_ActionSet.ReadRawSetActive*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_ReadRawSetActive_Valve_VR_SteamVR_Input_Sources_" data-uid="Valve.VR.SteamVR_ActionSet.ReadRawSetActive(Valve.VR.SteamVR_Input_Sources)">ReadRawSetActive(SteamVR_Input_Sources)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ReadRawSetActive(SteamVR_Input_Sources inputSource)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Input_Sources.html">SteamVR_Input_Sources</a></td>
+        <td><span class="parametername">inputSource</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_ReadRawSetLastChanged_" data-uid="Valve.VR.SteamVR_ActionSet.ReadRawSetLastChanged*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_ReadRawSetLastChanged_Valve_VR_SteamVR_Input_Sources_" data-uid="Valve.VR.SteamVR_ActionSet.ReadRawSetLastChanged(Valve.VR.SteamVR_Input_Sources)">ReadRawSetLastChanged(SteamVR_Input_Sources)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ReadRawSetLastChanged(SteamVR_Input_Sources inputSource)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Input_Sources.html">SteamVR_Input_Sources</a></td>
+        <td><span class="parametername">inputSource</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_ReadRawSetPriority_" data-uid="Valve.VR.SteamVR_ActionSet.ReadRawSetPriority*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_ReadRawSetPriority_Valve_VR_SteamVR_Input_Sources_" data-uid="Valve.VR.SteamVR_ActionSet.ReadRawSetPriority(Valve.VR.SteamVR_Input_Sources)">ReadRawSetPriority(SteamVR_Input_Sources)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int ReadRawSetPriority(SteamVR_Input_Sources inputSource)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Input_Sources.html">SteamVR_Input_Sources</a></td>
+        <td><span class="parametername">inputSource</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="operators">Operators
+  </h3>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_op_Equality_" data-uid="Valve.VR.SteamVR_ActionSet.op_Equality*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_op_Equality_Valve_VR_SteamVR_ActionSet_Valve_VR_SteamVR_ActionSet_" data-uid="Valve.VR.SteamVR_ActionSet.op_Equality(Valve.VR.SteamVR_ActionSet,Valve.VR.SteamVR_ActionSet)">Equality(SteamVR_ActionSet, SteamVR_ActionSet)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(SteamVR_ActionSet set1, SteamVR_ActionSet set2)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_ActionSet.html">SteamVR_ActionSet</a></td>
+        <td><span class="parametername">set1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_ActionSet.html">SteamVR_ActionSet</a></td>
+        <td><span class="parametername">set2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_op_Inequality_" data-uid="Valve.VR.SteamVR_ActionSet.op_Inequality*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_op_Inequality_Valve_VR_SteamVR_ActionSet_Valve_VR_SteamVR_ActionSet_" data-uid="Valve.VR.SteamVR_ActionSet.op_Inequality(Valve.VR.SteamVR_ActionSet,Valve.VR.SteamVR_ActionSet)">Inequality(SteamVR_ActionSet, SteamVR_ActionSet)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(SteamVR_ActionSet set1, SteamVR_ActionSet set2)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_ActionSet.html">SteamVR_ActionSet</a></td>
+        <td><span class="parametername">set1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_ActionSet.html">SteamVR_ActionSet</a></td>
+        <td><span class="parametername">set2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="eii">Explicit Interface Implementations
+  </h3>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_UnityEngine_ISerializationCallbackReceiver_OnAfterDeserialize_" data-uid="Valve.VR.SteamVR_ActionSet.UnityEngine#ISerializationCallbackReceiver#OnAfterDeserialize*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_UnityEngine_ISerializationCallbackReceiver_OnAfterDeserialize" data-uid="Valve.VR.SteamVR_ActionSet.UnityEngine#ISerializationCallbackReceiver#OnAfterDeserialize">ISerializationCallbackReceiver.OnAfterDeserialize()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void ISerializationCallbackReceiver.OnAfterDeserialize()</code></pre>
+  </div>
+  
+  
+  <a id="Valve_VR_SteamVR_ActionSet_UnityEngine_ISerializationCallbackReceiver_OnBeforeSerialize_" data-uid="Valve.VR.SteamVR_ActionSet.UnityEngine#ISerializationCallbackReceiver#OnBeforeSerialize*"></a>
+  <h4 id="Valve_VR_SteamVR_ActionSet_UnityEngine_ISerializationCallbackReceiver_OnBeforeSerialize" data-uid="Valve.VR.SteamVR_ActionSet.UnityEngine#ISerializationCallbackReceiver#OnBeforeSerialize">ISerializationCallbackReceiver.OnBeforeSerialize()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void ISerializationCallbackReceiver.OnBeforeSerialize()</code></pre>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IEquatable&lt;T&gt;</span>
+  </div>
+  <div>
+      <a class="xref" href="Valve.VR.ISteamVR_ActionSet.html">ISteamVR_ActionSet</a>
+  </div>
+  <div>
+      <span class="xref">UnityEngine.ISerializationCallbackReceiver</span>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright (c) Valve Corporation, All rights reserved.</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

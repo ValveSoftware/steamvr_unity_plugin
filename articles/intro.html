@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>SteamVR Unity Plugin | SteamVR Unity Plugin </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="SteamVR Unity Plugin | SteamVR Unity Plugin ">
+    <meta name="generator" content="docfx 2.40.7.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.jpg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="steamvr-unity-plugin">SteamVR Unity Plugin</h1>
+
+<h2 id="quickstart"><a href="Quickstart.html">Quickstart</a></h2>
+<p>There's a quickstart guide here that will lead you through the process of getting setup with the SteamVR Unity Plugin and into a scene.</p>
+<h2 id="render-models"><a href="Render-Models.html">Render Models</a></h2>
+<p>SteamVR works with a wide array of headsets and controllers. When you have a tracked device in VR it’s nice to have an accurate visualization of that device. Instead of shipping each individual model and texture for each controller with each application, SteamVR can manage this for you. We include a SteamVR_RenderModel ​component that you can put on a gameobject that will auto load whatever device SteamVR detects for a given Pose. Put a SteamVR_Behaviour_Pose​ on a gameobject to get the position and rotation of a controller and then a SteamVR_RenderModel to show the 3d model for that controller that will animate with button presses. See the simple sample scene or the SteamVR/Prefabs/CameraRig​ prefab for an example.</p>
+<h2 id="steamvr-input"><a href="SteamVR-Input.html">SteamVR Input</a></h2>
+<p>Since SteamVR works with so many different input devices we’ve simplified the process of accommodating all these devices. Instead of referencing the individual buttons on one controller, with SteamVR Input you reference an action. Instead of writing the code to recognize &quot;pulling the trigger button down 75% of the way to grab the block&quot; you can now just focus on the last bit of that, &quot;grab the block&quot;. You still configure the default for what &quot;grab&quot; means but the user can rebind it to their preference in a standard interface. And when a new input device comes out your users can publish bindings to share for that device with no code changes on your end.</p>
+<h2 id="skeleton-input"><a href="Skeleton-Input.html">Skeleton Input</a></h2>
+<p>Inline with the Knuckles Valve has released a system to get skeletal hand data independent from the controller you’re using. Some controllers have a high fidelity for hand tracking data with individual joints, some controllers only have buttons that we use to approximate joint data. We use whatever is available and give you two major sets of data:</p>
+<ul>
+<li>With Controller: Our best approximation of where the joints in your hand are wrapped around your controller in the real world.</li>
+<li>Without Controller: Based on the With Controller data we estimate how open or closed your hand is as if you were trying to hold your hand flat or make a fist.</li>
+</ul>
+<p>Included in this plugin are example models of gloves that you can freely use in your products. In addition we have a helper component that takes the data from SteamVR and applies it to these gloves: ​SteamVR_Behaviour_Skeleton. For an example of this in action see the Interaction System sample scene.</p>
+<h2 id="interaction-system"><a href="Interaction-System.html">Interaction System</a></h2>
+<p>After Valve released The Lab we took the learnings from that project and created an Interaction System that others could use in their own projects. This system has been updated since then to use SteamVR Input and the new SteamVR Skeleton Input systems. This system can serve as an example of how to use the these new systems. It includes the following examples:</p>
+<ul>
+<li>Interaction with Unity UI elements</li>
+<li>Pickup, Drop, and Throw</li>
+<li>Multiple variations on throwing velocities</li>
+<li>Bow and Arrow</li>
+<li>Wheel interactions</li>
+<li>Proximity button</li>
+<li>Variety of Skeleton Input examples</li>
+<li>Teleporting</li>
+<li>Using held objects</li>
+<li>Using Skeleton Input to form a hand around a held object.</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright (c) Valve Corporation, All rights reserved.</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

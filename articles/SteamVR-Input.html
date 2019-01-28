@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Input System | SteamVR Unity Plugin </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Input System | SteamVR Unity Plugin ">
+    <meta name="generator" content="docfx 2.40.7.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.jpg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="input-system">Input System</h1>
+
+<p>The heart of the SteamVR Unity Plugin is actions. Virtual Reality is evolving at a rapid rate and we need our software to be able to evolve with the hardware. SteamVR Input abstracts away the device specific parts of your code so you can focus on the intent of the user - their actions. Instead of writing the code to recognize &quot;pulling the trigger button down 75% of the way to grab the block&quot; you can now just focus on the last bit of that, &quot;grab the block&quot;. You still configure the default for what &quot;grab&quot; means but the user can rebind it to their preference in a standard interface. And when a new input device comes out your users can publish bindings to share for that device with no code changes on your end.</p>
+<p>This style of abstracting input is similar to how many other companies are thinking about it. Members from most of the major Virtual Reality hardware companies have joined Khronos to create the OpenXR standard which is still under development. For more information in participating in this organization and contributing to industry standards like this see: ​<a href="https://www.khronos.org/openxr">https://www.khronos.org/openxr</a></p>
+<p>SteamVR has separated actions out into 6 different types of input and one output type.</p>
+<ul>
+<li>Boolean - true or false</li>
+<li>Single - an analog value</li>
+<li>Vector2 - two analog values</li>
+<li>Vector3 - three analog values</li>
+<li>Pose - position, rotation, velocity, and angular velocity</li>
+<li>Skeleton - Orientations for each bone in a hand</li>
+<li>Vibration - Actuating haptic motors</li>
+</ul>
+<h3 id="boolean">Boolean</h3>
+<p>​Boolean actions are values that are either true or false. For example, Grab is a common action that is either true or false. You’re either intending to hold something or you aren’t, there is no in between. With a Vive Wand this may mean pulling the trigger 75%, with an Oculus Touch this may mean pulling the grip trigger 25%, with Knuckles this may be some combination of capacitive sensing and force sensing. But in the end it breaks down to a
+true or false value.</p>
+<h3 id="single">Single</h3>
+<p>​Single actions are analog values from 0 to 1. These are scenarios where you need more data than just a true or false. There are fewer of these than you’d expect. If previously you were reading a 0 to 1 value and then waiting for it to get to a certain point, a threshold, then you can accomplish the same thing with a boolean action, making it easier for your end user to customize. A good example of a Single action is the Throttle for the RC car in the SteamVR Interaction System. The action your taking as a user can vary depending on how fast you want the car to travel.</p>
+<h3 id="vector2">Vector2</h3>
+<p>Vector2​ actions are a combination of two analog values. An X and a Y. Generally in VR so far these sort of actions are best represented by the radial menus or 2D positioning. In the SteamVR Interaction System we have an example of steering an RC car as well as a platformer type character. On the Vive Wand this is mapped to the touchpad but on Oculus Touch and Knuckles this is mapped to the joystick. With the RC car we’re using the y axis to determine forward or backward direction and the x axis to determine turning. With the platformer we’re mapping the x/y input onto the direction and magnitude of the character's movement.</p>
+<h3 id="vector3">Vector3</h3>
+<p>Vector3​ actions are pretty uncommon. In SteamVR Home this is used for scrolling, x, y, and z is the number of pages to scroll.</p>
+<h3 id="pose">Pose</h3>
+<p>​Pose actions are a representation of a position and rotation in 3d space. This is used to track your VR controllers. The user can customize these bindings by setting the point on the controller that the pose represents. Some users may find a slightly different tracked position or rotation feels better for them.</p>
+<h3 id="skeleton">Skeleton</h3>
+<p>Skeleton​ actions use SteamVR Skeleton Input to get our best estimation of the orientation of your fingers while holding your VR controllers. This provides one standard to get joint positions and rotations for every controller regardless of tracking fidelity. Controllers with the capacity for higher fidelity finger tracking will be more accurate than those without.</p>
+<h3 id="vibration">Vibration</h3>
+<p>Vibration actions are used to trigger haptic feedback on VR devices. This could be a controller, a vest, or even a chair.</p>
+<h2 id="using-actions">Using actions</h2>
+<p>Once you've created your actions you can use them in your own scripts or you can use the unity components we've created that handle some common tasks. These are named SteamVR_Behaviour_Boolean, SteamVR_Behaviour_Single, SteamVR_Behaviour_Vector2, SteamVR_Behaviour_Vector3, SteamVR_Behaviour_Pose, and SteamVR_Behaviour_Skeleton. Drag those onto a GameObject to see what they can do.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright (c) Valve Corporation, All rights reserved.</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

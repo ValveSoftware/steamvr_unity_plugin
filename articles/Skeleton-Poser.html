@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Skeleton Poser | SteamVR Unity Plugin </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Skeleton Poser | SteamVR Unity Plugin ">
+    <meta name="generator" content="docfx 2.40.7.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.jpg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="skeleton-poser">Skeleton Poser</h1>
+
+<h2 id="the-basics">The Basics</h2>
+<p>The SteamVR_Skeleton_Poser script is designed to function independently from the SteamVR Interaction System and can be added to your own systems, but the SteamVR Interaction system works with it right out of the box and is a great way to quickly try it out.</p>
+<p>SteamVR_Skeleton_Poses are ScriptableObjects that contain a particular hand pose and some per-finger animation info.</p>
+<p>Multiple poses can be added to and modified via the SteamVR_Skeleton_Poser script with its handy UI. You can add any number of poses to one Poser, but you will likely only need a few at most. Using the buttons in the pose editor, new poses can be created, pose data can be copied between poses, pose data can be mirrored, poses can be reset to a variety of bases, and changes to skeletons in the scene view can be saved as changes to a pose. You can also add per-finger additive animation via the finger movement dropdowns. This lets the fingers move based on the skeleton input while remaining constrained to the pose. There are several types of finger movement:</p>
+<ul>
+<li><strong>Static</strong> – no finger movement. Only use pose.</li>
+<li><strong>Free</strong> – free finger movement. Ignore pose.</li>
+<li><strong>Extend</strong> – fingers can lift up to a fully extended position, but not curl any farther down than where the pose has them</li>
+<li><strong>Contract</strong> – fingers can curl to a fully contracted position, but cannot open any further than where the pose has them.</li>
+</ul>
+<p>Using the Poser’s Blending Editor tab, you can set up blending behaviours to mix and stack multiple poses in complex ways. Think of the blending editor as an animator controller, and the poses as animations. There are three types of blending behaviours you can add: Manual, analog action, or boolean action. Manual behaviours will have to be driven by code, with an easy call of:</p>
+<p><code>Poser.SetBlendingBehaviourValue(string behaviourName, float value)</code></p>
+<p>Analog and boolean action behaviours, on the other hand, are automatically driven by a chosen action. The smoothing value will be the speed of smoothing applied to them, with 0 for none. Smoothing is not required for analog actions, but is recommended for Boolean-driven behaviours as they will look much… smoother.</p>
+<h2 id="using-the-skeleton-poser-with-the-steamvr-interaction-system">Using the Skeleton Poser with the SteamVR Interaction system</h2>
+<p>The Poser component will work automatically with the SteamVR Interaction system. All you need to do is add the SteamVR_Skeleton_Poser script to an interactable GameObject. There are a couple settings on the interactable you should make sure to change though:</p>
+<ul>
+<li>Disable <code>Interactable.HideHandOnAttach</code>. This would hide your beautiful poses if you left it on!</li>
+<li>Enable <code>Interactable.HideControllerOnAttach</code>. This will make sure your controller doesn't get in the way of your hand poses.</li>
+<li>If you're creating an interactable that you want to be able to pick up, add the <code>Throwable</code> script to it.</li>
+<li>If you want that throwable to not pass through the environment, set only these attachment flags: <code>SnapOnAttach, DetachFromOtherHand, VelocityMovement, TurnOffGravity</code>.</li>
+</ul>
+<p>That is all that is needed to get a simple interactable with poser support.</p>
+<hr>
+<h2 id="using-the-skeleton-poser-with-your-own-framework">Using the Skeleton Poser with Your Own Framework</h2>
+<p>As also mentioned before, the SteamVR_Skeleton_Poser script is designed to function independently from the SteamVR Interaction System. If you are using the <code>SteamVR_Behaviour_Skeleton</code> script to animate your hand, you can tell it to blend to the output of a particular poser with a call of <code>BlendToPoser()</code>.</p>
+<p>If you are using a different solution to animate your skeleton, the Poser can generate poses on command in the format of the <code>SteamVR_Skeleton_PoseSnapshot</code> dataclass, which holds object offset and position/rotation for all the bones. Call <code>poser.GetBlendedPose</code>, passing either a <code>SteamVR_Behaviour_Skeleton</code> or a <code>SteamVR_Action_Skeleton</code> and <code>SteamVR_Input_Sources</code> hand identifier. This will give you a fully composited pose according to the various behaviours and options on that particular poser, which you can apply freely to your skeleton.</p>
+<hr>
+<p><strong>Check out this video for another overview of the system and a step-by-step demonstration of setting up poses!</strong></p>
+<p><a href="http://www.youtube.com/watch?feature=player_embedded&v=a9EBILq2ep8
+" target="_blank"><img src="http://img.youtube.com/vi/a9EBILq2ep8/0.jpg" alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10"></a></p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright (c) Valve Corporation, All rights reserved.</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

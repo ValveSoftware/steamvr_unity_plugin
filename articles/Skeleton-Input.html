@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Skeleton Input | SteamVR Unity Plugin </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Skeleton Input | SteamVR Unity Plugin ">
+    <meta name="generator" content="docfx 2.40.7.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.jpg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="skeleton-input">Skeleton Input</h1>
+
+<p>Seeing your physical controllers in VR is nice but what people really want is to be able to see their hands. As VR controllers advance we're seeing wildly different capabilities. Some controllers only get button presses (no touch), some give good finger estimates even mid-air, and we're starting to see gloves and cameras that have full per joint position/rotation tracking. SteamVR Skeleton Input gives you one API to get per joint data for all of these different types of devices. For devices with less data we estimate finger positions based on what buttons are being pressed while with more advanced controllers the data is just passed through.</p>
+<h2 id="range-of-motion">Range Of Motion</h2>
+<p>We have two ranges of motion that you can get bone data for. If you're looking for accurate-to-real-world data you can use the <code>WithController</code> range of motion. This means we try and estimate where your fingers are in the real world as best as the controller will allow. <code>WithoutController</code> gives you a full range from a flat hand with fingers spread out to a balled fist.</p>
+<p><img src="../images/skeleton_knuckles_controller.gif" alt="Skeleton Input - Knuckles With Controller"> <img src="../images/skeleton_knuckles_withoutcontroller.gif" alt="Skeleton Input - Knuckles Without Controller"></p>
+<h2 id="skeletal-transform-space">Skeletal Transform Space</h2>
+<p>Depending on what your use case is for this data you may want to get the positions and rotations relative to different things. By default we get positions and rotations relative to their <code>Parent</code>. But you can also get them relative to the <code>Model</code>.</p>
+<h2 id="finger-curls">Finger Curls</h2>
+<p>For some things it may be more useful to access a summary of how curled the finger is as opposed to the position and rotation for 4 joints on each finger. These values range from 0 to 1, with 1 being fully curled. You can access curl information at <code>skeletonAction.fingerCurls[]</code> as an array, or individually named at <code>skeletonAction.indexCurl</code>, <code>skeletonAction.middleCurl</code>, <code>skeletonAction.RingCurl</code>, <code>skeletonAction.pinkyCurl</code>, and <code>skeletonAction.thumbCurl</code>.</p>
+<h2 id="finger-splays">Finger Splays</h2>
+<p>Knowing the gaps between fingers can also be a commonly used piece of information. For this we provide data in a similar fashion to the curls. A range from 0 to 1 representing the size of the gap between fingers. <code>skeletonAction.fingerSplays[]</code> as an array, or individually named as <code>skeletonAction.thumbIndexSplay</code>, <code>indexMiddleSplay</code>, <code>middleRingSplay</code>, and <code>ringPinkySplay</code>.</p>
+<h2 id="skeletal-tracking-level">Skeletal Tracking Level</h2>
+<p>Different controllers have different abilities to track the individual joints of your fingers. Here we provide an overview value that should give you a general idea what level of fidelity your current controller has.</p>
+<ul>
+<li><strong>Estimated:</strong> Body part location can’t be directly determined by the device. Any skeletal pose provided by the device is estimated based on the active buttons, triggers, joysticks, or other input sensors. Examples include the Vive Controller and gamepads.</li>
+<li><strong>Partial:</strong> Body part location can be measured directly but with fewer degrees of freedom than the actual body part.Certain body part positions may be unmeasured by the device and estimated from other input data.Examples include Knuckles or gloves that only measure finger curl</li>
+<li><strong>Full:</strong> Body part location can be measured directly throughout the entire range of motion of the body part.Examples include hi-end mocap systems, or gloves that measure the rotation of each finger segment.</li>
+</ul>
+<h2 id="steamvr_behaviour_skeleton">SteamVR_Behaviour_Skeleton</h2>
+<p>The skeleton behaviour is a component to make common Skeleton Input tasks easier in unity. By setting the <code>skeletonAction</code> and <code>inputSource</code> you can then let the behaviour do a lot of work for you.</p>
+<ul>
+<li><code>updatePose</code> - Setting this to true will orient the GameObject in your playspace every time the skeleton is updated.</li>
+<li><code>mirroring</code> - If this bone data should be mirrored across the x axis.</li>
+<li><code>SetRangeOfMotion(EVRSkeletalMotionRange newRangeOfMotion, float blendOverSeconds = 0.1f)</code> - Gives you an easy way to blend to a new range of motion.</li>
+<li><code>BlendToSkeleton(float overTime = 0.1f)</code> - Fully blend to using the skeleton data to animate the bones.</li>
+<li><code>BlendToPoser(SteamVR_Skeleton_Poser poser, float overTime = 0.1f)</code> - Fully blend to using the Poser to animate the bones.</li>
+<li><code>BlendToAnimation(float overTime = 0.1f)</code> - Fully blend to a predefined Unity animation.</li>
+<li><code>BlendTo(float blendToAmount, float overTime)</code> - Lets you specify how much to blend between poser/animation data and skeleton input data.</li>
+<li><code>Transform GetBone(int joint)</code> - Returns a specific bone's Transform by the joint index (SteamVR_Skeleton_JointIndexes).</li>
+<li><code>ForceToReferencePose(EVRSkeletalReferencePose referencePose)</code> - Forced the bones to a specific reference pose as defined by SteamVR. Generally used for debugging purposes.</li>
+<li><code>Vector3[] GetBonePositions()</code> - Gives you an array of all the bone positions in the space you requested.</li>
+<li><code>Quaternion[] GetBoneRotations()</code> Gives you an array of all the bone rotations in the space you requested.</li>
+</ul>
+<h3 id="steamvr_behaviour_skeleton-events">SteamVR_Behaviour_Skeleton Events</h3>
+<p>There's five helpful events on the skeleton behaviour that have two forms. You can subscribe to the unity event or the more traditional C# event. The benefit of the C# events is most IDEs will automatically create a function with named parameters for you based on the event type.</p>
+<ul>
+<li><code>onBoneTransformsUpdated</code> - After the bone transforms have been updated this will fire.</li>
+<li><code>onTransformUpdated</code> - After the root transform has been updated this will fire.</li>
+<li><code>onTransformChanged</code> - After the root transform has been changed this will fire (moved / rotated).</li>
+<li><code>onConnectedChanged</code> - Whenever a device is connected or disconnected from this action</li>
+<li><code>onTrackingChanged</code> - Executes whenever the state of the tracking for this device changes.</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright (c) Valve Corporation, All rights reserved.</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

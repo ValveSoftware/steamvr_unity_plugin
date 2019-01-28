@@ -1,0 +1,1427 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Interactable
+   | SteamVR Unity Plugin </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Interactable
+   | SteamVR Unity Plugin ">
+    <meta name="generator" content="docfx 2.40.7.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.jpg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Valve.VR.InteractionSystem.Interactable">
+  
+  
+  <h1 id="Valve_VR_InteractionSystem_Interactable" data-uid="Valve.VR.InteractionSystem.Interactable" class="text-break">Class Interactable
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">UnityEngine.Object</span></div>
+    <div class="level2"><span class="xref">UnityEngine.Component</span></div>
+    <div class="level3"><span class="xref">UnityEngine.Behaviour</span></div>
+    <div class="level4"><span class="xref">UnityEngine.MonoBehaviour</span></div>
+    <div class="level5"><span class="xref">Interactable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.Invoke(System.String, System.Single)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.InvokeRepeating(System.String, System.Single, System.Single)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.CancelInvoke()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.CancelInvoke(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.IsInvoking(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.IsInvoking()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StartCoroutine(System.Collections.IEnumerator)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StartCoroutine_Auto(System.Collections.IEnumerator)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StartCoroutine(System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StartCoroutine(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StopCoroutine(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StopCoroutine(System.Collections.IEnumerator)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StopCoroutine(UnityEngine.Coroutine)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.StopAllCoroutines()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.print(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.MonoBehaviour.useGUILayout</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Behaviour.enabled</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Behaviour.isActiveAndEnabled</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponent(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponent&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponent(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInChildren(System.Type, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInChildren(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInChildren&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInChildren&lt;T&gt;(System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren(System.Type, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren&lt;T&gt;(System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren&lt;T&gt;(System.Boolean, System.Collections.Generic.List&lt;T&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInChildren&lt;T&gt;(System.Collections.Generic.List&lt;T&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInParent(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentInParent&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInParent(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInParent(System.Type, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInParent&lt;T&gt;(System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInParent&lt;T&gt;(System.Boolean, System.Collections.Generic.List&lt;T&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponentsInParent&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponents(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponents(System.Type, System.Collections.Generic.List&lt;UnityEngine.Component&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponents&lt;T&gt;(System.Collections.Generic.List&lt;T&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.GetComponents&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.CompareTag(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessageUpwards(System.String, System.Object, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessageUpwards(System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessageUpwards(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessageUpwards(System.String, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessage(System.String, System.Object, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessage(System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessage(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.SendMessage(System.String, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.BroadcastMessage(System.String, System.Object, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.BroadcastMessage(System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.BroadcastMessage(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.BroadcastMessage(System.String, UnityEngine.SendMessageOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.transform</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.gameObject</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.tag</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.rigidbody</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.rigidbody2D</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.camera</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.light</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.animation</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.constantForce</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.renderer</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.audio</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.guiText</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.networkView</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.guiElement</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.guiTexture</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.collider</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.collider2D</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.hingeJoint</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.particleEmitter</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.particleSystem</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Destroy(UnityEngine.Object, System.Single)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Destroy(UnityEngine.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.DestroyImmediate(UnityEngine.Object, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.DestroyImmediate(UnityEngine.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectsOfType(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.DontDestroyOnLoad(UnityEngine.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.DestroyObject(UnityEngine.Object, System.Single)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.DestroyObject(UnityEngine.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindSceneObjectsOfType(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectsOfTypeIncludingAssets(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectsOfTypeAll(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.GetInstanceID()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate(UnityEngine.Object, UnityEngine.Vector3, UnityEngine.Quaternion)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate(UnityEngine.Object, UnityEngine.Vector3, UnityEngine.Quaternion, UnityEngine.Transform)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate(UnityEngine.Object)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate(UnityEngine.Object, UnityEngine.Transform)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate(UnityEngine.Object, UnityEngine.Transform, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.Instantiate&lt;T&gt;(T)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectsOfType&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectOfType(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.FindObjectOfType&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.name</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Object.hideFlags</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Valve.VR.InteractionSystem.html">Valve.VR.InteractionSystem</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Valve_VR_InteractionSystem_Interactable_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class Interactable : MonoBehaviour</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_activateActionSetOnAttach" data-uid="Valve.VR.InteractionSystem.Interactable.activateActionSetOnAttach">activateActionSetOnAttach</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Tooltip(&quot;Activates an action set on attach and deactivates on detach&quot;)]
+public SteamVR_ActionSet activateActionSetOnAttach</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_ActionSet.html">SteamVR_ActionSet</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_attachEaseIn" data-uid="Valve.VR.InteractionSystem.Interactable.attachEaseIn">attachEaseIn</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool attachEaseIn</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_attachedToHand" data-uid="Valve.VR.InteractionSystem.Interactable.attachedToHand">attachedToHand</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[NonSerialized]
+public Hand attachedToHand</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.InteractionSystem.Hand.html">Hand</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_blendToPoseTime" data-uid="Valve.VR.InteractionSystem.Interactable.blendToPoseTime">blendToPoseTime</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected float blendToPoseTime</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_existingRenderers" data-uid="Valve.VR.InteractionSystem.Interactable.existingRenderers">existingRenderers</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected MeshRenderer[] existingRenderers</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.MeshRenderer</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_existingSkinnedRenderers" data-uid="Valve.VR.InteractionSystem.Interactable.existingSkinnedRenderers">existingSkinnedRenderers</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected SkinnedMeshRenderer[] existingSkinnedRenderers</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.SkinnedMeshRenderer</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_handAnimationOnPickup" data-uid="Valve.VR.InteractionSystem.Interactable.handAnimationOnPickup">handAnimationOnPickup</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Tooltip(&quot;The integer in the animator to trigger on pickup. 0 for none&quot;)]
+public int handAnimationOnPickup</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_handFollowTransform" data-uid="Valve.VR.InteractionSystem.Interactable.handFollowTransform">handFollowTransform</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Tooltip(&quot;Should the rendered hand lock on to and follow the object&quot;)]
+public bool handFollowTransform</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_hideControllerOnAttach" data-uid="Valve.VR.InteractionSystem.Interactable.hideControllerOnAttach">hideControllerOnAttach</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Tooltip(&quot;Hide the controller part of the hand on attachment and show on detach&quot;)]
+public bool hideControllerOnAttach</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_hideHandOnAttach" data-uid="Valve.VR.InteractionSystem.Interactable.hideHandOnAttach">hideHandOnAttach</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Tooltip(&quot;Hide the whole hand on attachment and show on detach&quot;)]
+public bool hideHandOnAttach</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_hideHighlight" data-uid="Valve.VR.InteractionSystem.Interactable.hideHighlight">hideHighlight</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Tooltip(&quot;An array of child gameObjects to not render a highlight for. Things like transparent parts, vfx, etc.&quot;)]
+public GameObject[] hideHighlight</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.GameObject</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_hideSkeletonOnAttach" data-uid="Valve.VR.InteractionSystem.Interactable.hideSkeletonOnAttach">hideSkeletonOnAttach</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Tooltip(&quot;Hide the skeleton part of the hand on attachment and show on detach&quot;)]
+public bool hideSkeletonOnAttach</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_highlightHolder" data-uid="Valve.VR.InteractionSystem.Interactable.highlightHolder">highlightHolder</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected GameObject highlightHolder</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.GameObject</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_highlightMat" data-uid="Valve.VR.InteractionSystem.Interactable.highlightMat">highlightMat</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected static Material highlightMat</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Material</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_highlightOnHover" data-uid="Valve.VR.InteractionSystem.Interactable.highlightOnHover">highlightOnHover</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Tooltip(&quot;Set whether or not you want this interactible to highlight when hovering over it&quot;)]
+public bool highlightOnHover</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_highlightRenderers" data-uid="Valve.VR.InteractionSystem.Interactable.highlightRenderers">highlightRenderers</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected MeshRenderer[] highlightRenderers</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.MeshRenderer</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_highlightSkinnedRenderers" data-uid="Valve.VR.InteractionSystem.Interactable.highlightSkinnedRenderers">highlightSkinnedRenderers</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected SkinnedMeshRenderer[] highlightSkinnedRenderers</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.SkinnedMeshRenderer</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_hoveringHand" data-uid="Valve.VR.InteractionSystem.Interactable.hoveringHand">hoveringHand</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[NonSerialized]
+public Hand hoveringHand</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.InteractionSystem.Hand.html">Hand</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_releasePoseBlendTime" data-uid="Valve.VR.InteractionSystem.Interactable.releasePoseBlendTime">releasePoseBlendTime</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected float releasePoseBlendTime</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_setRangeOfMotionOnPickup" data-uid="Valve.VR.InteractionSystem.Interactable.setRangeOfMotionOnPickup">setRangeOfMotionOnPickup</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Tooltip(&quot;The range of motion to set on the skeleton. None for no change.&quot;)]
+public SkeletalMotionRangeChange setRangeOfMotionOnPickup</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SkeletalMotionRangeChange.html">SkeletalMotionRangeChange</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_skeletonPoser" data-uid="Valve.VR.InteractionSystem.Interactable.skeletonPoser">skeletonPoser</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HideInInspector]
+public SteamVR_Skeleton_Poser skeletonPoser</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.SteamVR_Skeleton_Poser.html">SteamVR_Skeleton_Poser</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_snapAttachEaseInCompleted" data-uid="Valve.VR.InteractionSystem.Interactable.snapAttachEaseInCompleted">snapAttachEaseInCompleted</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool snapAttachEaseInCompleted</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_snapAttachEaseInCurve" data-uid="Valve.VR.InteractionSystem.Interactable.snapAttachEaseInCurve">snapAttachEaseInCurve</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HideInInspector]
+public AnimationCurve snapAttachEaseInCurve</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.AnimationCurve</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_snapAttachEaseInTime" data-uid="Valve.VR.InteractionSystem.Interactable.snapAttachEaseInTime">snapAttachEaseInTime</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float snapAttachEaseInTime</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_useHandObjectAttachmentPoint" data-uid="Valve.VR.InteractionSystem.Interactable.useHandObjectAttachmentPoint">useHandObjectAttachmentPoint</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Tooltip(&quot;Specify whether you want to snap to the hand's object attachment point, or just the raw hand&quot;)]
+public bool useHandObjectAttachmentPoint</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="Valve_VR_InteractionSystem_Interactable_isDestroying_" data-uid="Valve.VR.InteractionSystem.Interactable.isDestroying*"></a>
+  <h4 id="Valve_VR_InteractionSystem_Interactable_isDestroying" data-uid="Valve.VR.InteractionSystem.Interactable.isDestroying">isDestroying</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool isDestroying { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_InteractionSystem_Interactable_isHovering_" data-uid="Valve.VR.InteractionSystem.Interactable.isHovering*"></a>
+  <h4 id="Valve_VR_InteractionSystem_Interactable_isHovering" data-uid="Valve.VR.InteractionSystem.Interactable.isHovering">isHovering</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool isHovering { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_InteractionSystem_Interactable_wasHovering_" data-uid="Valve.VR.InteractionSystem.Interactable.wasHovering*"></a>
+  <h4 id="Valve_VR_InteractionSystem_Interactable_wasHovering" data-uid="Valve.VR.InteractionSystem.Interactable.wasHovering">wasHovering</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool wasHovering { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="Valve_VR_InteractionSystem_Interactable_CreateHighlightRenderers_" data-uid="Valve.VR.InteractionSystem.Interactable.CreateHighlightRenderers*"></a>
+  <h4 id="Valve_VR_InteractionSystem_Interactable_CreateHighlightRenderers" data-uid="Valve.VR.InteractionSystem.Interactable.CreateHighlightRenderers">CreateHighlightRenderers()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void CreateHighlightRenderers()</code></pre>
+  </div>
+  
+  
+  <a id="Valve_VR_InteractionSystem_Interactable_OnAttachedToHand_" data-uid="Valve.VR.InteractionSystem.Interactable.OnAttachedToHand*"></a>
+  <h4 id="Valve_VR_InteractionSystem_Interactable_OnAttachedToHand_Valve_VR_InteractionSystem_Hand_" data-uid="Valve.VR.InteractionSystem.Interactable.OnAttachedToHand(Valve.VR.InteractionSystem.Hand)">OnAttachedToHand(Hand)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnAttachedToHand(Hand hand)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.InteractionSystem.Hand.html">Hand</a></td>
+        <td><span class="parametername">hand</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_InteractionSystem_Interactable_OnDestroy_" data-uid="Valve.VR.InteractionSystem.Interactable.OnDestroy*"></a>
+  <h4 id="Valve_VR_InteractionSystem_Interactable_OnDestroy" data-uid="Valve.VR.InteractionSystem.Interactable.OnDestroy">OnDestroy()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnDestroy()</code></pre>
+  </div>
+  
+  
+  <a id="Valve_VR_InteractionSystem_Interactable_OnDetachedFromHand_" data-uid="Valve.VR.InteractionSystem.Interactable.OnDetachedFromHand*"></a>
+  <h4 id="Valve_VR_InteractionSystem_Interactable_OnDetachedFromHand_Valve_VR_InteractionSystem_Hand_" data-uid="Valve.VR.InteractionSystem.Interactable.OnDetachedFromHand(Valve.VR.InteractionSystem.Hand)">OnDetachedFromHand(Hand)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnDetachedFromHand(Hand hand)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.InteractionSystem.Hand.html">Hand</a></td>
+        <td><span class="parametername">hand</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_InteractionSystem_Interactable_OnDisable_" data-uid="Valve.VR.InteractionSystem.Interactable.OnDisable*"></a>
+  <h4 id="Valve_VR_InteractionSystem_Interactable_OnDisable" data-uid="Valve.VR.InteractionSystem.Interactable.OnDisable">OnDisable()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnDisable()</code></pre>
+  </div>
+  
+  
+  <a id="Valve_VR_InteractionSystem_Interactable_OnHandHoverBegin_" data-uid="Valve.VR.InteractionSystem.Interactable.OnHandHoverBegin*"></a>
+  <h4 id="Valve_VR_InteractionSystem_Interactable_OnHandHoverBegin_Valve_VR_InteractionSystem_Hand_" data-uid="Valve.VR.InteractionSystem.Interactable.OnHandHoverBegin(Valve.VR.InteractionSystem.Hand)">OnHandHoverBegin(Hand)</h4>
+  <div class="markdown level1 summary"><p>Called when a Hand starts hovering over this object</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnHandHoverBegin(Hand hand)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.InteractionSystem.Hand.html">Hand</a></td>
+        <td><span class="parametername">hand</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_InteractionSystem_Interactable_ShouldIgnore_" data-uid="Valve.VR.InteractionSystem.Interactable.ShouldIgnore*"></a>
+  <h4 id="Valve_VR_InteractionSystem_Interactable_ShouldIgnore_UnityEngine_GameObject_" data-uid="Valve.VR.InteractionSystem.Interactable.ShouldIgnore(UnityEngine.GameObject)">ShouldIgnore(GameObject)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual bool ShouldIgnore(GameObject check)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.GameObject</span></td>
+        <td><span class="parametername">check</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_InteractionSystem_Interactable_ShouldIgnoreHighlight_" data-uid="Valve.VR.InteractionSystem.Interactable.ShouldIgnoreHighlight*"></a>
+  <h4 id="Valve_VR_InteractionSystem_Interactable_ShouldIgnoreHighlight_UnityEngine_Component_" data-uid="Valve.VR.InteractionSystem.Interactable.ShouldIgnoreHighlight(UnityEngine.Component)">ShouldIgnoreHighlight(Component)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual bool ShouldIgnoreHighlight(Component component)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Component</span></td>
+        <td><span class="parametername">component</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Valve_VR_InteractionSystem_Interactable_Start_" data-uid="Valve.VR.InteractionSystem.Interactable.Start*"></a>
+  <h4 id="Valve_VR_InteractionSystem_Interactable_Start" data-uid="Valve.VR.InteractionSystem.Interactable.Start">Start()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void Start()</code></pre>
+  </div>
+  
+  
+  <a id="Valve_VR_InteractionSystem_Interactable_Update_" data-uid="Valve.VR.InteractionSystem.Interactable.Update*"></a>
+  <h4 id="Valve_VR_InteractionSystem_Interactable_Update" data-uid="Valve.VR.InteractionSystem.Interactable.Update">Update()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void Update()</code></pre>
+  </div>
+  
+  
+  <a id="Valve_VR_InteractionSystem_Interactable_UpdateHighlightRenderers_" data-uid="Valve.VR.InteractionSystem.Interactable.UpdateHighlightRenderers*"></a>
+  <h4 id="Valve_VR_InteractionSystem_Interactable_UpdateHighlightRenderers" data-uid="Valve.VR.InteractionSystem.Interactable.UpdateHighlightRenderers">UpdateHighlightRenderers()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void UpdateHighlightRenderers()</code></pre>
+  </div>
+  <h3 id="events">Events
+  </h3>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_onAttachedToHand" data-uid="Valve.VR.InteractionSystem.Interactable.onAttachedToHand">onAttachedToHand</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event Interactable.OnAttachedToHandDelegate onAttachedToHand</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.InteractionSystem.Interactable.OnAttachedToHandDelegate.html">Interactable.OnAttachedToHandDelegate</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Valve_VR_InteractionSystem_Interactable_onDetachedFromHand" data-uid="Valve.VR.InteractionSystem.Interactable.onDetachedFromHand">onDetachedFromHand</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event Interactable.OnDetachedFromHandDelegate onDetachedFromHand</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Valve.VR.InteractionSystem.Interactable.OnDetachedFromHandDelegate.html">Interactable.OnDetachedFromHandDelegate</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright (c) Valve Corporation, All rights reserved.</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

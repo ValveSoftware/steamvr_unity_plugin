@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>SteamVR Unity Plugin | SteamVR Unity Plugin </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="SteamVR Unity Plugin | SteamVR Unity Plugin ">
+    <meta name="generator" content="docfx 2.40.7.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.jpg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="steamvr-unity-plugin">SteamVR Unity Plugin</h1>
+
+<p>This is the class by class, member by member documentation for the SteamVR Unity Plugin. It is not complete. If you would like summary or example information for a specific class or member please post a request in the Issues section of the github repo.</p>
+<h2 id="steamvr_settings">SteamVR_Settings</h2>
+<p>Located in Assets/SteamVR/Resources you will find a SteamVR_Settings asset that has a couple setting on it you may find useful. Namely when the input system updates the actions. It also contains a boolean that decides whether to automatically enable VR for the project. If you have this plugin installed and are trying to disable VR you will need to uncheck this box first.</p>
+<h2 id="steamvr_actions">SteamVR_Actions</h2>
+<p>The Actions class will be generated for you when you hit &quot;Save and Generate&quot; in the SteamVR Input window. It gives you named access to all your actions. For example, if you have an action named Plant in the action set Farming you can access it through the actionset at SteamVR_Actions.Farming.Plant or just at the root of the class at  SteamVR_Actions.Farming_Plant.</p>
+<h2 id="steamvr_input">SteamVR_Input</h2>
+<p>Here is where most of the helper functions live to access your actions in code. You can get a reference to a specific action by name through a generic function <code>GetAction&lt;SteamVR_Action_Boolean&gt;(&quot;Plant&quot;)</code> or through a type-named function <code>GetBooleanAction(&quot;Plant&quot;)</code>. You can also pass in the full path to the action: <code>GetActionByPath&lt;SteamVR_Action_Boolean&gt;(&quot;/Farming/in/Plant&quot;)</code> if you have a lot of actions or want the best performance. These classes are nice because they give you access to common events and faster data access. But if you'd rather just access the data directly instead of going through the action class you can use more familiar calls <code>GetStateDown(&quot;Plant&quot;, SteamVR_Input_Sources.LeftHand)</code>. Different than normal Unity input you'll need to pass in the Input Source you want to get the data from. That can be Any, or quite a number of more specific sources (LeftHand, RightHand, etc). Any will combine all sources (OR'd) in to one set of data.</p>
+<h2 id="steamvr_behaviour">SteamVR_Behaviour</h2>
+<p>This is the component that manages most of the input system in relation to unity events. You shouldn't generally need to interact with it besides making sure it's in your scenes and doesn't get accidentally deleted. It should be automatically added to a scene at runtime when one isn't found.</p>
+<h2 id="steamvr_behaviour_pose">SteamVR_Behaviour_Pose</h2>
+<p>The pose behaviour component is what orients tracked objects. Add this to a GameObject to automatically set the position and rotation of the transform to match your tracked object (usually controllers). It also contains velocity data and a variety of helper functions for common orientation functions.</p>
+<h2 id="steamvr_behaviour_skeleton">SteamVR_Behaviour_Skeleton</h2>
+<p>Uses SteamVR Skeleton Input to give you a hand that is our best guess of where each joint is at that time. Varies in accuracy depending on the controller and tracking system currently being used. This can also orient the GameObject inline with the controller. So you don't need a pose and a skeleton behaviour on the same object.</p>
+<h2 id="steamvr_behaviour_boolean--single--vector2--vector3">SteamVR_Behaviour_Boolean / Single / Vector2 / Vector3</h2>
+<p>These are components designed to give you easy access to an action by the same name and a place to use UnityEvents if that is your preference. They also have some helpful functions designed around common scenarios for those actions. If you find yourself running into things you wish these helper components had, feel free to create an Issue on the github.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright (c) Valve Corporation, All rights reserved.</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
