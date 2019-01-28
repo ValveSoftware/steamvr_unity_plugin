@@ -36,6 +36,11 @@
       "requirement": "optional"
     },
     {
+      "name": "/actions/default/in/HeadsetOnHead",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },
@@ -62,6 +67,11 @@
     {
       "name": "/actions/buggy/in/Reset",
       "type": "boolean"
+    },
+    {
+      "name": "/actions/mixedreality/in/ExternalCamera",
+      "type": "pose",
+      "requirement": "optional"
     }
   ],
   "action_sets": [
@@ -75,6 +85,10 @@
     },
     {
       "name": "/actions/buggy",
+      "usage": "single"
+    },
+    {
+      "name": "/actions/mixedreality",
       "usage": "single"
     }
   ],
@@ -94,24 +108,40 @@
     {
       "controller_type": "holographic_controller",
       "binding_url": "bindings_holographic_controller.json"
+    },
+    {
+      "controller_type": "vive",
+      "binding_url": "binding_vive.json"
+    },
+    {
+      "controller_type": "vive_pro",
+      "binding_url": "binding_vive_pro.json"
+    },
+    {
+      "controller_type": "rift",
+      "binding_url": "binding_rift.json"
+    },
+    {
+      "controller_type": "holographic_hmd",
+      "binding_url": "binding_holographic_hmd.json"
+    },
+    {
+      "controller_type": "vive_tracker_camera",
+      "binding_url": "binding_vive_tracker_camera.json"
     }
   ],
   "localization": [
     {
       "language_tag": "en_US",
-      "/actions/default/in/InteractUI": "Interact With UI",
-      "/actions/default/in/Teleport": "Teleport",
-      "/actions/default/in/GrabPinch": "Grab Pinch",
       "/actions/default/in/GrabGrip": "Grab Grip",
+      "/actions/default/in/GrabPinch": "Grab Pinch",
+      "/actions/default/in/HeadsetOnHead": "Headset on head (proximity sensor)",
+      "/actions/default/in/InteractUI": "Interact With UI",
+      "/actions/default/in/Pose": "Pose",
       "/actions/default/in/SkeletonLeftHand": "Skeleton (Left)",
       "/actions/default/in/SkeletonRightHand": "Skeleton (Right)",
-      "/actions/default/in/Pose": "Pose",
+      "/actions/default/in/Teleport": "Teleport",
       "/actions/default/out/Haptic": "Haptic",
-      "/actions/buggybuddy/in/Steering": "Steering",
-      "/actions/buggybuddy/in/Throttle": "Throttle",
-      "/actions/buggybuddy/in/Brake": "Brake",
-      "/actions/buggybuddy/in/Reset": "Reset",
-      "/actions/platformer/in/Move": "Move",
       "/actions/platformer/in/Jump": "Jump"
     }
   ]

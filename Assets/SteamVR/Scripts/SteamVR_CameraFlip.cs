@@ -13,7 +13,7 @@ namespace Valve.VR
     {
         void Awake()
         {
-            Debug.Log("SteamVR_CameraFlip is deprecated in Unity 5.4 - REMOVING");
+            Debug.Log("<b>[SteamVR]</b> SteamVR_CameraFlip is deprecated in Unity 5.4 - REMOVING");
             DestroyImmediate(this);
         }
     }

@@ -119,70 +119,22 @@ namespace Valve.VR
                 //window.title = "SteamVR";
             }
 
-            if (SteamVR_Preferences.AutoEnableVR)
-            {
-                // Switch to native OpenVR support.
-                var updated = false;
-
-                if (!PlayerSettings.virtualRealitySupported)
-                {
-                    PlayerSettings.virtualRealitySupported = true;
-                    updated = true;
-                }
-
-#if (UNITY_5_4 || UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
-                var devices = UnityEditorInternal.VR.VREditor.GetVREnabledDevices(BuildTargetGroup.Standalone);
-#else
-			var devices = UnityEditorInternal.VR.VREditor.GetVREnabledDevicesOnTargetGroup(BuildTargetGroup.Standalone);
-#endif
-                var hasOpenVR = false;
-                foreach (var device in devices)
-                    if (device.ToLower() == "openvr")
-                        hasOpenVR = true;
-
-
-                if (!hasOpenVR)
-                {
-                    string[] newDevices;
-                    if (updated)
-                    {
-                        newDevices = new string[] { "OpenVR" };
-                    }
-                    else
-                    {
-                        newDevices = new string[devices.Length + 1];
-                        for (int i = 0; i < devices.Length; i++)
-                            newDevices[i] = devices[i];
-                        newDevices[devices.Length] = "OpenVR";
-                        updated = true;
-                    }
-#if (UNITY_5_4 || UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
-                    UnityEditorInternal.VR.VREditor.SetVREnabledDevices(BuildTargetGroup.Standalone, newDevices);
-#else
-				UnityEditorInternal.VR.VREditor.SetVREnabledDevicesOnTargetGroup(BuildTargetGroup.Standalone, newDevices);
-#endif
-                }
-
-                if (updated)
-                    Debug.Log("Switching to native OpenVR support.");
-            }
-
-            var dlls = new string[]
+            string[] dlls = new string[]
             {
             "Plugins/x86/openvr_api.dll",
             "Plugins/x86_64/openvr_api.dll"
             };
 
-            foreach (var path in dlls)
+            foreach (string path in dlls)
             {
                 if (!File.Exists(Application.dataPath + "/" + path))
                     continue;
 
                 if (AssetDatabase.DeleteAsset("Assets/" + path))
-                    Debug.Log("Deleting " + path);
+                    Debug.Log("<b>[SteamVR Setup]</b> Deleting " + path);
                 else
                 {
-                    Debug.Log(path + " in use; cannot delete.  Please restart Unity to complete upgrade.");
+                    Debug.Log("<b>[SteamVR Setup]</b> " + path + " in use; cannot delete.  Please restart Unity to complete upgrade.");
                 }
             }
 

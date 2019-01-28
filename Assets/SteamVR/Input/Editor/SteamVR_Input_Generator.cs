@@ -14,6 +14,8 @@ using System.CodeDom.Compiler;
 using System.Reflection;
 using System.Linq.Expressions;
 using UnityEditor.SceneManagement;
+using UnityEditor.Callbacks;
+using Valve.Newtonsoft.Json;
 
 namespace Valve.VR
 {
@@ -26,196 +28,139 @@ namespace Valve.VR
 
         private const string actionSetClassNamePrefix = "SteamVR_Input_ActionSet_";
 
-        private const string generationStepKey = "SteamVR_Input_GenerationStep";
-        private const string generationTryKey = "SteamVR_Input_GenerationTry";
+        public const string generationNeedsReloadKey = "SteamVR_Input_GenerationNeedsReload";
 
         private const string progressBarTitle = "SteamVR Input Generation";
 
-        public const string steamVRInputSubFolder = "ActionObjects";
+        public const string steamVRInputActionSetClassesFolder = "ActionSetClasses";
         public const string steamVRInputActionsClass = "SteamVR_Input_Actions";
         public const string steamVRInputActionSetsClass = "SteamVR_Input_ActionSets";
+        public const string steamVRInputInitializationClass = "SteamVR_Input_Initialization";
+        public const string steamVRActionsAssemblyDefinition = "SteamVR_Actions";
 
-        enum GenerationSteps
-        {
-            None,
-            GeneratingSetClasses,
-            GeneratingActions,
-            CreatingScriptableObjects,
-            AssigningDefaults,
-            Complete,
-        }
-
-        private static void SetNextGenerationStep(GenerationSteps step, bool refresh = true)
-        {
-            if (EditorPrefs.HasKey(generationStepKey))
-            {
-                if (EditorPrefs.HasKey(generationTryKey))
-                {
-                    GenerationSteps lastStep = (GenerationSteps)EditorPrefs.GetInt(generationStepKey);
-
-                    if (lastStep == step)
-                    {
-                        int tryNumber = EditorPrefs.GetInt(generationTryKey);
-                        tryNumber++;
-
-                        EditorPrefs.SetInt(generationTryKey, tryNumber);
-                    }
-                    else
-                    {
-                        EditorPrefs.SetInt(generationTryKey, 0);
-                    }
-                }
-                else
-                {
-                    EditorPrefs.SetInt(generationTryKey, 0);
-                }
-            }
-            else
-            {
-                EditorPrefs.SetInt(generationTryKey, 0);
-            }
-
-            EditorPrefs.SetInt(generationStepKey, (int)step);
-
-            if (refresh)
-                ForceAssetDatabaseRefresh();
-        }
-
-        private static void SetGenerationStepBegun()
-        {
-            int tryNumber = EditorPrefs.GetInt(generationTryKey);
-            if (tryNumber == -1)
-                tryNumber = 0;
-            tryNumber++;
-
-            if (tryNumber > 1)
-            {
-                Debug.LogError("[SteamVR] There was an error in input generation. Aborting.");
-                CancelGeneration();
-            }
-
-            EditorPrefs.SetInt(generationTryKey, tryNumber);
-        }
-
-        private static void ForceAssetDatabaseRefresh()
-        {
-            MonoScript[] monoScripts = MonoImporter.GetAllRuntimeMonoScripts();
-
-            Type steamVRInputType = typeof(SteamVR_Input);
-            MonoScript monoScript = monoScripts.FirstOrDefault(script => script.GetClass() == steamVRInputType);
-            string path = AssetDatabase.GetAssetPath(monoScript);
-            MonoImporter steamVRInputImporter = ((MonoImporter)MonoImporter.GetAtPath(path));
-            steamVRInputImporter.SaveAndReimport();
-
-            AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
-        }
-
-        public static void CancelGeneration()
-        {
-            EditorPrefs.SetInt(generationTryKey, -1);
-            EditorPrefs.SetInt(generationStepKey, 0);
-        }
+        private static bool generating = false;
 
         public static void BeginGeneration()
         {
+            generating = true;
+            fileChanged = false;
             string currentPath = Application.dataPath;
             int lastIndex = currentPath.LastIndexOf('/');
             currentPath = currentPath.Remove(lastIndex, currentPath.Length - lastIndex);
 
+
             SteamVR_Input_EditorWindow.SetProgressBarText("Beginning generation...", 0);
 
             GenerationStep_CreateActionSetClasses();
+            GenerationStep_CreateHelperClasses();
+            GenerationStep_CreateInitClass();
+            GenerationStep_CreateAssemblyDefinition();
+            DeleteUnusedScripts();
+
+            if (fileChanged)
+                EditorPrefs.SetBool(generationNeedsReloadKey, true);
+
+            AssetDatabase.Refresh();
+
+            SteamVR_Input_EditorWindow.ClearProgressBar();
+            generating = false;
         }
 
-
-        public static void OnEditorUpdate()
+        [DidReloadScripts]
+        private static void OnReload()
         {
-            int tryNumber = -1;
-            if (EditorPrefs.HasKey(generationTryKey))
-                tryNumber = EditorPrefs.GetInt(generationTryKey);
-
-            if (tryNumber == 0)
+            bool didGenerate = EditorPrefs.GetBool(generationNeedsReloadKey);
+            if (didGenerate)
             {
-                CheckForNextStep();
+                EditorPrefs.SetBool(generationNeedsReloadKey, false);
+
+                if (string.IsNullOrEmpty(EditorSceneManager.GetActiveScene().path) == false)
+                    EditorApplication.delayCall += ReloadScene;
             }
         }
 
-        [UnityEditor.Callbacks.DidReloadScripts]
-        private static void OnScriptsReloaded()
-        {
-#if UNITY_2017_1_OR_NEWER
-#else
-            CheckForNextStep();
-#endif
-            SteamVR_Settings.VerifyScriptableObject();
-        }
 
-        private static void CheckForNextStep()
+        public static void ReloadScene()
         {
-            if (EditorPrefs.HasKey(generationStepKey))
+            EditorPrefs.SetBool(generationNeedsReloadKey, false);
+
+            if (string.IsNullOrEmpty(EditorSceneManager.GetActiveScene().path) == false)
             {
-                GenerationSteps step = (GenerationSteps)EditorPrefs.GetInt(generationStepKey);
-                int tryNumber = EditorPrefs.GetInt(generationTryKey);
-
-                if (tryNumber > 1)
+                if (EditorSceneManager.GetActiveScene().isDirty)
                 {
-                    Debug.LogError("[SteamVR] There was an error in input generation. Aborting.");
-                    CancelGeneration();
+                    EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
                 }
 
-                if (step != GenerationSteps.None)
-                    ExecuteNextStep(step);
+                string previousPath = EditorSceneManager.GetActiveScene().path;
+                EditorSceneManager.NewScene(NewSceneSetup.EmptyScene);
+                EditorSceneManager.OpenScene(previousPath); //reload open scene to avoid any weird serialization
             }
         }
 
         public static bool IsGenerating()
         {
-            GenerationSteps step = (GenerationSteps)EditorPrefs.GetInt(generationStepKey);
-
-            return (step != GenerationSteps.None);
+            return generating;
         }
 
-        private static void ExecuteNextStep(GenerationSteps currentStep)
+        public static void CancelGeneration()
         {
-            switch (currentStep)
+            generating = false;
+
+        }
+
+        private static List<CodeTypeDeclaration> setClasses = new List<CodeTypeDeclaration>();
+
+        private static void GenerationStep_CreateInitClass()
+        {
+            CodeCompileUnit compileUnit = new CodeCompileUnit();
+
+            CodeTypeDeclaration inputClass = CreatePartialInputClass(compileUnit);
+
+            CodeMemberMethod preinitMethod = CreateStaticMethod(inputClass, SteamVR_Input_Generator_Names.preinitializeMethodName, true);
+
+            string steamVRInputClassName = typeof(SteamVR_Input).Name;
+
+            AddStaticInvokeToMethod(preinitMethod, SteamVR_Input_Generator_Names.actionsClassName, startPreInitActionSetsMethodName);
+            AddStaticInvokeToMethod(preinitMethod, steamVRInputClassName, initializeActionSetDictionariesMethodName);
+            AddStaticInvokeToMethod(preinitMethod, SteamVR_Input_Generator_Names.actionsClassName, preInitActionsMethodName);
+            AddStaticInvokeToMethod(preinitMethod, SteamVR_Input_Generator_Names.actionsClassName, initializeActionsArraysMethodName);
+            AddStaticInvokeToMethod(preinitMethod, steamVRInputClassName, initializeActionDictionariesMethodName);
+            AddStaticInvokeToMethod(preinitMethod, steamVRInputClassName, finishPreInitActionSetsMethodName);
+
+            // Build the output file name.
+            string fullSourceFilePath = GetSourceFilePath(steamVRInputInitializationClass);
+            CreateFile(fullSourceFilePath, compileUnit);
+        }
+
+        private static void GenerationStep_CreateAssemblyDefinition()
+        {
+            string fullSourceFilePath = GetSourceFilePath(steamVRActionsAssemblyDefinition, ".asmdef");
+
+            if (File.Exists(fullSourceFilePath) == false)
             {
-                case GenerationSteps.GeneratingSetClasses:
-                    GenerationStep_CreateHelperClasses();
-                    break;
-                case GenerationSteps.GeneratingActions:
-                    GenerationStep_CreateScriptableObjects();
-                    break;
-                case GenerationSteps.CreatingScriptableObjects:
-                    GenerationStep_AssignDefaultActions();
-                    break;
-                case GenerationSteps.AssigningDefaults:
-                    GenerationStep_Complete();
-                    break;
+                SteamVR_Input_Unity_AssemblyFile_Definition actionsAssemblyDefinitionData = new SteamVR_Input_Unity_AssemblyFile_Definition();
+                actionsAssemblyDefinitionData.autoReferenced = true;
+                string jsonText = JsonConvert.SerializeObject(actionsAssemblyDefinitionData, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Include });
+                File.WriteAllText(fullSourceFilePath, jsonText);
             }
         }
 
         private static void GenerationStep_CreateActionSetClasses()
         {
-            SetGenerationStepBegun();
-
             SteamVR_Input_EditorWindow.SetProgressBarText("Generating action set classes...", 0.25f);
 
             SteamVR_Input.InitializeFile();
 
             CreateActionsSubFolder();
 
-            List<CodeTypeDeclaration> setClasses = GenerateActionSetClasses();
+            setClasses = GenerateActionSetClasses();
 
-            SetNextGenerationStep(GenerationSteps.GeneratingSetClasses);
+            Debug.LogFormat("<b>[SteamVR Input]</b> Created input script set classes: {0}", setClasses.Count);
         }
 
         private static void GenerationStep_CreateHelperClasses()
         {
-            SetGenerationStepBegun();
-
             SteamVR_Input_EditorWindow.SetProgressBarText("Generating actions and actionsets classes...", 0.5f);
-
-            SteamVR_Input.InitializeFile();
 
             GenerateActionHelpers(steamVRInputActionsClass);
             GenerateActionSetsHelpers(steamVRInputActionSetsClass);
@@ -223,376 +168,63 @@ namespace Valve.VR
             string actionsFullpath = Path.Combine(GetClassPath(), steamVRInputActionsClass + ".cs");
             string actionSetsFullpath = Path.Combine(GetClassPath(), steamVRInputActionSetsClass + ".cs");
 
-            Debug.LogFormat("[SteamVR Input] Created input script main classes: {0} and {1}", actionsFullpath, actionSetsFullpath);
-
-            SetNextGenerationStep(GenerationSteps.GeneratingActions);
+            Debug.LogFormat("<b>[SteamVR Input]</b> Created input script main classes: {0} and {1}", actionsFullpath, actionSetsFullpath);
         }
 
-        private static void GenerationStep_CreateScriptableObjects()
-        {
-            SetGenerationStepBegun();
 
-            SteamVR_Input_EditorWindow.SetProgressBarText("Generating scriptable objects...", 0.75f);
-
-            SteamVR_Input.InitializeFile();
-
-            CreateScriptableObjects();
-
-            bool deleteUnused = EditorPrefs.GetBool(SteamVR_Input_Generator.steamVRInputDeleteUnusedKey);
-            if (deleteUnused)
-                DeleteUnusedScriptableObjects();
-
-            AssetDatabase.SaveAssets();
-
-            SetNextGenerationStep(GenerationSteps.CreatingScriptableObjects);
-        }
-
-        private static void GenerationStep_AssignDefaultActions()
-        {
-            SetGenerationStepBegun();
-
-            SteamVR_Input_EditorWindow.SetProgressBarText("Assigning default actions to MonoBehaviours...", 0.85f);
-
-            SteamVR_Input.InitializeFile();
-
-            AssignDefaultsInPrefabs();
-
-            AssignDefaultsInBuiltScenes();
-
-            AssetDatabase.SaveAssets();
-
-            SetNextGenerationStep(GenerationSteps.AssigningDefaults);
-        }
-
-        private static Dictionary<Type, bool> hasDefaultAttributeCache = new Dictionary<Type, bool>();
-        private static Type defaultInputActionType = typeof(SteamVR_DefaultAction);
-        private static Type defaultInputActionSetType = typeof(SteamVR_DefaultActionSet);
-
-        private static void AssignDefaultsInPrefabs()
-        {
-            string[] prefabs = GetAllPrefabPaths();
-            for (int prefabIndex = 0; prefabIndex < prefabs.Length; prefabIndex++)
-            {
-                string prefabPath = prefabs[prefabIndex];
-
-                GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-
-                MonoBehaviour[] behaviours = prefab.GetComponentsInChildren<MonoBehaviour>(true);
-                for (int index = 0; index < behaviours.Length; index++)
-                {
-                    MonoBehaviour behaviour = behaviours[index];
-                    if (behaviour == null)
-                        continue;
-
-                    if (behaviour != null && ShouldAssignDefaults(behaviour))
-                    {
-                        bool assigned = AssignDefaultsInBehaviour(behaviour);
-
-                        if (assigned)
-                        {
-                            EditorUtility.SetDirty(behaviour);
-                            EditorUtility.SetDirty(behaviour.gameObject);
-                        }
-                    }
-                }
-            }
-        }
-
-        private static void AssignDefaultsInBuiltScenes()
-        {
-            var activeScene = EditorSceneManager.GetActiveScene();
-            string activeScenePath = activeScene.path;
-
-            bool askSave = activeScene.isDirty;
-
-            if (askSave)
-            {
-                if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
-                    EditorSceneManager.SaveOpenScenes();
-            }
-
-
-            List<string> processedScenes = new List<string>();
-
-            if (string.IsNullOrEmpty(activeScenePath) == false)
-            {
-                AssignDefaultsInScene();
-                EditorSceneManager.SaveOpenScenes();
-            }
-
-            processedScenes.Add(activeScene.path);
-
-            string[] interactionsSceneGUIDs = AssetDatabase.FindAssets("t:Scene Interactions_Example");
-
-            for (int sceneIndex = 0; sceneIndex < interactionsSceneGUIDs.Length; sceneIndex++)
-            {
-                string path = AssetDatabase.GUIDToAssetPath(interactionsSceneGUIDs[sceneIndex]);
-                // if (path.EndsWith(".unity") == false)
-                //    path += ".unity";
-
-                if (processedScenes.Contains(path) == false)
-                {
-                    if (string.IsNullOrEmpty(path) == false)
-                    {
-                        EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
-                        AssignDefaultsInScene();
-                        EditorSceneManager.SaveOpenScenes();
-                        processedScenes.Add(path);
-
-                        Debug.Log("[SteamVR Input] Assigned default actions in scene: " + path);
-                    }
-                    else
-                    {
-                        Debug.LogWarning("[SteamVR Input] Generation could not open scene at: " + path);
-                    }
-                }
-            }
-
-            for (int sceneIndex = 0; sceneIndex < EditorBuildSettings.scenes.Length; sceneIndex++)
-            {
-                if (EditorBuildSettings.scenes[sceneIndex].enabled)
-                {
-                    string scenePath = EditorBuildSettings.scenes[sceneIndex].path;
-                    if (string.IsNullOrEmpty(scenePath) == false)
-                    {
-                        if (processedScenes.Contains(scenePath) == false)
-                        {
-                            UnityEngine.Object sceneAsset = AssetDatabase.LoadAssetAtPath(scenePath, typeof(UnityEngine.Object));
-                            if (sceneAsset != null)
-                            {
-                                EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
-                                AssignDefaultsInScene();
-                                EditorSceneManager.SaveOpenScenes();
-
-                                Debug.Log("[SteamVR Input] Assigned default actions in scene: " + scenePath);
-                            }
-                            else
-                            {
-                                Debug.LogWarning("[SteamVR Input] Scene in build settings could not be opened: " + scenePath);
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (string.IsNullOrEmpty(activeScenePath) == false)
-            {
-                EditorSceneManager.OpenScene(activeScenePath, OpenSceneMode.Single);
-                Debug.Log("[SteamVR Input] Returning editor to previous scene: " + activeScenePath);
-            }
-        }
-
-        private static void AssignDefaultsInScene()
-        {
-            var scene = EditorSceneManager.GetActiveScene();
-            GameObject[] rootObjects = scene.GetRootGameObjects();
-
-            bool dirty = false;
-            for (int rootIndex = 0; rootIndex < rootObjects.Length; rootIndex++)
-            {
-                MonoBehaviour[] behaviours = rootObjects[rootIndex].GetComponentsInChildren<MonoBehaviour>(true);
-                for (int behaviourIndex = 0; behaviourIndex < behaviours.Length; behaviourIndex++)
-                {
-                    MonoBehaviour behaviour = behaviours[behaviourIndex];
-
-                    if (behaviour != null && ShouldAssignDefaults(behaviour))
-                    {
-                        dirty |= AssignDefaultsInBehaviour(behaviour);
-                    }
-                }
-            }
-
-            if (dirty)
-                EditorSceneManager.MarkSceneDirty(scene);
-        }
-
-        private static bool ShouldAssignDefaults(MonoBehaviour behaviour)
-        {
-            Type behaviourType = behaviour.GetType();
-            if (hasDefaultAttributeCache.ContainsKey(behaviourType) == false)
-            {
-                bool containsProperty = behaviourType.GetProperties().Any(prop => prop.IsDefined(defaultInputActionType, false));
-                bool containsField = behaviourType.GetFields().Any(field => field.IsDefined(defaultInputActionType, false));
-
-                containsProperty |= behaviourType.GetProperties().Any(prop => prop.IsDefined(defaultInputActionSetType, false));
-                containsField |= behaviourType.GetFields().Any(field => field.IsDefined(defaultInputActionSetType, false));
-
-                hasDefaultAttributeCache[behaviourType] = containsProperty || containsField;
-            }
-
-            return hasDefaultAttributeCache[behaviourType];
-        }
-
-        private static bool AssignDefaultsInBehaviour(MonoBehaviour behaviour, bool isScene = false)
-        {
-            if (behaviour != null)
-            {
-                Type behaviourType = behaviour.GetType();
-
-                if (hasDefaultAttributeCache[behaviourType] == true)
-                {
-                    var properties = behaviourType.GetProperties().Where(prop => prop.IsDefined(defaultInputActionType, false));
-                    foreach (var property in properties)
-                    {
-                        var attributes = property.GetCustomAttributes(defaultInputActionType, false);
-                        foreach (var attribute in attributes)
-                        {
-                            SteamVR_DefaultAction defaultAttribute = (SteamVR_DefaultAction)attribute;
-
-                            if (isScene)
-                                Undo.RecordObject(behaviour, "Setting default action");
-                            defaultAttribute.AssignDefault(property, behaviour);
-                        }
-                    }
-
-                    var fields = behaviourType.GetFields().Where(field => field.IsDefined(defaultInputActionType, false));
-                    foreach (var field in fields)
-                    {
-                        var attributes = field.GetCustomAttributes(defaultInputActionType, false);
-                        foreach (var attribute in attributes)
-                        {
-                            SteamVR_DefaultAction defaultAttribute = (SteamVR_DefaultAction)attribute;
-
-                            if (isScene)
-                                Undo.RecordObject(behaviour, "Setting default action");
-                            defaultAttribute.AssignDefault(field, behaviour);
-                        }
-                    }
-
-                    properties = behaviourType.GetProperties().Where(prop => prop.IsDefined(defaultInputActionSetType, false));
-                    foreach (var property in properties)
-                    {
-                        var attributes = property.GetCustomAttributes(defaultInputActionSetType, false);
-                        foreach (var attribute in attributes)
-                        {
-                            SteamVR_DefaultActionSet defaultAttribute = (SteamVR_DefaultActionSet)attribute;
-
-                            if (isScene)
-                                Undo.RecordObject(behaviour, "Setting default action set");
-                            defaultAttribute.AssignDefault(property, behaviour);
-                        }
-                    }
-
-
-                    fields = behaviourType.GetFields().Where(field => field.IsDefined(defaultInputActionSetType, false));
-                    foreach (var field in fields)
-                    {
-                        var attributes = field.GetCustomAttributes(defaultInputActionSetType, false);
-                        foreach (var attribute in attributes)
-                        {
-                            SteamVR_DefaultActionSet defaultAttribute = (SteamVR_DefaultActionSet)attribute;
-
-                            if (isScene)
-                                Undo.RecordObject(behaviour, "Setting default action set");
-                            defaultAttribute.AssignDefault(field, behaviour);
-                        }
-                    }
-
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private static string[] GetAllPrefabPaths()
-        {
-            string[] assets = AssetDatabase.GetAllAssetPaths();
-            List<string> prefabs = new List<string>();
-            foreach (string assetPath in assets)
-            {
-                if (assetPath.EndsWith(".prefab"))
-                    prefabs.Add(assetPath);
-            }
-            return prefabs.ToArray();
-        }
-
-        private static void DeleteUnusedScriptableObjects()
+        private static void DeleteUnusedScripts()
         {
             string folderPath = GetSubFolderPath();
 
             string[] files = Directory.GetFiles(folderPath);
 
+            List<string> toDelete = new List<string>();
+
             for (int fileIndex = 0; fileIndex < files.Length; fileIndex++)
             {
                 FileInfo file = new FileInfo(files[fileIndex]);
 
-                if (file.Name.EndsWith(".asset") || file.Name.EndsWith(".asset.meta") || file.Name.EndsWith(".cs") || file.Name.EndsWith(".cs.meta"))
+                if (file.Name.EndsWith(".cs") || file.Name.EndsWith(".cs.meta"))
                 {
                     bool isSet = false;
-                    if (SteamVR_Input.actionFile.action_sets.Any(set => string.Equals(set.codeFriendlyName + ".asset", file.Name, StringComparison.CurrentCultureIgnoreCase) ||
-                                                                        string.Equals(set.codeFriendlyName + ".asset.meta", file.Name, StringComparison.CurrentCultureIgnoreCase)))
-                    {
-                        isSet = true;
-                    }
-                    else if (SteamVR_Input.actionFile.action_sets.Any(set => string.Equals(GetSetClassName(set) + ".asset", file.Name, StringComparison.CurrentCultureIgnoreCase) ||
-                                                                        string.Equals(GetSetClassName(set) + ".asset.meta", file.Name, StringComparison.CurrentCultureIgnoreCase)))
-                    {
-                        isSet = true;
-                    }
-                    else if (SteamVR_Input.actionFile.action_sets.Any(set => string.Equals(GetSetClassName(set) + ".cs", file.Name, StringComparison.CurrentCultureIgnoreCase) ||
+                    if (SteamVR_Input.actionFile.action_sets.Any(set => string.Equals(GetSetClassName(set) + ".cs", file.Name, StringComparison.CurrentCultureIgnoreCase) ||
                                                                         string.Equals(GetSetClassName(set) + ".cs.meta", file.Name, StringComparison.CurrentCultureIgnoreCase)))
                     {
                         isSet = true;
                     }
-                    else if (SteamVR_Input.actionFile.action_sets.Any(set => string.Equals(GetActionListClassName(set, SteamVR_ActionDirections.In) + ".cs", file.Name, StringComparison.CurrentCultureIgnoreCase) ||
-                                                                                string.Equals(GetActionListClassName(set, SteamVR_ActionDirections.In) + ".cs.meta", file.Name, StringComparison.CurrentCultureIgnoreCase)))
-                    {
-                        isSet = true;
-                    }
-                    else if (SteamVR_Input.actionFile.action_sets.Any(set => string.Equals(GetActionListClassName(set, SteamVR_ActionDirections.Out) + ".cs", file.Name, StringComparison.CurrentCultureIgnoreCase) ||
-                                                                                string.Equals(GetActionListClassName(set, SteamVR_ActionDirections.Out) + ".cs.meta", file.Name, StringComparison.CurrentCultureIgnoreCase)))
-                    {
-                        isSet = true;
-                    }
-                    else if (SteamVR_Input.actionFile.action_sets.Any(set => string.Equals(GetActionListClassName(set, SteamVR_ActionDirections.In) + ".asset", file.Name, StringComparison.CurrentCultureIgnoreCase) ||
-                                                                                string.Equals(GetActionListClassName(set, SteamVR_ActionDirections.In) + ".asset.meta", file.Name, StringComparison.CurrentCultureIgnoreCase)))
-                    {
-                        isSet = true;
-                    }
-                    else if (SteamVR_Input.actionFile.action_sets.Any(set => string.Equals(GetActionListClassName(set, SteamVR_ActionDirections.Out) + ".asset", file.Name, StringComparison.CurrentCultureIgnoreCase) ||
-                                                                                string.Equals(GetActionListClassName(set, SteamVR_ActionDirections.Out) + ".asset.meta", file.Name, StringComparison.CurrentCultureIgnoreCase)))
-                    {
-                        isSet = true;
-                    }
-
 
                     bool isAction = false;
-                    if (SteamVR_Input.actionFile.actions.Any(action => string.Equals(action.codeFriendlyName + ".asset", file.Name, StringComparison.CurrentCultureIgnoreCase) ||
-                                                                            string.Equals(action.codeFriendlyName + ".asset.meta", file.Name, StringComparison.CurrentCultureIgnoreCase)))
-                    {
-                        isAction = true;
-                    }
-                    else if (SteamVR_Input.actionFile.actions.Any(action => string.Equals(action.codeFriendlyName + ".cs", file.Name, StringComparison.CurrentCultureIgnoreCase) ||
+                    if (SteamVR_Input.actionFile.actions.Any(action => string.Equals(action.codeFriendlyName + ".cs", file.Name, StringComparison.CurrentCultureIgnoreCase) ||
                                                                             string.Equals(action.codeFriendlyName + ".cs.meta", file.Name, StringComparison.CurrentCultureIgnoreCase)))
                     {
 
                         isAction = true;
                     }
 
-
                     if (isSet == false && isAction == false)
                     {
-                        file.IsReadOnly = false;
-
-                        bool confirm = EditorUtility.DisplayDialog("Delete unused file", "Would you like to delete the unused input file: " + file.Name + "?", "Delete", "No");
-                        if (confirm)
-                        {
-                            file.Delete();
-                        }
+                        toDelete.Add(files[fileIndex]);
                     }
                 }
             }
-        }
 
-        private static void GenerationStep_Complete()
-        {
-            SetNextGenerationStep(GenerationSteps.None, false);
-            EditorPrefs.SetInt(generationTryKey, -1);
+            if (toDelete.Count > 0)
+            {
+                string filesToDelete = "";
+                foreach (string file in toDelete)
+                    filesToDelete += file + "\n";
 
-            SteamVR_Input_EditorWindow.ClearProgressBar();
-
-            Debug.Log("[SteamVR Input] Action generation complete!");
+                bool confirm = EditorUtility.DisplayDialog("SteamVR Input", "Would you like to delete the following unused input files:\n" + filesToDelete, "Delete", "No");
+                if (confirm)
+                {
+                    foreach (string fileName in toDelete)
+                    {
+                        FileInfo file = new FileInfo(fileName);
+                        file.IsReadOnly = false;
+                        file.Delete();
+                    }
+                }
+            }
         }
 
         private static void CreateActionsSubFolder()
@@ -602,220 +234,6 @@ namespace Valve.VR
             {
                 Directory.CreateDirectory(folderPath);
             }
-        }
-
-        private static void CreateScriptableObjects()
-        {
-            List<string> setNames = new List<string>();
-            List<SteamVR_ActionSet> setObjects = new List<SteamVR_ActionSet>();
-            List<string> actionNames = new List<string>();
-            List<SteamVR_Action> actionObjects = new List<SteamVR_Action>();
-
-            for (int actionSetIndex = 0; actionSetIndex < SteamVR_Input.actionFile.action_sets.Count; actionSetIndex++)
-            {
-                SteamVR_Input_ActionFile_ActionSet actionSet = SteamVR_Input.actionFile.action_sets[actionSetIndex];
-                SteamVR_ActionSet actionSetAsset = CreateScriptableActionSet(actionSet);
-
-                string shortName = GetValidIdentifier(actionSet.shortName);
-
-                string codeFriendlyInstanceName = shortName;
-
-                setNames.Add(codeFriendlyInstanceName);
-                setObjects.Add(actionSetAsset);
-
-                foreach (var action in actionSetAsset.allActions)
-                {
-                    actionNames.Add(action.name);
-                    actionObjects.Add(action);
-                }
-            }
-
-            SteamVR_Input_References.instance.actionSetNames = setNames.ToArray();
-            SteamVR_Input_References.instance.actionSetObjects = setObjects.ToArray();
-            SteamVR_Input_References.instance.actionNames = actionNames.ToArray();
-            SteamVR_Input_References.instance.actionObjects = actionObjects.ToArray();
-
-            EditorUtility.SetDirty(SteamVR_Input_References.instance);
-            AssetDatabase.SaveAssets();
-
-            string folderPath = GetSubFolderPath();
-            Debug.LogFormat("[SteamVR Input] Created {0} action set objects and {1} action objects in: {2}", SteamVR_Input.actionFile.action_sets.Count, SteamVR_Input.actionFile.actions.Count, folderPath);
-        }
-
-        private static SteamVR_Action CreateScriptableAction(SteamVR_Input_ActionFile_Action action, SteamVR_ActionSet set)
-        {
-            SteamVR_Action asset = null;
-            Type actionType = GetTypeForAction(action);
-
-            string folderPath = GetSubFolderPath();
-            string path = Path.Combine(folderPath, action.codeFriendlyName + ".asset");
-            UnityEngine.Object assetAtPath = AssetDatabase.LoadAssetAtPath(path, typeof(SteamVR_Action));
-            SteamVR_Action existingAction = null;
-            if (assetAtPath != null)
-            {
-                existingAction = AssetDatabase.LoadAssetAtPath(path, actionType) as SteamVR_Action;
-                if (existingAction != null)
-                {
-                    if (existingAction.GetType().Name != GetTypeStringForAction(action))
-                    {
-                        //only delete the asset if it's of a different type
-                        AssetDatabase.DeleteAsset(path);
-                        existingAction = null;
-                    }
-                    else
-                    {
-                        asset = existingAction;
-                    }
-                }
-            }
-
-            if (asset == null)
-            {
-                asset = (SteamVR_Action)ScriptableObject.CreateInstance(GetTypeForAction(action));
-            }
-
-            asset.fullPath = action.name;
-            asset.direction = action.direction;
-            asset.actionSet = set;
-
-            if (existingAction == null)
-                AssetDatabase.CreateAsset(asset, path);
-
-            EditorUtility.SetDirty(asset);
-
-            return asset;
-        }
-
-        private static SteamVR_ActionSet CreateScriptableActionSet(SteamVR_Input_ActionFile_ActionSet actionSet)
-        {
-            SteamVR_ActionSet asset = null;
-            Type setType = typeof(SteamVR_Action).Assembly.GetType(typeof(SteamVR_ActionSet).Namespace + "." + GetSetClassName(actionSet));
-
-            string folderPath = GetSubFolderPath();
-            string path = Path.Combine(folderPath, actionSet.codeFriendlyName + ".asset");
-            UnityEngine.Object assetAtPath = AssetDatabase.LoadAssetAtPath(path, typeof(SteamVR_Action));
-            SteamVR_ActionSet existingSet = null;
-            if (assetAtPath != null)
-            {
-                existingSet = AssetDatabase.LoadAssetAtPath(path, setType) as SteamVR_ActionSet;
-                if (existingSet != null)
-                {
-                    if (existingSet.usage != actionSet.usage)
-                    {
-                        //only delete the asset if it's of a different usage
-                        AssetDatabase.DeleteAsset(path);
-                        existingSet = null;
-                    }
-                    else
-                    {
-                        asset = existingSet;
-                        EditorUtility.SetDirty(existingSet);
-                    }
-                }
-            }
-
-            if (asset == null)
-            {
-                asset = ScriptableObject.CreateInstance(setType) as SteamVR_ActionSet;
-            }
-
-            asset.fullPath = actionSet.name;
-            asset.usage = actionSet.usage;
-
-            SteamVR_Action_List inList = null;
-            SteamVR_Action_List outList = null;
-
-            List<SteamVR_Action> actionsList = new List<SteamVR_Action>();
-
-            if (actionSet.actionsInList.Count > 0)
-            {
-                inList = CreateScriptableActionList(actionSet, asset, SteamVR_ActionDirections.In);
-                actionsList.AddRange(inList.actions);
-
-                FieldInfo inField = setType.GetField(inActionsFieldName);
-                inField.SetValue(asset, inList);
-            }
-
-            if (actionSet.actionsOutList.Count > 0)
-            {
-                outList = CreateScriptableActionList(actionSet, asset, SteamVR_ActionDirections.Out);
-                actionsList.AddRange(outList.actions);
-
-                FieldInfo outField = setType.GetField(outActionsFieldName);
-                outField.SetValue(asset, outList);
-            }
-
-            asset.allActions = actionsList.ToArray();
-            asset.nonVisualInActions = actionsList.Where(action => action is SteamVR_Action_In && (action is SteamVR_Action_Pose == false) && (action is SteamVR_Action_Skeleton == false)).Cast<SteamVR_Action_In>().ToArray();
-            asset.visualActions = actionsList.Where(action => action is SteamVR_Action_Pose || action is SteamVR_Action_Skeleton).Cast<SteamVR_Action_In>().ToArray();
-            asset.poseActions = actionsList.Where(action => action is SteamVR_Action_Pose).Cast<SteamVR_Action_Pose>().ToArray();
-            asset.skeletonActions = actionsList.Where(action => action is SteamVR_Action_Skeleton).Cast<SteamVR_Action_Skeleton>().ToArray();
-            asset.outActionArray = actionsList.Where(action => action is SteamVR_Action_Out).Cast<SteamVR_Action_Out>().ToArray();
-
-            if (existingSet == null)
-                AssetDatabase.CreateAsset(asset, path);
-
-            return asset;
-        }
-
-        private static SteamVR_Action_List CreateScriptableActionList(SteamVR_Input_ActionFile_ActionSet fileActionSet, SteamVR_ActionSet actionSetAsset, SteamVR_ActionDirections direction)
-        {
-            SteamVR_Action_List listAsset = null;
-            List<SteamVR_Input_ActionFile_Action> actions = null;
-            string listClassName = GetActionListClassName(fileActionSet, direction);
-
-            if (direction == SteamVR_ActionDirections.In)
-            {
-                actions = fileActionSet.actionsInList;
-            }
-
-            if (direction == SteamVR_ActionDirections.Out)
-            {
-                actions = fileActionSet.actionsOutList;
-            }
-
-            string folderPath = GetSubFolderPath();
-            string path = Path.Combine(folderPath, listClassName + ".asset");
-            UnityEngine.Object assetAtPath = AssetDatabase.LoadAssetAtPath(path, typeof(SteamVR_Action));
-            SteamVR_Action_List existingListAsset = null;
-            if (assetAtPath != null)
-            {
-                existingListAsset = AssetDatabase.LoadAssetAtPath<SteamVR_Action_List>(path);
-                if (existingListAsset != null)
-                {
-                    listAsset = existingListAsset;
-                    EditorUtility.SetDirty(existingListAsset);
-                }
-            }
-
-            Type listType = typeof(SteamVR_Action).Assembly.GetType(typeof(SteamVR_Action).Namespace + "." + listClassName);
-
-            if (listAsset == null)
-            {
-                listAsset = ScriptableObject.CreateInstance(listType) as SteamVR_Action_List;
-            }
-
-            listAsset.actionSet = actionSetAsset;
-            listAsset.listDirection = direction;
-            List<SteamVR_Action> actionsList = new List<SteamVR_Action>();
-
-            foreach (var action in actions)
-            {
-                SteamVR_Action actionAsset = CreateScriptableAction(action, actionSetAsset);
-                actionsList.Add(actionAsset);
-
-                FieldInfo actionField = listType.GetField(action.shortName);
-                actionField.SetValue(listAsset, actionAsset);
-            }
-
-            listAsset.actions = actionsList.ToArray();
-
-            if (existingListAsset == null)
-            {
-                AssetDatabase.CreateAsset(listAsset, path);
-            }
-
-            return listAsset;
         }
 
         public static void DeleteActionClassFiles()
@@ -831,14 +249,23 @@ namespace Valve.VR
             }
         }
 
-        private static void ForceRefresh()
+        public static void DeleteGeneratedFolder()
         {
-            AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+            string generatedFolderPath = GetClassPath();
+            string subFolderPath = GetSubFolderPath();
+            bool confirm = EditorUtility.DisplayDialog("Confirmation", "Are you absolutely sure you want to delete all code files in " + generatedFolderPath + "?", "Delete", "Cancel");
+            if (confirm)
+            {
+                DeleteActionObjects("*.cs*", generatedFolderPath);
+
+                DeleteActionObjects("*.cs*", subFolderPath);
+            }
         }
 
-        public static void DeleteActionObjects(string filter)
+        public static void DeleteActionObjects(string filter, string folderPath = null)
         {
-            string folderPath = GetSubFolderPath();
+            if (folderPath == null)
+                folderPath = GetSubFolderPath();
 
             string[] assets = Directory.GetFiles(folderPath, filter);
 
@@ -847,7 +274,7 @@ namespace Valve.VR
                 AssetDatabase.DeleteAsset(assets[assetIndex]);
             }
 
-            Debug.LogFormat("[SteamVR] Deleted {0} actions at path: {1}", assets.Length, folderPath);
+            Debug.LogFormat("<b>[SteamVR Input]</b> Deleted {0} files at path: {1}", assets.Length, folderPath);
         }
 
         private static void DeleteActionClass(string className)
@@ -856,14 +283,13 @@ namespace Valve.VR
             if (File.Exists(filePath) == true)
             {
                 AssetDatabase.DeleteAsset(filePath);
-                Debug.Log("[SteamVR] Deleted: " + filePath);
+                Debug.Log("<b>[SteamVR Input]</b> Deleted: " + filePath);
             }
             else
             {
-                Debug.Log("[SteamVR] No file found at: " + filePath);
+                Debug.Log("<b>[SteamVR Input]</b> No file found at: " + filePath);
             }
         }
-
 
         private static string GetTypeStringForAction(SteamVR_Input_ActionFile_Action action)
         {
@@ -924,16 +350,17 @@ namespace Valve.VR
 
         private static string GetSubFolderPath()
         {
-            return Path.Combine(GetClassPath(), steamVRInputSubFolder);
+            return Path.Combine(GetClassPath(), steamVRInputActionSetClassesFolder);
         }
 
-        private static string GetSourceFilePath(string classname)
+        private static string GetSourceFilePath(string classname, string suffix = ".cs")
         {
-            string sourceFileName = string.Format("{0}.cs", classname);
+            string sourceFileName = string.Format("{0}{1}", classname, suffix);
 
             return Path.Combine(GetClassPath(), sourceFileName);
         }
 
+        private static bool fileChanged = false;
         private static void CreateFile(string fullPath, CodeCompileUnit compileUnit)
         {
             // Generate the code with the C# code provider.
@@ -956,9 +383,13 @@ namespace Valve.VR
                 }
             }
 
+            string priorMD5 = null;
             FileInfo file = new FileInfo(fullSourceFilePath);
             if (file.Exists)
+            {
                 file.IsReadOnly = false;
+                priorMD5 = SteamVR_Utils.GetBadMD5HashFromFile(fullSourceFilePath);
+            }
 
             // Create a TextWriter to a StreamWriter to the output file.
             using (StreamWriter sw = new StreamWriter(fullSourceFilePath, false))
@@ -971,6 +402,11 @@ namespace Valve.VR
 
                 // Close the output file.
                 tw.Close();
+
+                string newMD5 = SteamVR_Utils.GetBadMD5HashFromFile(fullSourceFilePath);
+
+                if (priorMD5 != newMD5)
+                    fileChanged = true;
             }
 
             //Debug.Log("[SteamVR] Complete! Input class at: " + fullSourceFilePath);
@@ -987,21 +423,7 @@ namespace Valve.VR
             {
                 SteamVR_Input_ActionFile_ActionSet actionSet = SteamVR_Input.actionFile.action_sets[actionSetIndex];
 
-                CodeTypeDeclaration inClass = null;
-                if (actionSet.actionsInList.Count > 0)
-                {
-                    inClass = CreateActionListClass(actionSet, SteamVR_ActionDirections.In);
-                    setClasses.Add(inClass);
-                }
-
-                CodeTypeDeclaration outClass = null;
-                if (actionSet.actionsOutList.Count > 0)
-                {
-                    outClass = CreateActionListClass(actionSet, SteamVR_ActionDirections.Out);
-                    setClasses.Add(outClass);
-                }
-
-                CodeTypeDeclaration setClass = CreateActionSetClass(actionSet, inClass, outClass);
+                CodeTypeDeclaration setClass = CreateActionSetClass(actionSet);
 
                 setClasses.Add(setClass);
             }
@@ -1009,21 +431,23 @@ namespace Valve.VR
             return setClasses;
         }
 
+        private const string initializeActionDictionariesMethodName = "PreinitializeActionDictionaries";
+        private const string initializeActionSetDictionariesMethodName = "PreinitializeActionSetDictionaries";
+
+        private const string preInitActionsMethodName = "PreInitActions";
+        private const string initializeActionsArraysMethodName = "InitializeActionArrays";
+
         private static void GenerateActionHelpers(string actionsClassFileName)
         {
             CodeCompileUnit compileUnit = new CodeCompileUnit();
 
             CodeTypeDeclaration inputClass = CreatePartialInputClass(compileUnit);
 
-            CodeParameterDeclarationExpression skipStateUpdatesParameter = new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(bool)), skipStateUpdatesParamName);
-
-            CodeMemberMethod initializeMethod = CreateStaticMethod(inputClass, SteamVR_Input_Generator_Names.initializeActionsMethodName);
-
             CodeArrayCreateExpression actionsArray = new CodeArrayCreateExpression(new CodeTypeReference(typeof(SteamVR_Action)));
 
-            CodeArrayCreateExpression actionsInArray = new CodeArrayCreateExpression(new CodeTypeReference(typeof(SteamVR_Action_In)));
+            CodeArrayCreateExpression actionsInArray = new CodeArrayCreateExpression(new CodeTypeReference(typeof(ISteamVR_Action_In)));
 
-            CodeArrayCreateExpression actionsOutArray = new CodeArrayCreateExpression(new CodeTypeReference(typeof(SteamVR_Action_Out)));
+            CodeArrayCreateExpression actionsOutArray = new CodeArrayCreateExpression(new CodeTypeReference(typeof(ISteamVR_Action_Out)));
 
             CodeArrayCreateExpression actionsVibrationArray = new CodeArrayCreateExpression(new CodeTypeReference(typeof(SteamVR_Action_Vibration)));
 
@@ -1039,94 +463,105 @@ namespace Valve.VR
 
             CodeArrayCreateExpression actionsVector3Array = new CodeArrayCreateExpression(new CodeTypeReference(typeof(SteamVR_Action_Vector3)));
 
-            CodeArrayCreateExpression actionsNonPoseNonSkeletonArray = new CodeArrayCreateExpression(new CodeTypeReference(typeof(SteamVR_Action_In)));
+            CodeArrayCreateExpression actionsNonPoseNonSkeletonArray = new CodeArrayCreateExpression(new CodeTypeReference(typeof(ISteamVR_Action_In)));
 
 
             //add the getaction method to
-            CodeMemberMethod actionsInitMethod = CreateStaticMethod(inputClass, SteamVR_Input_Generator_Names.initializeInstanceActionsMethodName);
+            CodeMemberMethod actionsArraysInitMethod = CreateStaticMethod(inputClass, initializeActionsArraysMethodName, false);
+            CodeMemberMethod actionsPreInitMethod = CreateStaticMethod(inputClass, preInitActionsMethodName, false);
 
 
-            MethodInfo initializeActionMethodInfo = GetMethodInfo<SteamVR_Action>(set => set.Initialize());
-            MethodInfo updateActionMethodInfo = GetMethodInfo<SteamVR_Action_In>(set => set.UpdateValue(SteamVR_Input_Sources.Any));
 
-
-            for (int actionIndex = 0; actionIndex < SteamVR_Input.actionFile.actions.Count; actionIndex++)
+            for (int actionSetIndex = 0; actionSetIndex < SteamVR_Input.actionFile.action_sets.Count; actionSetIndex++)
             {
-                SteamVR_Input_ActionFile_Action action = SteamVR_Input.actionFile.actions[actionIndex];
+                SteamVR_Input_ActionFile_ActionSet actionSet = SteamVR_Input.actionFile.action_sets[actionSetIndex];
+                string actionSetShortName = actionSet.shortName;
+                actionSetShortName = actionSetShortName.Substring(0, 1).ToLower() + actionSetShortName.Substring(1);
 
-                string typeName = GetTypeStringForAction(action);
-
-                string codeFriendlyInstanceName = action.codeFriendlyName;
-
-                CodeMemberField actionInstanceField = CreateField(inputClass, action.codeFriendlyName, typeName, true);
-
-                //CodeMemberProperty actionStaticProperty = CreateStaticProperty(inputClass, action.codeFriendlyName, type, codeFriendlyInstanceName); //don't pollute static class with stuff we don't need
-
-                AddAssignActionStatement(actionsInitMethod, codeFriendlyInstanceName, codeFriendlyInstanceName, typeName);
-
-                actionsArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input)), codeFriendlyInstanceName));
-
-                if (action.direction == SteamVR_ActionDirections.In)
+                for (int actionIndex = 0; actionIndex < actionSet.actionsList.Count; actionIndex++)
                 {
-                    actionsInArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input)), codeFriendlyInstanceName));
+                    SteamVR_Input_ActionFile_Action action = actionSet.actionsList[actionIndex];
+                    string actionShortName = action.shortName;
 
-                    if (typeName == typeof(SteamVR_Action_Pose).Name)
-                    {
-                        actionsPoseArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input)), codeFriendlyInstanceName));
-                    }
-                    else if (typeName == typeof(SteamVR_Action_Skeleton).Name)
-                    {
-                        actionsSkeletonArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input)), codeFriendlyInstanceName));
-                    }
-                    else if (typeName == typeof(SteamVR_Action_Boolean).Name)
-                    {
-                        actionsBooleanArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input)), codeFriendlyInstanceName));
-                    }
-                    else if (typeName == typeof(SteamVR_Action_Single).Name)
-                    {
-                        actionsSingleArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input)), codeFriendlyInstanceName));
-                    }
-                    else if (typeName == typeof(SteamVR_Action_Vector2).Name)
-                    {
-                        actionsVector2Array.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input)), codeFriendlyInstanceName));
-                    }
-                    else if (typeName == typeof(SteamVR_Action_Vector3).Name)
-                    {
-                        actionsVector3Array.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input)), codeFriendlyInstanceName));
-                    }
+                    string typeName = GetTypeStringForAction(action);
 
-                    if ((typeName == typeof(SteamVR_Action_Skeleton).Name) == false && (typeName == typeof(SteamVR_Action_Pose).Name) == false)
+                    string codeFriendlyInstanceName;
+                    if (actionSet.actionsList.Count(findAction => findAction.shortName == actionShortName) >= 2)
+                        codeFriendlyInstanceName = string.Format("{0}_{1}_{2}", actionSetShortName, action.direction.ToString().ToLower(), actionShortName);
+                    else
+                        codeFriendlyInstanceName = string.Format("{0}_{1}", actionSetShortName, actionShortName);
+
+
+                    CodeMemberField actionField = CreateFieldAndPropertyWrapper(inputClass, codeFriendlyInstanceName, typeName);
+
+                    AddAssignActionStatement(actionsPreInitMethod, inputClass.Name, actionField.Name, action.name, typeName);
+
+                    actionsArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(inputClass.Name), codeFriendlyInstanceName));
+
+                    if (action.direction == SteamVR_ActionDirections.In)
                     {
-                        actionsNonPoseNonSkeletonArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input)), codeFriendlyInstanceName));
+                        actionsInArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(inputClass.Name), codeFriendlyInstanceName));
+
+                        if (typeName == typeof(SteamVR_Action_Pose).Name)
+                        {
+                            actionsPoseArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(inputClass.Name), codeFriendlyInstanceName));
+                        }
+                        else if (typeName == typeof(SteamVR_Action_Skeleton).Name)
+                        {
+                            actionsSkeletonArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(inputClass.Name), codeFriendlyInstanceName));
+                        }
+                        else if (typeName == typeof(SteamVR_Action_Boolean).Name)
+                        {
+                            actionsBooleanArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(inputClass.Name), codeFriendlyInstanceName));
+                        }
+                        else if (typeName == typeof(SteamVR_Action_Single).Name)
+                        {
+                            actionsSingleArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(inputClass.Name), codeFriendlyInstanceName));
+                        }
+                        else if (typeName == typeof(SteamVR_Action_Vector2).Name)
+                        {
+                            actionsVector2Array.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(inputClass.Name), codeFriendlyInstanceName));
+                        }
+                        else if (typeName == typeof(SteamVR_Action_Vector3).Name)
+                        {
+                            actionsVector3Array.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(inputClass.Name), codeFriendlyInstanceName));
+                        }
+
+                        if ((typeName == typeof(SteamVR_Action_Skeleton).Name) == false && (typeName == typeof(SteamVR_Action_Pose).Name) == false)
+                        {
+                            actionsNonPoseNonSkeletonArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(inputClass.Name), codeFriendlyInstanceName));
+                        }
+                    }
+                    else
+                    {
+                        actionsVibrationArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(inputClass.Name), codeFriendlyInstanceName));
+
+                        actionsOutArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(inputClass.Name), codeFriendlyInstanceName));
                     }
                 }
-                else
-                {
-                    actionsVibrationArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input)), codeFriendlyInstanceName));
-
-                    actionsOutArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input)), codeFriendlyInstanceName));
-                }
-
-                CodeMethodInvokeExpression initializeActionMethod = AddStaticInvokeToMethod(initializeMethod, codeFriendlyInstanceName, initializeActionMethodInfo.Name);
             }
 
-            AddAssignStatement(actionsInitMethod, SteamVR_Input_Generator_Names.actionsFieldName, actionsArray);
-            AddAssignStatement(actionsInitMethod, SteamVR_Input_Generator_Names.actionsInFieldName, actionsInArray);
-            AddAssignStatement(actionsInitMethod, SteamVR_Input_Generator_Names.actionsOutFieldName, actionsOutArray);
-            AddAssignStatement(actionsInitMethod, SteamVR_Input_Generator_Names.actionsVibrationFieldName, actionsVibrationArray);
-            AddAssignStatement(actionsInitMethod, SteamVR_Input_Generator_Names.actionsPoseFieldName, actionsPoseArray);
-            AddAssignStatement(actionsInitMethod, SteamVR_Input_Generator_Names.actionsBooleanFieldName, actionsBooleanArray);
-            AddAssignStatement(actionsInitMethod, SteamVR_Input_Generator_Names.actionsSingleFieldName, actionsSingleArray);
-            AddAssignStatement(actionsInitMethod, SteamVR_Input_Generator_Names.actionsVector2FieldName, actionsVector2Array);
-            AddAssignStatement(actionsInitMethod, SteamVR_Input_Generator_Names.actionsVector3FieldName, actionsVector3Array);
-            AddAssignStatement(actionsInitMethod, SteamVR_Input_Generator_Names.actionsSkeletonFieldName, actionsSkeletonArray);
-            AddAssignStatement(actionsInitMethod, SteamVR_Input_Generator_Names.actionsNonPoseNonSkeletonIn, actionsNonPoseNonSkeletonArray);
+            AddAssignStatement(actionsArraysInitMethod, SteamVR_Input_Generator_Names.actionsFieldName, actionsArray);
+            AddAssignStatement(actionsArraysInitMethod, SteamVR_Input_Generator_Names.actionsInFieldName, actionsInArray);
+            AddAssignStatement(actionsArraysInitMethod, SteamVR_Input_Generator_Names.actionsOutFieldName, actionsOutArray);
+            AddAssignStatement(actionsArraysInitMethod, SteamVR_Input_Generator_Names.actionsVibrationFieldName, actionsVibrationArray);
+            AddAssignStatement(actionsArraysInitMethod, SteamVR_Input_Generator_Names.actionsPoseFieldName, actionsPoseArray);
+            AddAssignStatement(actionsArraysInitMethod, SteamVR_Input_Generator_Names.actionsBooleanFieldName, actionsBooleanArray);
+            AddAssignStatement(actionsArraysInitMethod, SteamVR_Input_Generator_Names.actionsSingleFieldName, actionsSingleArray);
+            AddAssignStatement(actionsArraysInitMethod, SteamVR_Input_Generator_Names.actionsVector2FieldName, actionsVector2Array);
+            AddAssignStatement(actionsArraysInitMethod, SteamVR_Input_Generator_Names.actionsVector3FieldName, actionsVector3Array);
+            AddAssignStatement(actionsArraysInitMethod, SteamVR_Input_Generator_Names.actionsSkeletonFieldName, actionsSkeletonArray);
+            AddAssignStatement(actionsArraysInitMethod, SteamVR_Input_Generator_Names.actionsNonPoseNonSkeletonIn, actionsNonPoseNonSkeletonArray);
 
 
             // Build the output file name.
             string fullSourceFilePath = GetSourceFilePath(actionsClassFileName);
             CreateFile(fullSourceFilePath, compileUnit);
         }
+
+
+        private const string startPreInitActionSetsMethodName = "StartPreInitActionSets";
+        private const string finishPreInitActionSetsMethodName = "PreinitializeFinishActionSets";
 
         private static void GenerateActionSetsHelpers(string actionSetsClassFileName)
         {
@@ -1135,13 +570,9 @@ namespace Valve.VR
             CodeTypeDeclaration inputClass = CreatePartialInputClass(compileUnit);
 
 
-            CodeMemberMethod initializeMethod = CreateStaticMethod(inputClass, SteamVR_Input_Generator_Names.initializeActionSetsMethodName);
-
-            CodeMemberMethod actionSetsInitMethod = CreateStaticMethod(inputClass, SteamVR_Input_Generator_Names.initializeInstanceActionSetsMethodName);
+            CodeMemberMethod startPreInitActionSetsMethod = CreateStaticMethod(inputClass, startPreInitActionSetsMethodName, false);
 
             CodeArrayCreateExpression actionSetsArray = new CodeArrayCreateExpression(new CodeTypeReference(typeof(SteamVR_ActionSet)));
-
-            MethodInfo initializeActionSetMethodInfo = GetMethodInfo<SteamVR_ActionSet>(set => set.Initialize());
 
             for (int actionSetIndex = 0; actionSetIndex < SteamVR_Input.actionFile.action_sets.Count; actionSetIndex++)
             {
@@ -1153,22 +584,14 @@ namespace Valve.VR
 
                 string setTypeName = GetSetClassName(actionSet);
 
-                AddAssignActionSetStatement(actionSetsInitMethod, codeFriendlyInstanceName, codeFriendlyInstanceName, setTypeName);
+                CodeMemberField actionSetField = CreateFieldAndPropertyWrapper(inputClass, shortName, setTypeName);
 
-                Type setType = typeof(SteamVR_ActionSet).Assembly.GetType(typeof(SteamVR_Input).Namespace + "." + setTypeName);
+                AddAssignActionSetStatement(startPreInitActionSetsMethod, inputClass.Name, actionSetField.Name, actionSet.name, setTypeName);
 
-                CodeMemberField actionSetInstance = CreateField(inputClass, shortName, setType, true);
-
-                actionSetsArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input)), codeFriendlyInstanceName));
-
-
-                //add an invoke to the init method
-                CodeMethodInvokeExpression initializeActionMethod = AddStaticInvokeToMethod(initializeMethod, shortName, initializeActionSetMethodInfo.Name);
+                actionSetsArray.Initializers.Add(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(inputClass.Name), codeFriendlyInstanceName));
             }
 
-            AddAssignStatement(actionSetsInitMethod, SteamVR_Input_Generator_Names.actionSetsFieldName, actionSetsArray);
-
-            //initializeMethod.Statements.Add(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input)), actionSetsInitMethod.Name));
+            AddAssignStatement(startPreInitActionSetsMethod, SteamVR_Input_Generator_Names.actionSetsFieldName, actionSetsArray);
 
             // Build the output file name.
             string fullSourceFilePath = GetSourceFilePath(actionSetsClassFileName);
@@ -1200,54 +623,11 @@ namespace Valve.VR
             codeNamespace.Imports.Add(new CodeNamespaceImport("UnityEngine"));
             compileUnit.Namespaces.Add(codeNamespace);
 
-            CodeTypeDeclaration inputClass = new CodeTypeDeclaration(typeof(SteamVR_Input).Name);
+            CodeTypeDeclaration inputClass = new CodeTypeDeclaration(SteamVR_Input_Generator_Names.actionsClassName);
             inputClass.IsPartial = true;
             codeNamespace.Types.Add(inputClass);
 
             return inputClass;
-        }
-
-        private static string GetActionListClassName(SteamVR_Input_ActionFile_ActionSet set, SteamVR_ActionDirections direction)
-        {
-            return actionSetClassNamePrefix + set.shortName + "_" + direction.ToString();
-        }
-
-        private static CodeTypeDeclaration CreateActionListClass(SteamVR_Input_ActionFile_ActionSet set, SteamVR_ActionDirections direction)
-        {
-            CodeCompileUnit compileUnit = new CodeCompileUnit();
-
-            CodeNamespace codeNamespace = new CodeNamespace(typeof(SteamVR_Input).Namespace);
-            codeNamespace.Imports.Add(new CodeNamespaceImport("System"));
-            codeNamespace.Imports.Add(new CodeNamespaceImport("UnityEngine"));
-            compileUnit.Namespaces.Add(codeNamespace);
-
-            CodeTypeDeclaration setClass = new CodeTypeDeclaration(GetActionListClassName(set, direction));
-            setClass.BaseTypes.Add(typeof(SteamVR_Action_List));
-            setClass.Attributes = MemberAttributes.Public;
-
-            codeNamespace.Types.Add(setClass);
-
-            if (direction == SteamVR_ActionDirections.In)
-            {
-                foreach (var action in set.actionsInList)
-                {
-                    CreateField(setClass, action.shortName, GetTypeForAction(action), false);
-                }
-            }
-            else if (direction == SteamVR_ActionDirections.Out)
-            {
-                foreach (var action in set.actionsOutList)
-                {
-                    CreateField(setClass, action.shortName, GetTypeForAction(action), false);
-                }
-            }
-
-            // Build the output file name.
-            string folderPath = GetSubFolderPath();
-            string fullSourceFilePath = Path.Combine(folderPath, setClass.Name + ".cs");
-            CreateFile(fullSourceFilePath, compileUnit);
-
-            return setClass;
         }
 
         private static string GetSetClassName(SteamVR_Input_ActionFile_ActionSet set)
@@ -1255,9 +635,10 @@ namespace Valve.VR
             return actionSetClassNamePrefix + set.shortName;
         }
 
-        private const string inActionsFieldName = "inActions"; //in
-        private const string outActionsFieldName = "outActions"; //out
-        private static CodeTypeDeclaration CreateActionSetClass(SteamVR_Input_ActionFile_ActionSet set, CodeTypeDeclaration inClass, CodeTypeDeclaration outClass)
+        private const string inActionFieldPrefix = "in_";
+        private const string outActionFieldPrefix = "out_";
+        private const string setFinishPreInitializeMethodName = "FinishPreInitialize";
+        private static CodeTypeDeclaration CreateActionSetClass(SteamVR_Input_ActionFile_ActionSet set)
         {
             CodeCompileUnit compileUnit = new CodeCompileUnit();
 
@@ -1271,14 +652,29 @@ namespace Valve.VR
             setClass.Attributes = MemberAttributes.Public;
             codeNamespace.Types.Add(setClass);
 
-            if (inClass != null)
+            string actionSetShortName = set.shortName;
+            actionSetShortName = actionSetShortName.Substring(0, 1).ToLower() + actionSetShortName.Substring(1);
+
+            foreach (var inAction in set.actionsInList)
             {
-                CreateField(setClass, inActionsFieldName, inClass.Name, false);
+                string inActionName = inAction.shortName;
+                if (set.actionsOutList.Any(outAction => inAction.shortName == outAction.shortName))
+                    inActionName = inActionFieldPrefix + inActionName;
+
+                string actionClassPropertyName = string.Format("{0}_{1}", actionSetShortName, inActionName);
+
+                CreateActionPropertyWrapper(setClass, SteamVR_Input_Generator_Names.actionsClassName, inActionName, actionClassPropertyName, inAction);
             }
 
-            if (outClass != null)
+            foreach (var outAction in set.actionsOutList)
             {
-                CreateField(setClass, outActionsFieldName, outClass.Name, false);
+                string outActionName = outAction.shortName;
+                if (set.actionsInList.Any(inAction => inAction.shortName == outAction.shortName))
+                    outActionName = outActionFieldPrefix + outActionName;
+
+                string actionClassPropertyName = string.Format("{0}_{1}", actionSetShortName, outActionName);
+
+                CreateActionPropertyWrapper(setClass, SteamVR_Input_Generator_Names.actionsClassName, outActionName, actionClassPropertyName, outAction);
             }
 
             // Build the output file name.
@@ -1289,11 +685,24 @@ namespace Valve.VR
             return setClass;
         }
 
-        private static CodeMemberMethod CreateStaticMethod(CodeTypeDeclaration inputClass, string methodName)
+        private static CodeMemberMethod CreateStaticMethod(CodeTypeDeclaration inputClass, string methodName, bool isPublic)
         {
             CodeMemberMethod method = new CodeMemberMethod();
             method.Name = methodName;
-            method.Attributes = MemberAttributes.Public | MemberAttributes.Static;
+
+            if (isPublic)
+                method.Attributes = MemberAttributes.Public | MemberAttributes.Static;
+            else
+                method.Attributes = MemberAttributes.Private | MemberAttributes.Static;
+
+            inputClass.Members.Add(method);
+            return method;
+        }
+
+        private static CodeMemberMethod CreateStaticConstructorMethod(CodeTypeDeclaration inputClass)
+        {
+            CodeTypeConstructor method = new CodeTypeConstructor();
+            method.Attributes = MemberAttributes.Static;
 
             inputClass.Members.Add(method);
             return method;
@@ -1316,12 +725,71 @@ namespace Valve.VR
             return field;
         }
 
-        private static CodeMemberField CreateField(CodeTypeDeclaration inputClass, string fieldName, string fieldType, bool isStatic)
+        private static CodeMemberField CreateFieldAndPropertyWrapper(CodeTypeDeclaration inputClass, string name, string type)
+        {
+            CodeMemberField actionField = CreatePrivateField(inputClass, name, type, true);
+
+            CodeMemberProperty actionProperty = CreateStaticProperty(inputClass, name, type, actionField);
+
+            return actionField;
+        }
+
+        private static CodeMemberProperty CreateStaticProperty(CodeTypeDeclaration inputClass, string propertyName, string propertyType, CodeMemberField privateField)
+        {
+            CodeMemberProperty property = new CodeMemberProperty();
+            property.Name = propertyName;
+            property.Type = new CodeTypeReference(propertyType);
+            property.Attributes = MemberAttributes.Public | MemberAttributes.Static;
+
+            CodeFieldReferenceExpression fieldReference = new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(inputClass.Name), privateField.Name);
+            CodeMethodInvokeExpression invokeExpression = new CodeMethodInvokeExpression(fieldReference, "GetCopy");
+            invokeExpression.Method.TypeArguments.Add(property.Type);
+
+            CodeMethodReturnStatement returnStatement = new CodeMethodReturnStatement(invokeExpression);
+
+            property.GetStatements.Add(returnStatement);
+
+            inputClass.Members.Add(property);
+
+            return property;
+        }
+
+        private static CodeMemberProperty CreateActionPropertyWrapper(CodeTypeDeclaration addToClass, string actionClass, string propertyName, string actionClassFieldName, SteamVR_Input_ActionFile_Action action)
+        {
+            string propertyType = GetTypeStringForAction(action);
+
+            CodeMemberProperty property = new CodeMemberProperty();
+            property.Name = propertyName;
+            property.Type = new CodeTypeReference(propertyType);
+            property.Attributes = MemberAttributes.Public;
+
+            CodeFieldReferenceExpression fieldReference = new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(actionClass), actionClassFieldName);
+
+            CodeMethodReturnStatement returnStatement = new CodeMethodReturnStatement(fieldReference);
+
+            property.GetStatements.Add(returnStatement);
+
+            addToClass.Members.Add(property);
+
+            return property;
+        }
+
+        private const string privateFieldPrefix = "p_";
+        private static CodeMemberField CreatePrivateField(CodeTypeDeclaration inputClass, string fieldName, string fieldType, bool isStatic)
+        {
+            return CreateField(inputClass, privateFieldPrefix + fieldName, fieldType, isStatic, false);
+        }
+
+        private static CodeMemberField CreateField(CodeTypeDeclaration inputClass, string fieldName, string fieldType, bool isStatic, bool isPublic = true)
         {
             CodeMemberField field = new CodeMemberField();
             field.Name = fieldName;
             field.Type = new CodeTypeReference(fieldType);
-            field.Attributes = MemberAttributes.Public;
+            if (isPublic)
+                field.Attributes = MemberAttributes.Public;
+            else
+                field.Attributes = MemberAttributes.Private;
+
             if (isStatic)
                 field.Attributes |= MemberAttributes.Static;
 
@@ -1330,13 +798,10 @@ namespace Valve.VR
             return field;
         }
 
-        private static CodeMethodInvokeExpression AddStaticInvokeToMethod(CodeMemberMethod methodToAddTo, string staticActionName, string invokeMethodName, string paramName = null)
+        private static CodeMethodInvokeExpression AddStaticInvokeToMethod(CodeMemberMethod methodToAddTo, string classToInvoke, string invokeMethodName)
         {
             CodeMethodInvokeExpression invokeMethod = new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(
-                new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input).Name), staticActionName), invokeMethodName));
-
-            if (paramName != null)
-                invokeMethod.Parameters.Add(new CodeVariableReferenceExpression(skipStateUpdatesParamName));
+                new CodeTypeReferenceExpression(classToInvoke), invokeMethodName));
 
             methodToAddTo.Statements.Add(invokeMethod);
 
@@ -1348,23 +813,48 @@ namespace Valve.VR
             methodToAddTo.Statements.Add(new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input)), fieldToAssign), array));
         }
 
-        private const string referenceGetActionName = "GetAction";
-        private const string referenceGetActionSetName = "GetActionSet";
-        private static void AddAssignActionStatement(CodeMemberMethod methodToAddTo, string fieldToAssign, string actionName, string actionType)
+        private const string createActionMethodName = "Create";
+        private const string createActionSetMethodName = "Create";
+        private const string getActionFromPathMethodName = "GetActionFromPath";
+
+        //grab = SteamVR_Action.Create<SteamVR_Action_Boolean>("path");
+        private static void AddAssignActionStatement(CodeMemberMethod methodToAddTo, string actionClassName, string fieldToAssign, string actionPath, string actionType)
         {
-            CodeMethodInvokeExpression invokeMethod = new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input_References).Name), referenceGetActionName));
+            CodeMethodInvokeExpression invokeMethod = new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Action).Name), createActionMethodName));
 
-            invokeMethod.Parameters.Add(new CodePrimitiveExpression(actionName));
+            invokeMethod.Method.TypeArguments.Add(actionType);
+            invokeMethod.Parameters.Add(new CodePrimitiveExpression(actionPath));
 
-            methodToAddTo.Statements.Add(new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input)), fieldToAssign), new CodeCastExpression(new CodeTypeReference(actionType), invokeMethod)));
+            methodToAddTo.Statements.Add(new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(actionClassName), fieldToAssign), new CodeCastExpression(new CodeTypeReference(actionType), invokeMethod)));
         }
-        private static void AddAssignActionSetStatement(CodeMemberMethod methodToAddTo, string fieldToAssign, string actionSetName, string actionSetType)
+        private static void AddAssignActionSetStatement(CodeMemberMethod methodToAddTo, string actionClassName, string fieldToAssign, string actionSetName, string actionSetType)
         {
-            CodeMethodInvokeExpression invokeMethod = new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input_References).Name), referenceGetActionSetName));
+            CodeMethodInvokeExpression invokeMethod = new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_ActionSet).Name), createActionSetMethodName));
 
+            invokeMethod.Method.TypeArguments.Add(actionSetType);
             invokeMethod.Parameters.Add(new CodePrimitiveExpression(actionSetName));
 
-            methodToAddTo.Statements.Add(new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input)), fieldToAssign), new CodeCastExpression(new CodeTypeReference(actionSetType), invokeMethod)));
+            methodToAddTo.Statements.Add(new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(actionClassName), fieldToAssign), new CodeCastExpression(new CodeTypeReference(actionSetType), invokeMethod)));
+        }
+        private static void AddAssignLocalActionStatement(CodeMemberMethod methodToAddTo, string fieldToAssign, string actionPath, string actionType, bool create)
+        {
+            CodeMethodInvokeExpression invokeMethod;
+
+            if (create)
+                invokeMethod = new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Action).Name), createActionMethodName));
+            else
+                invokeMethod = new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(new CodeTypeReferenceExpression(typeof(SteamVR_Input).Name), getActionFromPathMethodName));
+
+            invokeMethod.Method.TypeArguments.Add(actionType);
+            invokeMethod.Parameters.Add(new CodePrimitiveExpression(actionPath));
+
+            methodToAddTo.Statements.Add(new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldToAssign), new CodeCastExpression(new CodeTypeReference(actionType), invokeMethod)));
+        }
+        private static void AddAssignNewInstanceStatement(CodeMemberMethod methodToAddTo, string fieldToAssign, string fieldType)
+        {
+            CodeObjectCreateExpression createExpression = new CodeObjectCreateExpression(new CodeTypeReference(fieldType));
+
+            methodToAddTo.Statements.Add(new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldToAssign), createExpression));
         }
 
         private static CodeConditionStatement CreateStringCompareStatement(CodeMemberMethod methodToAddTo, string action, string paramName, string returnActionName)

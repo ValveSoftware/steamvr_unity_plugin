@@ -89,11 +89,11 @@ namespace Valve.VR
                 var error = compositor.SetSkyboxOverride(textures);
                 if (error != EVRCompositorError.None)
                 {
-                    Debug.LogError("Failed to set skybox override with error: " + error);
+                    Debug.LogError("<b>[SteamVR]</b> Failed to set skybox override with error: " + error);
                     if (error == EVRCompositorError.TextureIsOnWrongDevice)
-                        Debug.Log("Set your graphics driver to use the same video card as the headset is plugged into for Unity.");
+                        Debug.Log("<b>[SteamVR]</b> Set your graphics driver to use the same video card as the headset is plugged into for Unity.");
                     else if (error == EVRCompositorError.TextureUsesUnsupportedFormat)
-                        Debug.Log("Ensure skybox textures are not compressed and have no mipmaps.");
+                        Debug.Log("<b>[SteamVR]</b> Ensure skybox textures are not compressed and have no mipmaps.");
                 }
             }
         }

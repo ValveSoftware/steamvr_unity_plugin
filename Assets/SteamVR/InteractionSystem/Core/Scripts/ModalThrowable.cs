@@ -40,5 +40,14 @@ namespace Valve.VR.InteractionSystem
                 hand.HideGrabHint();
             }
         }
+        protected override void HandAttachedUpdate(Hand hand)
+        {
+            if (interactable.skeletonPoser != null)
+            {
+                interactable.skeletonPoser.SetBlendingBehaviourEnabled("PinchPose", hand.currentAttachedObjectInfo.Value.grabbedWithType == GrabTypes.Pinch);
+            }
+
+            base.HandAttachedUpdate(hand);
+        }
     }
 }

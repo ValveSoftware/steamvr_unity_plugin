@@ -10,8 +10,9 @@ namespace Valve.VR
     /// </summary>
     public class SteamVR_ActivateActionSetOnLoad : MonoBehaviour
     {
-        [SteamVR_DefaultActionSet("default")]
-        public SteamVR_ActionSet actionSet;
+        public SteamVR_ActionSet actionSet = SteamVR_Input.GetActionSet("default");
+
+        public SteamVR_Input_Sources forSources = SteamVR_Input_Sources.Any;
 
         public bool disableAllOtherActionSets = false;
 
@@ -24,7 +25,7 @@ namespace Valve.VR
             if (actionSet != null && activateOnStart)
             {
                 //Debug.Log(string.Format("[SteamVR] Activating {0} action set.", actionSet.fullPath));
-                actionSet.ActivatePrimary(disableAllOtherActionSets);
+                actionSet.Activate(forSources, 0, disableAllOtherActionSets);
             }
         }
 
@@ -33,7 +34,7 @@ namespace Valve.VR
             if (actionSet != null && deactivateOnDestroy)
             {
                 //Debug.Log(string.Format("[SteamVR] Deactivating {0} action set.", actionSet.fullPath));
-                actionSet.Deactivate();
+                actionSet.Deactivate(forSources);
             }
         }
     }

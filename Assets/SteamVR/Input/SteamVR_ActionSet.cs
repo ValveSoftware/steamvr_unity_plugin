@@ -6,186 +6,535 @@ using System;
 using Valve.VR;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Valve.VR
 {
     /// <summary>
     /// Action sets are logical groupings of actions. Multiple sets can be active at one time.
     /// </summary>
-    public class SteamVR_ActionSet : ScriptableObject
+    [Serializable]
+    public class SteamVR_ActionSet : IEquatable<SteamVR_ActionSet>, ISteamVR_ActionSet, ISerializationCallbackReceiver
     {
-        [NonSerialized]
-        protected static VRActiveActionSet_t[] activeActionSets;
+        public SteamVR_ActionSet() { }
+
+        [SerializeField]
+        private string actionSetPath;
 
         [NonSerialized]
-        protected static List<VRActiveActionSet_t> activeActionSetsList = new List<VRActiveActionSet_t>();
+        protected SteamVR_ActionSet_Data setData;
 
-        [NonSerialized]
-        protected VRActiveActionSet_t actionSet = new VRActiveActionSet_t();
 
         /// <summary>All actions within this set (including out actions)</summary>
-        public SteamVR_Action[] allActions;
+        public SteamVR_Action[] allActions
+        {
+            get
+            {
+                if (initialized == false)
+                    Initialize();
+
+                return setData.allActions;
+            }
+        }
 
         /// <summary>All IN actions within this set that are NOT pose or skeleton actions</summary>
-        public SteamVR_Action_In[] nonVisualInActions;
+        public ISteamVR_Action_In[] nonVisualInActions
+        {
+            get
+            {
+                if (initialized == false)
+                    Initialize();
+
+                return setData.nonVisualInActions;
+            }
+        }
 
         /// <summary>All pose and skeleton actions within this set</summary>
-        public SteamVR_Action_In[] visualActions;
+        public ISteamVR_Action_In[] visualActions
+        {
+            get
+            {
+                if (initialized == false)
+                    Initialize();
+
+                return setData.visualActions;
+            }
+        }
 
         /// <summary>All pose actions within this set</summary>
-        public SteamVR_Action_Pose[] poseActions;
+        public SteamVR_Action_Pose[] poseActions
+        {
+            get
+            {
+                if (initialized == false)
+                    Initialize();
+
+                return setData.poseActions;
+            }
+        }
 
         /// <summary>All skeleton actions within this set</summary>
-        public SteamVR_Action_Skeleton[] skeletonActions;
+        public SteamVR_Action_Skeleton[] skeletonActions
+        {
+            get
+            {
+                if (initialized == false)
+                    Initialize();
+
+                return setData.skeletonActions;
+            }
+        }
 
         /// <summary>All out actions within this set</summary>
-        public SteamVR_Action_Out[] outActionArray;
+        public ISteamVR_Action_Out[] outActionArray
+        {
+            get
+            {
+                if (initialized == false)
+                    Initialize();
+
+                return setData.outActionArray;
+            }
+        }
 
 
         /// <summary>The full path to this action set (ex: /actions/in/default)</summary>
-        public string fullPath;
-        public string usage;
-
-        [NonSerialized]
-        public ulong handle;
-
-        [NonSerialized]
-        protected bool setIsActive = false;
-
-        [NonSerialized]
-        protected float lastChanged = -1;
-
-        [NonSerialized]
-        protected static uint activeActionSetSize;
-
-        public void Initialize()
+        public string fullPath
         {
-            EVRInputError err = OpenVR.Input.GetActionSetHandle(fullPath.ToLower(), ref handle);
+            get
+            {
+                if (initialized == false)
+                    Initialize();
 
-            if (err != EVRInputError.None)
-                Debug.LogError("GetActionSetHandle (" + fullPath + ") error: " + err.ToString());
+                return setData.fullPath;
+            }
+        }
+        public string usage
+        {
+            get
+            {
+                if (initialized == false)
+                    Initialize();
 
-            activeActionSetSize = (uint)(Marshal.SizeOf(typeof(VRActiveActionSet_t)));
+                return setData.usage;
+            }
+        }
+
+        public ulong handle
+        {
+            get
+            {
+                if (initialized == false)
+                    Initialize();
+
+                return setData.handle;
+            }
+        }
+
+        [NonSerialized]
+        protected bool initialized = false;
+
+
+        public static CreateType Create<CreateType>(string newSetPath) where CreateType : SteamVR_ActionSet, new()
+        {
+            CreateType actionSet = new CreateType();
+            actionSet.PreInitialize(newSetPath);
+            return actionSet;
+        }
+        public static CreateType CreateFromName<CreateType>(string newSetName) where CreateType : SteamVR_ActionSet, new()
+        {
+            CreateType actionSet = new CreateType();
+            actionSet.PreInitialize(SteamVR_Input_ActionFile_ActionSet.GetPathFromName(newSetName));
+            return actionSet;
+        }
+
+        public void PreInitialize(string newActionPath)
+        {
+            actionSetPath = newActionPath;
+
+            setData = new SteamVR_ActionSet_Data();
+            setData.fullPath = actionSetPath;
+            setData.PreInitialize();
+
+            initialized = true;
+        }
+
+        public virtual void FinishPreInitialize()
+        {
+            setData.FinishPreInitialize();
+        }
+
+        /// <summary>
+        /// Initializes the handle for the action
+        /// </summary>
+        public virtual void Initialize(bool createNew = false, bool throwErrors = true)
+        {
+            if (createNew)
+            {
+                setData.Initialize();
+            }
+            else
+            {
+                setData = SteamVR_Input.GetActionSetDataFromPath(actionSetPath);
+
+                if (setData == null)
+                {
+#if UNITY_EDITOR
+                    if (throwErrors)
+                    {
+                        if (string.IsNullOrEmpty(actionSetPath))
+                        {
+                            Debug.LogError("<b>[SteamVR]</b> Action has not been assigned.");
+                        }
+                        else
+                        {
+                            Debug.LogError("<b>[SteamVR]</b> Could not find action with path: " + actionSetPath);
+                        }
+                    }
+#endif
+                }
+            }
+
+            initialized = true;
+        }
+
+        public string GetPath()
+        {
+            return actionSetPath;
         }
 
         /// <summary>
         /// Returns whether the set is currently active or not.
         /// </summary>
-        public bool IsActive()
+        /// <param name="source">The device to check. Any means all devices here (not left or right, but all)</param>
+        public bool IsActive(SteamVR_Input_Sources source = SteamVR_Input_Sources.Any)
         {
-            return setIsActive;
+            return setData.IsActive(source);
         }
 
         /// <summary>
         /// Returns the last time this action set was changed (set to active or inactive)
         /// </summary>
-        /// <returns></returns>
-        public float GetTimeLastChanged()
+        /// <param name="source">The device to check. Any means all devices here (not left or right, but all)</param>
+        public float GetTimeLastChanged(SteamVR_Input_Sources source = SteamVR_Input_Sources.Any)
         {
-            return lastChanged;
+            return setData.GetTimeLastChanged(source);
         }
 
         /// <summary>
-        /// Activate this set as a primary action set so its actions can be called
+        /// Activate this set so its actions can be called
         /// </summary>
         /// <param name="disableAllOtherActionSets">Disable all other action sets at the same time</param>
-        public void ActivatePrimary(bool disableAllOtherActionSets = false)
+        /// <param name="priority">The priority of this action set. If you have two actions bound to the same input (button) the higher priority set will override the lower priority. If they are the same priority both will execute.</param>
+        /// <param name="activateForSource">Will activate this action set only for the specified source. Any if you want to activate for everything</param>
+        public void Activate(SteamVR_Input_Sources activateForSource = SteamVR_Input_Sources.Any, int priority = 0, bool disableAllOtherActionSets = false)
         {
-            if (disableAllOtherActionSets)
-                DisableAllActionSets();
-
-            actionSet.ulActionSet = handle;
-
-            if (activeActionSetsList.Contains(actionSet) == false)
-                activeActionSetsList.Add(actionSet);
-
-            setIsActive = true;
-            lastChanged = Time.time;
-
-            UpdateActionSetArray();
-        }
-
-        /// <summary>
-        /// Activate this set as a secondary action set so its actions can be called
-        /// </summary>
-        /// <param name="disableAllOtherActionSets">Disable all other action sets at the same time</param>
-        public void ActivateSecondary(bool disableAllOtherActionSets = false)
-        {
-            if (disableAllOtherActionSets)
-                DisableAllActionSets();
-
-            actionSet.ulSecondaryActionSet = handle;
-
-            if (activeActionSetsList.Contains(actionSet) == false)
-                activeActionSetsList.Add(actionSet);
-
-            setIsActive = true;
-            lastChanged = Time.time;
-
-            UpdateActionSetArray();
+            setData.Activate(activateForSource, priority, disableAllOtherActionSets);
         }
 
         /// <summary>
         /// Deactivate the action set so its actions can no longer be called
         /// </summary>
-        public void Deactivate()
+        public void Deactivate(SteamVR_Input_Sources forSource = SteamVR_Input_Sources.Any)
         {
-            setIsActive = false;
-            lastChanged = Time.time;
+            setData.Deactivate(forSource);
+        }
 
-            if (actionSet.ulActionSet == handle)
-                actionSet.ulActionSet = 0;
-            if (actionSet.ulSecondaryActionSet == handle)
-                actionSet.ulActionSet = 0;
+        /// <summary>Gets the last part of the path for this action. Removes "actions" and direction.</summary>
+        public string GetShortName()
+        {
+            return setData.GetShortName();
+        }
 
-            if (actionSet.ulActionSet == 0 && actionSet.ulSecondaryActionSet == 0)
+        public bool ReadRawSetActive(SteamVR_Input_Sources inputSource)
+        {
+            return setData.ReadRawSetActive(inputSource);
+        }
+
+        public float ReadRawSetLastChanged(SteamVR_Input_Sources inputSource)
+        {
+            return setData.ReadRawSetLastChanged(inputSource);
+        }
+
+        public int ReadRawSetPriority(SteamVR_Input_Sources inputSource)
+        {
+            return setData.ReadRawSetPriority(inputSource);
+        }
+
+        public SteamVR_ActionSet_Data GetActionSetData()
+        {
+            return setData;
+        }
+
+        public CreateType GetCopy<CreateType>() where CreateType : SteamVR_ActionSet, new()
+        {
+            CreateType actionSet = new CreateType();
+            actionSet.actionSetPath = this.actionSetPath;
+            actionSet.setData = this.setData;
+            actionSet.initialized = true;
+            return actionSet;
+
+            //return (CreateType)this; //no need to make copies in builds - will reduce memory alloc //todo: having this enabled was not working. all sets were the same (maybe actions too)
+        }
+
+        public bool Equals(SteamVR_ActionSet other)
+        {
+            if (ReferenceEquals(null, other))
+                return false;
+
+            return this.actionSetPath == other.actionSetPath;
+        }
+
+        public override bool Equals(object other)
+        {
+            if (ReferenceEquals(null, other))
             {
-                activeActionSetsList.Remove(actionSet);
+                if (string.IsNullOrEmpty(this.actionSetPath)) //if we haven't set a path, say this action set is equal to null
+                    return true;
+                return false;
+            }
 
-                UpdateActionSetArray();
+            if (ReferenceEquals(this, other))
+                return true;
+
+            if (other is SteamVR_ActionSet)
+                return this.Equals((SteamVR_ActionSet)other);
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            if (actionSetPath == null)
+                return 0;
+            else
+                return actionSetPath.GetHashCode();
+        }
+
+        public static bool operator !=(SteamVR_ActionSet set1, SteamVR_ActionSet set2)
+        {
+            return !(set1 == set2);
+        }
+
+        public static bool operator ==(SteamVR_ActionSet set1, SteamVR_ActionSet set2)
+        {
+            bool set1null = (ReferenceEquals(null, set1) || string.IsNullOrEmpty(set1.actionSetPath) || set1.GetActionSetData() == null);
+            bool set2null = (ReferenceEquals(null, set2) || string.IsNullOrEmpty(set2.actionSetPath) || set2.GetActionSetData() == null);
+
+            if (set1null && set2null)
+                return true;
+            else if (set1null != set2null)
+                return false;
+
+            return set1.Equals(set2);
+        }
+
+        void ISerializationCallbackReceiver.OnBeforeSerialize()
+        {
+        }
+
+        void ISerializationCallbackReceiver.OnAfterDeserialize()
+        {
+            if (setData != null)
+            {
+                if (setData.fullPath != actionSetPath)
+                {
+                    setData = SteamVR_Input.GetActionSetDataFromPath(actionSetPath);
+                }
+            }
+
+            if (initialized == false)
+                Initialize(false, false);
+        }
+    }
+    /// <summary>
+    /// Action sets are logical groupings of actions. Multiple sets can be active at one time.
+    /// </summary>
+    public class SteamVR_ActionSet_Data : ISteamVR_ActionSet
+    {
+        public SteamVR_ActionSet_Data() { }
+
+        /// <summary>All actions within this set (including out actions)</summary>
+        public SteamVR_Action[] allActions { get; set; }
+
+        /// <summary>All IN actions within this set that are NOT pose or skeleton actions</summary>
+        public ISteamVR_Action_In[] nonVisualInActions { get; set; }
+
+        /// <summary>All pose and skeleton actions within this set</summary>
+        public ISteamVR_Action_In[] visualActions { get; set; }
+
+        /// <summary>All pose actions within this set</summary>
+        public SteamVR_Action_Pose[] poseActions { get; set; }
+
+        /// <summary>All skeleton actions within this set</summary>
+        public SteamVR_Action_Skeleton[] skeletonActions { get; set; }
+
+        /// <summary>All out actions within this set</summary>
+        public ISteamVR_Action_Out[] outActionArray { get; set; }
+
+
+        /// <summary>The full path to this action set (ex: /actions/in/default)</summary>
+        public string fullPath { get; set; }
+        public string usage { get; set; }
+
+
+        public ulong handle { get; set; }
+
+        protected Dictionary<SteamVR_Input_Sources, bool> rawSetActive = new Dictionary<SteamVR_Input_Sources, bool>(new SteamVR_Input_Sources_Comparer());
+
+        protected Dictionary<SteamVR_Input_Sources, float> rawSetLastChanged = new Dictionary<SteamVR_Input_Sources, float>(new SteamVR_Input_Sources_Comparer());
+
+        protected Dictionary<SteamVR_Input_Sources, int> rawSetPriority = new Dictionary<SteamVR_Input_Sources, int>(new SteamVR_Input_Sources_Comparer());
+
+        protected bool initialized = false;
+
+        public void PreInitialize()
+        {
+            SteamVR_Input_Sources[] sources = SteamVR_Input_Source.GetAllSources();
+
+            for (int sourceIndex = 0; sourceIndex < sources.Length; sourceIndex++)
+            {
+                SteamVR_Input_Sources source = sources[sourceIndex];
+                rawSetActive.Add(source, false);
+                rawSetLastChanged.Add(source, 0);
+                rawSetPriority.Add(source, 0);
+            }
+        }
+
+        public void FinishPreInitialize()
+        {
+            List<SteamVR_Action> allActionsList = new List<SteamVR_Action>();
+            List<ISteamVR_Action_In> nonVisualInActionsList = new List<ISteamVR_Action_In>();
+            List<ISteamVR_Action_In> visualActionsList = new List<ISteamVR_Action_In>();
+            List<SteamVR_Action_Pose> poseActionsList = new List<SteamVR_Action_Pose>();
+            List<SteamVR_Action_Skeleton> skeletonActionsList = new List<SteamVR_Action_Skeleton>();
+            List<ISteamVR_Action_Out> outActionList = new List<ISteamVR_Action_Out>();
+
+            if (SteamVR_Input.actions == null)
+            {
+                Debug.LogError("<b>[SteamVR Input]</b> Actions not initialized!");
+                return;
+            }
+
+            for (int actionIndex = 0; actionIndex < SteamVR_Input.actions.Length; actionIndex++)
+            {
+                SteamVR_Action action = SteamVR_Input.actions[actionIndex];
+
+                if (action.actionSet.GetActionSetData() == this)
+                {
+                    allActionsList.Add(action);
+
+                    if (action is ISteamVR_Action_Boolean || action is ISteamVR_Action_Single || action is ISteamVR_Action_Vector2 || action is ISteamVR_Action_Vector3)
+                    {
+                        nonVisualInActionsList.Add((ISteamVR_Action_In)action);
+                    }
+                    else if (action is SteamVR_Action_Pose)
+                    {
+                        visualActionsList.Add((ISteamVR_Action_In)action);
+                        poseActionsList.Add((SteamVR_Action_Pose)action);
+                    }
+                    else if (action is SteamVR_Action_Skeleton)
+                    {
+                        visualActionsList.Add((ISteamVR_Action_In)action);
+                        skeletonActionsList.Add((SteamVR_Action_Skeleton)action);
+                    }
+                    else if (action is ISteamVR_Action_Out)
+                    {
+                        outActionList.Add((ISteamVR_Action_Out)action);
+                    }
+                    else
+                    {
+                        Debug.LogError("<b>[SteamVR Input]</b> Action doesn't implement known interface: " + action.fullPath);
+                    }
+                }
+            }
+
+            allActions = allActionsList.ToArray();
+            nonVisualInActions = nonVisualInActionsList.ToArray();
+            visualActions = visualActionsList.ToArray();
+            poseActions = poseActionsList.ToArray();
+            skeletonActions = skeletonActionsList.ToArray();
+            outActionArray = outActionList.ToArray();
+        }
+
+        public void Initialize()
+        {
+            ulong newHandle = 0;
+            EVRInputError err = OpenVR.Input.GetActionSetHandle(fullPath.ToLower(), ref newHandle);
+            handle = newHandle;
+
+            if (err != EVRInputError.None)
+                Debug.LogError("<b>[SteamVR]</b> GetActionSetHandle (" + fullPath + ") error: " + err.ToString());
+
+            initialized = true;
+        }
+
+        /// <summary>
+        /// Returns whether the set is currently active or not.
+        /// </summary>
+        /// <param name="source">The device to check. Any means all devices here (not left or right, but all)</param>
+        public bool IsActive(SteamVR_Input_Sources source = SteamVR_Input_Sources.Any)
+        {
+            if (initialized)
+                return rawSetActive[source] || rawSetActive[SteamVR_Input_Sources.Any];
+
+            return false;
+        }
+
+        /// <summary>
+        /// Returns the last time this action set was changed (set to active or inactive)
+        /// </summary>
+        /// <param name="source">The device to check. Any means all devices here (not left or right, but all)</param>
+        public float GetTimeLastChanged(SteamVR_Input_Sources source = SteamVR_Input_Sources.Any)
+        {
+            if (initialized)
+                return rawSetLastChanged[source];
+            return 0;
+        }
+
+        /// <summary>
+        /// Activate this set so its actions can be called
+        /// </summary>
+        /// <param name="disableAllOtherActionSets">Disable all other action sets at the same time</param>
+        /// <param name="priority">The priority of this action set. If you have two actions bound to the same input (button) the higher priority set will override the lower priority. If they are the same priority both will execute.</param>
+        /// <param name="activateForSource">Will activate this action set only for the specified source. Any if you want to activate for everything</param>
+        public void Activate(SteamVR_Input_Sources activateForSource = SteamVR_Input_Sources.Any, int priority = 0, bool disableAllOtherActionSets = false)
+        {
+            if (disableAllOtherActionSets)
+                SteamVR_ActionSet_Manager.DisableAllActionSets();
+
+            if (rawSetActive[activateForSource] == false)
+            {
+                rawSetActive[activateForSource] = true;
+                SteamVR_ActionSet_Manager.SetChanged();
+
+                rawSetLastChanged[activateForSource] = Time.realtimeSinceStartup;
+            }
+
+            if (rawSetPriority[activateForSource] != priority)
+            {
+                rawSetPriority[activateForSource] = priority;
+                SteamVR_ActionSet_Manager.SetChanged();
+
+                rawSetLastChanged[activateForSource] = Time.realtimeSinceStartup;
             }
         }
 
         /// <summary>
-        /// Disable all known action sets.
+        /// Deactivate the action set so its actions can no longer be called
         /// </summary>
-        public static void DisableAllActionSets()
+        public void Deactivate(SteamVR_Input_Sources forSource = SteamVR_Input_Sources.Any)
         {
-            for (int actionSetIndex = 0; actionSetIndex < SteamVR_Input.actionSets.Length; actionSetIndex++)
+            if (rawSetActive[forSource] != false)
             {
-                SteamVR_ActionSet set = SteamVR_Input.actionSets[actionSetIndex];
-                set.Deactivate();
+                rawSetLastChanged[forSource] = Time.realtimeSinceStartup;
+                SteamVR_ActionSet_Manager.SetChanged();
             }
-        }
-        
-        protected static void UpdateActionSetArray()
-        {
-            activeActionSets = activeActionSetsList.ToArray();
+
+            rawSetActive[forSource] = false;
+            rawSetPriority[forSource] = 0;
         }
 
-        [NonSerialized]
-        protected static int lastFrameUpdated;
-        public static void UpdateActionSetsState(bool force = false)
-        {
-            if (force || Time.frameCount != lastFrameUpdated)
-            {
-                lastFrameUpdated = Time.frameCount;
-
-                if (activeActionSets != null && activeActionSets.Length > 0)
-                {
-                    EVRInputError err = OpenVR.Input.UpdateActionState(activeActionSets, activeActionSetSize);
-                    if (err != EVRInputError.None)
-                        Debug.LogError("UpdateActionState error: " + err.ToString());
-                    //else Debug.Log("Action sets activated: " + activeActionSets.Length);
-                }
-                else
-                {
-                    //Debug.LogWarning("No sets active");
-                }
-            }
-        }
-
-        [NonSerialized]
         private string cachedShortName;
 
         /// <summary>Gets the last part of the path for this action. Removes "actions" and direction.</summary>
@@ -198,5 +547,83 @@ namespace Valve.VR
 
             return cachedShortName;
         }
+
+        public bool ReadRawSetActive(SteamVR_Input_Sources inputSource)
+        {
+            return rawSetActive[inputSource];
+        }
+
+        public float ReadRawSetLastChanged(SteamVR_Input_Sources inputSource)
+        {
+            return rawSetLastChanged[inputSource];
+        }
+
+        public int ReadRawSetPriority(SteamVR_Input_Sources inputSource)
+        {
+            return rawSetPriority[inputSource];
+        }
+    }
+    /// <summary>
+    /// Action sets are logical groupings of actions. Multiple sets can be active at one time.
+    /// </summary>
+    public interface ISteamVR_ActionSet
+    {
+        /// <summary>All actions within this set (including out actions)</summary>
+        SteamVR_Action[] allActions { get; }
+
+        /// <summary>All IN actions within this set that are NOT pose or skeleton actions</summary>
+        ISteamVR_Action_In[] nonVisualInActions { get; }
+
+        /// <summary>All pose and skeleton actions within this set</summary>
+        ISteamVR_Action_In[] visualActions { get; }
+
+        /// <summary>All pose actions within this set</summary>
+        SteamVR_Action_Pose[] poseActions { get; }
+
+        /// <summary>All skeleton actions within this set</summary>
+        SteamVR_Action_Skeleton[] skeletonActions { get; }
+
+        /// <summary>All out actions within this set</summary>
+        ISteamVR_Action_Out[] outActionArray { get; }
+
+
+        /// <summary>The full path to this action set (ex: /actions/in/default)</summary>
+        string fullPath { get; }
+
+        /// <summary>How the binding UI should display this set</summary>
+        string usage { get; }
+
+        ulong handle { get; }
+
+        bool ReadRawSetActive(SteamVR_Input_Sources inputSource);
+        float ReadRawSetLastChanged(SteamVR_Input_Sources inputSource);
+        int ReadRawSetPriority(SteamVR_Input_Sources inputSource);
+
+
+        /// <summary>
+        /// Returns whether the set is currently active or not.
+        /// </summary>
+        /// <param name="source">The device to check. Any means all devices here (not left or right, but all)</param>
+        bool IsActive(SteamVR_Input_Sources source = SteamVR_Input_Sources.Any);
+
+        /// <summary>
+        /// Returns the last time this action set was changed (set to active or inactive)
+        /// </summary>
+        /// <param name="source">The device to check. Any means all devices here (not left or right, but all)</param>
+        float GetTimeLastChanged(SteamVR_Input_Sources source = SteamVR_Input_Sources.Any);
+
+        /// <summary>
+        /// Activate this set so its actions can be called
+        /// </summary>
+        /// <param name="disableAllOtherActionSets">Disable all other action sets at the same time</param>
+        /// <param name="priority">The priority of this action set. If you have two actions bound to the same input (button) the higher priority set will override the lower priority. If they are the same priority both will execute.</param>
+        /// <param name="activateForSource">Will activate this action set only for the specified source. Any if you want to activate for everything</param>
+        void Activate(SteamVR_Input_Sources activateForSource = SteamVR_Input_Sources.Any, int priority = 0, bool disableAllOtherActionSets = false);
+
+        /// <summary>Deactivate the action set so its actions can no longer be called</summary>
+        void Deactivate(SteamVR_Input_Sources forSource = SteamVR_Input_Sources.Any);
+
+        /// <summary>Gets the last part of the path for this action. Removes "actions" and direction.</summary>
+        string GetShortName();
     }
 }

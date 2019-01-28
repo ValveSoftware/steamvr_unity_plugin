@@ -37,8 +37,8 @@ namespace Valve.VR.InteractionSystem
 		private bool useFadedPreview = false;
 		private GameObject previewObject;
 
-		public bool requireTriggerPressToTake = false;
-		public bool requireTriggerPressToReturn = false;
+		public bool requireGrabActionToTake = false;
+		public bool requireReleaseActionToReturn = false;
 		public bool showTriggerHint = false;
 
 		[EnumFlags]
@@ -121,7 +121,7 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		private void ItemPackageNotValid()
 		{
-			Debug.LogError( "ItemPackage assigned to " + gameObject.name + " is not valid. Destroying this game object." );
+			Debug.LogError("<b>[SteamVR Interaction]</b> ItemPackage assigned to " + gameObject.name + " is not valid. Destroying this game object." );
 			Destroy( gameObject );
 		}
 
@@ -163,18 +163,18 @@ namespace Valve.VR.InteractionSystem
 
 			if ( currentAttachedItemPackage == itemPackage ) // the item at the top of the hand's stack has an associated ItemPackage
 			{
-				if ( takeBackItem && !requireTriggerPressToReturn ) // if we want to take back matching items and aren't waiting for a trigger press
+				if ( takeBackItem && !requireReleaseActionToReturn ) // if we want to take back matching items and aren't waiting for a trigger press
 				{
 					TakeBackItem( hand );
 				}
 			}
 
-			if ( !requireTriggerPressToTake ) // we don't require trigger press for pickup. Spawn and attach object.
+			if (!requireGrabActionToTake) // we don't require trigger press for pickup. Spawn and attach object.
 			{
 				SpawnAndAttachObject( hand, GrabTypes.Scripted );
 			}
 
-			if ( requireTriggerPressToTake && showTriggerHint )
+			if (requireGrabActionToTake && showTriggerHint )
 			{
                 hand.ShowGrabHint("PickUp");
 			}
@@ -218,7 +218,7 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		private void HandHoverUpdate( Hand hand )
 		{
-			if ( takeBackItem && requireTriggerPressToReturn )
+			if ( takeBackItem && requireReleaseActionToReturn )
 			{
                 if (hand.isActive)
 				{
@@ -231,13 +231,13 @@ namespace Valve.VR.InteractionSystem
 				}
 			}
 
-			if ( requireTriggerPressToTake )
+			if ( requireGrabActionToTake )
 			{
                 GrabTypes startingGrab = hand.GetGrabStarting();
 
 				if (startingGrab != GrabTypes.None)
 				{
-					SpawnAndAttachObject( hand, startingGrab);
+					SpawnAndAttachObject( hand, GrabTypes.Scripted);
 				}
 			}
 		}
@@ -246,7 +246,7 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		private void OnHandHoverEnd( Hand hand )
 		{
-			if ( !justPickedUpItem && requireTriggerPressToTake && showTriggerHint )
+			if ( !justPickedUpItem && requireGrabActionToTake && showTriggerHint )
 			{
                 hand.HideGrabHint();
 			}
@@ -258,6 +258,9 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		private void RemoveMatchingItemsFromHandStack( ItemPackage package, Hand hand )
 		{
+            if (hand == null)
+                return;
+
 			for ( int i = 0; i < hand.AttachedObjects.Count; i++ )
 			{
 				ItemPackageReference packageReference = hand.AttachedObjects[i].attachedObject.GetComponent<ItemPackageReference>();
@@ -314,8 +317,8 @@ namespace Valve.VR.InteractionSystem
 			{
 				if ( hand.otherHand.hoverLocked )
 				{
-					//Debug.Log( "Not attaching objects because other hand is hoverlocked and we can't deliver both items." );
-					return;
+                    Debug.Log( "<b>[SteamVR Interaction]</b> Not attaching objects because other hand is hoverlocked and we can't deliver both items." );
+                    return;
 				}
 			}
 

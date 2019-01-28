@@ -32,21 +32,14 @@ namespace Valve.VR.InteractionSystem.Sample
         public Vector2 ui_fillAngles;
 
         public Transform resetToPoint;
-
-        [SteamVR_DefaultActionSet("buggy")]
-        public SteamVR_ActionSet actionSet;
-
-        [SteamVR_DefaultAction("Steering", "buggy")]
-        public SteamVR_Action_Vector2 a_steering;
-
-        [SteamVR_DefaultAction("Throttle", "buggy")]
-        public SteamVR_Action_Single a_trigger;
-
-        [SteamVR_DefaultAction("Brake", "buggy")]
-        public SteamVR_Action_Boolean a_brake;
-
-        [SteamVR_DefaultAction("Reset", "buggy")]
-        public SteamVR_Action_Boolean a_reset;
+        
+        public SteamVR_Action_Vector2 actionSteering = SteamVR_Input.GetAction<SteamVR_Action_Vector2>("buggy", "Steering");
+        
+        public SteamVR_Action_Single actionThrottle = SteamVR_Input.GetAction<SteamVR_Action_Single>("buggy", "Throttle");
+        
+        public SteamVR_Action_Boolean actionBrake = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("buggy", "Brake");
+        
+        public SteamVR_Action_Boolean actionReset = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("buggy", "Reset");
 
         private float usteer;
 
@@ -66,7 +59,6 @@ namespace Valve.VR.InteractionSystem.Sample
             trigSRot = modelTrigger.localRotation;
 
             interactable = GetComponent<Interactable>();
-            interactable.activateActionSetOnAttach = actionSet;
 
             StartCoroutine(DoBuzz());
             buggy.controllerReference = transform;
@@ -89,13 +81,13 @@ namespace Valve.VR.InteractionSystem.Sample
             {
                 SteamVR_Input_Sources hand = interactable.attachedToHand.handType;
 
-                steer = a_steering.GetAxis(hand);
+                steer = actionSteering.GetAxis(hand);
 
-                throttle = a_trigger.GetAxis(hand);
-                b_brake = a_brake.GetState(hand);
-                b_reset = a_reset.GetState(hand);
+                throttle = actionThrottle.GetAxis(hand);
+                b_brake = actionBrake.GetState(hand);
+                b_reset = actionReset.GetState(hand);
                 brake = b_brake ? 1 : 0;
-                reset = a_reset.GetStateDown(hand);
+                reset = actionReset.GetStateDown(hand);
             }
 
             if (reset && resettingRoutine == null)

@@ -22,32 +22,119 @@ namespace Valve.VR
         [Tooltip("The device this action should apply to. Any if the action is not device specific.")]
         public SteamVR_Input_Sources inputSource;
 
-        /// <summary>Fires whenever the action's value has changed since the last update.</summary>
+        /// <summary>Unity event that fires whenever the action's value has changed since the last update.</summary>
         [Tooltip("Fires whenever the action's value has changed since the last update.")]
         public SteamVR_Behaviour_Vector2Event onChange;
+
+        /// <summary>Unity event that fires whenever the action's value has been updated</summary>
+        [Tooltip("Fires whenever the action's value has been updated.")]
+        public SteamVR_Behaviour_Vector2Event onUpdate;
+
+        /// <summary>Unity event that fires whenever the action's value has been updated and is non-zero</summary>
+        [Tooltip("Fires whenever the action's value has been updated and is non-zero.")]
+        public SteamVR_Behaviour_Vector2Event onAxis;
+
+        /// <summary>C# event that fires whenever the action's value has changed since the last update.</summary>
+        public ChangeHandler onChangeEvent;
+
+        /// <summary>C# event that fires whenever the action's value has been updated</summary>
+        public UpdateHandler onUpdateEvent;
+
+        /// <summary>C# event that fires whenever the action's value has been updated and is non-zero</summary>
+        public AxisHandler onAxisEvent;
 
         /// <summary>Returns whether this action is bound and the action set is active</summary>
         public bool isActive { get { return vector2Action.GetActive(inputSource); } }
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
-            vector2Action.AddOnChangeListener(ActionChanged, inputSource);
+            if (vector2Action == null)
+            {
+                Debug.LogError("[SteamVR] Vector2 action not set.", this);
+                return;
+            }
+
+            AddHandlers();
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
-            vector2Action.RemoveOnChangeListener(ActionChanged, inputSource);
+            RemoveHandlers();
         }
 
-        private void ActionChanged(SteamVR_Action_In action)
+        protected void AddHandlers()
+        {
+            vector2Action[inputSource].onUpdate += SteamVR_Behaviour_Vector2_OnUpdate;
+            vector2Action[inputSource].onChange += SteamVR_Behaviour_Vector2_OnChange;
+            vector2Action[inputSource].onAxis += SteamVR_Behaviour_Vector2_OnAxis;
+        }
+
+        protected void RemoveHandlers()
+        {
+            if (vector2Action != null)
+            {
+                vector2Action[inputSource].onUpdate -= SteamVR_Behaviour_Vector2_OnUpdate;
+                vector2Action[inputSource].onChange -= SteamVR_Behaviour_Vector2_OnChange;
+                vector2Action[inputSource].onAxis -= SteamVR_Behaviour_Vector2_OnAxis;
+            }
+        }
+
+        private void SteamVR_Behaviour_Vector2_OnUpdate(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 newAxis, Vector2 newDelta)
+        {
+            if (onUpdate != null)
+            {
+                onUpdate.Invoke(this, fromSource, newAxis, newDelta);
+            }
+            if (onUpdateEvent != null)
+            {
+                onUpdateEvent.Invoke(this, fromSource, newAxis, newDelta);
+            }
+        }
+
+        private void SteamVR_Behaviour_Vector2_OnChange(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 newAxis, Vector2 newDelta)
         {
             if (onChange != null)
             {
-                onChange.Invoke((SteamVR_Action_Vector2)action);
+                onChange.Invoke(this, fromSource, newAxis, newDelta);
+            }
+            if (onChangeEvent != null)
+            {
+                onChangeEvent.Invoke(this, fromSource, newAxis, newDelta);
             }
         }
-    }
 
-    [Serializable]
-    public class SteamVR_Behaviour_Vector2Event : UnityEvent<SteamVR_Action_Vector2> { }
+        private void SteamVR_Behaviour_Vector2_OnAxis(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 newAxis, Vector2 newDelta)
+        {
+            if (onAxis != null)
+            {
+                onAxis.Invoke(this, fromSource, newAxis, newDelta);
+            }
+            if (onAxisEvent != null)
+            {
+                onAxisEvent.Invoke(this, fromSource, newAxis, newDelta);
+            }
+        }
+
+        /// <summary>
+        /// Gets the localized name of the device that the action corresponds to. 
+        /// </summary>
+        /// <param name="localizedParts">
+        /// <list type="bullet">
+        /// <item><description>VRInputString_Hand - Which hand the origin is in. E.g. "Left Hand"</description></item>
+        /// <item><description>VRInputString_ControllerType - What kind of controller the user has in that hand.E.g. "Vive Controller"</description></item>
+        /// <item><description>VRInputString_InputSource - What part of that controller is the origin. E.g. "Trackpad"</description></item>
+        /// <item><description>VRInputString_All - All of the above. E.g. "Left Hand Vive Controller Trackpad"</description></item>
+        /// </list>
+        /// </param>
+        public string GetLocalizedName(params EVRInputStringBits[] localizedParts)
+        {
+            if (vector2Action != null)
+                return vector2Action.GetLocalizedOriginPart(inputSource, localizedParts);
+            return null;
+        }
+
+        public delegate void AxisHandler(SteamVR_Behaviour_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 newAxis, Vector2 newDelta);
+        public delegate void ChangeHandler(SteamVR_Behaviour_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 newAxis, Vector2 newDelta);
+        public delegate void UpdateHandler(SteamVR_Behaviour_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 newAxis, Vector2 newDelta);
+    }
 }

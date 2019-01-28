@@ -337,7 +337,7 @@ namespace Valve.VR
                     DestroyImmediate(fx);
 
                     timer.Stop();
-                    Debug.Log(string.Format("Screenshot took {0} seconds.", timer.Elapsed));
+                    Debug.Log(string.Format("<b>[SteamVR]</b> Screenshot took {0} seconds.", timer.Elapsed));
                 }
 
                 if (tempCamera != null)

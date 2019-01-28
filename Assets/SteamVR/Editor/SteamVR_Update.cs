@@ -18,7 +18,7 @@ namespace Valve.VR
     [InitializeOnLoad]
     public class SteamVR_Update : EditorWindow
     {
-        const string currentVersion = "2.0";
+        const string currentVersion = "2.1";
         const string versionUrl = "http://media.steampowered.com/apps/steamvr/unitypluginversion.txt";
         const string notesUrl = "http://media.steampowered.com/apps/steamvr/unityplugin-v{0}.txt";
         const string pluginUrl = "http://u3d.as/content/valve-corporation/steam-vr-plugin";

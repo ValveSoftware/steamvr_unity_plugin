@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace Valve.VR.InteractionSystem
+namespace Valve.VR.InteractionSystem.Sample
 {
     public class Grenade : MonoBehaviour
     {

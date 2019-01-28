@@ -23,7 +23,7 @@ namespace Valve.VR.InteractionSystem.Sample
 
             if (plantAction == null)
             {
-                Debug.LogError("No plant action assigned");
+                Debug.LogError("<b>[SteamVR Interaction]</b> No plant action assigned");
                 return;
             }
 
@@ -36,9 +36,9 @@ namespace Valve.VR.InteractionSystem.Sample
                 plantAction.RemoveOnChangeListener(OnPlantActionChange, hand.handType);
         }
 
-        private void OnPlantActionChange(SteamVR_Action_In actionIn)
+        private void OnPlantActionChange(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources inputSource, bool newValue)
         {
-            if (plantAction.GetStateDown(hand.handType))
+            if (newValue)
             {
                 Plant();
             }
