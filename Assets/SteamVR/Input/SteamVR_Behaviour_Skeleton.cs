@@ -47,17 +47,6 @@ namespace Valve.VR
         [Tooltip("Modify this to blend between animations setup on the hand")]
         public float skeletonBlend = 1f;
 
-        /// <summary>
-        /// How much of a blend to apply to the transform positions and rotations between the normal position/rotation and the transform's
-        /// Set to 0 for the transform orientation to be set to the skeleton position/rotation
-        /// Set to 1 for the transform orientation to be set by the attached transform's position/rotation
-        /// </summary>
-        [Range(0, 1)]
-        [Tooltip("Modify this to blend between skeleton root orientation and attached transform root orientation")]
-        public float attachedTransformBlend = 0f;
-
-        public Transform attachedToTransform;
-
         /// <summary>This Unity event will fire whenever the position or rotation of the bones are updated.</summary>
         public SteamVR_Behaviour_SkeletonEvent onBoneTransformsUpdated;
 
@@ -177,6 +166,17 @@ namespace Valve.VR
 
         /// <summary>The range of motion that is set temporarily (call ResetTemporaryRangeOfMotion to reset to rangeOfMotion)</summary>
         protected EVRSkeletalMotionRange? temporaryRangeOfMotion = null;
+
+        /// <summary>
+        /// Get the accuracy level of the skeletal tracking data. 
+        /// <para/>* Estimated: Body part location can’t be directly determined by the device. Any skeletal pose provided by the device is estimated based on the active buttons, triggers, joysticks, or other input sensors. Examples include the Vive Controller and gamepads.
+        /// <para/>* Partial: Body part location can be measured directly but with fewer degrees of freedom than the actual body part.Certain body part positions may be unmeasured by the device and estimated from other input data.Examples include Knuckles or gloves that only measure finger curl
+        /// <para/>* Full: Body part location can be measured directly throughout the entire range of motion of the body part.Examples include hi-end mocap systems, or gloves that measure the rotation of each finger segment.
+        /// </summary>
+        public EVRSkeletalTrackingLevel skeletalTrackingLevel
+        {
+            get { return skeletonAction.skeletalTrackingLevel; }
+        }
 
         /// <summary>Returns true if we are in the process of blending the skeletonBlend field (between animation and bone data)</summary>
         public bool isBlending
@@ -352,7 +352,7 @@ namespace Valve.VR
         /// Blend from the current skeletonBlend amount to full bone data. (skeletonBlend = 1)
         /// </summary>
         /// <param name="overTime">How long you want the blend to take (in seconds)</param>
-        public void BlendToSkeleton(float overTime = 0.1f, bool detachTransform = false)
+        public void BlendToSkeleton(float overTime = 0.1f)
         {
             BlendTo(1, overTime);
         }
@@ -364,20 +364,9 @@ namespace Valve.VR
         /// <param name="overTime">How long you want the blend to take (in seconds)</param>
         public void BlendToPoser(SteamVR_Skeleton_Poser poser, float overTime = 0.1f)
         {
-            if (poser == null) return;
-            blendPoser = poser;
-            BlendTo(0, overTime);
-        }
+            if (poser == null)
+                return;
 
-        /// <summary>
-        /// Blend from the current skeletonBlend amount to pose animation. (skeletonBlend = 0)
-        /// Note: This will ignore the root position and rotation of the pose.
-        /// </summary>
-        /// <param name="overTime">How long you want the blend to take (in seconds)</param>
-        /// <param name="attachToTransform">If you have a positiona and rotation offset for your pose you can attach it to a particular transform</param>
-        public void BlendToPoser(SteamVR_Skeleton_Poser poser, Transform attachToTransform, float overTime = 0.1f)
-        {
-            if (poser == null) return;
             blendPoser = poser;
             BlendTo(0, overTime);
         }

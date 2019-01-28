@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.2RC4
+﻿# SteamVR Unity Plugin - v2.2
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -12,18 +12,20 @@ Requirements:
 
 Documentation:
 
- PDF documents are included in this directory on the new input system and the plugin itself. 
+ Documentation can be found online here: https://valvesoftware.github.io/steamvr_unity_plugin/
 
- For a basic tutorial see the steam guide here: https://steamcommunity.com/sharedfiles/filedetails/?id=1416820276
 
 
 Quick Start:
+
+ Follow the quickstart guide here: 
 
  If you want to explore the interaction scene you'll need to open the SteamVR Input window (under the Window Menu), click yes to copy example jsons, then click Save and Generate to create input actions.
 
  For the most simple example of VR with tracked controllers see the sample scene at ​SteamVR/Simple Sample
 
  For a more extensive example including picking up, throwing objects, and animated hands see the Interaction System example at ​SteamVR/Interaction System/Samples/Interactions_Example
+
 
 
 Support:
@@ -33,13 +35,24 @@ Support:
  If you'd like to discuss features, post guides, and give general feedback please post on the steam forum here: https://steamcommunity.com/app/250820/discussions/7/
  
 
+
+Changes for 2.2:
+
+ * Removed some old functions/members in the skeleton behaviour
+
+
+Changes for v2.2RC5:
+ 
+ * Fix for controllers that don't support Skeleton Input yet (WinMR)
+ 
+
 Changes for v2.2RC4:
  
  * Changed SteamVR_Input.isStartupFrame to return true for the couple frames around startup. This fixes some startup errors temporarily until we have a SteamVR API to determine startup state.
 
  * Fixed an issue where builds would fail
 
- * Significantly reduced asset package file size 50%. Some psds were replaced with pngs, some png res was lowered. The old assets are still on the github repo under old plugin versions.
+ * Significantly reduced asset package file size (~50%). Some psds were replaced with pngs, some png res was lowered. The old assets are still on the github repo under old plugin versions.
 
  * Made Unity 2018.1+ OpenVR package detection and installation more robust.
 

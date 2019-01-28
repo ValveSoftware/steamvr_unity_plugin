@@ -681,5 +681,72 @@ namespace Valve.VR
             return (float.IsNaN(rotation.x) == false && float.IsNaN(rotation.y) == false && float.IsNaN(rotation.z) == false && float.IsNaN(rotation.w) == false) &&
                 (rotation.x != 0 || rotation.y != 0 || rotation.z != 0 || rotation.w != 0);
         }
+
+        private static Dictionary<int, GameObject> velocityCache = new Dictionary<int, GameObject>();
+        public static void DrawVelocity(int key, Vector3 position, Vector3 velocity, float destroyAfterSeconds = 5f)
+        {
+            DrawVelocity(key, position, velocity, Color.green, destroyAfterSeconds);
+        }
+        public static void DrawVelocity(int key, Vector3 position, Vector3 velocity, Color color, float destroyAfterSeconds = 5f)
+        {
+            if (velocityCache.ContainsKey(key) == false || velocityCache[key] == null)
+            {
+                GameObject center = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                center.transform.localScale = Vector3.one * 0.025f;
+                center.transform.position = position;
+
+                if (velocity != Vector3.zero)
+                    center.transform.forward = velocity;
+
+                GameObject arrow = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                arrow.transform.parent = center.transform;
+
+                if (velocity != Vector3.zero)
+                {
+                    arrow.transform.localScale = new Vector3(0.25f, 0.25f, 3 + (velocity.magnitude * 1.5f));
+                    arrow.transform.localPosition = new Vector3(0, 0, arrow.transform.localScale.z / 2f);
+                }
+                else
+                {
+                    arrow.transform.localScale = Vector3.one;
+                    arrow.transform.localPosition = Vector3.zero;
+                }
+                arrow.transform.localRotation = Quaternion.identity;
+
+                GameObject.DestroyImmediate(arrow.GetComponent<Collider>());
+                GameObject.DestroyImmediate(center.GetComponent<Collider>());
+
+                center.GetComponent<MeshRenderer>().material.color = color;
+                arrow.GetComponent<MeshRenderer>().material.color = color;
+
+                velocityCache[key] = center;
+
+                GameObject.Destroy(center, destroyAfterSeconds);
+            }
+            else
+            {
+                GameObject center = velocityCache[key];
+                center.transform.position = position;
+
+                if (velocity != Vector3.zero)
+                    center.transform.forward = velocity;
+
+                Transform arrow = center.transform.GetChild(0);
+
+                if (velocity != Vector3.zero)
+                {
+                    arrow.localScale = new Vector3(0.25f, 0.25f, 3 + (velocity.magnitude * 1.5f));
+                    arrow.localPosition = new Vector3(0, 0, arrow.transform.localScale.z / 2f);
+                }
+                else
+                {
+                    arrow.localScale = Vector3.one;
+                    arrow.localPosition = Vector3.zero;
+                }
+                arrow.localRotation = Quaternion.identity;
+
+                GameObject.Destroy(center, destroyAfterSeconds);
+            }
+        }
     }
 }

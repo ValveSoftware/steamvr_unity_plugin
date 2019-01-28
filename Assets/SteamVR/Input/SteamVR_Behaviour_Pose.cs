@@ -67,7 +67,9 @@ namespace Valve.VR
         protected int deviceIndex = -1;
 
         protected SteamVR_HistoryBuffer historyBuffer = new SteamVR_HistoryBuffer(30);
-        
+
+        private bool debugVelocity = true;
+
 
         protected virtual void Start()
         {
@@ -133,6 +135,20 @@ namespace Valve.VR
             {
                 transform.localPosition = poseAction[inputSource].localPosition;
                 transform.localRotation = poseAction[inputSource].localRotation;
+            }
+
+            if (debugVelocity && isActive)
+            {
+                /*
+                Vector3 positionAtTime, velocityAtTime, angularVelocityAtTime;
+                Quaternion rotationAtTime;
+
+                poseAction[inputSource].GetPoseAtTimeOffset(1 * -0.011f, out positionAtTime, out rotationAtTime, out velocityAtTime, out angularVelocityAtTime);
+
+                SteamVR_Utils.DrawVelocity(-Time.frameCount, positionAtTime, velocityAtTime, Color.green);
+
+                SteamVR_Utils.DrawVelocity(Time.frameCount, transform.position, poseAction[inputSource].velocity, Color.red);
+                    */
             }
         }
 
@@ -221,6 +237,34 @@ namespace Valve.VR
             int top = historyBuffer.GetTopVelocity(10, 1);
 
             historyBuffer.GetAverageVelocities(out velocity, out angularVelocity, 2, top);
+        }
+
+        /// <summary>Rewrite the history buffer using SteamVR's actual recorded poses and get velocities based on those.</summary>
+        public void GetRealPeakVelocities(out Vector3 velocity, out Vector3 angularVelocity)
+        {
+            System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+            stopwatch.Start();
+
+            historyBuffer.Clear();
+
+            for (int framesBack = 1; framesBack < 15; framesBack++)
+            {
+                Vector3 positionAtTime, velocityAtTime, angularVelocityAtTime;
+                Quaternion rotationAtTime;
+
+                poseAction[inputSource].GetPoseAtTimeOffset(framesBack * -0.011f, out positionAtTime, out rotationAtTime, out velocityAtTime, out angularVelocityAtTime);
+
+                historyBuffer.Update(positionAtTime, rotationAtTime, velocityAtTime, angularVelocityAtTime);
+            }
+
+            int top = historyBuffer.GetTopVelocity(10, 1);
+
+            var step = historyBuffer.GetAtIndex(top);
+            velocity = step.velocity;
+            angularVelocity = step.angularVelocity;
+
+            stopwatch.Stop();
+            Debug.Log("ms: " + stopwatch.Elapsed.TotalMilliseconds);
         }
 
         protected int lastFrameUpdated;
