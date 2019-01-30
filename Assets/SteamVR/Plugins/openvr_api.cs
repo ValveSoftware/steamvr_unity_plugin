@@ -691,7 +691,7 @@ public struct IVRCompositor
 	internal _GetFrameTiming GetFrameTiming;
 
 	[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-	internal delegate uint _GetFrameTimings(ref Compositor_FrameTiming pTiming, uint nFrames);
+	internal delegate uint _GetFrameTimings([In, Out] Compositor_FrameTiming[] pTiming, uint nFrames);
 	[MarshalAs(UnmanagedType.FunctionPtr)]
 	internal _GetFrameTimings GetFrameTimings;
 
@@ -2523,9 +2523,9 @@ public class CVRCompositor
 		bool result = FnTable.GetFrameTiming(ref pTiming,unFramesAgo);
 		return result;
 	}
-	public uint GetFrameTimings(ref Compositor_FrameTiming pTiming,uint nFrames)
+	public uint GetFrameTimings(Compositor_FrameTiming [] pTiming)
 	{
-		uint result = FnTable.GetFrameTimings(ref pTiming,nFrames);
+		uint result = FnTable.GetFrameTimings(pTiming,(uint) pTiming.Length);
 		return result;
 	}
 	public float GetFrameTimeRemaining()
@@ -3803,8 +3803,6 @@ public enum ETrackedDeviceProperty
 	Prop_AdditionalDeviceSettingsPath_String = 1042,
 	Prop_Identifiable_Bool = 1043,
 	Prop_BootloaderVersion_Uint64 = 1044,
-	Prop_AdditionalSystemReportData_String = 1045,
-	Prop_CompositeFirmwareVersion_String = 1046,
 	Prop_ReportsTimeSinceVSync_Bool = 2000,
 	Prop_SecondsFromVsyncToPhotons_Float = 2001,
 	Prop_DisplayFrequency_Float = 2002,
@@ -3901,8 +3899,6 @@ public enum ETrackedDeviceProperty
 	Prop_TrackingRangeMinimumMeters_Float = 4004,
 	Prop_TrackingRangeMaximumMeters_Float = 4005,
 	Prop_ModeLabel_String = 4006,
-	Prop_CanWirelessIdentify_Bool = 4007,
-	Prop_Nonce_Int32 = 4008,
 	Prop_IconPathName_String = 5000,
 	Prop_NamedIconPathDeviceOff_String = 5001,
 	Prop_NamedIconPathDeviceSearching_String = 5002,
@@ -4025,6 +4021,7 @@ public enum EVREventType
 	VREvent_OverlayHidden = 501,
 	VREvent_DashboardActivated = 502,
 	VREvent_DashboardDeactivated = 503,
+	VREvent_DashboardThumbSelected = 504,
 	VREvent_DashboardRequested = 505,
 	VREvent_ResetDashboard = 506,
 	VREvent_RenderToast = 507,
@@ -4047,7 +4044,6 @@ public enum EVREventType
 	VREvent_RoomViewShown = 526,
 	VREvent_RoomViewHidden = 527,
 	VREvent_ShowUI = 528,
-	VREvent_ShowDevTools = 529,
 	VREvent_Notification_Shown = 600,
 	VREvent_Notification_Hidden = 601,
 	VREvent_Notification_BeginInteraction = 602,
@@ -4103,11 +4099,6 @@ public enum EVREventType
 	VREvent_Compositor_MirrorWindowHidden = 1401,
 	VREvent_Compositor_ChaperoneBoundsShown = 1410,
 	VREvent_Compositor_ChaperoneBoundsHidden = 1411,
-	VREvent_Compositor_DisplayDisconnected = 1412,
-	VREvent_Compositor_DisplayReconnected = 1413,
-	VREvent_Compositor_HDCPError = 1414,
-	VREvent_Compositor_ApplicationNotResponding = 1415,
-	VREvent_Compositor_ApplicationResumed = 1416,
 	VREvent_TrackedCamera_StartVideoStream = 1500,
 	VREvent_TrackedCamera_StopVideoStream = 1501,
 	VREvent_TrackedCamera_PauseVideoStream = 1502,
@@ -4130,7 +4121,6 @@ public enum EVREventType
 	VREvent_SpatialAnchors_DescriptorUpdated = 1801,
 	VREvent_SpatialAnchors_RequestPoseUpdate = 1802,
 	VREvent_SpatialAnchors_RequestDescriptorUpdate = 1803,
-	VREvent_SystemReport_Started = 1900,
 	VREvent_VendorSpecific_Reserved_Start = 10000,
 	VREvent_VendorSpecific_Reserved_End = 19999,
 }
@@ -4183,15 +4173,6 @@ public enum EShowUIType
 	ShowUI_ManageTrackers = 1,
 	ShowUI_QuickStart = 2,
 	ShowUI_Pairing = 3,
-	ShowUI_Settings = 4,
-}
-public enum EHDCPError
-{
-	None = 0,
-	LinkLost = 1,
-	Tampered = 2,
-	DeviceRevoked = 3,
-	Unknown = 4,
 }
 public enum EVRInputError
 {
@@ -4876,8 +4857,6 @@ public enum EIOBufferMode
 	[FieldOffset(0)] public VREvent_InputActionManifestLoad_t actionManifest;
 	[FieldOffset(0)] public VREvent_ProgressUpdate_t progressUpdate;
 	[FieldOffset(0)] public VREvent_ShowUI_t showUi;
-	[FieldOffset(0)] public VREvent_ShowDevTools_t showDevTools;
-	[FieldOffset(0)] public VREvent_HDCPError_t hdcpError;
 	[FieldOffset(0)] public VREvent_Keyboard_t keyboard; // This has to be at the end due to a mono bug
 }
 
@@ -5075,8 +5054,7 @@ public enum EIOBufferMode
 {
 	public float xdelta;
 	public float ydelta;
-	public uint unused;
-	public float viewportscale;
+	public uint repeatCount;
 }
 [StructLayout(LayoutKind.Sequential)] public struct VREvent_TouchPadMove_t
 {
@@ -5237,14 +5215,6 @@ public enum EIOBufferMode
 [StructLayout(LayoutKind.Sequential)] public struct VREvent_ShowUI_t
 {
 	public EShowUIType eType;
-}
-[StructLayout(LayoutKind.Sequential)] public struct VREvent_ShowDevTools_t
-{
-	public int nBrowserIdentifier;
-}
-[StructLayout(LayoutKind.Sequential)] public struct VREvent_HDCPError_t
-{
-	public EHDCPError eCode;
 }
 [StructLayout(LayoutKind.Sequential)] public struct VREvent_t
 {
@@ -6032,10 +6002,9 @@ public class OpenVR
 	public const string k_pch_Dashboard_Section = "dashboard";
 	public const string k_pch_Dashboard_EnableDashboard_Bool = "enableDashboard";
 	public const string k_pch_Dashboard_ArcadeMode_Bool = "arcadeMode";
-	public const string k_pch_Dashboard_UseWebDashboard = "useWebDashboard";
-	public const string k_pch_Dashboard_UseWebSettings = "useWebSettings";
-	public const string k_pch_Dashboard_UseWebIPD = "useWebIPD";
-	public const string k_pch_Dashboard_UseWebPowerMenu = "useWebPowerMenu";
+	public const string k_pch_Dashboard_EnableWebUI = "webUI";
+	public const string k_pch_Dashboard_EnableWebUIDevTools = "webUIDevTools";
+	public const string k_pch_Dashboard_EnableWebUIDashboardReplacement = "webUIDashboard";
 	public const string k_pch_modelskin_Section = "modelskins";
 	public const string k_pch_Driver_Enable_Bool = "enable";
 	public const string k_pch_WebInterface_Section = "WebInterface";

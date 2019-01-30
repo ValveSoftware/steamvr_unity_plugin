@@ -520,7 +520,7 @@ namespace Valve.VR
 
         private static void IdentifyEditorApplication(bool showLogs = true)
         {
-            bool isInstalled = OpenVR.Applications.IsApplicationInstalled(SteamVR_Settings.instance.editorAppKey);
+            //bool isInstalled = OpenVR.Applications.IsApplicationInstalled(SteamVR_Settings.instance.editorAppKey);
 
             string manifestPath = GetManifestFile();
 

@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.2
+﻿# SteamVR Unity Plugin - v2.2.0
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -31,7 +31,7 @@ Support:
  If you'd like to discuss features, post guides, and give general feedback please post on the steam forum here: https://steamcommunity.com/app/250820/discussions/7/
  
 
-Changes for v2.2:
+Changes for v2.2.0:
  
  * Removing some unused code
 
