@@ -73,7 +73,22 @@ namespace Valve.VR.InteractionSystem
 		public TextMesh debugText = null;
 
 		[Tooltip( "The output angle value of the drive in degrees, unlimited will increase or decrease without bound, take the 360 modulus to find number of rotations" )]
-		public float outAngle;
+		[SerializeField]
+        private float outAngle;
+
+		public float OutAngle
+		{
+			get
+			{
+				return outAngle;
+			}
+			set
+			{
+				outAngle = value;
+				UpdateAll();
+			}
+		}
+
 
 		private Quaternion start;
 
@@ -93,7 +108,7 @@ namespace Valve.VR.InteractionSystem
 
 		private bool driving = false;
 
-		// If the drive is limited as is at min/max, angles greater than this are ignored 
+		// If the drive is limited as is at min/max, angles greater than this are ignored
 		private float minMaxAngularThreshold = 1.0f;
 
 		private bool frozen = false;
