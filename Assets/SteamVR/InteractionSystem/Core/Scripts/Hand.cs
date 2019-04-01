@@ -1484,11 +1484,19 @@ namespace Valve.VR.InteractionSystem
             {
                 if (attachedObjects[attachedObjectIndex].attachedObject == attachedObject)
                 {
-                    return IsGrabbingWithType(attachedObjects[attachedObjectIndex].grabbedWithType) == false;
+                    if ((attachedObjects[attachedObjectIndex].attachmentFlags & AttachmentFlags.AllowSidegrade) != 0)
+                        return IsGrabbing() == false;
+                    else
+                        return IsGrabbingWithType(attachedObjects[attachedObjectIndex].grabbedWithType) == false;
                 }
             }
 
             return false;
+        }
+		
+        public bool IsGrabbing()
+        {
+            return IsGrabbingWithType(GrabTypes.Grip) || IsGrabbingWithType(GrabTypes.Pinch);
         }
 
         public bool IsGrabbingWithType(GrabTypes type)
