@@ -282,13 +282,22 @@ namespace Valve.VR
 
         private void Awake()
         {
+            if(SteamVR_Behaviour.instance != null
+               && SteamVR_Behaviour.instance.steamvr_render != null
+               && SteamVR_Behaviour.instance.steamvr_render != this)
+            {
+                Debug.LogError("Duplicate \"SteamVR_Render\" components!");
+                Destroy(this);
+                return;
+            }
+
             if (externalCamera == null && System.IO.File.Exists(externalCameraConfigPath))
             {
                 var prefab = Resources.Load<GameObject>("SteamVR_ExternalCamera");
-                var instance = Instantiate(prefab);
-                instance.gameObject.name = "External Camera";
+                var newInstance = Instantiate(prefab);
+                newInstance.gameObject.name = "External Camera";
 
-                externalCamera = instance.transform.GetChild(0).GetComponent<SteamVR_ExternalCamera>();
+                externalCamera = newInstance.transform.GetChild(0).GetComponent<SteamVR_ExternalCamera>();
                 externalCamera.configPath = externalCameraConfigPath;
                 externalCamera.ReadConfig();
             }
