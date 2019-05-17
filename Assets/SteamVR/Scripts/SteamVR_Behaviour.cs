@@ -93,6 +93,12 @@ namespace Valve.VR
 
         protected void Awake()
         {
+	    if (_instance != null && _instance != this)
+            {
+                Debug.LogError("Duplicate \"SteamVR_Behaviour\" components!");
+                Destroy(this);
+                return;
+            }
             if (initializeSteamVROnAwake && forcingInitialization == false)
                 InitializeSteamVR();
         }
