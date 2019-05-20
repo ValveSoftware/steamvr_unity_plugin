@@ -65,7 +65,7 @@ namespace Valve.VR
                     GameObject objectInstance = new GameObject("[SteamVR]");
                     _instance = objectInstance.AddComponent<SteamVR_Behaviour>();
                     _instance.steamvr_render = objectInstance.AddComponent<SteamVR_Render>();
-					behaviourInstance = _instance;
+                    behaviourInstance = _instance;
                 }
                 else
                 {
