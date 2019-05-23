@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.3.0
+﻿# SteamVR Unity Plugin - v2.3b1
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -31,7 +31,7 @@ Support:
  If you'd like to discuss features, post guides, and give general feedback please post on the steam forum here: https://steamcommunity.com/app/250820/discussions/7/
 
 
-Changes for 2.3b
+Changes for 2.3b1
 
  * Fix for runtime action instantiation generating garbage
 
