@@ -402,9 +402,9 @@ namespace Valve.VR
                 var vr = SteamVR.instance;
                 if (vr != null)
                 {
-                    var timing = new Compositor_FrameTiming();
-                    timing.m_nSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf(typeof(Compositor_FrameTiming));
-                    vr.compositor.GetFrameTiming(ref timing, 0);
+                    //var timing = new Compositor_FrameTiming();
+                    //timing.m_nSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf(typeof(Compositor_FrameTiming));
+                    //vr.compositor.GetFrameTiming(ref timing, 0);
 
                     Time.fixedDeltaTime = Time.timeScale / vr.hmd_DisplayFrequency;
                 }

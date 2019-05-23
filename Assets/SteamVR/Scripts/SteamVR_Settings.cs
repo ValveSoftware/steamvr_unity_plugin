@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Serialization;
 
 namespace Valve.VR
 {
@@ -22,7 +23,23 @@ namespace Valve.VR
 
         public bool pauseGameWhenDashboardVisible = true;
         public bool lockPhysicsUpdateRateToRenderFrequency = true;
-        public Valve.VR.ETrackingUniverseOrigin trackingSpace = Valve.VR.ETrackingUniverseOrigin.TrackingUniverseStanding;
+        public ETrackingUniverseOrigin trackingSpace
+        {
+            get
+            {
+                return trackingSpaceOrigin;
+            }
+            set
+            {
+                trackingSpaceOrigin = value;
+                if (SteamVR_Behaviour.isPlaying)
+                    SteamVR_Action_Pose.SetTrackingUniverseOrigin(trackingSpaceOrigin);
+            }
+        }
+
+        [SerializeField]
+        [FormerlySerializedAsAttribute("trackingSpace")]
+        private ETrackingUniverseOrigin trackingSpaceOrigin = ETrackingUniverseOrigin.TrackingUniverseStanding;
 
         [Tooltip("Filename local to the project root (or executable, in a build)")]
         public string actionsFilePath = "actions.json";

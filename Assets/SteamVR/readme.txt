@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.2.0
+﻿# SteamVR Unity Plugin - v2.3.0
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -29,7 +29,36 @@ Support:
  If you're having trouble with the plugin the best place to discuss issues is our github here: https://github.com/ValveSoftware/steamvr_unity_plugin/issues/
 
  If you'd like to discuss features, post guides, and give general feedback please post on the steam forum here: https://steamcommunity.com/app/250820/discussions/7/
- 
+
+
+Changes for 2.3b
+
+ * Fix for runtime action instantiation generating garbage
+
+ * Fix for setting Universe Origin at runtime. SteamVR.settings.trackingOrigin will automatically set all pose origins and the compositor origin (hmd)
+
+ * Physics objects correctly teleport while held now
+
+ * Fix for left hand being inside out sometimes.
+
+ * Fixed some perf and gc issues in the skeleton
+
+ * Updated poses to support 120hz prediction better
+
+ * Fix for IL2CPP compilation
+
+ * Fix for poor interpolation when dropping objects with left hand
+
+ * Added SteamVR_TrackingReferenceManager to allow showing tracking devices (base stations / cameras)
+
+ * Typo fix for GetStateUp returning GetStateDown
+
+ * Added ability to suppress updating the full skeletal bone data and only update summary data SteamVR_Action_Skeleton.onlyUpdateSummaryData
+
+ * Added access to different skeletal summary data. SteamVR_Action_Skeleton.summaryDataType specifies if you want the summary of the animation data or the summary of the device data. Device data may be faster but different than animation data.
+
+ * Added wrappers for ShowActionOrigin and ShowBindingsForActionSet. See SteamVR_Action.ShowOrigins() .HideOrigins(). SteamVR_ActionSet.ShowBindingHints() .HideBindingHints()
+
 
 Changes for v2.2.0:
  

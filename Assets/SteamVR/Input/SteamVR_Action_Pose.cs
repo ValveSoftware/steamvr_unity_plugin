@@ -163,6 +163,7 @@ namespace Valve.VR
         public static void SetTrackingUniverseOrigin(ETrackingUniverseOrigin newOrigin)
         {
             SetUniverseOrigin(newOrigin);
+            OpenVR.Compositor.SetTrackingSpace(newOrigin);
         }
     }
 
@@ -411,9 +412,6 @@ namespace Valve.VR
 
         protected static uint poseActionData_size = 0;
 
-        /// <summary>The amount of time in the future (or past!) the input system will predict poses for. Default is one frame forward (at 90hz) to account for render time.</summary>
-        public float predictedSecondsFromNow = 0.011f;
-
         /// <summary>The distance the pose needs to move/rotate before a change is detected</summary>
         public float changeTolerance = Mathf.Epsilon;
 
@@ -568,7 +566,7 @@ namespace Valve.VR
             lastVelocity = velocity;
             lastAngularVelocity = angularVelocity;
 
-            EVRInputError err = OpenVR.Input.GetPoseActionData(handle, universeOrigin, predictedSecondsFromNow, ref poseActionData, poseActionData_size, inputSourceHandle);
+            EVRInputError err = OpenVR.Input.GetPoseActionDataForNextFrame(handle, universeOrigin, ref poseActionData, poseActionData_size, inputSourceHandle);
             if (err != EVRInputError.None)
             {
                 Debug.LogError("<b>[SteamVR]</b> GetPoseActionData error (" + fullPath + "): " + err.ToString() + " Handle: " + handle.ToString() + ". Input source: " + inputSource.ToString());
@@ -578,7 +576,7 @@ namespace Valve.VR
             changed = GetChanged();
 
             if (changed)
-                changedTime = updateTime + predictedSecondsFromNow;
+                changedTime = updateTime;
 
             if (skipStateAndEventUpdates == false)
                 CheckAndSendEvents();
@@ -614,7 +612,7 @@ namespace Valve.VR
         /// <returns>true if we successfully returned a pose</returns>
         public bool GetVelocitiesAtTimeOffset(float secondsFromNow, out Vector3 velocityAtTime, out Vector3 angularVelocityAtTime)
         {
-            EVRInputError err = OpenVR.Input.GetPoseActionData(handle, universeOrigin, secondsFromNow, ref tempPoseActionData, poseActionData_size, inputSourceHandle);
+            EVRInputError err = OpenVR.Input.GetPoseActionDataRelativeToNow(handle, universeOrigin, secondsFromNow, ref tempPoseActionData, poseActionData_size, inputSourceHandle);
             if (err != EVRInputError.None)
             {
                 Debug.LogError("<b>[SteamVR]</b> GetPoseActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString()); //todo: this should be an error
@@ -637,7 +635,7 @@ namespace Valve.VR
         /// <returns>true if we successfully returned a pose</returns>
         public bool GetPoseAtTimeOffset(float secondsFromNow, out Vector3 positionAtTime, out Quaternion rotationAtTime, out Vector3 velocityAtTime, out Vector3 angularVelocityAtTime)
         {
-            EVRInputError err = OpenVR.Input.GetPoseActionData(handle, universeOrigin, secondsFromNow, ref tempPoseActionData, poseActionData_size, inputSourceHandle);
+            EVRInputError err = OpenVR.Input.GetPoseActionDataRelativeToNow(handle, universeOrigin, secondsFromNow, ref tempPoseActionData, poseActionData_size, inputSourceHandle);
             if (err != EVRInputError.None)
             {
                 Debug.LogError("<b>[SteamVR]</b> GetPoseActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString()); //todo: this should be an error

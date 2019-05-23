@@ -162,7 +162,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012099312676}
   m_LocalRotation: {x: -0.5000002, y: -0.49999997, z: -0.50000006, w: 0.49999994}
-  m_LocalPosition: {x: 0.3343, y: 1.012, z: -0.19}
+  m_LocalPosition: {x: 0.29399988, y: 1.2014, z: -0.19000012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000013251070012}
@@ -354,7 +354,7 @@ MonoBehaviour:
   hideSkeletonOnAttach: 0
   hideControllerOnAttach: 1
   handAnimationOnPickup: 0
-  setRangeOfMotionOnPickup: 0
+  setRangeOfMotionOnPickup: -1
   useHandObjectAttachmentPoint: 0
   attachEaseIn: 0
   snapAttachEaseInCurve:

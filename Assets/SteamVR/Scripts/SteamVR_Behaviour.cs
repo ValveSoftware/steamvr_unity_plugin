@@ -40,6 +40,7 @@ namespace Valve.VR
         [HideInInspector]
         public SteamVR_Render steamvr_render;
 
+        internal static bool isPlaying = false;
 
         private static bool initializing = false;
         public static void Initialize(bool forceUnityVRToOpenVR = false)
@@ -93,6 +94,8 @@ namespace Valve.VR
 
         protected void Awake()
         {
+            isPlaying = true;
+
             if (initializeSteamVROnAwake && forcingInitialization == false)
                 InitializeSteamVR();
         }
@@ -161,6 +164,14 @@ namespace Valve.VR
             initializeCoroutine = null;
             forcingInitialization = false;
         }
+
+#if UNITY_EDITOR
+        //only stop playing if the unity editor is running
+        private void OnDestroy()
+        {
+            isPlaying = false;
+        }
+#endif
 
 #if UNITY_2017_1_OR_NEWER
         protected void OnEnable()
