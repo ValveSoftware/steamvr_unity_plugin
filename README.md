@@ -8,19 +8,18 @@ The SteamVR runtime must be installed. This can be downloaded from Steam under t
 
  * This version of the SteamVR Unity Plugin is compatible and has been tested with Unity versions 5.4 - 2019.1
 
+### Documentation
+Documentation can be found online here: [https://valvesoftware.github.io/steamvr_unity_plugin/](https://valvesoftware.github.io/steamvr_unity_plugin/)
+
 ### Quick Start
 
- * Follow the [Quickstart guide on this site](articles/Quickstart.md)
+ * Follow the [Quickstart guide on this site](https://valvesoftware.github.io/steamvr_unity_plugin/articles/Quickstart.html)
 
- * If you want to explore the [Interaction System](articles/Interaction-System.md) scene you'll need to open the SteamVR Input window (under the Window Menu), click yes to copy example jsons, then click Save and Generate to create input actions.
+ * If you want to explore the [Interaction System](https://valvesoftware.github.io/steamvr_unity_plugin/articles/Interaction-System.html) scene you'll need to open the SteamVR Input window (under the Window Menu), click yes to copy example jsons, then click Save and Generate to create input actions.
 
  * For the most simple example of VR with tracked controllers see the sample scene at /SteamVR/Simple Sample
 
  * For a more extensive example including picking up, throwing objects, and animated hands see the Interaction System example at /SteamVR/Interaction System/Samples/Interactions_Example
-
-
-### Documentation
-Documentation can be found online here: [https://valvesoftware.github.io/steamvr_unity_plugin/](https://valvesoftware.github.io/steamvr_unity_plugin/)
 
 
 ### Support
