@@ -199,8 +199,11 @@ namespace Valve.VR
 
             poseUpdatedThisFrame = true;
 
-            // always do additive animation on main pose
-            blendPoses[0].UpdateAdditiveAnimation(skeletonAction, inputSource);
+            if (skeletonAction.activeBinding)
+            {
+                // always do additive animation on main pose
+                blendPoses[0].UpdateAdditiveAnimation(skeletonAction, inputSource);
+            }
 
             //copy from main pose as a base
             SteamVR_Skeleton_PoseSnapshot snap = GetHandSnapshot(inputSource);
@@ -228,7 +231,7 @@ namespace Valve.VR
                 // if disabled or very low influence, skip for perf
                 if (blendingBehaviours[behaviourIndex].enabled && blendingBehaviours[behaviourIndex].influence * blendingBehaviours[behaviourIndex].value > 0.01f)
                 {
-                    if (blendingBehaviours[behaviourIndex].pose != 0)
+                    if (blendingBehaviours[behaviourIndex].pose != 0 && skeletonAction.activeBinding)
                     {
                         // update additive animation only as needed
                         blendPoses[blendingBehaviours[behaviourIndex].pose].UpdateAdditiveAnimation(skeletonAction, inputSource);

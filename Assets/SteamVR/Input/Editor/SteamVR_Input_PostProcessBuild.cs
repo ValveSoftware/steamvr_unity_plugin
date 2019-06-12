@@ -14,7 +14,7 @@ namespace Valve.VR
             SteamVR_Input.InitializeFile();
             
             FileInfo fileInfo = new FileInfo(pathToBuiltProject);
-            string buildPath = fileInfo.Directory.FullName;
+            string buildPath = Path.Combine(fileInfo.Directory.FullName, Path.GetDirectoryName(SteamVR_Settings.instance.actionsFilePath));
 
             bool overwrite = EditorPrefs.GetBool(SteamVR_Input_Generator.steamVRInputOverwriteBuildKey);
 

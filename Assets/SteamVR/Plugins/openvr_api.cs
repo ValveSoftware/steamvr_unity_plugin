@@ -231,11 +231,6 @@ public struct IVRSystem
 	internal _ShouldApplicationReduceRenderingWork ShouldApplicationReduceRenderingWork;
 
 	[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-	internal delegate uint _DriverDebugRequest(uint unDeviceIndex, string pchRequest, System.Text.StringBuilder pchResponseBuffer, uint unResponseBufferSize);
-	[MarshalAs(UnmanagedType.FunctionPtr)]
-	internal _DriverDebugRequest DriverDebugRequest;
-
-	[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 	internal delegate EVRFirmwareError _PerformFirmwareUpdate(uint unDeviceIndex);
 	[MarshalAs(UnmanagedType.FunctionPtr)]
 	internal _PerformFirmwareUpdate PerformFirmwareUpdate;
@@ -1550,6 +1545,11 @@ public struct IVRDriverManager
 	[MarshalAs(UnmanagedType.FunctionPtr)]
 	internal _GetDriverHandle GetDriverHandle;
 
+	[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+	internal delegate bool _IsEnabled(uint nDriver);
+	[MarshalAs(UnmanagedType.FunctionPtr)]
+	internal _IsEnabled IsEnabled;
+
 }
 
 [StructLayout(LayoutKind.Sequential)]
@@ -1744,6 +1744,31 @@ public struct IVRSpatialAnchors
 	internal delegate EVRSpatialAnchorError _GetSpatialAnchorDescriptor(uint unHandle, System.Text.StringBuilder pchDescriptorOut, ref uint punDescriptorBufferLenInOut);
 	[MarshalAs(UnmanagedType.FunctionPtr)]
 	internal _GetSpatialAnchorDescriptor GetSpatialAnchorDescriptor;
+
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public struct IVRDebug
+{
+	[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+	internal delegate EVRDebugError _EmitVrProfilerEvent(string pchMessage);
+	[MarshalAs(UnmanagedType.FunctionPtr)]
+	internal _EmitVrProfilerEvent EmitVrProfilerEvent;
+
+	[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+	internal delegate EVRDebugError _BeginVrProfilerEvent(ref ulong pHandleOut);
+	[MarshalAs(UnmanagedType.FunctionPtr)]
+	internal _BeginVrProfilerEvent BeginVrProfilerEvent;
+
+	[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+	internal delegate EVRDebugError _FinishVrProfilerEvent(ulong hHandle, string pchMessage);
+	[MarshalAs(UnmanagedType.FunctionPtr)]
+	internal _FinishVrProfilerEvent FinishVrProfilerEvent;
+
+	[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+	internal delegate uint _DriverDebugRequest(uint unDeviceIndex, string pchRequest, System.Text.StringBuilder pchResponseBuffer, uint unResponseBufferSize);
+	[MarshalAs(UnmanagedType.FunctionPtr)]
+	internal _DriverDebugRequest DriverDebugRequest;
 
 }
 
@@ -2048,11 +2073,6 @@ public class CVRSystem
 	public bool ShouldApplicationReduceRenderingWork()
 	{
 		bool result = FnTable.ShouldApplicationReduceRenderingWork();
-		return result;
-	}
-	public uint DriverDebugRequest(uint unDeviceIndex,string pchRequest,System.Text.StringBuilder pchResponseBuffer,uint unResponseBufferSize)
-	{
-		uint result = FnTable.DriverDebugRequest(unDeviceIndex,pchRequest,pchResponseBuffer,unResponseBufferSize);
 		return result;
 	}
 	public EVRFirmwareError PerformFirmwareUpdate(uint unDeviceIndex)
@@ -3493,6 +3513,11 @@ public class CVRDriverManager
 		ulong result = FnTable.GetDriverHandle(pchDriverName);
 		return result;
 	}
+	public bool IsEnabled(uint nDriver)
+	{
+		bool result = FnTable.IsEnabled(nDriver);
+		return result;
+	}
 }
 
 
@@ -3716,6 +3741,37 @@ public class CVRSpatialAnchors
 }
 
 
+public class CVRDebug
+{
+	IVRDebug FnTable;
+	internal CVRDebug(IntPtr pInterface)
+	{
+		FnTable = (IVRDebug)Marshal.PtrToStructure(pInterface, typeof(IVRDebug));
+	}
+	public EVRDebugError EmitVrProfilerEvent(string pchMessage)
+	{
+		EVRDebugError result = FnTable.EmitVrProfilerEvent(pchMessage);
+		return result;
+	}
+	public EVRDebugError BeginVrProfilerEvent(ref ulong pHandleOut)
+	{
+		pHandleOut = 0;
+		EVRDebugError result = FnTable.BeginVrProfilerEvent(ref pHandleOut);
+		return result;
+	}
+	public EVRDebugError FinishVrProfilerEvent(ulong hHandle,string pchMessage)
+	{
+		EVRDebugError result = FnTable.FinishVrProfilerEvent(hHandle,pchMessage);
+		return result;
+	}
+	public uint DriverDebugRequest(uint unDeviceIndex,string pchRequest,System.Text.StringBuilder pchResponseBuffer,uint unResponseBufferSize)
+	{
+		uint result = FnTable.DriverDebugRequest(unDeviceIndex,pchRequest,pchResponseBuffer,unResponseBufferSize);
+		return result;
+	}
+}
+
+
 public class OpenVRInterop
 {
 	[DllImportAttribute("openvr_api", EntryPoint = "VR_InitInternal", CallingConvention = CallingConvention.Cdecl)]
@@ -3926,6 +3982,7 @@ public enum ETrackedDeviceProperty
 	Prop_CameraDistortionFunction_Int32_Array = 2072,
 	Prop_CameraDistortionCoefficients_Float_Array = 2073,
 	Prop_ExpectedControllerType_String = 2074,
+	Prop_HmdTrackingStyle_Int32 = 2075,
 	Prop_DisplayAvailableFrameRates_Float_Array = 2080,
 	Prop_DisplaySupportsMultipleFramerates_Bool = 2081,
 	Prop_DashboardLayoutPathName_String = 2090,
@@ -3997,6 +4054,13 @@ public enum ETrackedPropertyError
 	TrackedProp_InvalidOperation = 11,
 	TrackedProp_CannotWriteToWildcards = 12,
 	TrackedProp_IPCReadFailure = 13,
+}
+public enum EHmdTrackingStyle
+{
+	Unknown = 0,
+	Lighthouse = 1,
+	OutsideInCameras = 2,
+	InsideOutCameras = 3,
 }
 public enum EVRSubmitFlags
 {
@@ -4911,6 +4975,11 @@ public enum EIOBufferMode
 	Read = 1,
 	Write = 2,
 	Create = 512,
+}
+public enum EVRDebugError
+{
+	Success = 0,
+	BadParameter = 1,
 }
 
 [StructLayout(LayoutKind.Explicit)] public struct VREvent_Data_t
@@ -5836,6 +5905,7 @@ public enum EIOBufferMode
 	public IntPtr m_pVRInput; // class vr::IVRInput *
 	public IntPtr m_pVRIOBuffer; // class vr::IVRIOBuffer *
 	public IntPtr m_pVRSpatialAnchors; // class vr::IVRSpatialAnchors *
+	public IntPtr m_pVRDebug; // class vr::IVRDebug *
 	public IntPtr m_pVRNotifications; // class vr::IVRNotifications *
 }
 
@@ -5932,7 +6002,7 @@ public class OpenVR
 	public const ulong k_ulOverlayHandleInvalid = 0;
 	public const uint k_unMaxDistortionFunctionParameters = 8;
 	public const uint k_unScreenshotHandleInvalid = 0;
-	public const string IVRSystem_Version = "IVRSystem_019";
+	public const string IVRSystem_Version = "IVRSystem_020";
 	public const string IVRExtendedDisplay_Version = "IVRExtendedDisplay_001";
 	public const string IVRTrackedCamera_Version = "IVRTrackedCamera_005";
 	public const uint k_unMaxApplicationKeyLength = 128;
@@ -6108,6 +6178,7 @@ public class OpenVR
 	public const string k_pch_Dashboard_UseWebPowerMenu = "useWebPowerMenu";
 	public const string k_pch_modelskin_Section = "modelskins";
 	public const string k_pch_Driver_Enable_Bool = "enable";
+	public const string k_pch_Driver_LoadPriority_Int32 = "loadPriority";
 	public const string k_pch_WebInterface_Section = "WebInterface";
 	public const string k_pch_WebInterface_WebEnable_Bool = "WebEnable";
 	public const string k_pch_WebInterface_WebPort_String = "WebPort";
@@ -6136,6 +6207,7 @@ public class OpenVR
 	public const string IVRIOBuffer_Version = "IVRIOBuffer_002";
 	public const uint k_ulInvalidSpatialAnchorHandle = 0;
 	public const string IVRSpatialAnchors_Version = "IVRSpatialAnchors_001";
+	public const string IVRDebug_Version = "IVRDebug_001";
 
 	static uint VRToken { get; set; }
 
@@ -6162,6 +6234,7 @@ public class OpenVR
 			m_pVRIOBuffer = null;
 			m_pVRSpatialAnchors = null;
 			m_pVRNotifications = null;
+			m_pVRDebug = null;
 		}
 
 		void CheckClear()
@@ -6355,6 +6428,19 @@ public class OpenVR
 			return m_pVRSpatialAnchors;
 		}
 
+		public CVRDebug VRDebug()
+		{
+			CheckClear();
+			if (m_pVRDebug == null)
+			{
+				var eError = EVRInitError.None;
+				var pInterface = OpenVRInterop.GetGenericInterface(FnTable_Prefix + IVRDebug_Version, ref eError);
+				if (pInterface != IntPtr.Zero && eError == EVRInitError.None)
+					m_pVRDebug = new CVRDebug(pInterface);
+			}
+			return m_pVRDebug;
+		}
+
 		public CVRNotifications VRNotifications()
 		{
 			CheckClear();
@@ -6383,6 +6469,7 @@ public class OpenVR
 		private CVRIOBuffer m_pVRIOBuffer;
 		private CVRSpatialAnchors m_pVRSpatialAnchors;
 		private CVRNotifications m_pVRNotifications;
+		private CVRDebug m_pVRDebug;
 	};
 
 	private static COpenVRContext _OpenVRInternal_ModuleContext = null;
@@ -6411,6 +6498,8 @@ public class OpenVR
 	public static CVRIOBuffer IOBuffer { get { return OpenVRInternal_ModuleContext.VRIOBuffer(); } }
 	public static CVRSpatialAnchors SpatialAnchors { get { return OpenVRInternal_ModuleContext.VRSpatialAnchors(); } }
 	public static CVRNotifications Notifications { get { return OpenVRInternal_ModuleContext.VRNotifications(); } }
+	public static CVRDebug Debug { get { return OpenVRInternal_ModuleContext.VRDebug(); } }
+
 
 	/** Finds the active installation of vrclient.dll and initializes it */
 	public static CVRSystem Init(ref EVRInitError peError, EVRApplicationType eApplicationType = EVRApplicationType.VRApplication_Scene, string pchStartupInfo= "")

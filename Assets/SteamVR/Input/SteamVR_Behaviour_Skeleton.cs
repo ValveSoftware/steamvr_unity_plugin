@@ -87,27 +87,114 @@ namespace Valve.VR
         [Tooltip("Is this rendermodel a mirror of another one?")]
         public MirrorType mirroring;
 
+
+        [Header("No Skeleton - Fallback")]
+
+
+        [Tooltip("The fallback SkeletonPoser to drive hand animation when no skeleton data is available")]
+        /// <summary>The fallback SkeletonPoser to drive hand animation when no skeleton data is available</summary>
+        public SteamVR_Skeleton_Poser fallbackPoser;
+
+        [Tooltip("The fallback action to drive finger curl values when no skeleton data is available")]
+        /// <summary>The fallback SkeletonPoser to drive hand animation when no skeleton data is available</summary>
+        public SteamVR_Action_Single fallbackCurlAction;
+
+        /// <summary>
+        /// Is the skeleton action bound?
+        /// </summary>
+        public bool skeletonAvailable { get { return skeletonAction.activeBinding; } }
+
+
+
+
         /// <summary>Returns whether this action is bound and the action set is active</summary>
         public bool isActive { get { return skeletonAction.GetActive(); } }
 
 
-        /// <summary>An array of five 0-1 values representing how curled a finger is. 0 being straight, 1 being fully curled. Index 0 being thumb, index 4 being pinky</summary>
-        public float[] fingerCurls { get { return skeletonAction.GetFingerCurls(); } }
+
+
+        /// <summary>An array of five 0-1 values representing how curled a finger is. 0 being straight, 1 being fully curled. 0 being thumb, 4 being pinky</summary>
+        public float[] fingerCurls
+        {
+            get
+            {
+                if (skeletonAvailable)
+                {
+                    return skeletonAction.GetFingerCurls();
+                }
+                else
+                {
+                    //fallback, return array where each finger curl is just the fallback curl action value
+                    float[] curls = new float[5];
+                    for (int i = 0; i < 5; i++)
+                    {
+                        curls[i] = fallbackCurlAction.GetAxis(inputSource);
+                    }
+                    return curls;
+                }
+            }
+        }
 
         /// <summary>An 0-1 value representing how curled a finger is. 0 being straight, 1 being fully curled.</summary>
-        public float thumbCurl { get { return skeletonAction.GetFingerCurl(SteamVR_Skeleton_FingerIndexEnum.thumb); } }
+        public float thumbCurl
+        {
+            get
+            {
+                if (skeletonAvailable)
+                    return skeletonAction.GetFingerCurl(SteamVR_Skeleton_FingerIndexEnum.thumb);
+                else
+                    return fallbackCurlAction.GetAxis(inputSource);
+            }
+        }
 
         /// <summary>An 0-1 value representing how curled a finger is. 0 being straight, 1 being fully curled.</summary>
-        public float indexCurl { get { return skeletonAction.GetFingerCurl(SteamVR_Skeleton_FingerIndexEnum.index); } }
+        public float indexCurl
+        {
+            get
+            {
+                if (skeletonAvailable)
+                    return skeletonAction.GetFingerCurl(SteamVR_Skeleton_FingerIndexEnum.index);
+                else
+                    return fallbackCurlAction.GetAxis(inputSource);
+            }
+        }
 
         /// <summary>An 0-1 value representing how curled a finger is. 0 being straight, 1 being fully curled.</summary>
-        public float middleCurl { get { return skeletonAction.GetFingerCurl(SteamVR_Skeleton_FingerIndexEnum.middle); } }
+        public float middleCurl
+        {
+            get
+            {
+                if (skeletonAvailable)
+                    return skeletonAction.GetFingerCurl(SteamVR_Skeleton_FingerIndexEnum.middle);
+                else
+                    return fallbackCurlAction.GetAxis(inputSource);
+            }
+        }
 
         /// <summary>An 0-1 value representing how curled a finger is. 0 being straight, 1 being fully curled.</summary>
-        public float ringCurl { get { return skeletonAction.GetFingerCurl(SteamVR_Skeleton_FingerIndexEnum.ring); } }
+        public float ringCurl
+        {
+            get
+            {
+                if (skeletonAvailable)
+                    return skeletonAction.GetFingerCurl(SteamVR_Skeleton_FingerIndexEnum.ring);
+                else
+                    return fallbackCurlAction.GetAxis(inputSource);
+            }
+        }
 
         /// <summary>An 0-1 value representing how curled a finger is. 0 being straight, 1 being fully curled.</summary>
-        public float pinkyCurl { get { return skeletonAction.GetFingerCurl(SteamVR_Skeleton_FingerIndexEnum.pinky); } }
+        public float pinkyCurl
+        {
+            get
+            {
+                if (skeletonAvailable)
+                    return skeletonAction.GetFingerCurl(SteamVR_Skeleton_FingerIndexEnum.pinky);
+                else
+                    return fallbackCurlAction.GetAxis(inputSource);
+            }
+        }
+
 
 
         public Transform root { get { return bones[SteamVR_Skeleton_JointIndexes.root]; } }
@@ -273,7 +360,7 @@ namespace Valve.VR
 
         protected virtual void UpdateSkeleton()
         {
-            if (skeletonAction == null || skeletonAction.active == false)
+            if (skeletonAction == null)
                 return;
 
             if (updatePose)
@@ -673,35 +760,65 @@ namespace Valve.VR
 
         protected void CopyBonePositions(Vector3[] positionBuffer)
         {
-            Vector3[] rawSkeleton = skeletonAction.GetBonePositions();
-
-            if (mirroring == MirrorType.LeftToRight || mirroring == MirrorType.RightToLeft)
+            if (skeletonAvailable)
             {
-                for (int boneIndex = 0; boneIndex < positionBuffer.Length; boneIndex++)
+                Vector3[] rawSkeleton = skeletonAction.GetBonePositions();
+
+                if (mirroring == MirrorType.LeftToRight || mirroring == MirrorType.RightToLeft)
                 {
-                    MirrorBonePosition(ref rawSkeleton[boneIndex], ref positionBuffer[boneIndex], boneIndex);
+                    for (int boneIndex = 0; boneIndex < positionBuffer.Length; boneIndex++)
+                    {
+                        MirrorBonePosition(ref rawSkeleton[boneIndex], ref positionBuffer[boneIndex], boneIndex);
+                    }
+                }
+                else
+                {
+                    rawSkeleton.CopyTo(positionBuffer, 0);
                 }
             }
             else
             {
-                rawSkeleton.CopyTo(positionBuffer, 0);
+                //fallback to getting skeleton pose from skeletonPoser
+                if (fallbackPoser != null)
+                {
+                    fallbackPoser.GetBlendedPose(skeletonAction, inputSource).bonePositions.CopyTo(positionBuffer, 0);
+                }
+                else
+                {
+                    Debug.LogError("Skeleton Action is not bound, and you have not provided a fallback SkeletonPoser. Please create one to drive hand animation when no skeleton data is available.");
+                }
             }
         }
 
         protected void CopyBoneRotations(Quaternion[] rotationBuffer)
         {
-            Quaternion[] rawSkeleton = skeletonAction.GetBoneRotations();
-
-            if (mirroring == MirrorType.LeftToRight || mirroring == MirrorType.RightToLeft)
+            if (skeletonAvailable)
             {
-                for (int boneIndex = 0; boneIndex < rotationBuffer.Length; boneIndex++)
+                Quaternion[] rawSkeleton = skeletonAction.GetBoneRotations();
+
+                if (mirroring == MirrorType.LeftToRight || mirroring == MirrorType.RightToLeft)
                 {
-                    MirrorBoneRotation(ref rawSkeleton[boneIndex], ref rotationBuffer[boneIndex], boneIndex);
+                    for (int boneIndex = 0; boneIndex < rotationBuffer.Length; boneIndex++)
+                    {
+                        MirrorBoneRotation(ref rawSkeleton[boneIndex], ref rotationBuffer[boneIndex], boneIndex);
+                    }
+                }
+                else
+                {
+                    rawSkeleton.CopyTo(rotationBuffer, 0);
                 }
             }
             else
             {
-                rawSkeleton.CopyTo(rotationBuffer, 0);
+                //fallback to getting skeleton pose from skeletonPoser
+                if (fallbackPoser != null)
+                {
+                    fallbackPoser.GetBlendedPose(skeletonAction, inputSource).boneRotations.CopyTo(rotationBuffer,0);
+                }
+                else
+                {
+                    Debug.LogError("Skeleton Action is not bound, and you have not provided a fallback SkeletonPoser. Please create one to drive hand animation when no skeleton data is available.");
+                }
             }
         }
 

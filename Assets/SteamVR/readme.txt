@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.3b1
+﻿# SteamVR Unity Plugin - v2.3.1b
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -31,7 +31,32 @@ Support:
  If you'd like to discuss features, post guides, and give general feedback please post on the steam forum here: https://steamcommunity.com/app/250820/discussions/7/
 
 
-Changes for 2.3b1
+Changes for 2.3.1b
+
+ * Added legacy mixed reality camera mode (enabled by default). You can change this in SteamVR/Resources/SteamVR_Settings.
+
+ * Fixing some errors for 2019.1
+
+ * Removing an unused editor class
+
+ * Added low fidelity fallback hand animation for when no skeleton data is available (WinMR)
+
+ * Fixing OpenVR Package not required error for pre 2018.2 versions of unity
+
+ * Fixed serializable event in Throwable
+
+ * Fix for Custom Skeleton not getting initialized
+
+ * Fix for a rare failure in action retrieval (https://github.com/ValveSoftware/steamvr_unity_plugin/pull/431)
+
+ * Allowing folders in the action path. (https://github.com/ValveSoftware/steamvr_unity_plugin/pull/443)
+
+ * Fix for multiple SteamVR_Behaviours initializing (https://github.com/ValveSoftware/steamvr_unity_plugin/pull/435)
+
+ * Stop updating poses if they're not active
+
+
+Changes for 2.3b
 
  * Fix for runtime action instantiation generating garbage
 

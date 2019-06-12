@@ -572,8 +572,11 @@ namespace Valve.VR
                 Debug.LogError("<b>[SteamVR]</b> GetPoseActionData error (" + fullPath + "): " + err.ToString() + " Handle: " + handle.ToString() + ". Input source: " + inputSource.ToString());
             }
 
-            SetCacheVariables();
-            changed = GetChanged();
+            if (active)
+            {
+                SetCacheVariables();
+                changed = GetChanged();
+            }
 
             if (changed)
                 changedTime = updateTime;
