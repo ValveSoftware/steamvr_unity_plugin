@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.3.1b
+﻿# SteamVR Unity Plugin - v2.3.2
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -29,6 +29,12 @@ Support:
  If you're having trouble with the plugin the best place to discuss issues is our github here: https://github.com/ValveSoftware/steamvr_unity_plugin/issues/
 
  If you'd like to discuss features, post guides, and give general feedback please post on the steam forum here: https://steamcommunity.com/app/250820/discussions/7/
+ 
+
+
+Changes for 2.3.2
+
+ * Added SteamVR.asmdef.20192 for Unity 2019.2b and 2019.3a - replace SteamVR.asmdef to fix UI errors in these versions.
 
 
 Changes for 2.3.1b
