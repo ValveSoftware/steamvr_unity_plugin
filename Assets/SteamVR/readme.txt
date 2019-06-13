@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.3.2
+﻿# SteamVR Unity Plugin - v2.3.2 (sdk 1.4.18)
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -33,6 +33,8 @@ Support:
 
 
 Changes for 2.3.2
+ 
+ * Updated openvr sdk version to 1.4.18
 
  * Added SteamVR.asmdef.20192 for Unity 2019.2b and 2019.3a - replace SteamVR.asmdef to fix UI errors in these versions.
 
