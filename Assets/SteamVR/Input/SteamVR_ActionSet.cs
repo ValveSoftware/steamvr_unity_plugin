@@ -246,6 +246,44 @@ namespace Valve.VR
             return setData.GetShortName();
         }
 
+        VRActiveActionSet_t[] emptySetCache = new VRActiveActionSet_t[0];
+        VRActiveActionSet_t[] setCache = new VRActiveActionSet_t[1];
+        /// <summary>
+        /// Shows all the bindings for the actions in this set.
+        /// </summary>
+        /// <param name="originToHighlight">Highlights the binding of the passed in action (or the first action in the set if none is specified)</param>
+        /// <returns></returns>
+        public bool ShowBindingHints(ISteamVR_Action_In originToHighlight = null)
+        {
+            if (originToHighlight == null)
+            {
+                for (int actionIndex = 0; actionIndex < allActions.Length; actionIndex++)
+                {
+                    if (allActions[actionIndex].direction == SteamVR_ActionDirections.In && allActions[actionIndex].active)
+                    {
+                        originToHighlight = (ISteamVR_Action_In)allActions[actionIndex];
+                        break;
+                    }
+                }
+            }
+
+
+            if (originToHighlight != null)
+            {
+                setCache[0].ulActionSet = this.handle;
+                OpenVR.Input.ShowBindingsForActionSet(setCache, 1, originToHighlight.activeOrigin);
+                return true;
+            }
+
+            return false;
+        }
+
+        public void HideBindingHints()
+        {
+            OpenVR.Input.ShowBindingsForActionSet(emptySetCache, 0, 0);
+        }
+        
+
         public bool ReadRawSetActive(SteamVR_Input_Sources inputSource)
         {
             return setData.ReadRawSetActive(inputSource);
@@ -268,13 +306,18 @@ namespace Valve.VR
 
         public CreateType GetCopy<CreateType>() where CreateType : SteamVR_ActionSet, new()
         {
-            CreateType actionSet = new CreateType();
-            actionSet.actionSetPath = this.actionSetPath;
-            actionSet.setData = this.setData;
-            actionSet.initialized = true;
-            return actionSet;
-
-            //return (CreateType)this; //no need to make copies in builds - will reduce memory alloc //todo: having this enabled was not working. all sets were the same (maybe actions too)
+            if (SteamVR_Input.ShouldMakeCopy()) //no need to make copies at runtime
+            {
+                CreateType actionSet = new CreateType();
+                actionSet.actionSetPath = this.actionSetPath;
+                actionSet.setData = this.setData;
+                actionSet.initialized = true;
+                return actionSet;
+            }
+            else
+            {
+                return (CreateType)this;
+            }
         }
 
         public bool Equals(SteamVR_ActionSet other)
