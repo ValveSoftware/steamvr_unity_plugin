@@ -677,7 +677,7 @@ namespace Valve.VR
             int count = directionEndIndex - setEndIndex - 1;
             string direction = fullPath.Substring(setEndIndex + 1, count);
 
-            if (direction == "in")
+            if (direction == "IN".ToLower(CultureInfo.CurrentCulture))
                 return SteamVR_ActionDirections.In;
             else if (direction == "out")
                 return SteamVR_ActionDirections.Out;
