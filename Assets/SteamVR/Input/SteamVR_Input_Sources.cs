@@ -48,6 +48,9 @@ namespace Valve.VR
 
         [Description("/user/keyboard")]
         Keyboard,
+        
+        [Description("/user/treadmill")]
+        Treadmill,
     }
 }
 
