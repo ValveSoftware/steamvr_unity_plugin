@@ -543,15 +543,21 @@ namespace Valve.VR
             }
 
             int processId = System.Diagnostics.Process.GetCurrentProcess().Id;
-            EVRApplicationError applicationIdentifyErr = OpenVR.Applications.IdentifyApplication((uint)processId, SteamVR_Settings.instance.editorAppKey);
 
-            if (applicationIdentifyErr != EVRApplicationError.None)
-                Debug.LogError("<b>[SteamVR]</b> Error identifying application: " + applicationIdentifyErr.ToString());
-            else
+            if (!string.IsNullOrEmpty(SteamVR_Settings.instance.editorAppKey)) 
             {
-                if (showLogs)
-                    Debug.Log(string.Format("<b>[SteamVR]</b> Successfully identified process as editor project to SteamVR ({0})", SteamVR_Settings.instance.editorAppKey));
-            }
+                EVRApplicationError applicationIdentifyErr = OpenVR.Applications.IdentifyApplication((uint)processId, SteamVR_Settings.instance.editorAppKey);
+
+                if (applicationIdentifyErr != EVRApplicationError.None) 
+                    Debug.LogError("<b>[SteamVR]</b> Error identifying application: " + applicationIdentifyErr.ToString());
+                else 
+                {
+                    if (showLogs) 
+                        Debug.Log(string.Format("<b>[SteamVR]</b> Successfully identified process as editor project to SteamVR ({0})", SteamVR_Settings.instance.editorAppKey));
+                }
+            } 
+            else 
+                Debug.LogError("<b>[SteamVR]</b> SteamVR_Settings.instance.editorAppKey is NULL, cannot identify application!");
         }
 
         #region Event callbacks
