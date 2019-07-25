@@ -248,11 +248,11 @@ namespace Valve.VR
                         Debug.LogError("<b>[SteamVR]</b> There was an error deserializing the binding at path: " + currentBindingPath);
                         continue;
                     }
-                    
-                    SteamVR_Input_BindingFile importingBindingFile = GetBindingFileObject(newDefaultPath.binding_url);
+
+                    SteamVR_Input_BindingFile importingBindingFile = GetBindingFileObject(Path.Combine(directory, newDefaultPath.binding_url));
                     if (importingBindingFile == null)
                     {
-                        Debug.LogError("<b>[SteamVR]</b> There was an error deserializing the binding at path: " + newDefaultPath.binding_url);
+                        Debug.LogError("<b>[SteamVR]</b> There was an error deserializing the binding at path: " + Path.Combine(directory, newDefaultPath.binding_url));
                         continue;
                     }
 
