@@ -1338,21 +1338,21 @@ namespace Valve.VR.InteractionSystem
             {
                 Gizmos.color = Color.green;
                 float scaledHoverRadius = hoverSphereRadius * Mathf.Abs(SteamVR_Utils.GetLossyScale(hoverSphereTransform));
-                Gizmos.DrawWireSphere(hoverSphereTransform.position, scaledHoverRadius/2);
+                Gizmos.DrawWireSphere(hoverSphereTransform.position, scaledHoverRadius);
             }
 
             if (useControllerHoverComponent && mainRenderModel != null && mainRenderModel.IsControllerVisibile())
             {
                 Gizmos.color = Color.blue;
                 float scaledHoverRadius = controllerHoverRadius * Mathf.Abs(SteamVR_Utils.GetLossyScale(this.transform));
-                Gizmos.DrawWireSphere(mainRenderModel.GetControllerPosition(controllerHoverComponent), scaledHoverRadius/2);
+                Gizmos.DrawWireSphere(mainRenderModel.GetControllerPosition(controllerHoverComponent), scaledHoverRadius);
             }
 
             if (useFingerJointHover && mainRenderModel != null && mainRenderModel.IsHandVisibile())
             {
                 Gizmos.color = Color.yellow;
                 float scaledHoverRadius = fingerJointHoverRadius * Mathf.Abs(SteamVR_Utils.GetLossyScale(this.transform));
-                Gizmos.DrawWireSphere(mainRenderModel.GetBonePosition((int)fingerJointHover), scaledHoverRadius/2);
+                Gizmos.DrawWireSphere(mainRenderModel.GetBonePosition((int)fingerJointHover), scaledHoverRadius);
             }
         }
 
