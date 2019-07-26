@@ -33,7 +33,6 @@ namespace Valve.VR.InteractionSystem
 
 		public ItemPackage _itemPackage;
 
-		[SerializeField]
 		private bool useItemPackagePreview = true;
 		private bool useFadedPreview = false;
 		private GameObject previewObject;
