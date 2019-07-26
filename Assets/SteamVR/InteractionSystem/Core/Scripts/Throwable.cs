@@ -47,7 +47,7 @@ namespace Valve.VR.InteractionSystem
 
 		public UnityEvent onPickUp;
         public UnityEvent onDetachFromHand;
-        public UnityEvent<Hand> onHeldUpdate;
+        public HandEvent onHeldUpdate;
 
         
         protected RigidbodyInterpolation hadInterpolation = RigidbodyInterpolation.None;

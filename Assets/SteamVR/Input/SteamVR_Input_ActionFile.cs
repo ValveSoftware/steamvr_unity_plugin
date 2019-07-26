@@ -138,6 +138,9 @@ namespace Valve.VR
 
         public void CopyFilesToPath(string toPath, bool overwrite)
         {
+            if (Directory.Exists(toPath) == false)
+                Directory.CreateDirectory(toPath);
+
             string[] files = SteamVR_Input.actionFile.GetFilesToCopy();
 
             foreach (string file in files)

@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.2.0
+﻿# SteamVR Unity Plugin - v2.3.2 (sdk 1.4.18)
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -30,6 +30,68 @@ Support:
 
  If you'd like to discuss features, post guides, and give general feedback please post on the steam forum here: https://steamcommunity.com/app/250820/discussions/7/
  
+
+
+Changes for 2.3.2
+ 
+ * Updated openvr sdk version to 1.4.18
+
+ * Added SteamVR.asmdef.20192 for Unity 2019.2b and 2019.3a - replace SteamVR.asmdef to fix UI errors in these versions.
+
+
+Changes for 2.3.1b
+
+ * Added legacy mixed reality camera mode (enabled by default). You can change this in SteamVR/Resources/SteamVR_Settings.
+
+ * Fixing some errors for 2019.1
+
+ * Removing an unused editor class
+
+ * Added low fidelity fallback hand animation for when no skeleton data is available (WinMR)
+
+ * Fixing OpenVR Package not required error for pre 2018.2 versions of unity
+
+ * Fixed serializable event in Throwable
+
+ * Fix for Custom Skeleton not getting initialized
+
+ * Fix for a rare failure in action retrieval (https://github.com/ValveSoftware/steamvr_unity_plugin/pull/431)
+
+ * Allowing folders in the action path. (https://github.com/ValveSoftware/steamvr_unity_plugin/pull/443)
+
+ * Fix for multiple SteamVR_Behaviours initializing (https://github.com/ValveSoftware/steamvr_unity_plugin/pull/435)
+
+ * Stop updating poses if they're not active
+
+
+Changes for 2.3b
+
+ * Fix for runtime action instantiation generating garbage
+
+ * Fix for setting Universe Origin at runtime. SteamVR.settings.trackingOrigin will automatically set all pose origins and the compositor origin (hmd)
+
+ * Physics objects correctly teleport while held now
+
+ * Fix for left hand being inside out sometimes.
+
+ * Fixed some perf and gc issues in the skeleton
+
+ * Updated poses to support 120hz prediction better
+
+ * Fix for IL2CPP compilation
+
+ * Fix for poor interpolation when dropping objects with left hand
+
+ * Added SteamVR_TrackingReferenceManager to allow showing tracking devices (base stations / cameras)
+
+ * Typo fix for GetStateUp returning GetStateDown
+
+ * Added ability to suppress updating the full skeletal bone data and only update summary data SteamVR_Action_Skeleton.onlyUpdateSummaryData
+
+ * Added access to different skeletal summary data. SteamVR_Action_Skeleton.summaryDataType specifies if you want the summary of the animation data or the summary of the device data. Device data may be faster but different than animation data.
+
+ * Added wrappers for ShowActionOrigin and ShowBindingsForActionSet. See SteamVR_Action.ShowOrigins() .HideOrigins(). SteamVR_ActionSet.ShowBindingHints() .HideBindingHints()
+
 
 Changes for v2.2.0:
  
