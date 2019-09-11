@@ -98,6 +98,10 @@
       "binding_url": "bindings_vive_controller.json"
     },
     {
+      "controller_type": "vive_cosmos_controller",
+      "binding_url": "bindings_vive_cosmos_controller.json"
+    },
+    {
       "controller_type": "oculus_touch",
       "binding_url": "bindings_oculus_touch.json"
     },

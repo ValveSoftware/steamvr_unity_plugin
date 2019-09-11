@@ -100,7 +100,7 @@ namespace Valve.VR.InteractionSystem.Sample
             generalText.text = string.Format("Attached: {0}", hand.name);
             attachTime = Time.time;
 		}
-        
+
 
 
 		//-------------------------------------------------

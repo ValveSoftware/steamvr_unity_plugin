@@ -140,8 +140,8 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Get all the handles for actions and action sets. 
-        /// Initialize our dictionaries of action / action set names. 
+        /// Get all the handles for actions and action sets.
+        /// Initialize our dictionaries of action / action set names.
         /// Setup the tracking space universe origin
         /// </summary>
         public static void Initialize(bool force = false)
@@ -246,7 +246,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Gets called by SteamVR_Behaviour every LateUpdate and updates actions if the steamvr settings are configured to update then. 
+        /// Gets called by SteamVR_Behaviour every LateUpdate and updates actions if the steamvr settings are configured to update then.
         /// Also updates skeletons regardless of settings are configured to so we can account for animations on the skeletons.
         /// </summary>
         public static void LateUpdate()
@@ -915,7 +915,7 @@ namespace Valve.VR
                     if (actionSetsByPathLowered.ContainsKey(loweredPath))
                     {
                         actionSetsByPathCache.Add(path, actionSetsByPathLowered[loweredPath]);
-                        return actionSetsByPathLowered[loweredPath].GetCopy<T>();
+                        return actionSetsByPath[loweredPath].GetCopy<T>();
                     }
                     else
                     {
@@ -1227,7 +1227,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Gets the localized name of the device that the action corresponds to. 
+        /// Gets the localized name of the device that the action corresponds to.
         /// </summary>
         /// <param name="inputSource"></param>
         /// <param name="localizedParts">

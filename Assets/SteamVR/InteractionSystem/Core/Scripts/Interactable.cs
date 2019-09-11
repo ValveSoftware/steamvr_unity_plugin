@@ -79,7 +79,7 @@ namespace Valve.VR.InteractionSystem
         public bool isDestroying { get; protected set; }
         public bool isHovering { get; protected set; }
         public bool wasHovering { get; protected set; }
-        
+
 
         private void Awake()
         {
@@ -266,7 +266,7 @@ namespace Valve.VR.InteractionSystem
                     Destroy(highlightHolder);
             }
         }
-        
+
 
         protected float blendToPoseTime = 0.1f;
         protected float releasePoseBlendTime = 0.2f;
@@ -325,10 +325,10 @@ namespace Valve.VR.InteractionSystem
                 attachedToHand.DetachObject(this.gameObject, false);
                 attachedToHand.skeleton.BlendToSkeleton(0.1f);
             }
-            
+
             if (highlightHolder != null)
                 Destroy(highlightHolder);
-            
+
         }
 
 

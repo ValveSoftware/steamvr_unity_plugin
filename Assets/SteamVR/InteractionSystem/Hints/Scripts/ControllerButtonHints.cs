@@ -21,6 +21,8 @@ namespace Valve.VR.InteractionSystem
 
         public SteamVR_Action_Vibration hapticFlash = SteamVR_Input.GetAction<SteamVR_Action_Vibration>("Haptic");
 
+        public bool autoSetWithControllerRangeOfMotion = true;
+
         [Header( "Debug" )]
 		public bool debugHints = false;
 
@@ -187,7 +189,7 @@ namespace Valve.VR.InteractionSystem
             textHintParent.localScale = Vector3.one;
 
             //Get the button mask for each component of the render model
-            
+
             var renderModels = OpenVR.RenderModels;
             if (renderModels != null)
             {
@@ -796,7 +798,13 @@ namespace Valve.VR.InteractionSystem
 			if ( hints != null )
 			{
 				hints.ShowText(action, text, highlightButton );
-			}
+
+                if (hand != null)
+                {
+                    if (hints.autoSetWithControllerRangeOfMotion)
+                        hand.SetTemporarySkeletonRangeOfMotion(SkeletalMotionRangeChange.WithController);
+                }
+            }
 		}
 
 
@@ -807,7 +815,14 @@ namespace Valve.VR.InteractionSystem
 			if ( hints != null )
 			{
 				hints.HideText(action);
-			}
+
+                if (hand != null)
+                {
+                    if (hints.autoSetWithControllerRangeOfMotion)
+                        hand.ResetTemporarySkeletonRangeOfMotion();
+                }
+            }
+
 		}
 
 

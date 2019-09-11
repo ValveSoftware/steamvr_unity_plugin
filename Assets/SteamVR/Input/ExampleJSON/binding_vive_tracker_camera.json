@@ -1,6 +1,5 @@
 {
    "alias_info" : {},
-   "app_key" : "application.generated.unity.steamvr.exe",
   "bindings": {
     "/actions/mixedreality": {
       "haptics": [

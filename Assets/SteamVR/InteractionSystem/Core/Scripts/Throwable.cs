@@ -36,7 +36,7 @@ namespace Valve.VR.InteractionSystem
 		[Tooltip( "When detaching the object, should it return to its original parent?" )]
 		public bool restoreOriginalParent = false;
 
-        
+
 
 		protected VelocityEstimator velocityEstimator;
         protected bool attached = false;
@@ -49,7 +49,7 @@ namespace Valve.VR.InteractionSystem
         public UnityEvent onDetachFromHand;
         public HandEvent onHeldUpdate;
 
-        
+
         protected RigidbodyInterpolation hadInterpolation = RigidbodyInterpolation.None;
 
         protected new Rigidbody rigidbody;
@@ -121,7 +121,7 @@ namespace Valve.VR.InteractionSystem
         protected virtual void HandHoverUpdate( Hand hand )
         {
             GrabTypes startingGrabType = hand.GetGrabStarting();
-            
+
             if (startingGrabType != GrabTypes.None)
             {
 				hand.AttachObject( gameObject, startingGrabType, attachmentFlags, attachmentOffset );
@@ -141,9 +141,9 @@ namespace Valve.VR.InteractionSystem
 			onPickUp.Invoke();
 
 			hand.HoverLock( null );
-            
+
             rigidbody.interpolation = RigidbodyInterpolation.None;
-            
+
 		    velocityEstimator.BeginEstimatingVelocity();
 
 			attachTime = Time.time;
@@ -161,7 +161,7 @@ namespace Valve.VR.InteractionSystem
             onDetachFromHand.Invoke();
 
             hand.HoverUnlock(null);
-            
+
             rigidbody.interpolation = hadInterpolation;
 
             Vector3 velocity;

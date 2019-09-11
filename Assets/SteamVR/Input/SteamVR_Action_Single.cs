@@ -50,7 +50,7 @@ namespace Valve.VR
         /// Note: Will only return non-zero if the action is also active.</summary>
         public float delta { get { return sourceMap[SteamVR_Input_Sources.Any].delta; } }
 
-        /// <summary><strong>[Shortcut to: SteamVR_Input_Sources.Any]</strong> The float value difference between the previous update and update before that. 
+        /// <summary><strong>[Shortcut to: SteamVR_Input_Sources.Any]</strong> The float value difference between the previous update and update before that.
         /// Note: Will only return non-zero if the action is also active.</summary>
         public float lastDelta { get { return sourceMap[SteamVR_Input_Sources.Any].lastDelta; } }
 
@@ -85,7 +85,7 @@ namespace Valve.VR
             return sourceMap[inputSource].lastDelta;
         }
 
-        /// <summary>Executes a function when the *functional* active state of this action (with the specified inputSource) changes. 
+        /// <summary>Executes a function when the *functional* active state of this action (with the specified inputSource) changes.
         /// This happens when the action is bound or unbound, or when the ActionSet changes state.</summary>
         /// <param name="functionToCall">A local function that receives the boolean action who's active state changes and the corresponding input source</param>
         /// <param name="inputSource">The device you would like to get data from. Any if the action is not device specific.</param>
@@ -94,7 +94,7 @@ namespace Valve.VR
             sourceMap[inputSource].onActiveChange += functionToCall;
         }
 
-        /// <summary>Stops executing a function when the *functional* active state of this action (with the specified inputSource) changes. 
+        /// <summary>Stops executing a function when the *functional* active state of this action (with the specified inputSource) changes.
         /// This happens when the action is bound or unbound, or when the ActionSet changes state.</summary>
         /// <param name="functionToStopCalling">The local function that you've setup to receive update events</param>
         /// <param name="inputSource">The device you would like to get data from. Any if the action is not device specific.</param>
@@ -176,7 +176,7 @@ namespace Valve.VR
             InitAfterDeserialize();
         }
     }
-    
+
     public class SteamVR_Action_Single_Source_Map : SteamVR_Action_In_Source_Map<SteamVR_Action_Single_Source>
     {
     }
@@ -203,19 +203,19 @@ namespace Valve.VR
         /// <summary>Event fires when the action is updated</summary>
         public event SteamVR_Action_Single.UpdateHandler onUpdate;
 
-        /// <summary>The current float value of the action. 
+        /// <summary>The current float value of the action.
         /// Note: Will only return non-zero if the action is also active.</summary>
         public float axis { get { if (active) return actionData.x; else return 0; } }
 
-        /// <summary>The float value of the action from the previous update. 
+        /// <summary>The float value of the action from the previous update.
         /// Note: Will only return non-zero if the action is also active.</summary>
         public float lastAxis { get { if (active) return lastActionData.x; else return 0; } }
 
-        /// <summary>The float value difference between this update and the previous update. 
+        /// <summary>The float value difference between this update and the previous update.
         /// Note: Will only return non-zero if the action is also active.</summary>
         public float delta { get { if (active) return actionData.deltaX; else return 0; } }
 
-        /// <summary>The float value difference between the previous update and update before that. 
+        /// <summary>The float value difference between the previous update and update before that.
         /// Note: Will only return non-zero if the action is also active.</summary>
         public float lastDelta { get { if (active) return lastActionData.deltaX; else return 0; } }
 
@@ -272,7 +272,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// <strong>[Should not be called by user code]</strong> 
+        /// <strong>[Should not be called by user code]</strong>
         /// Initializes the handle for the inputSource, the action data size, and any other related SteamVR data.
         /// </summary>
         public override void Initialize()
@@ -283,7 +283,7 @@ namespace Valve.VR
                 actionData_size = (uint)Marshal.SizeOf(typeof(InputAnalogActionData_t));
         }
 
-        /// <summary><strong>[Should not be called by user code]</strong> 
+        /// <summary><strong>[Should not be called by user code]</strong>
         /// Updates the data for this action and this input source. Sends related events.
         /// </summary>
         public override void UpdateValue()
@@ -294,7 +294,7 @@ namespace Valve.VR
             EVRInputError err = OpenVR.Input.GetAnalogActionData(handle, ref actionData, actionData_size, SteamVR_Input_Source.GetHandle(inputSource));
             if (err != EVRInputError.None)
                 Debug.LogError("<b>[SteamVR]</b> GetAnalogActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString());
-            
+
             updateTime = Time.realtimeSinceStartup;
 
             changed = false;
@@ -330,23 +330,23 @@ namespace Valve.VR
                 onActiveChange.Invoke(singleAction, inputSource, activeBinding);
         }
     }
-    
+
     public interface ISteamVR_Action_Single : ISteamVR_Action_In_Source
     {
-        /// <summary>The current float value of the action. 
+        /// <summary>The current float value of the action.
         /// Note: Will only return non-zero if the action is also active.</summary>
         float axis { get; }
 
-        /// <summary>The float value of the action from the previous update. 
+        /// <summary>The float value of the action from the previous update.
         /// Note: Will only return non-zero if the action is also active.</summary>
         float lastAxis { get; }
 
 
-        /// <summary>The float value difference between this update and the previous update. 
+        /// <summary>The float value difference between this update and the previous update.
         /// Note: Will only return non-zero if the action is also active.</summary>
         float delta { get; }
 
-        /// <summary>The float value difference between the previous update and update before that. 
+        /// <summary>The float value difference between the previous update and update before that.
         /// Note: Will only return non-zero if the action is also active.</summary>
         float lastDelta { get; }
     }

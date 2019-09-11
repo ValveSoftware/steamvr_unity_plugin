@@ -4,7 +4,7 @@ using System.Collections;
 namespace Valve.VR.Extras
 {
     /// <summary>
-    /// This is an example class of how to force steamvr initialization. You still need to have vr mode enabled 
+    /// This is an example class of how to force steamvr initialization. You still need to have vr mode enabled
     /// but you can have the top sdk set to None, then this script will force it to OpenVR after a second
     /// </summary>
     public class SteamVR_ForceSteamVRMode : MonoBehaviour
@@ -16,7 +16,7 @@ namespace Valve.VR.Extras
         private IEnumerator Start()
         {
             yield return new WaitForSeconds(1f); // just here to show that you can wait a while.
-            
+
             SteamVR.Initialize(true);
 
             while (SteamVR.initializedState != SteamVR.InitializedStates.InitializeSuccess)

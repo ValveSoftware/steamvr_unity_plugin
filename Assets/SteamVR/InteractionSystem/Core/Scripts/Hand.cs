@@ -44,13 +44,13 @@ namespace Valve.VR.InteractionSystem
         public SteamVR_Input_Sources handType;
 
         public SteamVR_Behaviour_Pose trackedObject;
-        
+
         public SteamVR_Action_Boolean grabPinchAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabPinch");
-        
+
         public SteamVR_Action_Boolean grabGripAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabGrip");
-        
+
         public SteamVR_Action_Vibration hapticAction = SteamVR_Input.GetAction<SteamVR_Action_Vibration>("Haptic");
-        
+
         public SteamVR_Action_Boolean uiInteractAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("InteractUI");
 
         public bool useHoverSphere = true;
@@ -76,9 +76,12 @@ namespace Valve.VR.InteractionSystem
         private float noSteamVRFallbackInteractorDistance = -1.0f;
 
         public GameObject renderModelPrefab;
-        protected List<RenderModel> renderModels = new List<RenderModel>();
-        protected RenderModel mainRenderModel;
-        protected RenderModel hoverhighlightRenderModel;
+        [HideInInspector]
+        public List<RenderModel> renderModels = new List<RenderModel>();
+        [HideInInspector]
+        public RenderModel mainRenderModel;
+        [HideInInspector]
+        public RenderModel hoverhighlightRenderModel;
 
         public bool showDebugText = false;
         public bool spewDebugText = false;
@@ -103,6 +106,7 @@ namespace Valve.VR.InteractionSystem
             public Vector3 easeSourcePosition;
             public Quaternion easeSourceRotation;
             public float attachTime;
+            public AllowTeleportWhileAttachedToHand allowTeleportWhileAttachedToHand;
 
             public bool HasAttachFlag(AttachmentFlags flag)
             {
@@ -224,6 +228,16 @@ namespace Valve.VR.InteractionSystem
                     return attachedObjects[attachedObjects.Count - 1];
                 }
 
+                return null;
+            }
+        }
+
+        public AllowTeleportWhileAttachedToHand currentAttachedTeleportManager
+        {
+            get
+            {
+                if (currentAttachedObjectInfo.HasValue)
+                    return currentAttachedObjectInfo.Value.allowTeleportWhileAttachedToHand;
                 return null;
             }
         }
@@ -386,6 +400,7 @@ namespace Valve.VR.InteractionSystem
 
             attachedObject.attachedObject = objectToAttach;
             attachedObject.interactable = objectToAttach.GetComponent<Interactable>();
+            attachedObject.allowTeleportWhileAttachedToHand = objectToAttach.GetComponent<AllowTeleportWhileAttachedToHand>();
             attachedObject.handAttachmentPointTransform = this.transform;
 
             if (attachedObject.interactable != null)
@@ -394,7 +409,7 @@ namespace Valve.VR.InteractionSystem
                 {
                     attachedObject.easeSourcePosition = attachedObject.attachedObject.transform.position;
                     attachedObject.easeSourceRotation = attachedObject.attachedObject.transform.rotation;
-                    attachedObject.interactable.snapAttachEaseInCompleted = false;  
+                    attachedObject.interactable.snapAttachEaseInCompleted = false;
                 }
 
                 if (attachedObject.interactable.useHandObjectAttachmentPoint)
@@ -425,7 +440,7 @@ namespace Valve.VR.InteractionSystem
                 if (attachedObject.interactable.attachedToHand != null) //already attached to another hand
                 {
                     //if it was attached to another hand, get the flags from that hand
-                    
+
                     for (int attachedIndex = 0; attachedIndex < attachedObject.interactable.attachedToHand.attachedObjects.Count; attachedIndex++)
                     {
                         AttachedObject attachedObjectInList = attachedObject.interactable.attachedToHand.attachedObjects[attachedIndex];
@@ -471,7 +486,7 @@ namespace Valve.VR.InteractionSystem
                     attachedObject.initialRotationalOffset = Quaternion.Inverse(attachedObject.handAttachmentPointTransform.rotation) * objectToAttach.transform.rotation;
                 }
                 else
-                { 
+                {
                     if (attachmentOffset != null)
                     {
                         //offset the object from the hand by the positional and rotational difference between the offset transform and the attached object
@@ -710,7 +725,7 @@ namespace Valve.VR.InteractionSystem
 
             return Vector3.zero;
         }
-        
+
 
         //-------------------------------------------------
         // Get the world space angular velocity of the VR Hand.
@@ -802,6 +817,11 @@ namespace Valve.VR.InteractionSystem
             {
                 Debug.LogError("<b>[SteamVR Interaction]</b> No player instance found in Hand Start()");
             }
+
+            if (this.gameObject.layer == 0)
+                Debug.LogWarning("<b>[SteamVR Interaction]</b> Hand is on default layer. This puts unnecessary strain on hover checks as it is always true for hand colliders (which are then ignored).");
+            else
+                hoverLayerMask &= ~(1 << this.gameObject.layer); //ignore self for hovering
 
             // allocate array for colliders
             overlappingColliders = new Collider[ColliderArraySize];
@@ -1071,7 +1091,7 @@ namespace Valve.VR.InteractionSystem
             CancelInvoke();
         }
 
-        
+
         //-------------------------------------------------
         protected virtual void Update()
         {

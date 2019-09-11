@@ -715,7 +715,7 @@ namespace Valve.VR.InteractionSystem
 			Destroy( this );
 		}
 
-		
+
 		//-------------------------------------------------
 		void OnDestroy()
 		{

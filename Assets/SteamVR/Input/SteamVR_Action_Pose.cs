@@ -11,7 +11,7 @@ namespace Valve.VR
 {
     [Serializable]
     /// <summary>
-    /// Pose actions represent a position, rotation, and velocities inside the tracked space. 
+    /// Pose actions represent a position, rotation, and velocities inside the tracked space.
     /// SteamVR keeps a log of past poses so you can retrieve old poses with GetPoseAtTimeOffset or GetVelocitiesAtTimeOffset.
     /// You can also pass in times in the future to these methods for SteamVR's best prediction of where the pose will be at that time.
     /// </summary>
@@ -237,7 +237,7 @@ namespace Valve.VR
         public SteamVR_Action_Pose_Base() { }
 
         /// <summary>
-        /// <strong>[Should not be called by user code]</strong> 
+        /// <strong>[Should not be called by user code]</strong>
         /// Updates the data for all the input sources the system has detected need to be updated.
         /// </summary>
         public virtual void UpdateValues(bool skipStateAndEventUpdates)
@@ -389,11 +389,10 @@ namespace Valve.VR
         /// </summary>
         public void SetTrackingUniverseOrigin(ETrackingUniverseOrigin newOrigin)
         {
-            var sourceEnumerator = sources.GetEnumerator();
-            while (sourceEnumerator.MoveNext())
+            for (int sourceIndex = 0; sourceIndex < sources.Length; sourceIndex++)
             {
-                var sourceElement = sourceEnumerator.Current;
-                sourceElement.Value.universeOrigin = newOrigin;
+                if (sources[sourceIndex] != null)
+                    sources[sourceIndex].universeOrigin = newOrigin;
             }
         }
 
@@ -435,8 +434,8 @@ namespace Valve.VR
 
         /// <summary>Event fires when the device bound to this action is connected or disconnected</summary>
         public event SteamVR_Action_Pose.DeviceConnectedChangeHandler onDeviceConnectedChanged;
-        
-        
+
+
 
         /// <summary>True when the orientation of the pose has changhed more than changeTolerance in the last update. Note: Will only return true if the action is also active.</summary>
         public override bool changed { get; protected set; }
@@ -514,7 +513,7 @@ namespace Valve.VR
 
         /// <summary>The angular velocity for this pose during the previous update</summary>
         public Vector3 lastAngularVelocity { get; protected set; }
-        
+
 
         protected InputPoseActionData_t poseActionData = new InputPoseActionData_t();
 
@@ -535,7 +534,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// <strong>[Should not be called by user code]</strong> 
+        /// <strong>[Should not be called by user code]</strong>
         /// Initializes the handle for the inputSource, the pose action data size, and any other related SteamVR data.
         /// </summary>
         public override void Initialize()
@@ -546,7 +545,7 @@ namespace Valve.VR
                 poseActionData_size = (uint)Marshal.SizeOf(typeof(InputPoseActionData_t));
         }
 
-        /// <summary><strong>[Should not be called by user code]</strong> 
+        /// <summary><strong>[Should not be called by user code]</strong>
         /// Updates the data for this action and this input source. Sends related events.
         /// </summary>
         public override void UpdateValue()
@@ -554,7 +553,9 @@ namespace Valve.VR
             UpdateValue(false);
         }
 
-        /// <summary><strong>[Should not be called by user code]</strong> 
+        public static float framesAhead = 2;
+
+        /// <summary><strong>[Should not be called by user code]</strong>
         /// Updates the data for this action and this input source. Sends related events.
         /// </summary>
         public virtual void UpdateValue(bool skipStateAndEventUpdates)
@@ -566,7 +567,13 @@ namespace Valve.VR
             lastVelocity = velocity;
             lastAngularVelocity = angularVelocity;
 
-            EVRInputError err = OpenVR.Input.GetPoseActionDataForNextFrame(handle, universeOrigin, ref poseActionData, poseActionData_size, inputSourceHandle);
+            EVRInputError err;
+
+            if (framesAhead == 0)
+                err = OpenVR.Input.GetPoseActionDataForNextFrame(handle, universeOrigin, ref poseActionData, poseActionData_size, inputSourceHandle);
+            else
+                err = OpenVR.Input.GetPoseActionDataRelativeToNow(handle, universeOrigin, framesAhead * (Time.timeScale / SteamVR.instance.hmd_DisplayFrequency), ref poseActionData, poseActionData_size, inputSourceHandle);
+
             if (err != EVRInputError.None)
             {
                 Debug.LogError("<b>[SteamVR]</b> GetPoseActionData error (" + fullPath + "): " + err.ToString() + " Handle: " + handle.ToString() + ". Input source: " + inputSource.ToString());
@@ -587,8 +594,8 @@ namespace Valve.VR
 
         protected void SetCacheVariables()
         {
-            localPosition = SteamVR_Utils.GetPosition(poseActionData.pose.mDeviceToAbsoluteTracking);
-            localRotation = SteamVR_Utils.GetRotation(poseActionData.pose.mDeviceToAbsoluteTracking);
+            localPosition = poseActionData.pose.mDeviceToAbsoluteTracking.GetPosition();
+            localRotation = poseActionData.pose.mDeviceToAbsoluteTracking.GetRotation();
             velocity = GetUnityCoordinateVelocity(poseActionData.pose.vVelocity);
             angularVelocity = GetUnityCoordinateAngularVelocity(poseActionData.pose.vAngularVelocity);
             updateTime = Time.realtimeSinceStartup;
@@ -652,8 +659,8 @@ namespace Valve.VR
 
             velocityAtTime = GetUnityCoordinateVelocity(tempPoseActionData.pose.vVelocity);
             angularVelocityAtTime = GetUnityCoordinateAngularVelocity(tempPoseActionData.pose.vAngularVelocity);
-            positionAtTime = SteamVR_Utils.GetPosition(tempPoseActionData.pose.mDeviceToAbsoluteTracking);
-            rotationAtTime = SteamVR_Utils.GetRotation(tempPoseActionData.pose.mDeviceToAbsoluteTracking);
+            positionAtTime = tempPoseActionData.pose.mDeviceToAbsoluteTracking.GetPosition();
+            rotationAtTime = tempPoseActionData.pose.mDeviceToAbsoluteTracking.GetRotation();
 
             return true;
         }
@@ -667,7 +674,7 @@ namespace Valve.VR
             transformToUpdate.localPosition = localPosition;
             transformToUpdate.localRotation = localRotation;
         }
-        
+
         protected virtual void CheckAndSendEvents()
         {
             if (trackingState != lastTrackingState && onTrackingChanged != null)
@@ -737,7 +744,7 @@ namespace Valve.VR
 
         /// <summary>The local velocity of this pose relative to the universe origin</summary>
         Vector3 velocity { get; }
-        
+
         /// <summary>The local angular velocity of this pose relative to the universe origin</summary>
         Vector3 angularVelocity { get; }
 

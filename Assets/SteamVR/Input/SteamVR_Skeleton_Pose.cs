@@ -17,6 +17,8 @@ namespace Valve.VR
         protected const int leftHandInputSource = (int)SteamVR_Input_Sources.LeftHand;
         protected const int rightHandInputSource = (int)SteamVR_Input_Sources.RightHand;
 
+        public bool applyToSkeletonRoot = true;
+
         public SteamVR_Skeleton_Pose_Hand GetHand(int hand)
         {
             if (hand == leftHandInputSource)

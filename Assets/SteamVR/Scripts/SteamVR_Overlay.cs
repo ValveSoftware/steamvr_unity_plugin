@@ -1,4 +1,4 @@
-﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
+//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
 // Purpose: Displays 2d content on a large virtual screen.
 //
@@ -13,9 +13,6 @@ namespace Valve.VR
     public class SteamVR_Overlay : MonoBehaviour
     {
         public Texture texture;
-        public bool curved = true;
-        public bool antialias = true;
-        public bool highquality = true;
 
         [Tooltip("Size of overlay view.")]
         public float scale = 3.0f;
@@ -123,20 +120,6 @@ namespace Valve.VR
                 }
 
                 overlay.SetOverlayInputMethod(handle, inputMethod);
-
-                if (curved || antialias)
-                    highquality = true;
-
-                if (highquality)
-                {
-                    overlay.SetHighQualityOverlay(handle);
-                    overlay.SetOverlayFlag(handle, VROverlayFlags.Curved, curved);
-                    overlay.SetOverlayFlag(handle, VROverlayFlags.RGSS4X, antialias);
-                }
-                else if (overlay.GetHighQualityOverlay() == handle)
-                {
-                    overlay.SetHighQualityOverlay(OpenVR.k_ulOverlayHandleInvalid);
-                }
             }
             else
             {

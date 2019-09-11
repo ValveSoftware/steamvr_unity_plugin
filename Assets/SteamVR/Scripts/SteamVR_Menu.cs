@@ -1,4 +1,4 @@
-﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
+//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
 // Purpose: Example menu using OnGUI with SteamVR_Camera's overlay support
 //
@@ -156,19 +156,6 @@ namespace Valve.VR
                     }
                 }
                 GUILayout.EndHorizontal();
-            }
-
-            overlay.highquality = GUILayout.Toggle(overlay.highquality, "High quality");
-
-            if (overlay.highquality)
-            {
-                overlay.curved = GUILayout.Toggle(overlay.curved, "Curved overlay");
-                overlay.antialias = GUILayout.Toggle(overlay.antialias, "Overlay RGSS(2x2)");
-            }
-            else
-            {
-                overlay.curved = false;
-                overlay.antialias = false;
             }
 
             var tracker = SteamVR_Render.Top();

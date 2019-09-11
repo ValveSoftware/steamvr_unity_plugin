@@ -27,7 +27,7 @@ namespace Valve.VR.InteractionSystem
 
                 Hand hand = GetComponentInParent<Hand>();
                 if (hand != null)
-                { 
+                {
 					float pulse = distanceIntensityCurve.Evaluate( distance );
                     hand.TriggerHapticPulse((ushort)pulse);
 

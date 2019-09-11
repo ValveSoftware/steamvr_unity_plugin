@@ -10,7 +10,7 @@ namespace Valve.VR
 {
     public enum SteamVR_Input_Sources
     {
-        [Description("/unrestricted")] //todo: check to see if this gets exported: k_ulInvalidInputHandle 
+        [Description("/unrestricted")] //todo: check to see if this gets exported: k_ulInvalidInputHandle
         Any,
 
         [Description("/user/hand/left")]

@@ -9,7 +9,7 @@ namespace Valve.VR.Extras
     {
         public GameObject prefab;
         public Rigidbody attachPoint;
-        
+
         public SteamVR_Action_Boolean spawn = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("InteractUI");
 
         SteamVR_Behaviour_Pose trackedObj;
