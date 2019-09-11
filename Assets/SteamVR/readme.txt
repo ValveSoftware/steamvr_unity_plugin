@@ -46,9 +46,6 @@ Changes for 2.4.0b
 
  * Normalized line endings and trailing spaces across project.
 
-
-Changes for 2.3.3
-
  * Updated openvr sdk version to 1.6.10
 
  * Significant performance increases in the input system
