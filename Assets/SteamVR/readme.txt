@@ -48,8 +48,6 @@ Changes for 2.4.0b
 
  * Updated openvr sdk version to 1.6.10
 
- * Significant performance increases in the input system
-
  * Added Vive Cosmos default bindings
 
 
