@@ -45,16 +45,7 @@
                   }
                },
                "mode" : "button",
-               "path" : "/user/hand/left/input/x"
-            },
-            {
-               "inputs" : {
-                  "click" : {
-                     "output" : "/actions/buggy/in/brake"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/right/input/x"
+               "path" : "/user/hand/left/input/a"
             },
             {
                "inputs" : {
@@ -63,16 +54,7 @@
                   }
                },
                "mode" : "button",
-               "path" : "/user/hand/left/input/y"
-            },
-            {
-               "inputs" : {
-                  "click" : {
-                     "output" : "/actions/buggy/in/reset"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/right/input/y"
+               "path" : "/user/hand/left/input/b"
             },
             {
                "inputs" : {
@@ -144,15 +126,6 @@
             },
             "mode": "button",
             "path": "/user/hand/left/input/grip"
-          },
-          {
-            "inputs": {
-              "click": {
-                "output": "/actions/default/in/grabgrip"
-              }
-            },
-            "mode": "button",
-            "path": "/user/hand/left/input/paddle_heavy"
           },
           {
             "inputs": {
@@ -263,12 +236,12 @@
           },
           {
             "inputs": {
-              "click": {
-                "output": "/actions/default/in/grabgrip"
+              "pull": {
+                "output": "/actions/default/in/squeeze"
               }
             },
-            "mode": "button",
-            "path": "/user/hand/right/input/paddle_heavy"
+            "mode": "trigger",
+            "path": "/user/hand/left/input/trigger"
           },
           {
             "inputs": {
@@ -277,16 +250,7 @@
               }
             },
             "mode": "trigger",
-            "path": "/user/hand/left/input/grip"
-          },
-          {
-            "inputs": {
-              "pull": {
-                "output": "/actions/default/in/squeeze"
-              }
-            },
-            "mode": "trigger",
-            "path": "/user/hand/right/input/grip"
+            "path": "/user/hand/right/input/trigger"
           },
           {
             "inputs": {

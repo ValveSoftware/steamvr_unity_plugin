@@ -47,8 +47,7 @@ namespace Valve.VR
                     string[] files = Directory.GetFiles(path, "*.json");
                     foreach (string file in files)
                     {
-                        lastIndex = file.LastIndexOf("\\");
-                        string filename = file.Substring(lastIndex + 1);
+                        string filename = Path.GetFileName(file);
 
                         string newPath = Path.Combine(dataPath, filename);
 

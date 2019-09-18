@@ -33,8 +33,8 @@ namespace Valve.VR.InteractionSystem
 
 		public ItemPackage _itemPackage;
 
-		private bool useItemPackagePreview = true;
-		private bool useFadedPreview = false;
+		public bool useItemPackagePreview = true;
+        private bool useFadedPreview = false;
 		private GameObject previewObject;
 
 		public bool requireGrabActionToTake = false;

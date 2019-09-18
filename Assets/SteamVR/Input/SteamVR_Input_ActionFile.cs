@@ -233,16 +233,22 @@ namespace Valve.VR
             File.WriteAllText(path, json);
         }
     }
+
     public enum SteamVR_Input_ActionFile_DefaultBinding_ControllerTypes
     {
-        vive,
-        vive_pro,
+        vive, //hmd
+        vive_pro, //hmd
         vive_controller,
         generic,
         holographic_controller,
         oculus_touch,
         gamepad,
         knuckles,
+        index_hmd, //hmd
+        vive_cosmos_controller,
+        rift, //hmd
+        vive_tracker_camera,
+        vive_tracker,
     }
 
     [System.Serializable]
@@ -608,6 +614,9 @@ namespace Valve.VR
         public static string holographic_hmd = "holographic_hmd";
         public static string rift = "rift";
         public static string vive_tracker_camera = "vive_tracker_camera";
+        public static string vive_cosmos = "vive_cosmos";
+        public static string vive_cosmos_controller = "vive_cosmos_controller";
+        public static string index_hmd = "index_hmd";
     }
 
     static public class SteamVR_Input_ActionFile_ActionTypes

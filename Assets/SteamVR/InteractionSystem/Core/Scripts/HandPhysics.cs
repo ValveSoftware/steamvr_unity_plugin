@@ -37,8 +37,16 @@ namespace Valve.VR.InteractionSystem
         {
             hand = GetComponent<Hand>();
             //spawn hand collider and link it to us
-            handCollider = ((GameObject)Instantiate(handColliderPrefab.gameObject, Player.instance.transform)).GetComponent<HandCollider>();
+            
+            handCollider = ((GameObject)Instantiate(handColliderPrefab.gameObject)).GetComponent<HandCollider>();
+            Vector3 localPosition = handCollider.transform.localPosition;
+            Quaternion localRotation = handCollider.transform.localRotation;
+
+            handCollider.transform.parent = Player.instance.transform;
+            handCollider.transform.localPosition = localPosition;
+            handCollider.transform.localRotation = localRotation;
             handCollider.hand = this;
+
             GetComponent<SteamVR_Behaviour_Pose>().onTransformUpdated.AddListener(UpdateHand);
         }
 

@@ -4034,6 +4034,9 @@ public enum ETrackedDeviceProperty
 	Prop_DriverRequestedMuraFeather_OuterRight_Int32 = 2206,
 	Prop_DriverRequestedMuraFeather_OuterTop_Int32 = 2207,
 	Prop_DriverRequestedMuraFeather_OuterBottom_Int32 = 2208,
+	Prop_Audio_DefaultPlaybackDeviceId_String = 2300,
+	Prop_Audio_DefaultRecordingDeviceId_String = 2301,
+	Prop_Audio_DefaultPlaybackDeviceVolume_Float = 2302,
 	Prop_AttachedDeviceId_String = 3000,
 	Prop_SupportedButtons_Uint64 = 3001,
 	Prop_Axis0Type_Int32 = 3002,
@@ -6787,6 +6790,7 @@ public class OpenVR
 	public const string k_pch_CollisionBounds_ColorGammaG_Int32 = "CollisionBoundsColorGammaG";
 	public const string k_pch_CollisionBounds_ColorGammaB_Int32 = "CollisionBoundsColorGammaB";
 	public const string k_pch_CollisionBounds_ColorGammaA_Int32 = "CollisionBoundsColorGammaA";
+	public const string k_pch_CollisionBounds_EnableDriverImport = "enableDriverBoundsImport";
 	public const string k_pch_Camera_Section = "camera";
 	public const string k_pch_Camera_EnableCamera_Bool = "enableCamera";
 	public const string k_pch_Camera_EnableCameraInDashboard_Bool = "enableCameraInDashboard";
@@ -6799,11 +6803,14 @@ public class OpenVR
 	public const string k_pch_Camera_BoundsStrength_Int32 = "cameraBoundsStrength";
 	public const string k_pch_Camera_RoomViewMode_Int32 = "cameraRoomViewMode";
 	public const string k_pch_audio_Section = "audio";
-	public const string k_pch_audio_OnPlaybackDevice_String = "onPlaybackDevice";
-	public const string k_pch_audio_OnRecordDevice_String = "onRecordDevice";
-	public const string k_pch_audio_OnPlaybackMirrorDevice_String = "onPlaybackMirrorDevice";
-	public const string k_pch_audio_OffPlaybackDevice_String = "offPlaybackDevice";
-	public const string k_pch_audio_OffRecordDevice_String = "offRecordDevice";
+	public const string k_pch_audio_SetOsDefaultPlaybackDevice_Bool = "setOsDefaultPlaybackDevice";
+	public const string k_pch_audio_EnablePlaybackDeviceOverride_Bool = "enablePlaybackDeviceOverride";
+	public const string k_pch_audio_PlaybackDeviceOverride_String = "playbackDeviceOverride";
+	public const string k_pch_audio_SetOsDefaultRecordingDevice_Bool = "setOsDefaultRecordingDevice";
+	public const string k_pch_audio_EnableRecordingDeviceOverride_Bool = "enableRecordingDeviceOverride";
+	public const string k_pch_audio_RecordingDeviceOverride_String = "recordingDeviceOverride";
+	public const string k_pch_audio_DisablePlaybackMirror_Bool = "disablePlaybackMirror";
+	public const string k_pch_audio_PlaybackMirrorDevice_String = "playbackMirrorDevice";
 	public const string k_pch_audio_VIVEHDMIGain = "viveHDMIGain";
 	public const string k_pch_Power_Section = "power";
 	public const string k_pch_Power_PowerOffOnExit_Bool = "powerOffOnExit";

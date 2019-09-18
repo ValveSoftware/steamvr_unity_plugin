@@ -670,6 +670,9 @@ namespace Valve.VR
             return fullPath.Substring(0, count);
         }
 
+        private static string inLowered = "IN".ToLower(System.Globalization.CultureInfo.CurrentCulture);
+        private static string outLowered = "OUT".ToLower(System.Globalization.CultureInfo.CurrentCulture);
+
         private SteamVR_ActionDirections GetActionDirection()
         {
             int actionsEndIndex = fullPath.IndexOf('/', 1);
@@ -679,9 +682,9 @@ namespace Valve.VR
             int count = directionEndIndex - setEndIndex - 1;
             string direction = fullPath.Substring(setEndIndex + 1, count);
 
-            if (direction == "in")
+            if (direction == inLowered)
                 return SteamVR_ActionDirections.In;
-            else if (direction == "out")
+            else if (direction == outLowered)
                 return SteamVR_ActionDirections.Out;
             else
                 Debug.LogError("Could not find match for direction: " + direction);

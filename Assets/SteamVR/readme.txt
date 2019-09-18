@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.4.0b (sdk 1.7.15)
+﻿# SteamVR Unity Plugin - v2.4.1b (sdk 1.7.15)
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -30,6 +30,35 @@ Support:
 
  If you'd like to discuss features, post guides, and give general feedback please post on the steam forum here: https://steamcommunity.com/app/250820/discussions/7/
 
+ 
+
+Changes for 2.4.1b
+
+ * Some fixes for fallback mode
+
+ * Fixed some cosmos bindings
+
+ * Added index hmd proximity binding
+
+ * Increased default ColliderArraySize for Hands in the Interaction System to 32.
+
+ * Removed ResolutionDialogSetting warning in Unity 2019.1 (https://github.com/ValveSoftware/steamvr_unity_plugin/pull/498)
+
+ * Fix partial bindings not including default actions (https://github.com/ValveSoftware/steamvr_unity_plugin/pull/494)
+
+ * Fix Unity crash on "Open binding UI" when using as package (https://github.com/ValveSoftware/steamvr_unity_plugin/pull/491)
+
+ * Fix for copy example input files failing on Linux/OSX (https://github.com/ValveSoftware/steamvr_unity_plugin/pull/490)
+
+ * Add Treadmill Source to Input Sources (https://github.com/ValveSoftware/steamvr_unity_plugin/pull/486)
+
+ * 2D Debug: Camera navigation up/down (E/Q) support (https://github.com/ValveSoftware/steamvr_unity_plugin/pull/481)
+
+ * Fixed an issue with Unity throwing "cannot find ın" error in PCs with Turkish default language. (https://github.com/ValveSoftware/steamvr_unity_plugin/pull/479)
+
+ * Exposed useItemPackagePreview (https://github.com/ValveSoftware/steamvr_unity_plugin/pull/432)
+
+ * Modified Throwable to optionally ease into release velocity scaling. (https://github.com/ValveSoftware/steamvr_unity_plugin/pull/173)
 
 
 Changes for 2.4.0b

@@ -531,6 +531,12 @@ namespace Valve.VR
         {
             //bool isInstalled = OpenVR.Applications.IsApplicationInstalled(SteamVR_Settings.instance.editorAppKey);
 
+            if (string.IsNullOrEmpty(SteamVR_Settings.instance.editorAppKey))
+            {
+                Debug.LogError("<b>[SteamVR]</b> Critical Error identifying application. EditorAppKey is null or empty. Input may not work.");
+                return;
+            }
+
             string manifestPath = GetManifestFile();
 
             EVRApplicationError addManifestErr = OpenVR.Applications.AddApplicationManifest(manifestPath, true);
