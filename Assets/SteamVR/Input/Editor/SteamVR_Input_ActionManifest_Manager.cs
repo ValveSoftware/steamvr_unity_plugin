@@ -198,9 +198,9 @@ namespace Valve.VR
 
         protected static SteamVR_Input_BindingFile GetBindingFileObject(string path)
         {
-            if (File.Exists(path) == false)
+            path = CheckPath(path);
+            if (path == null)
             {
-                Debug.LogError("<b>[SteamVR]</b> Could not access file at path: " + path);
                 return null;
             }
 
@@ -211,6 +211,36 @@ namespace Valve.VR
             return importingBindingFile;
         }
 
+        private static string CheckPath(string path)
+        {
+            if (File.Exists(path) == false)
+            {
+                if (SteamVR_Input.actionsFilePath != null)
+                {
+                    try
+                    {
+                        string fullPath = new FileInfo(SteamVR_Input.actionsFilePath).Directory.FullName;
+                        Debug.LogWarningFormat(
+                            "<b>[SteamVR]</b> Tried path '{0}' but there is no file there, trying with added path '{1}'.",
+                            path, fullPath);
+                        path = Path.Combine(fullPath, path);
+                    }
+                    catch (Exception exc)
+                    {
+                        Debug.LogErrorFormat("<b>[SteamVR]</b> Fixing path for '{0}' failed with exception: {1}",
+                            path, exc);
+                    }
+                }
+
+                if (File.Exists(path) == false)
+                {
+                    Debug.LogErrorFormat("<b>[SteamVR]</b> Could not access file at path: '{0}'", path);
+                    return null;
+                }
+            }
+
+            return path;
+        }
 
         protected static void WriteBindingFileObject(SteamVR_Input_BindingFile currentBindingFile, string currentBindingPath)
         {
@@ -364,19 +394,19 @@ namespace Valve.VR
             {
                 SteamVR_Input_ActionFile_DefaultBinding currentBinding = currentActionsFile.default_bindings[bindingIndex];
 
-                if (File.Exists(currentBinding.binding_url) == false)
-                {
-                    if (verbose)
-                        Debug.Log("<b>[SteamVR Input]</b> Removing binding entry for missing file: '" + currentBinding.controller_type + "' at: " + currentBinding.binding_url);
-
-                    currentActionsFile.default_bindings.RemoveAt(bindingIndex);
-                    bindingIndex--;
-                    continue;
-                }
-
                 SteamVR_Input_BindingFile bindingFile = GetBindingFileObject(currentBinding.binding_url);
                 if (bindingFile == null)
                 {
+                    if (CheckPath(currentBinding.binding_url) == null)
+                    {
+                        if (verbose)
+                            Debug.Log("<b>[SteamVR Input]</b> Removing binding entry for missing file: '" + currentBinding.controller_type + "' at: " + currentBinding.binding_url);
+
+                        currentActionsFile.default_bindings.RemoveAt(bindingIndex);
+                        bindingIndex--;
+                        continue;
+                    }
+
                     Debug.LogError("<b>[SteamVR Input]</b> Error parsing binding file for: '" + currentBinding.controller_type + "' at: " + currentBinding.binding_url);
                     continue;
                 }

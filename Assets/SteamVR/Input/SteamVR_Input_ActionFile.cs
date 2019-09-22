@@ -140,6 +140,13 @@ namespace Valve.VR
         {
             string[] files = SteamVR_Input.actionFile.GetFilesToCopy();
 
+            DirectoryInfo toPathInfo = new DirectoryInfo(toPath);
+            if (toPathInfo.Exists == false)
+            {
+                Debug.LogWarning("<b>[SteamVR]</b> Creating directory because it did not exist: " + toPathInfo.FullName);
+                toPathInfo.Create();
+            }
+
             foreach (string file in files)
             {
                 FileInfo bindingInfo = new FileInfo(file);
