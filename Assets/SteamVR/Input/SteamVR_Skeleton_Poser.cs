@@ -17,8 +17,8 @@ namespace Valve.VR
         public string[] poseNames;
         #endregion
 
-        public GameObject previewLeftHandPrefab;
-        public GameObject previewRightHandPrefab;
+        public GameObject overridePreviewLeftHandPrefab;
+        public GameObject overridePreviewRightHandPrefab;
 
         public SteamVR_Skeleton_Pose skeletonMainPose;
         public List<SteamVR_Skeleton_Pose> skeletonAdditionalPoses = new List<SteamVR_Skeleton_Pose>();

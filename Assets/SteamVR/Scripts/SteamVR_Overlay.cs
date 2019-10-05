@@ -25,7 +25,6 @@ namespace Valve.VR
 
         public Vector4 uvOffset = new Vector4(0, 0, 1, 1);
         public Vector2 mouseScale = new Vector2(1, 1);
-        public Vector2 curvedRange = new Vector2(1, 2);
 
         public VROverlayInputMethod inputMethod = VROverlayInputMethod.None;
 
@@ -91,7 +90,6 @@ namespace Valve.VR
 
                 overlay.SetOverlayAlpha(handle, alpha);
                 overlay.SetOverlayWidthInMeters(handle, scale);
-                overlay.SetOverlayAutoCurveDistanceRangeInMeters(handle, curvedRange.x, curvedRange.y);
 
                 var textureBounds = new VRTextureBounds_t();
                 textureBounds.uMin = (0 + uvOffset.x) * uvOffset.z;

@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.4.1b (sdk 1.7.15)
+﻿# SteamVR Unity Plugin - v2.4.2b (sdk 1.7.15)
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -31,6 +31,22 @@ Support:
  If you'd like to discuss features, post guides, and give general feedback please post on the steam forum here: https://steamcommunity.com/app/250820/discussions/7/
 
  
+
+Changes for 2.4.2b
+
+ * **BREAKING:** actions.json and associated bindings will automatically be moved to the StreamingAssets folder instead of stored in the project root. This removes the need for the plugin to copy them post build and fixes some problems people were having with version control. **IF YOU HAVE A TITLE ON STEAM AND YOU USE THIS TO BUILD - SET THE NEW PATH IN Application/Virtual Reality -> SteamVR Input System -> This game uses SteamVR Input system -> GameName_Data/StreamingAssets/SteamVR/actions.json **
+
+ * Added properties to SteamVR_Settings to set default models to use when previewing hand poses
+
+ * Moved default location of SteamVR_Settings.asset to a folder called SteamVR_Resources to make upgrading the plugin easier (can just delete the whole steamvr directory and import again)
+
+ * Various fixes for mac/linux issues
+
+ * Pathing fixes to allow nesting of the SteamVR folders
+
+ * Added a way to easily set the prefab the poser system uses for previews in the editor. Check SteamVR_Settings.asset
+
+
 
 Changes for 2.4.1b
 
