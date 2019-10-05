@@ -45,7 +45,7 @@
                   }
                },
                "mode" : "button",
-               "path" : "/user/hand/left/input/a"
+               "path" : "/user/hand/left/input/x"
             },
             {
                "inputs" : {
@@ -54,7 +54,7 @@
                   }
                },
                "mode" : "button",
-               "path" : "/user/hand/left/input/b"
+               "path" : "/user/hand/left/input/y"
             },
             {
                "inputs" : {
@@ -259,7 +259,7 @@
               }
             },
             "mode": "trigger",
-            "path": "/user/hand/left/input/paddle_heavy"
+            "path": "/user/hand/left/input/grip"
           },
           {
             "inputs": {
@@ -268,7 +268,7 @@
               }
             },
             "mode": "trigger",
-            "path": "/user/hand/right/input/paddle_heavy"
+            "path": "/user/hand/right/input/grip"
           }
         ]
       },
