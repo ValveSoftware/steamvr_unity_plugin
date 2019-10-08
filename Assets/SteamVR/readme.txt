@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.4.3 (sdk 1.7.15)
+﻿# SteamVR Unity Plugin - v2.4.4 (sdk 1.7.15)
 
 Copyright (c) Valve Corporation, All rights reserved.
 
