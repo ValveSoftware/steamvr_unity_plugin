@@ -478,7 +478,7 @@ namespace Valve.VR
 
             string fullPath = Path.Combine(currentPath, "unityProject.vrmanifest");
 
-            FileInfo fullManifestPath = new FileInfo(SteamVR_Settings.instance.actionsFilePath);
+            FileInfo fullManifestPath = new FileInfo(SteamVR_Input.GetActionsFilePath());
 
             if (File.Exists(fullPath))
             {
