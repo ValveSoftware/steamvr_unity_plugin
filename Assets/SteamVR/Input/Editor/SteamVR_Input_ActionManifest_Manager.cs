@@ -46,9 +46,11 @@ namespace Valve.VR
 
             string folderName = "SteamVR_" + SteamVR_Input_ActionFile.GetCodeFriendlyName(name);
 
+            string directorySeparatorChar = System.IO.Path.DirectorySeparatorChar.ToString();
+
             string mainFolderPath = string.Format("{0}", folderName);
-            string versionFolderPath = string.Format("{0}/{1}", folderName, version.ToString());
-            string manifestPath = string.Format("{0}/{1}/{2}", folderName, version.ToString(), partialManifestFilename);
+            string versionFolderPath = string.Format("{1}{0}{2}", directorySeparatorChar, folderName, version.ToString());
+            string manifestPath = string.Format("{1}{0}{2}{0}{3}", directorySeparatorChar, folderName, version.ToString(), partialManifestFilename);
 
             if (Directory.Exists(mainFolderPath) == false)
             {
@@ -240,7 +242,9 @@ namespace Valve.VR
                 }
                 else
                 {
+                    string currentBindingDirectory = SteamVR_Input.GetActionsFileFolder();
                     string currentBindingPath = currentActionsFile.default_bindings.First(binding => binding.controller_type == newDefaultPath.controller_type).binding_url;
+                    currentBindingPath = Path.Combine(currentBindingDirectory, currentBindingPath);
 
                     SteamVR_Input_BindingFile currentBindingFile = GetBindingFileObject(currentBindingPath);
                     if (currentBindingFile == null)
@@ -248,11 +252,11 @@ namespace Valve.VR
                         Debug.LogError("<b>[SteamVR]</b> There was an error deserializing the binding at path: " + currentBindingPath);
                         continue;
                     }
-                    
-                    SteamVR_Input_BindingFile importingBindingFile = GetBindingFileObject(newDefaultPath.binding_url);
+
+                    SteamVR_Input_BindingFile importingBindingFile = GetBindingFileObject(Path.Combine(directory, newDefaultPath.binding_url));
                     if (importingBindingFile == null)
                     {
-                        Debug.LogError("<b>[SteamVR]</b> There was an error deserializing the binding at path: " + newDefaultPath.binding_url);
+                        Debug.LogError("<b>[SteamVR]</b> There was an error deserializing the binding at path: " + Path.Combine(directory, newDefaultPath.binding_url));
                         continue;
                     }
 
@@ -330,7 +334,7 @@ namespace Valve.VR
         {
             SteamVR_Input.InitializeFile(true);
             SteamVR_Input_ActionFile currentActionsFile = SteamVR_Input.actionFile;
-            
+
             for (int localizationIndex = 0; localizationIndex < currentActionsFile.localization.Count; localizationIndex++)
             {
                 Dictionary<string, string> dictionary = currentActionsFile.localization[localizationIndex];
@@ -364,20 +368,21 @@ namespace Valve.VR
             {
                 SteamVR_Input_ActionFile_DefaultBinding currentBinding = currentActionsFile.default_bindings[bindingIndex];
 
-                if (File.Exists(currentBinding.binding_url) == false)
+                string bindingPath = Path.Combine(SteamVR_Input.GetActionsFileFolder(), currentBinding.binding_url);
+                if (File.Exists(bindingPath) == false)
                 {
                     if (verbose)
-                        Debug.Log("<b>[SteamVR Input]</b> Removing binding entry for missing file: '" + currentBinding.controller_type + "' at: " + currentBinding.binding_url);
+                        Debug.Log("<b>[SteamVR Input]</b> Removing binding entry for missing file: '" + currentBinding.controller_type + "' at: " + bindingPath);
 
                     currentActionsFile.default_bindings.RemoveAt(bindingIndex);
                     bindingIndex--;
                     continue;
                 }
 
-                SteamVR_Input_BindingFile bindingFile = GetBindingFileObject(currentBinding.binding_url);
+                SteamVR_Input_BindingFile bindingFile = GetBindingFileObject(bindingPath);
                 if (bindingFile == null)
                 {
-                    Debug.LogError("<b>[SteamVR Input]</b> Error parsing binding file for: '" + currentBinding.controller_type + "' at: " + currentBinding.binding_url);
+                    Debug.LogError("<b>[SteamVR Input]</b> Error parsing binding file for: '" + currentBinding.controller_type + "' at: " + bindingPath);
                     continue;
                 }
 
@@ -458,16 +463,16 @@ namespace Valve.VR
 
                 if (changed > 0)
                 {
-                    WriteBindingFileObject(bindingFile, currentBinding.binding_url);
+                    WriteBindingFileObject(bindingFile, bindingPath);
                 }
             }
 
             if (SteamVR_Input.HasFileInMemoryBeenModified())
             {
-                SteamVR_Input.actionFile.Save(SteamVR_Input.actionsFilePath);
+                SteamVR_Input.actionFile.Save(SteamVR_Input.GetActionsFilePath());
 
                 if (verbose)
-                    Debug.Log("<b>[SteamVR Input]</b> Saved new actions file: " + SteamVR_Input.actionsFilePath);
+                    Debug.Log("<b>[SteamVR Input]</b> Saved new actions file: " + SteamVR_Input.GetActionsFilePath());
             }
         }
 
@@ -491,9 +496,9 @@ namespace Valve.VR
 
             if (SteamVR_Input.HasFileInMemoryBeenModified())
             {
-                SteamVR_Input.actionFile.Save(SteamVR_Input.actionsFilePath);
+                SteamVR_Input.actionFile.Save(SteamVR_Input.GetActionsFilePath());
 
-                Debug.Log("<b>[SteamVR]</b> Saved new actions file: " + SteamVR_Input.actionsFilePath);
+                Debug.Log("<b>[SteamVR]</b> Saved new actions file: " + SteamVR_Input.GetActionsFilePath());
             }
 
             ImportBindings(currentActionsFile, newActionsFile, partialBinding.GetDirectory());
@@ -524,16 +529,19 @@ namespace Valve.VR
             string newActionsFilePath = partialBinding.GetActionsPath();
             if (File.Exists(newActionsFilePath))
             {
-                File.Copy(newActionsFilePath, SteamVR_Input.actionsFilePath);
+                File.Copy(newActionsFilePath, SteamVR_Input.GetActionsFilePath());
             }
 
-            SteamVR_Input_ActionFile newActionsFile = ReadJson<SteamVR_Input_ActionFile>(SteamVR_Input.actionsFilePath);
+            string bindingsFolder = SteamVR_Input.GetActionsFileFolder();
+
+            SteamVR_Input_ActionFile newActionsFile = ReadJson<SteamVR_Input_ActionFile>(SteamVR_Input.GetActionsFilePath());
             string partialBindingDirectory = partialBinding.GetDirectory();
 
             foreach (var newDefaultPath in newActionsFile.default_bindings)
             {
                 string bindingPath = Path.Combine(partialBindingDirectory, newDefaultPath.binding_url);
-                File.Copy(bindingPath, newDefaultPath.binding_url);
+                string newBindingPath = Path.Combine(bindingsFolder, newDefaultPath.binding_url);
+                File.Copy(bindingPath, newBindingPath, true); 
             }
 
             partialBinding.imported = true;
@@ -750,7 +758,7 @@ namespace Valve.VR
             {
                 RemoveOldActionsAndSetsFromBindings(setsToRemove, actionsToRemove);
 
-                SteamVR_Input.actionFile.Save(SteamVR_Input.actionsFilePath);
+                SteamVR_Input.actionFile.Save(SteamVR_Input.GetActionsFilePath());
 
                 SteamVR_Input.InitializeFile(true); // reload after the save
             }
@@ -803,7 +811,7 @@ namespace Valve.VR
 
         public static Dictionary<string, List<SteamVR_PartialInputBindings>> ScanForPartials()
         {
-            string[] partialManifestPaths = Directory.GetFiles("Assets/", partialManifestFilename, SearchOption.AllDirectories);
+            string[] partialManifestPaths = Directory.GetFiles(Application.dataPath, partialManifestFilename, SearchOption.AllDirectories);
             Dictionary<string, List<SteamVR_PartialInputBindings>> partialBindings = new Dictionary<string, List<SteamVR_PartialInputBindings>>();
 
             for (int partialIndex = 0; partialIndex < partialManifestPaths.Length; partialIndex++)

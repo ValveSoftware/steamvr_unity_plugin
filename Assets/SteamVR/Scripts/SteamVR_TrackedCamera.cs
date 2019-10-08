@@ -37,7 +37,7 @@ namespace Valve.VR
             public bool undistorted { get; private set; }
             public uint deviceIndex { get { return videostream.deviceIndex; } }
             public bool hasCamera { get { return videostream.hasCamera; } }
-            public bool hasTracking { get { Update(); return header.standingTrackedDevicePose.bPoseIsValid; } }
+            public bool hasTracking { get { Update(); return header.trackedDevicePose.bPoseIsValid; } }
             public uint frameId { get { Update(); return header.nFrameSequence; } }
             public VRTextureBounds_t frameBounds { get; private set; }
             public EVRTrackedCameraFrameType frameType { get { return undistorted ? EVRTrackedCameraFrameType.Undistorted : EVRTrackedCameraFrameType.Distorted; } }
@@ -45,11 +45,11 @@ namespace Valve.VR
             Texture2D _texture;
             public Texture2D texture { get { Update(); return _texture; } }
 
-            public SteamVR_Utils.RigidTransform transform { get { Update(); return new SteamVR_Utils.RigidTransform(header.standingTrackedDevicePose.mDeviceToAbsoluteTracking); } }
-            public Vector3 velocity { get { Update(); var pose = header.standingTrackedDevicePose; return new Vector3(pose.vVelocity.v0, pose.vVelocity.v1, -pose.vVelocity.v2); } }
-            public Vector3 angularVelocity { get { Update(); var pose = header.standingTrackedDevicePose; return new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2); } }
+            public SteamVR_Utils.RigidTransform transform { get { Update(); return new SteamVR_Utils.RigidTransform(header.trackedDevicePose.mDeviceToAbsoluteTracking); } }
+            public Vector3 velocity { get { Update(); var pose = header.trackedDevicePose; return new Vector3(pose.vVelocity.v0, pose.vVelocity.v1, -pose.vVelocity.v2); } }
+            public Vector3 angularVelocity { get { Update(); var pose = header.trackedDevicePose; return new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2); } }
 
-            public TrackedDevicePose_t GetPose() { Update(); return header.standingTrackedDevicePose; }
+            public TrackedDevicePose_t GetPose() { Update(); return header.trackedDevicePose; }
 
             public ulong Acquire()
             {

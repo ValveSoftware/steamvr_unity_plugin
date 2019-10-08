@@ -85,7 +85,7 @@ namespace Valve.VR
             {
                 labelStyle = new GUIStyle(EditorStyles.textField);
                 labelStyle.normal.background = Texture2D.whiteTexture;
-                
+
                 setLabelStyle = new GUIStyle(EditorStyles.label);
                 setLabelStyle.wordWrap = true;
                 setLabelStyle.normal.background = Texture2D.whiteTexture;
@@ -120,7 +120,7 @@ namespace Valve.VR
             }
 
             DrawMap();
-            
+
             for (int sourceIndex = 0; sourceIndex < sources.Length; sourceIndex++)
             {
                 SteamVR_Input_Sources source = sources[sourceIndex];

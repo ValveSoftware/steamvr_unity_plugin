@@ -184,8 +184,8 @@ namespace Valve.VR
 		    Application.onBeforeRender -= OnBeforeRender;
             SteamVR_Events.System(EVREventType.VREvent_Quit).Remove(OnQuit);
         }
-	    protected void OnBeforeRender() 
-        { 
+	    protected void OnBeforeRender()
+        {
             PreCull();
         }
 #else

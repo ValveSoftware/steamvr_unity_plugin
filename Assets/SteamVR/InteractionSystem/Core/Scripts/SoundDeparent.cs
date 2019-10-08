@@ -28,7 +28,7 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		void Start()
 		{
-			// move the sound object out from under the parent 
+			// move the sound object out from under the parent
 			gameObject.transform.parent = null;
 
 			if ( destroyAfterPlayOnce )

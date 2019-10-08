@@ -43,7 +43,9 @@ namespace Valve.VR
         const int recommended_DefaultScreenWidth = 1024;
         const int recommended_DefaultScreenHeight = 768;
         const bool recommended_RunInBackground = true;
+#if !UNITY_2019_1_OR_NEWER
         const ResolutionDialogSetting recommended_DisplayResolutionDialog = ResolutionDialogSetting.HiddenByDefault;
+#endif
         const bool recommended_ResizableWindow = true;
         const D3D11FullscreenMode recommended_FullscreenMode = D3D11FullscreenMode.FullscreenWindow;
         const bool recommended_VisibleInBackground = true;

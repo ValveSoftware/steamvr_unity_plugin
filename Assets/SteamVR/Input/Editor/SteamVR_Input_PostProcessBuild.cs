@@ -11,14 +11,7 @@ namespace Valve.VR
         [PostProcessBuildAttribute(1)]
         public static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
         {
-            SteamVR_Input.InitializeFile();
             
-            FileInfo fileInfo = new FileInfo(pathToBuiltProject);
-            string buildPath = Path.Combine(fileInfo.Directory.FullName, Path.GetDirectoryName(SteamVR_Settings.instance.actionsFilePath));
-
-            bool overwrite = EditorPrefs.GetBool(SteamVR_Input_Generator.steamVRInputOverwriteBuildKey);
-
-            SteamVR_Input.actionFile.CopyFilesToPath(buildPath, overwrite);
         }
 
         private static void UpdateAppKey(string newFilePath, string executableName)

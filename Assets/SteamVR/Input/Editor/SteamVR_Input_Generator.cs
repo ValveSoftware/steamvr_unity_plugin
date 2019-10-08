@@ -44,10 +44,6 @@ namespace Valve.VR
         {
             generating = true;
             fileChanged = false;
-            string currentPath = Application.dataPath;
-            int lastIndex = currentPath.LastIndexOf('/');
-            currentPath = currentPath.Remove(lastIndex, currentPath.Length - lastIndex);
-
 
             SteamVR_Input_EditorWindow.SetProgressBarText("Beginning generation...", 0);
 
@@ -340,10 +336,10 @@ namespace Valve.VR
 
         private static string GetClassPath()
         {
-            string path = string.Format("Assets/{0}", SteamVR_Settings.instance.steamVRInputPath);
+            string path = Path.Combine(SteamVR.GetSteamVRFolderParentPath(), SteamVR_Settings.instance.steamVRInputPath);
 
-            if (path[0] == '/' || path[0] == '\\')
-                path = path.Remove(0, 1);
+            if (Directory.Exists(path) == false)
+                Directory.CreateDirectory(path);
 
             return path;
         }
@@ -371,17 +367,6 @@ namespace Valve.VR
             //Debug.Log("[SteamVR] Writing class to: " + fullSourceFilePath);
 
             string path = GetClassPath();
-            string[] parts = path.Split('/');
-
-            for (int partIndex = 0; partIndex < parts.Length - 1; partIndex++)
-            {
-                string directoryPath = string.Join("/", parts.Take(partIndex + 1).ToArray());
-                if (Directory.Exists(directoryPath) == false)
-                {
-                    Directory.CreateDirectory(directoryPath);
-                    //Debug.Log("[SteamVR] Created directory: " + directoryPath);
-                }
-            }
 
             string priorMD5 = null;
             FileInfo file = new FileInfo(fullSourceFilePath);

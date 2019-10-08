@@ -12,9 +12,6 @@ namespace Valve.VR
     [CustomEditor(typeof(SteamVR_Skeleton_Poser))]
     public class SteamVR_Skeleton_PoserEditor : Editor
     {
-        private const string leftDefaultAssetName = "vr_glove_left_model_slim";
-        private const string rightDefaultAssetName = "vr_glove_right_model_slim";
-
         private SerializedProperty skeletonMainPoseProperty;
         private SerializedProperty skeletonAdditionalPosesProperty;
 
@@ -58,8 +55,8 @@ namespace Valve.VR
             previewLeftInstanceProperty = serializedObject.FindProperty("previewLeftInstance");
             previewRightInstanceProperty = serializedObject.FindProperty("previewRightInstance");
 
-            previewLeftHandPrefab = serializedObject.FindProperty("previewLeftHandPrefab");
-            previewRightHandPrefab = serializedObject.FindProperty("previewRightHandPrefab");
+            previewLeftHandPrefab = serializedObject.FindProperty("overridePreviewLeftHandPrefab");
+            previewRightHandPrefab = serializedObject.FindProperty("overridePreviewRightHandPrefab");
 
             previewPoseSelection = serializedObject.FindProperty("previewPoseSelection");
 
@@ -79,42 +76,20 @@ namespace Valve.VR
         {
             if (previewLeftHandPrefab.objectReferenceValue == null)
             {
-                string[] defaultLeftPaths = AssetDatabase.FindAssets(string.Format("t:Prefab {0}", leftDefaultAssetName));
-                if (defaultLeftPaths != null && defaultLeftPaths.Length > 0)
-                {
-                    string defaultLeftGUID = defaultLeftPaths[0];
-                    string defaultLeftPath = AssetDatabase.GUIDToAssetPath(defaultLeftGUID);
-                    previewLeftHandPrefab.objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameObject>(defaultLeftPath);
-
-                    if (previewLeftHandPrefab.objectReferenceValue == null)
-                        Debug.LogError("[SteamVR] Could not load prefab: " + leftDefaultAssetName + ". Found path: " + defaultLeftPath);
-                }
-                else
-                    Debug.LogError("[SteamVR] Could not load prefab: " + leftDefaultAssetName);
+                previewLeftHandPrefab.objectReferenceValue = SteamVR_Settings.instance.previewHandLeft;
             }
 
             if (previewRightHandPrefab.objectReferenceValue == null)
             {
-                string[] defaultRightPaths = AssetDatabase.FindAssets(string.Format("t:Prefab {0}", rightDefaultAssetName));
-                if (defaultRightPaths != null && defaultRightPaths.Length > 0)
-                {
-                    string defaultRightGUID = defaultRightPaths[0];
-                    string defaultRightPath = AssetDatabase.GUIDToAssetPath(defaultRightGUID);
-
-                    previewRightHandPrefab.objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameObject>(defaultRightPath);
-
-                    if (previewLeftHandPrefab.objectReferenceValue == null)
-                        Debug.LogError("[SteamVR] Could not load prefab: " + rightDefaultAssetName + ". Found path: " + defaultRightPath);
-                }
-                else
-                    Debug.LogError("[SteamVR] Could not load prefab: " + rightDefaultAssetName);
+                previewRightHandPrefab.objectReferenceValue = SteamVR_Settings.instance.previewHandRight;
             }
         }
 
-        protected void UpdatePreviewHand(SerializedProperty instanceProperty, SerializedProperty showPreviewProperty, SerializedProperty prefabProperty, SteamVR_Skeleton_Pose_Hand handData, SteamVR_Skeleton_Pose sourcePose, bool forceUpdate)
+        protected void UpdatePreviewHand(SerializedProperty instanceProperty, SerializedProperty showPreviewProperty, GameObject previewPrefab, SteamVR_Skeleton_Pose_Hand handData, SteamVR_Skeleton_Pose sourcePose, bool forceUpdate)
         {
             GameObject preview = instanceProperty.objectReferenceValue as GameObject;
             //EditorGUILayout.PropertyField(showPreviewProperty);
+
             if (showPreviewProperty.boolValue)
             {
                 if (forceUpdate && preview != null)
@@ -124,7 +99,7 @@ namespace Valve.VR
 
                 if (preview == null)
                 {
-                    preview = GameObject.Instantiate<GameObject>((GameObject)prefabProperty.objectReferenceValue);
+                    preview = GameObject.Instantiate<GameObject>(previewPrefab);
                     preview.transform.localScale = Vector3.one * poserScale.floatValue;
                     preview.transform.parent = poser.transform;
                     preview.transform.localPosition = Vector3.zero;
@@ -211,7 +186,7 @@ namespace Valve.VR
             EditorUtility.SetDirty(activePose);
         }
 
-        protected void DrawHand(bool showHand, SteamVR_Skeleton_Pose_Hand handData, SteamVR_Skeleton_Pose_Hand otherData, bool getFromOpposite)
+        protected void DrawHand(bool showHand, SteamVR_Skeleton_Pose_Hand handData, SteamVR_Skeleton_Pose_Hand otherData, bool getFromOpposite, SerializedProperty showPreviewProperty)
         {
             SteamVR_Behaviour_Skeleton thisSkeleton;
             SteamVR_Behaviour_Skeleton oppositeSkeleton;
@@ -236,7 +211,6 @@ namespace Valve.VR
 
             if (showHand)
             {
-
                 if (getFromOpposite)
                 {
                     bool confirm = EditorUtility.DisplayDialog("SteamVR", string.Format("This will overwrite your current {0} skeleton data. (with data from the {1} skeleton)", thisSourceString, oppositeSourceString), "Overwrite", "Cancel");
@@ -279,6 +253,10 @@ namespace Valve.VR
             SteamVR_Skeleton_FingerExtensionTypes newRing = (SteamVR_Skeleton_FingerExtensionTypes)EditorGUILayout.EnumPopup("Ring movement", handData.ringFingerMovementType);
             SteamVR_Skeleton_FingerExtensionTypes newPinky = (SteamVR_Skeleton_FingerExtensionTypes)EditorGUILayout.EnumPopup("Pinky movement", handData.pinkyFingerMovementType);
             EditorGUIUtility.labelWidth = 0;
+
+            EditorGUILayout.Space();
+
+            EditorGUILayout.PropertyField(showPreviewProperty);
 
             if (newThumb != handData.thumbFingerMovementType || newIndex != handData.indexFingerMovementType ||
                     newMiddle != handData.middleFingerMovementType || newRing != handData.ringFingerMovementType ||
@@ -623,8 +601,8 @@ namespace Valve.VR
 
                         DrawPoseControlButtons();
 
-                        UpdatePreviewHand(previewLeftInstanceProperty, showLeftPreviewProperty, previewLeftHandPrefab, activePose.leftHand, activePose, forceUpdateHands);
-                        UpdatePreviewHand(previewRightInstanceProperty, showRightPreviewProperty, previewRightHandPrefab, activePose.rightHand, activePose, forceUpdateHands);
+                        UpdatePreviewHand(previewLeftInstanceProperty, showLeftPreviewProperty, SteamVR_Settings.instance.previewHandLeft, activePose.leftHand, activePose, forceUpdateHands);
+                        UpdatePreviewHand(previewRightInstanceProperty, showRightPreviewProperty, SteamVR_Settings.instance.previewHandRight, activePose.rightHand, activePose, forceUpdateHands);
 
                         forceUpdateHands = false;
 
@@ -664,7 +642,7 @@ namespace Valve.VR
                         bool showLeft = showLeftPreviewProperty.boolValue;
 
 
-                        DrawHand(showLeft, activePose.leftHand, activePose.rightHand, getLeftFromOpposite);
+                        DrawHand(showLeft, activePose.leftHand, activePose.rightHand, getLeftFromOpposite, showLeftPreviewProperty);
                         EditorGUILayout.EndVertical();
                         EditorGUI.BeginDisabledGroup((showLeftPreviewProperty.boolValue && showRightPreviewProperty.boolValue) == false);
                         getRightFromOpposite = GUILayout.Button("Copy Left pose to Right hand");
@@ -692,7 +670,7 @@ namespace Valve.VR
 
                         bool showRight = showLeftPreviewProperty.boolValue;
 
-                        DrawHand(showRight, activePose.rightHand, activePose.leftHand, getRightFromOpposite);
+                        DrawHand(showRight, activePose.rightHand, activePose.leftHand, getRightFromOpposite, showRightPreviewProperty);
                         EditorGUILayout.EndVertical();
                         EditorGUI.BeginDisabledGroup((showLeftPreviewProperty.boolValue && showRightPreviewProperty.boolValue) == false);
                         getLeftFromOpposite = GUILayout.Button("Copy Right pose to Left hand");

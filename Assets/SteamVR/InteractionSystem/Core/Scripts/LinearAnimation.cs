@@ -19,7 +19,7 @@ namespace Valve.VR.InteractionSystem
 		private float animLength;
 		private float lastValue;
 
-	
+
 		//-------------------------------------------------
 		void Awake()
 		{

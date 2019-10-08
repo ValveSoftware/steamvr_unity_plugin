@@ -128,7 +128,7 @@ namespace Valve.VR.InteractionSystem
 			return Vector3.Dot( displacement, direction ) / length;
 		}
 
-        
+
 		protected virtual void Update()
         {
             if ( maintainMomemntum && mappingChangeRate != 0.0f )

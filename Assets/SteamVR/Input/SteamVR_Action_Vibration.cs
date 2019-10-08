@@ -50,7 +50,7 @@ namespace Valve.VR
         }
 
 
-        /// <summary>Executes a function when the *functional* active state of this action (with the specified inputSource) changes. 
+        /// <summary>Executes a function when the *functional* active state of this action (with the specified inputSource) changes.
         /// This happens when the action is bound or unbound, or when the ActionSet changes state.</summary>
         /// <param name="functionToCall">A local function that receives the boolean action who's active state changes and the corresponding input source</param>
         /// <param name="inputSource">The device you would like to get data from. Any if the action is not device specific.</param>
@@ -59,7 +59,7 @@ namespace Valve.VR
             sourceMap[inputSource].onActiveChange += functionToCall;
         }
 
-        /// <summary>Stops executing a function when the *functional* active state of this action (with the specified inputSource) changes. 
+        /// <summary>Stops executing a function when the *functional* active state of this action (with the specified inputSource) changes.
         /// This happens when the action is bound or unbound, or when the ActionSet changes state.</summary>
         /// <param name="functionToStopCalling">The local function that you've setup to receive update events</param>
         /// <param name="inputSource">The device you would like to get data from. Any if the action is not device specific.</param>
@@ -128,7 +128,9 @@ namespace Valve.VR
     {
         public bool IsUpdating(SteamVR_Input_Sources inputSource)
         {
-            return sources[inputSource].timeLastExecuted != 0;
+            int sourceIndex = (int)inputSource;
+
+            return sources[sourceIndex].timeLastExecuted != 0;
         }
     }
 
@@ -164,7 +166,7 @@ namespace Valve.VR
 
 
         /// <summary>
-        /// <strong>[Should not be called by user code]</strong> 
+        /// <strong>[Should not be called by user code]</strong>
         /// Initializes the handle for the inputSource, and any other related SteamVR data.
         /// </summary>
         public override void Initialize()

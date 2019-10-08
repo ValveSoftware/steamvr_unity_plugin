@@ -24,7 +24,7 @@ namespace Valve.VR.InteractionSystem
 		private Vector3[] velocitySamples;
 		private Vector3[] angularVelocitySamples;
 
-	
+
 		//-------------------------------------------------
 		public void BeginEstimatingVelocity()
 		{

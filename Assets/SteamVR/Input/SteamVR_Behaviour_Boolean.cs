@@ -11,7 +11,7 @@ using UnityEngine.Events;
 namespace Valve.VR
 {
     /// <summary>
-    /// This component simplifies using boolean actions. 
+    /// This component simplifies using boolean actions.
     /// <para>Provides editor accessible events: OnPress, OnPressDown, OnPressUp, OnChange, and OnUpdate.</para>
     /// <para>Provides script accessible events: OnPressEvent, OnPressDownEvent, OnPressUpEvent, OnChangeEvent, and OnUpdateEvent.</para>
     /// </summary>
@@ -58,7 +58,7 @@ namespace Valve.VR
 
         /// <summary>Returns the action set that this action is in.</summary>
         public SteamVR_ActionSet actionSet { get { if (booleanAction != null) return booleanAction.actionSet; else return null; } }
-        
+
 
 
         protected virtual void OnEnable()
@@ -165,7 +165,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// Gets the localized name of the device that the action corresponds to. 
+        /// Gets the localized name of the device that the action corresponds to.
         /// </summary>
         /// <param name="localizedParts">
         /// <list type="bullet">

@@ -15,7 +15,7 @@ namespace Valve.VR
         where SourceElement : SteamVR_Action_Out_Source, new()
     {
     }
-    
+
     public abstract class SteamVR_Action_Out_Source : SteamVR_Action_Source, ISteamVR_Action_Out_Source
     {
     }

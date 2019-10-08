@@ -41,7 +41,17 @@ namespace Valve.VR.InteractionSystem
 				forward -= 1.0f;
 			}
 
-			float right = 0.0f;
+            float up = 0.0f;
+            if (Input.GetKey(KeyCode.E))
+            {
+                up += 1.0f;
+            }
+            if (Input.GetKey(KeyCode.Q))
+            {
+                up -= 1.0f;
+            }
+
+            float right = 0.0f;
 			if ( Input.GetKey( KeyCode.D ) || Input.GetKey( KeyCode.RightArrow ) )
 			{
 				right += 1.0f;
@@ -61,7 +71,7 @@ namespace Valve.VR.InteractionSystem
 			float deltaRealTime = realTimeNow - realTime;
 			realTime = realTimeNow;
 
-			Vector3 delta = new Vector3( right, 0.0f, forward ) * currentSpeed * deltaRealTime;
+			Vector3 delta = new Vector3( right, up, forward ) * currentSpeed * deltaRealTime;
 
 			transform.position += transform.TransformDirection( delta );
 
@@ -87,7 +97,7 @@ namespace Valve.VR.InteractionSystem
 			if ( showInstructions )
 			{
 				GUI.Label( new Rect( 10.0f, 10.0f, 600.0f, 400.0f ),
-					"WASD/Arrow Keys to translate the camera\n" +
+					"WASD EQ/Arrow Keys to translate the camera\n" +
 					"Right mouse click to rotate the camera\n" +
 					"Left mouse click for standard interactions.\n" );
 			}

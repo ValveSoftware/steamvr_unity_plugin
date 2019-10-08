@@ -424,6 +424,6 @@ namespace Valve.VR.InteractionSystem
             return handAnimatorStateId != -1 && handAnimator != null && handAnimator.isInitialized;
         }
 
-        
+
     }
 }

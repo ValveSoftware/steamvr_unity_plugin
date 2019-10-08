@@ -79,7 +79,7 @@ namespace Valve.VR.InteractionSystem
             lastColor = grabbedColor;
         }
 
-        
+
         private void OnDetachedFromHand( Hand hand )
 		{
             if (isThrowable)

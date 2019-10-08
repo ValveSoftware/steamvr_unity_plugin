@@ -1,5 +1,4 @@
 {
-   "app_key" : "application.generated.unity.steamvr.exe",
    "bindings" : {
       "/actions/buggy" : {
          "sources" : [
@@ -109,114 +108,176 @@
                "path" : "/user/hand/right/input/skeleton/right"
             }
          ],
-         "sources" : [
-            {
-               "inputs" : {
-                  "click" : {
-                     "output" : "/actions/default/in/interactui"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/left/input/trigger"
+        "sources": [
+          {
+            "inputs": {
+              "click": {
+                "output": "/actions/default/in/interactui"
+              }
             },
-            {
-               "inputs" : {
-                  "force" : {
-                     "output" : "/actions/default/in/squeeze"
-                  }
-               },
-               "mode" : "force_sensor",
-               "path" : "/user/hand/left/input/grip"
+            "mode": "button",
+            "path": "/user/hand/left/input/trigger"
+          },
+          {
+            "inputs": {
+              "force": {
+                "output": "/actions/default/in/squeeze"
+              }
             },
-            {
-               "inputs" : {
-                  "force" : {
-                     "output" : "/actions/default/in/squeeze"
-                  }
-               },
-               "mode" : "force_sensor",
-               "path" : "/user/hand/right/input/grip"
+            "mode": "force_sensor",
+            "path": "/user/hand/left/input/grip"
+          },
+          {
+            "inputs": {
+              "force": {
+                "output": "/actions/default/in/squeeze"
+              }
             },
-            {
-               "inputs" : {
-                  "click" : {
-                     "output" : "/actions/default/in/teleport"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/left/input/trackpad"
+            "mode": "force_sensor",
+            "path": "/user/hand/right/input/grip"
+          },
+          {
+            "inputs": {
+              "click": {
+                "output": "/actions/default/in/teleport"
+              }
             },
-            {
-               "inputs" : {
-                  "click" : {
-                     "output" : "/actions/default/in/interactui"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/right/input/trigger"
+            "mode": "button",
+            "path": "/user/hand/left/input/trackpad"
+          },
+          {
+            "inputs": {
+              "click": {
+                "output": "/actions/default/in/interactui"
+              }
             },
-            {
-               "inputs" : {
-                  "click" : {
-                     "output" : "/actions/default/in/teleport"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/right/input/trackpad"
+            "mode": "button",
+            "path": "/user/hand/right/input/trigger"
+          },
+          {
+            "inputs": {
+              "click": {
+                "output": "/actions/default/in/teleport"
+              }
             },
-            {
-               "inputs" : {
-                  "grab" : {
-                     "output" : "/actions/default/in/grabgrip"
-                  }
-               },
-               "mode" : "grab",
-               "parameters" : {
-                  "force_hold_threshold" : "0.02",
-                  "force_release_threshold" : "0.01"
-               },
-               "path" : "/user/hand/left/input/grip"
+            "mode": "button",
+            "path": "/user/hand/right/input/trackpad"
+          },
+          {
+            "inputs": {
+              "north": {
+                "output": "/actions/default/in/teleport"
+              }
             },
-            {
-               "inputs" : {
-                  "grab" : {
-                     "output" : "/actions/default/in/grabgrip"
-                  }
-               },
-               "mode" : "grab",
-               "parameters" : {
-                  "force_hold_threshold" : "0.02",
-                  "force_release_threshold" : "0.01"
-               },
-               "path" : "/user/hand/right/input/grip"
+            "mode": "dpad",
+            "parameters": {
+              "deadzone_pct": "25",
+              "overlap_pct": "30",
+              "sub_mode": "touch"
             },
-            {
-               "inputs" : {
-                  "grab" : {
-                     "output" : "/actions/default/in/grabpinch"
-                  }
-               },
-               "mode" : "grab",
-               "parameters" : {
-                  "force_hold_threshold" : "0.02",
-                  "force_release_threshold" : "0.01"
-               },
-               "path" : "/user/hand/left/input/pinch"
+            "path": "/user/hand/left/input/thumbstick"
+          },
+          {
+            "inputs": {
+              "north": {
+                "output": "/actions/default/in/teleport"
+              }
             },
-            {
-               "inputs" : {
-                  "grab" : {
-                     "output" : "/actions/default/in/grabpinch"
-                  }
-               },
-               "mode" : "grab",
-               "parameters" : {
-                  "force_hold_threshold" : "0.02",
-                  "force_release_threshold" : "0.01"
-               },
-               "path" : "/user/hand/right/input/pinch"
-            }
-         ]
+            "mode": "dpad",
+            "parameters": {
+              "deadzone_pct": "25",
+              "overlap_pct": "30",
+              "sub_mode": "touch"
+            },
+            "path": "/user/hand/right/input/thumbstick"
+          },
+          {
+            "inputs": {
+              "east": {
+                "output": "/actions/default/in/snapturnright"
+              },
+              "west": {
+                "output": "/actions/default/in/snapturnleft"
+              }
+            },
+            "mode": "dpad",
+            "parameters": {
+              "deadzone_pct": "85",
+              "overlap_pct": "0",
+              "sub_mode": "touch"
+            },
+            "path": "/user/hand/left/input/thumbstick"
+          },
+          {
+            "inputs": {
+              "east": {
+                "output": "/actions/default/in/snapturnright"
+              },
+              "west": {
+                "output": "/actions/default/in/snapturnleft"
+              }
+            },
+            "mode": "dpad",
+            "parameters": {
+              "deadzone_pct": "85",
+              "overlap_pct": "0",
+              "sub_mode": "touch"
+            },
+            "path": "/user/hand/right/input/thumbstick"
+          },
+          {
+            "inputs": {
+              "grab": {
+                "output": "/actions/default/in/grabgrip"
+              }
+            },
+            "mode": "grab",
+            "parameters": {
+              "force_hold_threshold": "0.02",
+              "force_release_threshold": "0.01"
+            },
+            "path": "/user/hand/left/input/grip"
+          },
+          {
+            "inputs": {
+              "grab": {
+                "output": "/actions/default/in/grabgrip"
+              }
+            },
+            "mode": "grab",
+            "parameters": {
+              "force_hold_threshold": "0.02",
+              "force_release_threshold": "0.01"
+            },
+            "path": "/user/hand/right/input/grip"
+          },
+          {
+            "inputs": {
+              "grab": {
+                "output": "/actions/default/in/grabpinch"
+              }
+            },
+            "mode": "grab",
+            "parameters": {
+              "force_hold_threshold": "0.02",
+              "force_release_threshold": "0.01"
+            },
+            "path": "/user/hand/left/input/pinch"
+          },
+          {
+            "inputs": {
+              "grab": {
+                "output": "/actions/default/in/grabpinch"
+              }
+            },
+            "mode": "grab",
+            "parameters": {
+              "force_hold_threshold": "0.02",
+              "force_release_threshold": "0.01"
+            },
+            "path": "/user/hand/right/input/pinch"
+          }
+        ]
       },
       "/actions/platformer" : {
          "sources" : [
