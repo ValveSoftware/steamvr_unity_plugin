@@ -13,7 +13,6 @@ namespace Valve.VR.InteractionSystem
 	//-------------------------------------------------------------------------
 	[RequireComponent( typeof( Interactable ) )]
 	[RequireComponent( typeof( Rigidbody ) )]
-    [RequireComponent( typeof(VelocityEstimator))]
 	public class Throwable : MonoBehaviour
 	{
 		[EnumFlags]
@@ -149,7 +148,8 @@ namespace Valve.VR.InteractionSystem
 
             rigidbody.interpolation = RigidbodyInterpolation.None;
 
-		    velocityEstimator.BeginEstimatingVelocity();
+            if (velocityEstimator != null)
+		        velocityEstimator.BeginEstimatingVelocity();
 
 			attachTime = Time.time;
 			attachPosition = transform.position;
@@ -187,9 +187,19 @@ namespace Valve.VR.InteractionSystem
             switch (releaseVelocityStyle)
             {
                 case ReleaseStyle.ShortEstimation:
-                    velocityEstimator.FinishEstimatingVelocity();
-                    velocity = velocityEstimator.GetVelocityEstimate();
-                    angularVelocity = velocityEstimator.GetAngularVelocityEstimate();
+                    if (velocityEstimator != null)
+                    {
+                        velocityEstimator.FinishEstimatingVelocity();
+                        velocity = velocityEstimator.GetVelocityEstimate();
+                        angularVelocity = velocityEstimator.GetAngularVelocityEstimate();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("[SteamVR Interaction System] Throwable: No Velocity Estimator component on object but release style set to short estimation. Please add one or change the release style.");
+
+                        velocity = rigidbody.velocity;
+                        angularVelocity = rigidbody.angularVelocity;
+                    }
                     break;
                 case ReleaseStyle.AdvancedEstimation:
                     hand.GetEstimatedPeakVelocities(out velocity, out angularVelocity);
@@ -253,7 +263,9 @@ namespace Valve.VR.InteractionSystem
         protected virtual void OnHandFocusAcquired( Hand hand )
 		{
 			gameObject.SetActive( true );
-			velocityEstimator.BeginEstimatingVelocity();
+
+            if (velocityEstimator != null)
+			    velocityEstimator.BeginEstimatingVelocity();
 		}
 
 
@@ -261,7 +273,9 @@ namespace Valve.VR.InteractionSystem
         protected virtual void OnHandFocusLost( Hand hand )
 		{
 			gameObject.SetActive( false );
-			velocityEstimator.FinishEstimatingVelocity();
+
+            if (velocityEstimator != null)
+                velocityEstimator.FinishEstimatingVelocity();
 		}
 	}
 

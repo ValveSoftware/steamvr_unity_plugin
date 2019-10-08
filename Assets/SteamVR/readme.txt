@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.4.2b (sdk 1.7.15)
+﻿# SteamVR Unity Plugin - v2.4.3 (sdk 1.7.15)
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -30,11 +30,15 @@ Support:
 
  If you'd like to discuss features, post guides, and give general feedback please post on the steam forum here: https://steamcommunity.com/app/250820/discussions/7/
 
+
+Input and Steam:
+
+ If you publish your game to steam you can let users change their input bindings while the game is not running by setting the location of your action manifest. On the steamworks partner site go to the Application settings, and the Virtual Reality Section. At the bottom you'll see a radio button to designate your title as a SteamVR Input application. You then can set the location of your action manifest. In older versions of the plugin this was next to the executable. In versions 2.3.3 and above this is in [GameName]_Data/StreamingAssets/SteamVR/actions.json.
  
 
-Changes for 2.4.2b
+Changes for 2.4.3
 
- * **BREAKING:** actions.json and associated bindings will automatically be moved to the StreamingAssets folder instead of stored in the project root. This removes the need for the plugin to copy them post build and fixes some problems people were having with version control. **IF YOU HAVE A TITLE ON STEAM AND YOU USE THIS TO BUILD - SET THE NEW PATH IN Application/Virtual Reality -> SteamVR Input System -> This game uses SteamVR Input system -> GameName_Data/StreamingAssets/SteamVR/actions.json **
+ * **BREAKING** actions.json and associated bindings will automatically be moved to the StreamingAssets folder instead of stored in the project root. This removes the need for the plugin to copy them post build and fixes some problems people were having with version control. **IF YOU HAVE A TITLE ON STEAM AND YOU USE THIS TO BUILD - SET THE NEW PATH IN Application/Virtual Reality -> SteamVR Input System -> This game uses SteamVR Input system to: [GameName]_Data/StreamingAssets/SteamVR/actions.json **
 
  * Added properties to SteamVR_Settings to set default models to use when previewing hand poses
 
@@ -46,17 +50,11 @@ Changes for 2.4.2b
 
  * Added a way to easily set the prefab the poser system uses for previews in the editor. Check SteamVR_Settings.asset
 
-
-
-Changes for 2.4.1b
-
  * Some fixes for fallback mode
-
- * Fixed some cosmos bindings
 
  * Added index hmd proximity binding
 
- * Increased default ColliderArraySize for Hands in the Interaction System to 32.
+ * Increased default ColliderArraySize for Hands in the Interaction System to 32
 
  * Removed ResolutionDialogSetting warning in Unity 2019.1 (https://github.com/ValveSoftware/steamvr_unity_plugin/pull/498)
 
@@ -76,9 +74,6 @@ Changes for 2.4.1b
 
  * Modified Throwable to optionally ease into release velocity scaling. (https://github.com/ValveSoftware/steamvr_unity_plugin/pull/173)
 
-
-Changes for 2.4.0b
-
  * Updated openvr sdk version to 1.7.15
 
  * Significant performance increases in the input system
@@ -89,11 +84,13 @@ Changes for 2.4.0b
 
  * Changed teleport bindings to use joysticks when available
 
- * Normalized line endings and trailing spaces across project.
-
- * Updated openvr sdk version to 1.6.10
+ * Normalized line endings and trailing spaces across project
 
  * Added Vive Cosmos default bindings
+
+ * Removed the requirements to have a velocityestimator on throwables.
+
+ * Added SteamVR.GetHeadsetActivityLevel() which will give you the current state of the hmd (idle, in use, etc)
 
 
 Changes for 2.3.2

@@ -261,6 +261,11 @@ namespace Valve.VR
         public float hmd_SecondsFromVsyncToPhotons { get { return GetFloatProperty(ETrackedDeviceProperty.Prop_SecondsFromVsyncToPhotons_Float); } }
         public float hmd_DisplayFrequency { get { return GetFloatProperty(ETrackedDeviceProperty.Prop_DisplayFrequency_Float); } }
 
+        public EDeviceActivityLevel GetHeadsetActivityLevel()
+        {
+            return OpenVR.System.GetTrackedDeviceActivityLevel(OpenVR.k_unTrackedDeviceIndex_Hmd);
+        }
+
         public string GetTrackedDeviceString(uint deviceId)
         {
             var error = ETrackedPropertyError.TrackedProp_Success;
