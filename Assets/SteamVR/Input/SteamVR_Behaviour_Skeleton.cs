@@ -343,6 +343,8 @@ namespace Valve.VR
 
         protected virtual void OnEnable()
         {
+            SteamVR.Initialize();
+
             CheckSkeletonAction();
             SteamVR_Input.onSkeletonsUpdated += SteamVR_Input_OnSkeletonsUpdated;
 
