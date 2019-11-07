@@ -131,7 +131,7 @@
       "binding_url": "binding_vive.json"
     },
     {
-      "controller_type": "index_hmd",
+      "controller_type": "indexhmd",
       "binding_url": "binding_index_hmd.json"
     },
     {

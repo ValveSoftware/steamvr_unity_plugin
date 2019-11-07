@@ -815,11 +815,11 @@ namespace Valve.VR.InteractionSystem
             playerInstance = Player.instance;
             if (!playerInstance)
             {
-                Debug.LogError("<b>[SteamVR Interaction]</b> No player instance found in Hand Start()");
+                Debug.LogError("<b>[SteamVR Interaction]</b> No player instance found in Hand Start()", this);
             }
 
             if (this.gameObject.layer == 0)
-                Debug.LogWarning("<b>[SteamVR Interaction]</b> Hand is on default layer. This puts unnecessary strain on hover checks as it is always true for hand colliders (which are then ignored).");
+                Debug.LogWarning("<b>[SteamVR Interaction]</b> Hand is on default layer. This puts unnecessary strain on hover checks as it is always true for hand colliders (which are then ignored).", this);
             else
                 hoverLayerMask &= ~(1 << this.gameObject.layer); //ignore self for hovering
 
@@ -900,7 +900,7 @@ namespace Valve.VR.InteractionSystem
 
             int numColliding = Physics.OverlapSphereNonAlloc(hoverPosition, hoverRadius, overlappingColliders, hoverLayerMask.value);
 
-            if (numColliding == ColliderArraySize)
+            if (numColliding >= ColliderArraySize)
                 Debug.LogWarning("<b>[SteamVR Interaction]</b> This hand is overlapping the max number of colliders: " + ColliderArraySize + ". Some collisions may be missed. Increase ColliderArraySize on Hand.cs");
 
             // DebugVar
@@ -940,16 +940,20 @@ namespace Valve.VR.InteractionSystem
                         break;
                     }
                 }
-                if (hoveringOverAttached)
-                    continue;
 
-                // Occupied by another hand, so we can't touch it
-                if (otherHand && otherHand.hoveringInteractable == contacting)
+                if (hoveringOverAttached)
                     continue;
 
                 // Best candidate so far...
                 float distance = Vector3.Distance(contacting.transform.position, hoverPosition);
-                if (distance < closestDistance)
+                //float distance = Vector3.Distance(collider.bounds.center, hoverPosition);
+                bool lowerPriority = false;
+                if (closestInteractable != null)
+                { // compare to closest interactable to check priority
+                    lowerPriority = contacting.hoverPriority < closestInteractable.hoverPriority;
+                }
+                bool isCloser = (distance < closestDistance);
+                if (isCloser && !lowerPriority)
                 {
                     closestDistance = distance;
                     closestInteractable = contacting;

@@ -73,7 +73,7 @@ namespace Valve.VR
         {
             if (poseAction == null)
             {
-                Debug.LogError("<b>[SteamVR]</b> No pose action set for this component");
+                Debug.LogError("<b>[SteamVR]</b> No pose action set for this component", this);
                 return;
             }
 

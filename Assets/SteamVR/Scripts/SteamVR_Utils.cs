@@ -217,6 +217,22 @@ public static class SteamVR_Utils
         return GetBadMD5Hash(data + secretKey);
     }
 
+    public static string SanitizePath(string path, bool allowLeadingSlash = true)
+    {
+        if (path.Contains("\\\\"))
+            path = path.Replace("\\\\", "\\");
+        if (path.Contains("//"))
+            path = path.Replace("//", "/");
+
+        if (allowLeadingSlash == false)
+        {
+            if (path[0] == '/' || path[0] == '\\')
+                path = path.Substring(1);
+        }
+
+        return path;
+    }
+
     [System.Serializable]
 	public struct RigidTransform
 	{

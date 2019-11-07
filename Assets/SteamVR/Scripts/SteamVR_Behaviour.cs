@@ -144,7 +144,7 @@ namespace Valve.VR
             }
             else
             {
-                Debug.LogError("<b>[SteamVR]</b> Tried to async load: " + openVRDeviceName + ". Loaded: " + deviceName);
+                Debug.LogError("<b>[SteamVR]</b> Tried to async load: " + openVRDeviceName + ". Loaded: " + deviceName, this);
                 loadedOpenVRDeviceSuccess = true; //try anyway
             }
         }

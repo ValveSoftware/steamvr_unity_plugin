@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.4.5 (sdk 1.7.15)
+﻿# SteamVR Unity Plugin - v2.5 (sdk 1.8.19)
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -34,6 +34,30 @@ Support:
 Input and Steam:
 
  If you publish your game to steam you can let users change their input bindings while the game is not running by setting the location of your action manifest. On the steamworks partner site go to the Application settings, and the Virtual Reality Section. At the bottom you'll see a radio button to designate your title as a SteamVR Input application. You then can set the location of your action manifest. In older versions of the plugin this was next to the executable. In versions 2.3.3 and above this is in [GameName]_Data/StreamingAssets/SteamVR/actions.json.
+
+ 
+ 
+Changes for 2.5.0
+
+ * Updated openvr_api to v1.8.19
+
+ * Fixes the Open Binding UI button. This should now work on all computers as it opens the window in SteamVR instead of through your default browser.
+
+ * Multiple hands can now hover over one interactable.
+
+ * Interactable now has a priority member. Higher numbers will make the interactable preferred when one hand is hovering over multiple interactables.
+
+ * Fixed the SteamVR binding hint ui. This lets you show the user (through a SteamVR interface) what actions are mapped to what bindings in a specified set. See: SteamVR_Input.ShowBindingHints(Action), SteamVR_Input.ShowBindingHints(ActionSet), SteamVR_Input.ShowBindingHints(ActionSet), SteamVR_Input.ShowBindingHintsForActiveActionSets()
+
+ * SteamVR_Behaviour_Skeleton will now initialize SteamVR if a Pose has not already done so.
+
+ * Fixed default binding bug with the index hmd not responding to proximity events (controller type is "indexhmd" not "index_hmd")
+
+ * Fixed bug with the SteamVR_Skeleton_Poser_Editor being offscreen
+
+ * Fixed a bug with the teleport point prefabs being on the wrong layer
+
+ * 
  
 Changes for 2.4.5
 

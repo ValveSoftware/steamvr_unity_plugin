@@ -252,22 +252,16 @@ namespace Valve.VR
             SteamVR_Skeleton_FingerExtensionTypes newMiddle = (SteamVR_Skeleton_FingerExtensionTypes)EditorGUILayout.EnumPopup("Middle movement", handData.middleFingerMovementType);
             SteamVR_Skeleton_FingerExtensionTypes newRing = (SteamVR_Skeleton_FingerExtensionTypes)EditorGUILayout.EnumPopup("Ring movement", handData.ringFingerMovementType);
             SteamVR_Skeleton_FingerExtensionTypes newPinky = (SteamVR_Skeleton_FingerExtensionTypes)EditorGUILayout.EnumPopup("Pinky movement", handData.pinkyFingerMovementType);
-            EditorGUIUtility.labelWidth = 0;
 
             EditorGUILayout.Space();
 
             EditorGUILayout.PropertyField(showPreviewProperty);
+            EditorGUIUtility.labelWidth = 0;
 
             if (newThumb != handData.thumbFingerMovementType || newIndex != handData.indexFingerMovementType ||
                     newMiddle != handData.middleFingerMovementType || newRing != handData.ringFingerMovementType ||
                     newPinky != handData.pinkyFingerMovementType)
             {
-                /*if ((int)newThumb >= 2 || (int)newIndex >= 2 || (int)newMiddle >= 2 || (int)newRing >= 2 || (int)newPinky >= 2)
-                {
-                    Debug.LogError("<b>[SteamVR Input]</b> Unfortunately only Static and Free modes are supported in this beta.");
-                    return;
-                }*/
-
                 handData.thumbFingerMovementType = newThumb;
                 handData.indexFingerMovementType = newIndex;
                 handData.middleFingerMovementType = newMiddle;

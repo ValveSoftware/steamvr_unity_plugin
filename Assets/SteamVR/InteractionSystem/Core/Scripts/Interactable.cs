@@ -69,12 +69,24 @@ namespace Valve.VR.InteractionSystem
         [Tooltip("An array of child gameObjects to not render a highlight for. Things like transparent parts, vfx, etc.")]
         public GameObject[] hideHighlight;
 
+        [Tooltip("Higher is better")]
+        public int hoverPriority = 0;
 
         [System.NonSerialized]
         public Hand attachedToHand;
 
         [System.NonSerialized]
-        public Hand hoveringHand;
+        public List<Hand> hoveringHands = new List<Hand>();
+        public Hand hoveringHand
+        {
+            get
+            {
+                if (hoveringHands.Count > 0)
+                    return hoveringHands[0];
+                return null;
+            }
+        }
+
 
         public bool isDestroying { get; protected set; }
         public bool isHovering { get; protected set; }
@@ -91,7 +103,7 @@ namespace Valve.VR.InteractionSystem
             highlightMat = (Material)Resources.Load("SteamVR_HoverHighlight", typeof(Material));
 
             if (highlightMat == null)
-                Debug.LogError("<b>[SteamVR Interaction]</b> Hover Highlight Material is missing. Please create a material named 'SteamVR_HoverHighlight' and place it in a Resources folder");
+                Debug.LogError("<b>[SteamVR Interaction]</b> Hover Highlight Material is missing. Please create a material named 'SteamVR_HoverHighlight' and place it in a Resources folder", this);
 
             if (skeletonPoser != null)
             {
@@ -234,9 +246,9 @@ namespace Valve.VR.InteractionSystem
             wasHovering = isHovering;
             isHovering = true;
 
-            hoveringHand = hand;
+            hoveringHands.Add(hand);
 
-            if (highlightOnHover == true)
+            if (highlightOnHover == true && wasHovering == false)
             {
                 CreateHighlightRenderers();
                 UpdateHighlightRenderers();
@@ -247,13 +259,19 @@ namespace Valve.VR.InteractionSystem
         /// <summary>
         /// Called when a Hand stops hovering over this object
         /// </summary>
-        private void OnHandHoverEnd(Hand hand)
+        protected virtual void OnHandHoverEnd(Hand hand)
         {
             wasHovering = isHovering;
-            isHovering = false;
 
-            if (highlightOnHover && highlightHolder != null)
-                Destroy(highlightHolder);
+            hoveringHands.Remove(hand);
+
+            if (hoveringHands.Count == 0)
+            {
+                isHovering = false;
+
+                if (highlightOnHover && highlightHolder != null)
+                    Destroy(highlightHolder);
+            }
         }
 
         protected virtual void Update()

@@ -32,10 +32,10 @@ namespace Valve.VR.Extras
             if (pose == null)
                 pose = this.GetComponent<SteamVR_Behaviour_Pose>();
             if (pose == null)
-                Debug.LogError("No SteamVR_Behaviour_Pose component found on this object");
+                Debug.LogError("No SteamVR_Behaviour_Pose component found on this object", this);
 
             if (interactWithUI == null)
-                Debug.LogError("No ui interaction action has been set on this component.");
+                Debug.LogError("No ui interaction action has been set on this component.", this);
 
 
             holder = new GameObject();

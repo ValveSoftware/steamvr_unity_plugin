@@ -246,41 +246,17 @@ namespace Valve.VR
             return setData.GetShortName();
         }
 
-        VRActiveActionSet_t[] emptySetCache = new VRActiveActionSet_t[0];
-        VRActiveActionSet_t[] setCache = new VRActiveActionSet_t[1];
         /// <summary>
         /// Shows all the bindings for the actions in this set.
         /// </summary>
-        /// <param name="originToHighlight">Highlights the binding of the passed in action (or the first action in the set if none is specified)</param>
+        /// <param name="originToHighlight">Highlights the binding of the passed in action (must be in an active set)</param>
         /// <returns></returns>
         public bool ShowBindingHints(ISteamVR_Action_In originToHighlight = null)
         {
             if (originToHighlight == null)
-            {
-                for (int actionIndex = 0; actionIndex < allActions.Length; actionIndex++)
-                {
-                    if (allActions[actionIndex].direction == SteamVR_ActionDirections.In && allActions[actionIndex].active)
-                    {
-                        originToHighlight = (ISteamVR_Action_In)allActions[actionIndex];
-                        break;
-                    }
-                }
-            }
-
-
-            if (originToHighlight != null)
-            {
-                setCache[0].ulActionSet = this.handle;
-                OpenVR.Input.ShowBindingsForActionSet(setCache, 1, originToHighlight.activeOrigin);
-                return true;
-            }
-
-            return false;
-        }
-
-        public void HideBindingHints()
-        {
-            OpenVR.Input.ShowBindingsForActionSet(emptySetCache, 0, 0);
+                return SteamVR_Input.ShowBindingHints(this);
+            else
+                return SteamVR_Input.ShowBindingHints(originToHighlight);
         }
 
 
