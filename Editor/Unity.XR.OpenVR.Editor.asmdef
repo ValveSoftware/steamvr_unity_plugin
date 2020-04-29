@@ -1,0 +1,25 @@
+﻿{
+   "name": "Unity.XR.OpenVR.Editor",
+    "references": [
+        "Unity.XR.OpenVR",
+    	"Unity.XR.Management",
+    	"Unity.XR.Management.Editor"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+    	"Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.xr.management",
+            "expression": "3.2.0",
+            "define": "XR_MGMT_GTE_320"
+        }
+    ]
+}

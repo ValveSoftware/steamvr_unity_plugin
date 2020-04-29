@@ -1,0 +1,25 @@
+{
+  "name": "com.valve.openvr",
+  "displayName": "OpenVR XR Plugin",
+  "version": "1.0.0-preview.1",
+  "unity": "2019.3",
+  "description": "Provides rendering and legacy input support for OpenVR devices.",
+  "keywords": [
+    "openvr",
+    "xr",
+    "reality",
+    "xreditorsubsystem",
+    "xrsdk",
+    "steamvr"
+  ],
+  "dependencies": {
+    "com.unity.xr.management": "3.0.1",
+    "com.unity.ugui": "1.0.0",
+    "com.unity.xr.legacyinputhelpers": "1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ValveSoftware/steamvr_unity_plugin.git#UnityXRPlugin"
+  },
+  "hideInEditor": false
+}

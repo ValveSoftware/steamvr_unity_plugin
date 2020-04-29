@@ -1,0 +1,255 @@
+{
+    "bindings": {
+        "/actions/legacy": {
+            "haptics": [
+                {
+                    "output": "/actions/legacy/out/left_haptic",
+                    "path": "/user/hand/left/output/haptic"
+                },
+                {
+                    "output": "/actions/legacy/out/right_haptic",
+                    "path": "/user/hand/right/output/haptic"
+                }
+            ],
+            "poses": [
+                {
+                    "output": "/actions/legacy/in/Left_Pose",
+                    "path": "/user/hand/left/pose/raw"
+                },
+                {
+                    "output": "/actions/legacy/in/Right_Pose",
+                    "path": "/user/hand/right/pose/raw"
+                }
+            ],
+            "sources": [
+                {
+                    "path": "/user/hand/left/input/system",
+                    "mode": "button",
+                    "inputs": {
+                        "click": {
+                            "output": "/actions/legacy/in/left_system_press"
+                        }
+                    }
+                },
+                {
+                    "path": "/user/hand/right/input/system",
+                    "mode": "button",
+                    "inputs": {
+                        "click": {
+                            "output": "/actions/legacy/in/right_system_press"
+                        }
+                    }
+                },
+                {
+                    "path": "/user/hand/left/input/grip",
+                    "mode": "button",
+                    "parameters": {
+                        "click_activate_threshold": "0.2",
+                        "click_deactivate_threshold": "0.1",
+                        "haptic_amplitude": "0"
+                    },
+                    "inputs": {
+                        "click": {
+                            "output": "/actions/legacy/in/left_grip_press"
+                        }
+                    }
+                },
+                {
+                    "path": "/user/hand/right/input/grip",
+                    "mode": "button",
+                    "parameters": {
+                        "click_activate_threshold": "0.2",
+                        "click_deactivate_threshold": "0.1",
+                        "haptic_amplitude": "0"
+                    },
+                    "inputs": {
+                        "click": {
+                            "output": "/actions/legacy/in/right_grip_press"
+                        }
+                    }
+                },
+                {
+                    "path": "/user/hand/left/input/menu",
+                    "mode": "button",
+                    "inputs": {
+                        "click": {
+                            "output": "/actions/legacy/in/left_applicationmenu_press"
+                        }
+                    }
+                },
+                {
+                    "path": "/user/hand/right/input/menu",
+                    "mode": "button",
+                    "inputs": {
+                        "click": {
+                            "output": "/actions/legacy/in/right_applicationmenu_press"
+                        }
+                    }
+                },
+                {
+                    "path": "/user/hand/left/input/primary",
+                    "mode": "force_sensor",
+                    "inputs": {
+                        "force": {
+                            "output": "/actions/legacy/in/left_axis1_value"
+                        }
+                    }
+                },
+                {
+                    "path": "/user/hand/left/input/primary",
+                    "mode": "button",
+                    "parameters": {
+                        "click_activate_threshold": "0.25",
+                        "click_deactivate_threshold": "0.2",
+                        "touch_activate_threshold": "0.05",
+                        "touch_deactivate_threshold": "0.01",
+                        "haptic_amplitude": "0.25"
+                    },
+                    "inputs": {
+                        "click": {
+                            "output": "/actions/legacy/in/left_axis1_press"
+                        },
+                        "touch": {
+                            "output": "/actions/legacy/in/left_axis1_touch"
+                        }
+                    }
+                },
+                {
+                    "path": "/user/hand/right/input/primary",
+                    "mode": "force_sensor",
+                    "inputs": {
+                        "force": {
+                            "output": "/actions/legacy/in/right_axis1_value"
+                        }
+                    }
+                },
+                {
+                    "path": "/user/hand/left/input/tip",
+                    "mode": "button",
+                    "parameters": {
+                        "click_activate_threshold": "0.15",
+                        "click_deactivate_threshold": "0.1",
+                        "touch_activate_threshold": "0.05",
+                        "touch_deactivate_threshold": "0.01",
+                        "haptic_amplitude": "0.25"
+                    },
+                    "inputs": {
+                        "click": {
+                            "output": "/actions/legacy/in/left_axis3_press"
+                        },
+                        "touch": {
+                            "output": "/actions/legacy/in/left_axis3_touch"
+                        }
+                    }
+                },
+                {
+                    "path": "/user/hand/right/input/tip",
+                    "mode": "button",
+                    "parameters": {
+                        "click_activate_threshold": "0.25",
+                        "click_deactivate_threshold": "0.2",
+                        "touch_activate_threshold": "0.05",
+                        "touch_deactivate_threshold": "0.01",
+                        "haptic_amplitude": "0.25"
+                    },
+                    "inputs": {
+                        "click": {
+                            "output": "/actions/legacy/in/right_axis3_press"
+                        },
+                        "touch": {
+                            "output": "/actions/legacy/in/right_axis3_touch"
+                        }
+                    }
+                },
+                {
+                    "path": "/user/hand/left/input/touchstrip",
+                    "mode": "trackpad",
+                    "inputs": {
+                        "click": {
+                            "output": "/actions/legacy/in/left_axis0_press"
+                        },
+                        "position": {
+                            "output": "/actions/legacy/in/left_axis0_value"
+                        },
+                        "touch": {
+                            "output": "/actions/legacy/in/left_axis0_touch"
+                        }
+                    }
+                },
+                {
+                    "path": "/user/hand/right/input/touchstrip",
+                    "mode": "trackpad",
+                    "inputs": {
+                        "click": {
+                            "output": "/actions/legacy/in/right_axis0_press"
+                        },
+                        "position": {
+                            "output": "/actions/legacy/in/right_axis0_value"
+                        },
+                        "touch": {
+                            "output": "/actions/legacy/in/right_axis0_touch"
+                        }
+                    }
+                },
+                {
+                    "path": "/user/hand/right/input/primary",
+                    "mode": "button",
+                    "parameters": {
+                        "click_activate_threshold": "0.25",
+                        "click_deactivate_threshold": "0.2",
+                        "touch_activate_threshold": "0.05",
+                        "touch_deactivate_threshold": "0.01",
+                        "haptic_amplitude": "0.25"
+                    },
+                    "inputs": {
+                        "click": {
+                            "output": "/actions/legacy/in/right_axis1_press"
+                        },
+                        "touch": {
+                            "output": "/actions/legacy/in/right_axis1_touch"
+                        }
+                    }
+                },
+                {
+                    "path": "/user/hand/left/input/primary",
+                    "mode": "force_sensor",
+                    "inputs": {
+                        "force": {
+                            "output": "/actions/legacy/in/left_axis4_value_e0"
+                        }
+                    }
+                },
+                {
+                    "path": "/user/hand/right/input/primary",
+                    "mode": "force_sensor",
+                    "inputs": {
+                        "force": {
+                            "output": "/actions/legacy/in/right_axis4_value_e0"
+                        }
+                    }
+                },
+                {
+                    "path": "/user/hand/left/input/tip",
+                    "mode": "force_sensor",
+                    "inputs": {
+                        "force": {
+                            "output": "/actions/legacy/in/left_axis3_value_e0"
+                        }
+                    }
+                },
+                {
+                    "path": "/user/hand/right/input/tip",
+                    "mode": "force_sensor",
+                    "inputs": {
+                        "force": {
+                            "output": "/actions/legacy/in/right_axis3_value_e0"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "controller_type": "logitech_stylus",
+    "description": "Default binding values for legacy apps using the Logitech Stylus",
+    "name": "Logitech Stylus Legacy Defaults"
+}

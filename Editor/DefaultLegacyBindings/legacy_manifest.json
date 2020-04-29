@@ -1,0 +1,39 @@
+{
+  "legacy_binding_manifest": true,
+
+
+  "default_bindings": [
+    {
+      "controller_type": "knuckles",
+      "binding_url": "custom_legacy_bindings_knuckles.json"
+    },
+    {
+      "controller_type": "oculus_touch",
+      "binding_url": "custom_legacy_bindings_oculus_touch.json"
+    },
+    {
+      "controller_type": "vive_cosmos_controller",
+      "binding_url": "custom_legacy_bindings_vive_cosmos_controller.json"
+    },
+    {
+      "controller_type": "holographic_controller",
+      "binding_url": "custom_legacy_bindings_holographic_controller.json"
+    },
+    {
+      "controller_type": "logitech_stylus",
+      "binding_url": "custom_legacy_bindings_logitech_stylus.json"
+    },
+    {
+      "controller_type": "vive_controller",
+      "binding_url": "custom_legacy_bindings_vive_controller.json"
+    },
+    {
+      "controller_type": "vive_tracker",
+      "binding_url": "custom_legacy_bindings_vive_tracker.json"
+    },
+    {
+      "controller_type": "vive_tracker_handed",
+      "binding_url": "custom_legacy_bindings_vive_tracker_handed.json"
+    }
+  ]
+}

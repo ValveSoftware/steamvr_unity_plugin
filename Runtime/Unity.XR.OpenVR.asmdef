@@ -1,0 +1,32 @@
+{
+    "name": "Unity.XR.OpenVR",
+    "references": [
+        "Unity.XR.Management",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [
+        "Editor",
+        "WSA",
+        "WindowsStandalone32",
+        "WindowsStandalone64"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.inputsystem",
+            "expression": "",
+            "define": "UNITY_INPUT_SYSTEM"
+        },
+        {
+            "name": "com.unity.xr.management",
+            "expression": "",
+            "define": "UNITY_XR_MANAGEMENT"
+        }
+    ],
+    "noEngineReferences": false
+}

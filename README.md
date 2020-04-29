@@ -1,28 +1,79 @@
-# **SteamVR Unity Plugin**
+# OpenVR XR SDK Package
 
-Valve maintains a Unity plugin to smoothly interface SteamVR with Unity. With SteamVR developers can target one API that all the popular VR headsets can connect to. The modern SteamVR Unity Plugin manages three main things for developers: loading 3d models for VR controllers, handling input from those controllers, and estimating what your hand looks like while using those controllers. On top of managing those things we have an Interaction System example to help get your VR application off the ground. Providing concrete examples of interacting with the virtual world and our APIs.
+The purpose of this package is to provide OpenVR XR SDK Support. This package provides the necessary sdk libraries for users to build Applications that work with the OpenVR runtime. The OpenVR XR Plugin gives you access to all major VR devices through one interface. Explicit support for: HTC Vive, HTC Vive Cosmos, HTC Vive Tracker, Oculus Touch, Windows Mixed Reality, Logitech VR Ink, and Valve Index. Other SteamVR compatible devices are supported though may have inaccurate or incomplete features.
 
+# Documentation
 
-### Requirements
-The SteamVR runtime must be installed. This can be downloaded from Steam under the Tools category. Or by [clicking here](https://store.steampowered.com/app/250820/SteamVR/). As developers we strongly recommend that you opt-in to SteamVR beta so you can test new features and verify your application works with the latest versions of SteamVR.
+There is some brief documentation included with this plugin at /Documentation~/com.valve.openvr.md
 
- * This version of the SteamVR Unity Plugin is compatible and has been tested with Unity versions 5.4 - 2019.1
+# Input choice
 
-### Documentation
-Documentation can be found online here: [https://valvesoftware.github.io/steamvr_unity_plugin/](https://valvesoftware.github.io/steamvr_unity_plugin/)
+First, you have a choice to make between using SteamVR Input, and Unity XR Input. The two systems are currently mutually exclusive.
 
-### Quick Start
+If you would like to use all the functionality SteamVR Input has to offer (user rebindable inputs, skeletal input, etc) you will need to also install the SteamVR Unity Plugin. This can be found at (https://github.com/ValveSoftware/steamvr_unity_plugin/releases/tag/2.6.0b1).
 
- * Follow the [Quickstart guide on this site](https://valvesoftware.github.io/steamvr_unity_plugin/articles/Quickstart.html)
-
- * If you want to explore the [Interaction System](https://valvesoftware.github.io/steamvr_unity_plugin/articles/Interaction-System.html) scene you'll need to open the SteamVR Input window (under the Window Menu), click yes to copy example jsons, then click Save and Generate to create input actions.
-
- * For the most simple example of VR with tracked controllers see the sample scene at /SteamVR/Simple Sample
-
- * For a more extensive example including picking up, throwing objects, and animated hands see the Interaction System example at /SteamVR/Interaction System/Samples/Interactions_Example
+If you would prefer to use Unity’s XR Input so your application can use multiple SDKs and therefore be deployed to multiple stores you can use this plugin standalone.
 
 
-### Support
- If you're having trouble with the plugin the best place to discuss issues is our github here: https://github.com/ValveSoftware/steamvr_unity_plugin/issues/
+## Known Issues:
+* Display Provider
+  * OpenVR Mirror View Mode (default) can cause black screens in the game view. Please send us bug reports if this happens.
+  * OpenVR Mirror View Mode requires use of Linear Color Space (Project Settings > Player > Other Settings > (Rendering) Color Space)
+  * In certain use cases, changing RenderScale and ViewPortScale in runtime causes some performance spikes
+  * Vulkan currently only supported in Multi pass stereo rendering mode 
+* Input Provider
+  * You cannot access skeletal finger information. This api is incompatible with SteamVR Legacy Input.
 
- If you'd like to discuss features, post guides, and give general feedback please post on the steam forum here: https://steamcommunity.com/app/250820/discussions/7/
+
+## Bug reports:
+* For bug reports please create an issue on our github (https://github.com/ValveSoftware/steamvr_unity_plugin/issues) and include the following information
+  * Detailed steps of what you were doing at the time
+  * Your editor or build log (editor log location: %LOCALAPPDATA%\Unity\Editor\Editor.log)
+  * A SteamVR System report DIRECTLY AFTER encountering the issue. (SteamVR interface -> Menu -> Create System Report -> Save to file)
+
+
+## QuickStart
+
+### Unity XR Input (SteamVR Legacy Input):
+* Go to the package manager window (Window Menu -> Package Manager)
+* Hit the + button in the upper left hand corner
+* Select “Add package from git URL”
+* Paste in: https://github.com/ValveSoftware/steamvr_unity_plugin.git#UnityXRPlugin
+* Open the XR Management UI (Edit Menu -> Project Settings -> XR Plugin Management)
+* Click the checkbox next to OpenVR Loader - or in older versions - Under Plugin Providers hit the + icon and add “Open VR Loader”
+
+#### Testing:
+
+* Add a couple cubes to the scene (scale to 0.1)
+* Add TrackedPoseDriver to both cubes and the Main Camera
+ *	Main Camera: Under Tracked Pose Driver:
+    * For Device select: “Generic XR Device”
+    * For Pose Source select: “Center Eye - HMD Reference”
+  * Cube 1:
+    *	For Device select: “Generic XR Controller”
+    *	For Pose Source select “Left Controller”
+  * Cube 2:
+    *	For Device select: “Generic XR Controller”
+    *	For Pose Source select “Right Controller” 
+* Hit play and you should see a tracked camera and two tracked cubes
+
+
+### SteamVR Legacy Input with Unity Input System:
+* Follow the above instructions
+* Go to the package manager window (Window Menu -> Package Manager)
+* Look for the Input System package
+* Click Install
+* Open Input System debug window (Window -> Analysis -> Input System Debugger)
+* Verify devices load as expected and are getting reasonable values. All controllers should have the correct buttons and touch states (including index)
+
+
+### SteamVR Input System:
+* Install SteamVR Unity Plugin v2.6.0b1 (https://github.com/ValveSoftware/steamvr_unity_plugin/releases/tag/2.6.0b1)
+* It should install the OpenVR XR API package automatically for 2020.1+ for 2019.3 you’ll need to add it with the instructions above.
+* Open the SteamVR Input window (Window -> SteamVR Input)
+* Accept the default json
+* Click Save and Generate
+* Open the Interactions_Example scene (Assets/SteamVR/InteractionSystem/Samples/Interaction_Example.unity)
+* Hit play, verify that you can see your hands and teleport around
+
+
