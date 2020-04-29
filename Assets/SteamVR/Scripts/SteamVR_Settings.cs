@@ -140,6 +140,16 @@ namespace Valve.VR
             if (_instance.previewHandRight == null)
                 _instance.previewHandRight = FindDefaultPreviewHand(previewRightDefaultAssetName);
 #endif
+
+#if OPENVR_XR_API
+            Unity.XR.OpenVR.OpenVRSettings settings = Unity.XR.OpenVR.OpenVRSettings.GetSettings();
+            settings.IsLegacy = false;
+            settings.ActionManifestFileRelativeFilePath = SteamVR_Input.GetActionsFilePath();
+
+#if UNITY_EDITOR
+            settings.EditorAppKey = _instance.editorAppKey;
+#endif
+#endif
         }
 
         private static GameObject FindDefaultPreviewHand(string assetName)

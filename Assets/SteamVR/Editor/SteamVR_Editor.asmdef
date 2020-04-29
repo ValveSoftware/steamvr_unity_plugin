@@ -3,7 +3,6 @@
     "references": [
         "SteamVR"
     ],
-    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
@@ -12,5 +11,23 @@
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": []
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.valve.openvr",
+            "expression": "",
+            "define": "OPENVR_XR_API"
+        },
+        {
+            "name": "com.unity.xr.management",
+            "expression": "3.2.0",
+            "define": "XR_MGMT_GTE_320"
+        },
+        {
+            "name": "com.unity.xr.management",
+            "expression": "",
+            "define": "XR_MGMT"
+        }
+    ],
+    "noEngineReferences": false
 }

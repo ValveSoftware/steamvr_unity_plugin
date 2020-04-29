@@ -109,7 +109,7 @@ GameObject:
   - 33: {fileID: 3364936}
   - 23: {fileID: 2356592}
   - 135: {fileID: 13593758}
-  m_Layer: 21
+  m_Layer: 5
   m_Name: teleport_marker_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -23,7 +23,7 @@ namespace Valve.VR.InteractionSystem.Sample
 
             if (plantAction == null)
             {
-                Debug.LogError("<b>[SteamVR Interaction]</b> No plant action assigned");
+                Debug.LogError("<b>[SteamVR Interaction]</b> No plant action assigned", this);
                 return;
             }
 

@@ -319,6 +319,8 @@ namespace Valve.VR
 
         protected virtual void Awake()
         {
+            SteamVR.Initialize();
+
             AssignBonesArray();
 
             proximals = new Transform[] { thumbProximal, indexProximal, middleProximal, ringProximal, pinkyProximal };
@@ -826,7 +828,7 @@ namespace Valve.VR
                 }
                 else
                 {
-                    Debug.LogError("Skeleton Action is not bound, and you have not provided a fallback SkeletonPoser. Please create one to drive hand animation when no skeleton data is available.");
+                    Debug.LogError("Skeleton Action is not bound, and you have not provided a fallback SkeletonPoser. Please create one to drive hand animation when no skeleton data is available.", this);
                     return null;
                 }
             }
@@ -858,7 +860,7 @@ namespace Valve.VR
                 }
                 else
                 {
-                    Debug.LogError("Skeleton Action is not bound, and you have not provided a fallback SkeletonPoser. Please create one to drive hand animation when no skeleton data is available.");
+                    Debug.LogError("Skeleton Action is not bound, and you have not provided a fallback SkeletonPoser. Please create one to drive hand animation when no skeleton data is available.", this);
                     return null;
                 }
             }
@@ -973,7 +975,7 @@ namespace Valve.VR
 
             if (skeletonAction.active == false)
             {
-                Debug.LogError("<b>[SteamVR Input]</b> Please turn on your " + inputSource.ToString() + " controller and ensure SteamVR is open.");
+                Debug.LogError("<b>[SteamVR Input]</b> Please turn on your " + inputSource.ToString() + " controller and ensure SteamVR is open.", this);
                 return;
             }
 
@@ -981,7 +983,7 @@ namespace Valve.VR
 
             if (transforms == null || transforms.Length == 0)
             {
-                Debug.LogError("<b>[SteamVR Input]</b> Unable to get the reference transform for " + inputSource.ToString() + ". Please make sure SteamVR is open and both controllers are connected.");
+                Debug.LogError("<b>[SteamVR Input]</b> Unable to get the reference transform for " + inputSource.ToString() + ". Please make sure SteamVR is open and both controllers are connected.", this);
             }
 
             if (mirroring == MirrorType.LeftToRight || mirroring == MirrorType.RightToLeft)

@@ -144,7 +144,7 @@ namespace Valve.VR
             }
             else
             {
-                Debug.LogError("<b>[SteamVR]</b> Tried to async load: " + openVRDeviceName + ". Loaded: " + deviceName);
+                Debug.LogError("<b>[SteamVR]</b> Tried to async load: " + openVRDeviceName + ". Loaded: " + deviceName, this);
                 loadedOpenVRDeviceSuccess = true; //try anyway
             }
         }
@@ -211,28 +211,40 @@ namespace Valve.VR
         protected static int lastFrameCount = -1;
         protected void PreCull()
         {
-            // Only update poses on the first camera per frame.
-            if (Time.frameCount != lastFrameCount)
+            if (OpenVR.Input != null)
             {
-                lastFrameCount = Time.frameCount;
+                // Only update poses on the first camera per frame.
+                if (Time.frameCount != lastFrameCount)
+                {
+                    lastFrameCount = Time.frameCount;
 
-                SteamVR_Input.OnPreCull();
+                    SteamVR_Input.OnPreCull();
+                }
             }
         }
 
         protected void FixedUpdate()
         {
-            SteamVR_Input.FixedUpdate();
+            if (OpenVR.Input != null)
+            {
+                SteamVR_Input.FixedUpdate();
+            }
         }
 
         protected void LateUpdate()
         {
-            SteamVR_Input.LateUpdate();
+            if (OpenVR.Input != null)
+            {
+                SteamVR_Input.LateUpdate();
+            }
         }
 
         protected void Update()
         {
-            SteamVR_Input.Update();
+            if (OpenVR.Input != null)
+            {
+                SteamVR_Input.Update();
+            }
         }
 
         protected void OnQuit(VREvent_t vrEvent)
