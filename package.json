@@ -1,7 +1,7 @@
 {
   "name": "com.valve.openvr",
   "displayName": "OpenVR XR Plugin",
-  "version": "1.0.0-preview.1",
+  "version": "1.0.0-preview.2",
   "unity": "2019.3",
   "description": "Provides rendering and legacy input support for OpenVR devices.",
   "keywords": [
