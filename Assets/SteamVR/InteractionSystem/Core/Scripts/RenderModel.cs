@@ -21,7 +21,7 @@ namespace Valve.VR.InteractionSystem
         [Space]
 
         public GameObject controllerPrefab;
-        protected GameObject controllerInstance;
+        public GameObject controllerInstance;
         protected Renderer[] controllerRenderers;
         protected SteamVR_RenderModel controllerRenderModel;
         public bool displayControllerByDefault = true;
