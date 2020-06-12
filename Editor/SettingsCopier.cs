@@ -28,7 +28,7 @@ namespace Unity.XR.OpenVR.Editor
         [PostProcessBuildAttribute(1)]
         public static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
         {
-            if (target != BuildTarget.StandaloneLinux64 && target != BuildTarget.StandaloneWindows)
+            if (target != BuildTarget.StandaloneLinux64 && target != BuildTarget.StandaloneWindows && target != BuildTarget.StandaloneWindows64)
                 return;
 
             OpenVRSettings settings = OpenVRSettings.GetSettings();
