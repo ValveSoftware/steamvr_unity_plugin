@@ -14,7 +14,7 @@
     "defineConstraints": [],
     "versionDefines": [
         {
-            "name": "com.valve.openvr",
+            "name": "com.valvesoftware.unity.openvr",
             "expression": "",
             "define": "OPENVR_XR_API"
         },
@@ -22,6 +22,11 @@
             "name": "com.unity.xr.legacyinputhelpers",
             "expression": "",
             "define": "UNITY_LEGACY_INPUT_HELPERS"
+        },
+        {
+            "name": "com.unity.render-pipelines.universal",
+            "expression": "",
+            "define": "UNITY_URP"
         }
     ],
     "noEngineReferences": false

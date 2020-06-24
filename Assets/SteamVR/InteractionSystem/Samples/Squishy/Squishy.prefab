@@ -28,6 +28,7 @@ GameObject:
   - 114: {fileID: 114000012201270156}
   - 114: {fileID: 114000012844786124}
   - 114: {fileID: 114000010208793216}
+  - 114: {fileID: 114000013478460800}
   m_Layer: 0
   m_Name: Squishy
   m_TagString: Untagged
@@ -44,10 +45,10 @@ Transform:
   m_LocalRotation: {x: -0.00000020861626, y: -0.7071067, z: -0.7071068, w: 0.00000014901161}
   m_LocalPosition: {x: -0.332, y: 1.164, z: -0.255}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &54000013602376012
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -96,9 +97,9 @@ MonoBehaviour:
   poseNames:
   - SquishyBase (MAIN)
   - SquishySqueeze
-  previewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
+  overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
     type: 2}
-  previewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
+  overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
     type: 2}
   skeletonMainPose: {fileID: 11400000, guid: c8576ff2e3da53743b7694fbfe3ad743, type: 2}
   skeletonAdditionalPoses:
@@ -175,6 +176,7 @@ MonoBehaviour:
   handFollowTransform: 1
   highlightOnHover: 1
   hideHighlight: []
+  hoverPriority: 0
 --- !u!114 &114000012201270156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -226,6 +228,23 @@ MonoBehaviour:
   releaseVelocityStyle: 1
   releaseVelocityTimeOffset: -0.011
   scaleReleaseVelocity: 1.1
+  scaleReleaseVelocityThreshold: -1
+  scaleReleaseVelocityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   restoreOriginalParent: 0
   onPickUp:
     m_PersistentCalls:
@@ -237,7 +256,24 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  onHeldUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Valve.VR.InteractionSystem.HandEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   interactable: {fileID: 0}
+--- !u!114 &114000013478460800
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013227978282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a4af4cc6b48a9449034f15c9691985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  children: 0
 --- !u!135 &135000011211313512
 SphereCollider:
   m_ObjectHideFlags: 1

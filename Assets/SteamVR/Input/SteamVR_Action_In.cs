@@ -149,6 +149,16 @@ namespace Valve.VR
         {
             sourceMap.ForceAddSourceToUpdateList(inputSource);
         }
+
+        /// <summary>
+        /// Returns a string for the type of controller that was being used the last time the action was triggered. Common types: 
+        /// vive_controller, oculus_touch, knuckles, vive_cosmos_controller, logitech_stylus
+        /// </summary>
+        /// <param name="inputSource">The device you would like to get data from. Any if the action is not device specific.</param>
+        public string GetControllerType(SteamVR_Input_Sources inputSource)
+        {
+            return SteamVR.instance.GetStringProperty(ETrackedDeviceProperty.Prop_ControllerType_String, GetDeviceIndex(inputSource));
+        }
     }
 
     public class SteamVR_Action_In_Source_Map<SourceElement> : SteamVR_Action_Source_Map<SourceElement>

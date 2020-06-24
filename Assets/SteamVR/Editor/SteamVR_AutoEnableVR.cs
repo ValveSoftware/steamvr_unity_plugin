@@ -22,7 +22,7 @@ namespace Valve.VR
 
         protected const string openVRString = "OpenVR";
         protected const string openVRPackageString = "com.unity.xr.openvr.standalone";
-        protected const string valveOpenVRPackageString = "com.valve.openvr";
+        protected const string valveOpenVRPackageString = "com.valvesoftware.unity.openvr";
         protected const string valveOpenVRGitURL = "https://github.com/ValveSoftware/steamvr_unity_plugin.git#UnityXRPlugin";
 
 #if UNITY_2018_2_OR_NEWER

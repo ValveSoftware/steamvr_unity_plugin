@@ -143,7 +143,6 @@ namespace Valve.VR
 
 #if OPENVR_XR_API
             Unity.XR.OpenVR.OpenVRSettings settings = Unity.XR.OpenVR.OpenVRSettings.GetSettings();
-            settings.IsLegacy = false;
             settings.ActionManifestFileRelativeFilePath = SteamVR_Input.GetActionsFilePath();
 
 #if UNITY_EDITOR

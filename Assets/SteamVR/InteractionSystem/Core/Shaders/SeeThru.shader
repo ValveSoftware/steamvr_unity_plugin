@@ -32,8 +32,13 @@ Shader "Valve/VR/SeeThru"
 
 			CGPROGRAM
 				#pragma target 5.0
+#if UNITY_VERSION >= 560
 				#pragma only_renderers d3d11 vulkan glcore
+#else
+				#pragma only_renderers d3d11 glcore
+#endif
 				#pragma exclude_renderers gles
+				#pragma multi_compile_instancing
 
 				#pragma vertex MainVS
 				#pragma fragment MainPS
@@ -46,14 +51,55 @@ Shader "Valve/VR/SeeThru"
 				{
 					float4 vertex : POSITION;
 					float2 uv : TEXCOORD0;
+#if UNITY_VERSION >= 560
+					UNITY_VERTEX_INPUT_INSTANCE_ID
+#endif
 				};
 				
 				struct VertexOutput
 				{
 					float2 uv : TEXCOORD0;
 					float4 vertex : SV_POSITION;
+
+#if UNITY_VERSION >= 560
+					UNITY_VERTEX_OUTPUT_STEREO
+#endif
 				};
+
+#if UNITY_VERSION >= 201810
+				// Globals --------------------------------------------------------------------------------------------------------------------------------------------------
+				UNITY_INSTANCING_BUFFER_START( Props )
+					UNITY_DEFINE_INSTANCED_PROP( float4, _Color )
+					UNITY_DEFINE_INSTANCED_PROP( sampler2D, _MainTex )
+					UNITY_DEFINE_INSTANCED_PROP( float4, _MainTex_ST )
+				UNITY_INSTANCING_BUFFER_END( Props )
 				
+				
+				// MainVs ---------------------------------------------------------------------------------------------------------------------------------------------------
+				VertexOutput MainVS( VertexInput i )
+				{
+					VertexOutput o;
+
+					UNITY_SETUP_INSTANCE_ID( i );
+					UNITY_INITIALIZE_OUTPUT( VertexOutput, o );
+					UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO( o );
+
+					o.vertex = UnityObjectToClipPos(i.vertex);
+					o.uv = TRANSFORM_TEX( i.uv, UNITY_ACCESS_INSTANCED_PROP( Props, _MainTex ) );
+					
+					return o;
+				}
+				
+				// MainPs ---------------------------------------------------------------------------------------------------------------------------------------------------
+				float4 MainPS( VertexOutput i ) : SV_Target
+				{
+					UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO( i );
+
+					float4 vColor = UNITY_ACCESS_INSTANCED_PROP( Props, _Color.rgba );
+				
+					return vColor.rgba;
+				}
+#else
 				// Globals --------------------------------------------------------------------------------------------------------------------------------------------------
 				sampler2D _MainTex;
 				float4 _MainTex_ST;
@@ -80,6 +126,7 @@ Shader "Valve/VR/SeeThru"
 				
 					return vColor.rgba;
 				}
+#endif
 
 			ENDCG
 		}

@@ -1,7 +1,8 @@
 {
     "name": "SteamVR_Editor",
     "references": [
-        "SteamVR"
+        "SteamVR",
+        "Unity.XR.OpenVR"
     ],
     "includePlatforms": [
         "Editor"
@@ -14,7 +15,7 @@
     "defineConstraints": [],
     "versionDefines": [
         {
-            "name": "com.valve.openvr",
+            "name": "com.valvesoftware.unity.openvr",
             "expression": "",
             "define": "OPENVR_XR_API"
         },
