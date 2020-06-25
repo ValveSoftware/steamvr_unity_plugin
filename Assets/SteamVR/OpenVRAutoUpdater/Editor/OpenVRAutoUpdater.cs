@@ -1,4 +1,4 @@
-﻿#if UNITY_EDITOR && (UNITY_2020_1_OR_NEWER || VALVE_UPDATE_FORCE)
+﻿#if UNITY_EDITOR && (UNITY_2019_3_OR_NEWER || VALVE_UPDATE_FORCE)
 using System.IO;
 using System.Linq;
 using Unity.XR.OpenVR.SimpleJSON;
@@ -60,10 +60,15 @@ namespace Unity.XR.OpenVR
 
         static OpenVRAutoUpdater()
         {
-#if UNITY_2020_1_OR_NEWER || VALVE_UPDATE_FORCE
+            #if UNITY_2020_1_OR_NEWER || VALVE_UPDATE_FORCE
+            Start();
+            #endif
+        }
+
+        public static void Start()
+        {
             EditorApplication.update -= Update;
             EditorApplication.update += Update;
-#endif
         }
 
         /// <summary>

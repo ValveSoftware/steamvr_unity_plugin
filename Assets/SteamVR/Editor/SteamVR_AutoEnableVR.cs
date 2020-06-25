@@ -9,6 +9,8 @@ using UnityEditor;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using System.Reflection;
 
 namespace Valve.VR
 {
@@ -21,8 +23,9 @@ namespace Valve.VR
         }
 
         protected const string openVRString = "OpenVR";
-        protected const string openVRPackageString = "com.unity.xr.openvr.standalone";
+        protected const string unityOpenVRPackageString = "com.unity.xr.openvr.standalone";
         protected const string valveOpenVRPackageString = "com.valvesoftware.unity.openvr";
+        protected const string valveOpenVRPackageStringOld = "com.valve.openvr";
         protected const string valveOpenVRGitURL = "https://github.com/ValveSoftware/steamvr_unity_plugin.git#UnityXRPlugin";
 
 #if UNITY_2018_2_OR_NEWER
@@ -127,19 +130,29 @@ namespace Valve.VR
                                 break;
                             }
 
-                            string packageName = openVRPackageString;
-#if OPENVR_XR_API
-                            UnityEditor.PackageManager.Client.Remove(openVRPackageString); //remove the old one or the dlls will clash
+                            string packageName = null;
+                            
+#if OPENVR_XR_API || UNITY_2020_1_OR_NEWER || XR_MGMT
+                            if (listRequest.Result.Any(package => package.name == unityOpenVRPackageString))
+                                UnityEditor.PackageManager.Client.Remove(unityOpenVRPackageString); //remove the old one or the dlls will clash
+                            if (listRequest.Result.Any(package => package.name == valveOpenVRPackageStringOld))
+                                UnityEditor.PackageManager.Client.Remove(valveOpenVRPackageStringOld); //remove the old one or the dlls will clash
 
                             packageName = valveOpenVRPackageString;
-#elif UNITY_2020_1_OR_NEWER || XR_MGMT
-                            packageName = valveOpenVRGitURL;
+#else
+                            packageName = unityOpenVRPackageString;
 #endif
 
                             bool hasPackage = listRequest.Result.Any(package => package.name == packageName);
 
                             if (hasPackage == false)
                             {
+                                if (packageName == valveOpenVRPackageString)
+                                {
+                                    packageState = PackageStates.Installed; //mark it as installed here so the npm installer can take over
+                                    StartAutoUpdater();
+                                }
+
                                 //if we don't have the package - then install it
                                 addRequest = UnityEditor.PackageManager.Client.Add(packageName);
                                 packageState = PackageStates.WaitingForAdd;
@@ -205,7 +218,7 @@ namespace Valve.VR
                                 packageState = PackageStates.Failed;
                                 break;
                             }
-                            string packageName = openVRPackageString;
+                            string packageName = unityOpenVRPackageString;
 #if OPENVR_XR_API
                             packageName = valveOpenVRPackageString;
 #endif
@@ -252,8 +265,26 @@ namespace Valve.VR
                     }
                 }
 #else
-                            UnityEditor.EditorApplication.update -= Update;
+                UnityEditor.EditorApplication.update -= Update;
 #endif
+            }
+        }
+        private static void StartAutoUpdater()
+        {
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            for (int assemblyIndex = 0; assemblyIndex < assemblies.Length; assemblyIndex++)
+            {
+                Assembly assembly = assemblies[assemblyIndex];
+                Type type = assembly.GetType("Unity.XR.OpenVR.OpenVRAutoUpdater");
+                if (type != null)
+                {
+                    MethodInfo preinitMethodInfo = type.GetMethod("Start");
+                    if (preinitMethodInfo != null)
+                    {
+                        preinitMethodInfo.Invoke(null, null);
+                        return;
+                    }
+                }
             }
         }
     }
