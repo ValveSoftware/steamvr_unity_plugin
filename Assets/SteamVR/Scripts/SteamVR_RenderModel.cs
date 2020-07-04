@@ -8,6 +8,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using UnityEngine.Rendering;
 using Valve.VR;
 
 namespace Valve.VR
@@ -452,8 +453,38 @@ namespace Valve.VR
                         texture.Apply();
                     }
 
-                    material = new Material(shader != null ? shader : Shader.Find("Standard"));
-                    material.mainTexture = texture;
+                    var isShaderSet = false;
+                    var renderPipelineAsset = GraphicsSettings.renderPipelineAsset;
+                    if (renderPipelineAsset != null)
+                    {
+                        switch (renderPipelineAsset.GetType().Name)
+                        {
+                            case "UniversalRenderPipelineAsset":
+                                material = new Material(shader != null ? shader : Shader.Find("Universal Render Pipeline/Lit"));
+                                material.SetTexture("_BaseMap", texture);
+                                material.SetFloat("_Smoothness", 0.405f);
+                                isShaderSet = true;
+                                break;
+                            case "HDRenderPipelineAsset":
+                                material = new Material(shader != null ? shader : Shader.Find("HDRP/Lit"));
+                                material.SetTexture("_BaseColorMap", texture);
+                                material.SetFloat("_Smoothness", 0.405f);
+                                isShaderSet = true;
+                                break;
+                            default:
+                                isShaderSet = false;
+                                break;
+                        }
+                    }
+
+                    if (!isShaderSet)
+                    {
+                        material = new Material(shader != null ? shader : Shader.Find("Standard"))
+                        {
+                            mainTexture = texture
+                        };
+                    }
+
                     //material.hideFlags = HideFlags.DontUnloadUnusedAsset;
 
                     materials[renderModel.diffuseTextureId] = material;
