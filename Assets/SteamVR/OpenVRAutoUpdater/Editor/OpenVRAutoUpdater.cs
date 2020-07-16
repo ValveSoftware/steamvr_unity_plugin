@@ -60,9 +60,9 @@ namespace Unity.XR.OpenVR
 
         static OpenVRAutoUpdater()
         {
-            #if UNITY_2020_1_OR_NEWER || VALVE_UPDATE_FORCE
+#if UNITY_2020_1_OR_NEWER || VALVE_UPDATE_FORCE
             Start();
-            #endif
+#endif
         }
 
         public static void Start()

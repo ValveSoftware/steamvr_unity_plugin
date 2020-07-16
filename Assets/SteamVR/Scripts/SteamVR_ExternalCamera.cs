@@ -119,6 +119,11 @@ namespace Valve.VR
             }
         }
 
+        System.IO.FileSystemWatcher watcher;
+#else
+	}
+#endif
+
         public void SetupPose(SteamVR_Action_Pose newCameraPose, SteamVR_Input_Sources newCameraSource)
         {
             cameraPose = newCameraPose;
@@ -142,10 +147,6 @@ namespace Valve.VR
             ReadConfig();
         }
 
-        System.IO.FileSystemWatcher watcher;
-#else
-	}
-#endif
         Camera cam;
         Transform target;
         GameObject clipQuad;
