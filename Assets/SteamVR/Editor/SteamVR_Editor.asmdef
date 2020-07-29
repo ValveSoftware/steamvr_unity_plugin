@@ -2,7 +2,9 @@
     "name": "SteamVR_Editor",
     "references": [
         "SteamVR",
-        "Unity.XR.OpenVR"
+        "Unity.XR.OpenVR",
+        "Unity.XR.Management.Editor",
+        "Unity.XR.Management"
     ],
     "includePlatforms": [
         "Editor"

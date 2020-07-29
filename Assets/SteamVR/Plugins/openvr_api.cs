@@ -7465,6 +7465,7 @@ public class OpenVR
 		return OpenVRInterop.GetInitToken();
 	}
 
+	public const ulong k_ulSharedTextureIsNTHandle = 4294967296;
 	public const uint k_nDriverNone = 4294967295;
 	public const uint k_unMaxDriverDebugResponseSize = 32768;
 	public const uint k_unTrackedDeviceIndex_Hmd = 0;
@@ -7773,6 +7774,7 @@ public class OpenVR
 	public const string k_pchPathBoundTrackerRole = "/bound_tracker_role";
 	public const string k_pchPathPoseRaw = "/pose/raw";
 	public const string k_pchPathPoseTip = "/pose/tip";
+	public const string k_pchPathPoseGrip = "/pose/grip";
 	public const string k_pchPathSystemButtonClick = "/input/system/click";
 	public const string k_pchPathProximity = "/proximity";
 	public const string k_pchPathControllerTypePrefix = "/controller_type/";

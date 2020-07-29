@@ -12,6 +12,19 @@ using System.Linq;
 using System;
 using System.Reflection;
 
+using Valve.VR.InteractionSystem;
+
+#if OPENVR_XR_API
+using UnityEditor.XR.Management.Metadata;
+using UnityEngine.XR.Management;
+#endif
+
+#if UNITY_2018_2_OR_NEWER
+#pragma warning disable CS0618
+#pragma warning disable CS0219
+#pragma warning disable CS0414
+#endif
+
 namespace Valve.VR
 {
     [InitializeOnLoad]
@@ -25,8 +38,11 @@ namespace Valve.VR
         protected const string openVRString = "OpenVR";
         protected const string unityOpenVRPackageString = "com.unity.xr.openvr.standalone";
         protected const string valveOpenVRPackageString = "com.valvesoftware.unity.openvr";
-        protected const string valveOpenVRPackageStringOld = "com.valve.openvr";
-        protected const string valveOpenVRGitURL = "https://github.com/ValveSoftware/steamvr_unity_plugin.git#UnityXRPlugin";
+
+#if UNITY_2020_1_OR_NEWER || OPENVR_XR_API
+        protected const string valveEnabledLoaderKeyTemplate = "valve.enablexddrloader.{0}";
+        protected const string valveOpenVRLoaderType = "Unity.XR.OpenVR.OpenVRLoader";
+#endif
 
 #if UNITY_2018_2_OR_NEWER
         private enum PackageStates
@@ -46,6 +62,14 @@ namespace Valve.VR
         private static System.Diagnostics.Stopwatch addingPackageTimeTotal = new System.Diagnostics.Stopwatch();
         private static float estimatedTimeToInstall = 80;
         private static int addTryCount = 0;
+
+        private static string enabledLoaderKey = null;
+
+        private static MethodInfo isLoaderAssigned;
+        private static MethodInfo installPackageAndAssignLoaderForBuildTarget;
+
+        private static Type[] isLoaderAssignedMethodParameters;
+        private static object[] isLoaderAssignedCallParameters;
 #endif
 
         public static void Update()
@@ -54,13 +78,66 @@ namespace Valve.VR
             {
                 bool enabledVR = false;
 
-#if OPENVR_XR_API
+#if UNITY_2020_1_OR_NEWER || OPENVR_XR_API
+#if !UNITY_2020_2_OR_NEWER
                 if (UnityEditor.PlayerSettings.virtualRealitySupported == true)
                 {
                     UnityEditor.PlayerSettings.virtualRealitySupported = false;
                     enabledVR = true;
                     Debug.Log("<b>[SteamVR Setup]</b> Disabled virtual reality support in Player Settings. <b>Because you're using XR Manager. Make sure OpenVR Loader is enabled in XR Manager UI.</b> (you can disable this by unchecking Assets/SteamVR/SteamVR_Settings.autoEnableVR)");
                 }
+#endif
+
+#if OPENVR_XR_API
+                //little hacky, but the public methods weren't working.
+
+                if (isLoaderAssignedMethodParameters == null)
+                    isLoaderAssignedMethodParameters = new Type[] { typeof(string), typeof(BuildTargetGroup) };
+                if (isLoaderAssignedCallParameters == null)
+                    isLoaderAssignedCallParameters = new object[] { valveOpenVRLoaderType, BuildTargetGroup.Standalone };
+                if (isLoaderAssigned == null)
+                    isLoaderAssigned = GetMethod("IsLoaderAssigned", isLoaderAssignedMethodParameters);
+
+                if (installPackageAndAssignLoaderForBuildTarget == null)
+                    installPackageAndAssignLoaderForBuildTarget = GetMethod("InstallPackageAndAssignLoaderForBuildTarget");
+
+                if (isLoaderAssigned != null && installPackageAndAssignLoaderForBuildTarget != null)
+                {
+                    bool isAssigned = (bool)isLoaderAssigned.Invoke(null, isLoaderAssignedCallParameters);
+
+                    if (isAssigned == false)
+                    {
+                        if (enabledLoaderKey == null)
+                            enabledLoaderKey = string.Format(valveEnabledLoaderKeyTemplate, SteamVR_Settings.instance.editorAppKey);
+
+                        if (EditorPrefs.HasKey(enabledLoaderKey) == false)
+                        {
+                            installPackageAndAssignLoaderForBuildTarget.Invoke(null, new object[] { valveOpenVRPackageString, valveOpenVRLoaderType, BuildTargetGroup.Standalone });
+
+                            isAssigned = (bool)isLoaderAssigned.Invoke(null, isLoaderAssignedCallParameters);
+                            if (isAssigned)
+                            {
+                                EditorPrefs.SetBool(enabledLoaderKey, true);
+
+                                Debug.Log("<b>[SteamVR Setup]</b> Enabled OpenVR Loader in XR Management");
+                                UnityEditor.EditorApplication.update -= Update;
+                            }
+                        }
+                        else
+                        {
+                            UnityEditor.EditorApplication.update -= Update;
+                        }
+
+                    }
+                    else
+                    {
+                        UnityEditor.EditorApplication.update -= Update;
+                    }
+                }
+
+#elif UNITY_2020_1_OR_NEWER
+                StartAutoUpdater();
+#endif
 #else
                 if (UnityEditor.PlayerSettings.virtualRealitySupported == false)
                 {
@@ -68,7 +145,6 @@ namespace Valve.VR
                     enabledVR = true;
                     Debug.Log("<b>[SteamVR Setup]</b> Enabled virtual reality support in Player Settings. (you can disable this by unchecking Assets/SteamVR/SteamVR_Settings.autoEnableVR)");
                 }
-#endif
 
                 UnityEditor.BuildTargetGroup currentTarget = UnityEditor.EditorUserBuildSettings.selectedBuildTargetGroup;
 
@@ -97,21 +173,18 @@ namespace Valve.VR
                         newDevices = devicesList.ToArray();
                     }
 
-
-#if OPENVR_XR_API
-                    //UnityEditorInternal.VR.VREditor.SetVREnabledDevicesOnTargetGroup(currentTarget, new string[] { });
-#else
 #if (UNITY_5_6 || UNITY_5_4 || UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
                     UnityEditorInternal.VR.VREditor.SetVREnabledDevices(currentTarget, newDevices);
 #else
                     UnityEditorInternal.VR.VREditor.SetVREnabledDevicesOnTargetGroup(currentTarget, newDevices);
 #endif
                     Debug.Log("<b>[SteamVR Setup]</b> Added OpenVR to supported VR SDKs list.");
-#endif
+
                 }
 
 #if UNITY_2018_2_OR_NEWER
                 //2018+ requires us to manually add the OpenVR package
+                //2020.1+ has a separate script that does installs
 
                 switch (packageState)
                 {
@@ -131,28 +204,13 @@ namespace Valve.VR
                             }
 
                             string packageName = null;
-                            
-#if OPENVR_XR_API || UNITY_2020_1_OR_NEWER || XR_MGMT
-                            if (listRequest.Result.Any(package => package.name == unityOpenVRPackageString))
-                                UnityEditor.PackageManager.Client.Remove(unityOpenVRPackageString); //remove the old one or the dlls will clash
-                            if (listRequest.Result.Any(package => package.name == valveOpenVRPackageStringOld))
-                                UnityEditor.PackageManager.Client.Remove(valveOpenVRPackageStringOld); //remove the old one or the dlls will clash
 
-                            packageName = valveOpenVRPackageString;
-#else
                             packageName = unityOpenVRPackageString;
-#endif
 
                             bool hasPackage = listRequest.Result.Any(package => package.name == packageName);
 
                             if (hasPackage == false)
                             {
-                                if (packageName == valveOpenVRPackageString)
-                                {
-                                    packageState = PackageStates.Installed; //mark it as installed here so the npm installer can take over
-                                    StartAutoUpdater();
-                                }
-
                                 //if we don't have the package - then install it
                                 addRequest = UnityEditor.PackageManager.Client.Add(packageName);
                                 packageState = PackageStates.WaitingForAdd;
@@ -164,7 +222,7 @@ namespace Valve.VR
                             }
                             else
                             {
-                                //if we do have the package do nothing
+                                //if we do have the package, do nothing
                                 packageState = PackageStates.Installed; //already installed
                             }
                         }
@@ -219,9 +277,6 @@ namespace Valve.VR
                                 break;
                             }
                             string packageName = unityOpenVRPackageString;
-#if OPENVR_XR_API
-                            packageName = valveOpenVRPackageString;
-#endif
 
                             bool hasPackage = listRequest.Result.Any(package => package.name == packageName);
 
@@ -267,6 +322,7 @@ namespace Valve.VR
 #else
                 UnityEditor.EditorApplication.update -= Update;
 #endif
+#endif
             }
         }
         private static void StartAutoUpdater()
@@ -286,6 +342,18 @@ namespace Valve.VR
                     }
                 }
             }
+        }
+
+        private static Type xrMetadataStoreType;
+        private static MethodInfo GetMethod(string methodName, Type[] parameters = null)
+        {
+            if (xrMetadataStoreType == null)
+                xrMetadataStoreType = SteamVR_Utils.FindType("UnityEditor.XR.Management.Metadata.XRPackageMetadataStore");
+
+            if (parameters == null)
+                return xrMetadataStoreType.GetMethod(methodName, BindingFlags.Static | BindingFlags.NonPublic);
+            else
+                return xrMetadataStoreType.GetMethod(methodName, BindingFlags.Static | BindingFlags.NonPublic, null, parameters, null);
         }
     }
 }

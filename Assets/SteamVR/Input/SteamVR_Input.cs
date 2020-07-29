@@ -50,7 +50,7 @@ namespace Valve.VR
         {
             get
             {
-                return Time.frameCount >= (startupFrame-1) && Time.frameCount <= (startupFrame+1);
+                return Time.frameCount >= (startupFrame - 1) && Time.frameCount <= (startupFrame + 1);
             }
         }
 
@@ -1627,7 +1627,7 @@ namespace Valve.VR
                 {
                     openingSetup = true;
                     UnityEditor.EditorApplication.isPlaying = false;
-                    Type editorWindowType = FindType("Valve.VR.SteamVR_Input_EditorWindow");
+                    Type editorWindowType = SteamVR_Utils.FindType("Valve.VR.SteamVR_Input_EditorWindow");
                     if (editorWindowType != null)
                     {
                         var window = UnityEditor.EditorWindow.GetWindow(editorWindowType, false, "SteamVR Input", true);
@@ -1646,19 +1646,6 @@ namespace Valve.VR
         public static string GetEditorAppKey()
         {
             return SteamVR_Settings.instance.editorAppKey;
-        }
-
-        private static Type FindType(string typeName)
-        {
-            var type = Type.GetType(typeName);
-            if (type != null) return type;
-            foreach (var a in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                type = a.GetType(typeName);
-                if (type != null)
-                    return type;
-            }
-            return null;
         }
 #endif
     }
