@@ -30,8 +30,13 @@ namespace Valve.VR
         {
             get
             {
+#if UNITY_2020_1_OR_NEWER || OPENVR_XR_API
+                if (XRSettings.supportedDevices.Length == 0)
+                    enabled = false;
+#else
                 if (!XRSettings.enabled)
                     enabled = false;
+#endif
                 return _enabled;
             }
             set
