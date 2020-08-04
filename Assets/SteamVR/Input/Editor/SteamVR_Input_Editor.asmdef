@@ -1,9 +1,9 @@
 {
     "name": "SteamVR_Input_Editor",
     "references": [
-        "SteamVR"
+        "SteamVR",
+        "Unity.XR.OpenVR"
     ],
-    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
@@ -12,5 +12,7 @@
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": []
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

@@ -59,6 +59,7 @@ GameObject:
   - 4: {fileID: 428928}
   - 111: {fileID: 11120990}
   - 114: {fileID: 11479906}
+  - 114: {fileID: 114000014156291180}
   m_Layer: 0
   m_Name: TeleportPoint
   m_TagString: Untagged
@@ -109,7 +110,7 @@ GameObject:
   - 33: {fileID: 3364936}
   - 23: {fileID: 2356592}
   - 135: {fileID: 13593758}
-  m_Layer: 21
+  m_Layer: 5
   m_Name: teleport_marker_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +159,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 125956}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 8.593181, y: 0, z: 1.3962787}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_Children:
@@ -601,3 +602,15 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 125956}
   m_IsPrefabParent: 1
+--- !u!114 &114000014156291180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a4af4cc6b48a9449034f15c9691985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  children: 1

@@ -23,17 +23,27 @@ Shader "FX/LightCone" {
 #pragma fragment frag
 #pragma multi_compile_particles
 
+#if UNITY_VERSION >= 201810	
+            #pragma multi_compile_instancing
+#endif
+
 #include "UnityCG.cginc"
 
-		sampler2D _MainTex;
+	sampler2D _MainTex;
 	fixed4 _TintColor;
 	uniform fixed _BWEffectOn;
+	float _InvFade;
+	half _Rim;
 
 	struct appdata_t {
 		float4 vertex : POSITION;
 		float3 normal : NORMAL;
 		fixed4 color : COLOR;
 		fixed4 viewDir : TEXCOORD0;
+
+#if UNITY_VERSION >= 201810	
+        UNITY_VERTEX_INPUT_INSTANCE_ID
+#endif
 	};
 
 	struct v2f {
@@ -44,12 +54,22 @@ Shader "FX/LightCone" {
 #endif
 		float3 normal : NORMAL;
 		float3 viewDir : TEXCOORD1;
+
+#if UNITY_VERSION >= 201810	
+    UNITY_VERTEX_OUTPUT_STEREO //Insert
+#endif
 	};
 
 
+#if UNITY_VERSION >= 201810	
 	v2f vert(appdata_t v)
-	{
+	{		
 		v2f o;
+
+    	UNITY_SETUP_INSTANCE_ID(v); //Insert
+    	UNITY_INITIALIZE_OUTPUT(v2f, o); //Insert
+    	UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o); //Insert
+
 		o.vertex = UnityObjectToClipPos(v.vertex);
 #ifdef SOFTPARTICLES_ON
 		o.projPos = ComputeScreenPos(o.vertex);
@@ -62,9 +82,48 @@ Shader "FX/LightCone" {
 		return o;
 	}
 
+	UNITY_DECLARE_DEPTH_TEXTURE(_CameraDepthTexture);
+	
+
+	fixed4 frag(v2f i) : SV_Target
+	{
+    	UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i); //Insert
+
+#ifdef SOFTPARTICLES_ON
+		float sceneZ = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.projPos)));
+	float partZ = i.projPos.z;
+	float fade = 1 - saturate(_InvFade * (partZ - sceneZ));
+	i.color.a *= fade;
+#endif
+
+	i.color = pow(i.color,3);
+
+	half rim = saturate(pow(saturate(abs(dot(i.viewDir, i.normal))),_Rim));
+
+	i.color.a *= rim;
+
+	fixed4 finalCol = 2.0f * i.color * _TintColor;
+	fixed lum = Luminance(finalCol.xyz);
+	return finalCol;
+	}
+
+#else
+
 	sampler2D_float _CameraDepthTexture;
-	float _InvFade;
-	half _Rim;
+	v2f vert(appdata_t v)
+	{		
+		v2f o;
+		o.vertex = UnityObjectToClipPos(v.vertex);
+#ifdef SOFTPARTICLES_ON
+		o.projPos = ComputeScreenPos(o.vertex);
+		COMPUTE_EYEDEPTH(o.projPos.z);
+#endif
+		o.color = v.color;
+		o.normal = v.normal;
+		o.viewDir = normalize(ObjSpaceViewDir(v.vertex));
+
+		return o;
+	}
 
 	fixed4 frag(v2f i) : SV_Target
 	{
@@ -85,6 +144,7 @@ Shader "FX/LightCone" {
 	fixed lum = Luminance(finalCol.xyz);
 	return finalCol;
 	}
+#endif
 		ENDCG
 	}
 	}

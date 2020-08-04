@@ -100,7 +100,12 @@ namespace Valve.VR.InteractionSystem
 
         protected virtual void Start()
         {
-            highlightMat = (Material)Resources.Load("SteamVR_HoverHighlight", typeof(Material));
+            if (highlightMat == null)
+#if UNITY_URP
+                highlightMat = (Material)Resources.Load("SteamVR_HoverHighlight_URP", typeof(Material));
+#else
+                highlightMat = (Material)Resources.Load("SteamVR_HoverHighlight", typeof(Material));
+#endif
 
             if (highlightMat == null)
                 Debug.LogError("<b>[SteamVR Interaction]</b> Hover Highlight Material is missing. Please create a material named 'SteamVR_HoverHighlight' and place it in a Resources folder", this);

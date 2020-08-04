@@ -123,6 +123,10 @@
       "binding_url": "bindings_vive_cosmos_controller.json"
     },
     {
+      "controller_type": "logitech_stylus",
+      "binding_url": "bindings_logitech_stylus.json"
+    },
+    {
       "controller_type": "vive_cosmos",
       "binding_url": "binding_vive_cosmos.json"
     },

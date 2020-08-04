@@ -42,6 +42,7 @@ GameObject:
   - 4: {fileID: 433792}
   - 33: {fileID: 3343506}
   - 23: {fileID: 2327308}
+  - 114: {fileID: 114000012054325206}
   m_Layer: 0
   m_Name: TeleportDestination_Invalid
   m_TagString: Untagged
@@ -155,6 +156,7 @@ GameObject:
   - 4: {fileID: 450016}
   - 33: {fileID: 3308562}
   - 23: {fileID: 2307398}
+  - 114: {fileID: 114000010492062482}
   m_Layer: 0
   m_Name: DestinationReticle
   m_TagString: Untagged
@@ -187,6 +189,7 @@ GameObject:
   - 4: {fileID: 475244}
   - 114: {fileID: 11445746}
   - 114: {fileID: 11445956}
+  - 114: {fileID: 114000010264285480}
   m_Layer: 0
   m_Name: Teleporting
   m_TagString: Untagged
@@ -987,7 +990,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f260935093f73f241bfaa1578e5e5506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportAction: {fileID: 11400000, guid: eb8a513be558a3746801dd280bb3ee08, type: 2}
+  teleportAction:
+    actionPath: /actions/default/in/Teleport
+    needsReinit: 0
   traceLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1185,6 +1190,7 @@ GameObject:
   - 4: {fileID: 4000010987318946}
   - 33: {fileID: 33000013948641102}
   - 23: {fileID: 23000012122883432}
+  - 114: {fileID: 114000010221557166}
   m_Layer: 0
   m_Name: PlayAreaEdge
   m_TagString: Untagged
@@ -1202,6 +1208,7 @@ GameObject:
   - 4: {fileID: 4000014002718978}
   - 33: {fileID: 33000010155385218}
   - 23: {fileID: 23000010500400360}
+  - 114: {fileID: 114000014163398588}
   m_Layer: 0
   m_Name: PlayAreaCorner
   m_TagString: Untagged
@@ -1307,3 +1314,62 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010252528310}
   m_Mesh: {fileID: 4300002, guid: c7aaa47f2514a5141970781d595e76a9, type: 3}
+--- !u!114 &114000010221557166
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010252528310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a4af4cc6b48a9449034f15c9691985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  children: 0
+--- !u!114 &114000010264285480
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eedfa54ef02254a428194e8de8e14d75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114000010492062482
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a4af4cc6b48a9449034f15c9691985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  children: 0
+--- !u!114 &114000012054325206
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a4af4cc6b48a9449034f15c9691985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  children: 0
+--- !u!114 &114000014163398588
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010545928982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a4af4cc6b48a9449034f15c9691985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  children: 0

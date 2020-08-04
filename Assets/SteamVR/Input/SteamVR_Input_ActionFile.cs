@@ -598,7 +598,7 @@ namespace Valve.VR
         public string[] references = new string[] { "SteamVR" };
         public string[] optionalUnityReferences = new string[0];
         public string[] includePlatforms = new string[0];
-        public string[] excludePlatforms = new string[0];
+        public string[] excludePlatforms = new string[] { "Android" };
         public bool allowUnsafeCode = false;
         public bool overrideReferences = false;
         public string[] precompiledReferences = new string[0];

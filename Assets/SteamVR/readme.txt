@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.5 (sdk 1.8.19)
+﻿# SteamVR Unity Plugin - v2.6.1 (sdk 1.13.10)
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -37,27 +37,37 @@ Input and Steam:
 
  
  
+Changes for 2.6.1
+
+ * Updated sdk header to 1.13.10
+
+ * Added support for Unity XR API
+
+ * Added basic Universal Rendering Pipeline support
+
+ * Added Exclusion for unused build targets
+
+ * Fixed some error logging messages related to the old VR API.
+
+ * Fixing obsolete API issue in unity 2020.2a
+
+ * Moved System.ResetSeatedPosition to Chaperone.ResetZeroPosition(trackingUniverse)
+
+ * Fixed some errors / warnings in 2020.1+
+
+ * Fixed HDRP error that would cause SteamVR to not start. (still no hdrp support for the interaction system)
+ 
 Changes for 2.5.0
 
- * Updated openvr_api to v1.8.19
-
  * Fixes the Open Binding UI button. This should now work on all computers as it opens the window in SteamVR instead of through your default browser.
+
+ * Updated sdk header to 1.8.19
 
  * Multiple hands can now hover over one interactable.
 
  * Interactable now has a priority member. Higher numbers will make the interactable preferred when one hand is hovering over multiple interactables.
 
  * Fixed the SteamVR binding hint ui. This lets you show the user (through a SteamVR interface) what actions are mapped to what bindings in a specified set. See: SteamVR_Input.ShowBindingHints(Action), SteamVR_Input.ShowBindingHints(ActionSet), SteamVR_Input.ShowBindingHints(ActionSet), SteamVR_Input.ShowBindingHintsForActiveActionSets()
-
- * SteamVR_Behaviour_Skeleton will now initialize SteamVR if a Pose has not already done so.
-
- * Fixed default binding bug with the index hmd not responding to proximity events (controller type is "indexhmd" not "index_hmd")
-
- * Fixed bug with the SteamVR_Skeleton_Poser_Editor being offscreen
-
- * Fixed a bug with the teleport point prefabs being on the wrong layer
-
- * 
  
 Changes for 2.4.5
 

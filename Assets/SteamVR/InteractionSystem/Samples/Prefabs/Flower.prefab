@@ -23,6 +23,7 @@ GameObject:
   - 114: {fileID: 114000013408952098}
   - 114: {fileID: 114000010830299382}
   - 114: {fileID: 114000014078190628}
+  - 114: {fileID: 114000012114515564}
   m_Layer: 0
   m_Name: Flower
   m_TagString: Untagged
@@ -237,6 +238,18 @@ MonoBehaviour:
   velocityAverageFrames: 5
   angularVelocityAverageFrames: 11
   estimateOnAwake: 0
+--- !u!114 &114000012114515564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011210241306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a4af4cc6b48a9449034f15c9691985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  children: 1
 --- !u!114 &114000013408952098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -257,6 +270,7 @@ MonoBehaviour:
   handFollowTransform: 0
   highlightOnHover: 1
   hideHighlight: []
+  hoverPriority: 0
 --- !u!114 &114000014078190628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -274,6 +288,23 @@ MonoBehaviour:
   releaseVelocityStyle: 3
   releaseVelocityTimeOffset: -0.011
   scaleReleaseVelocity: 1.1
+  scaleReleaseVelocityThreshold: -1
+  scaleReleaseVelocityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   restoreOriginalParent: 0
   attachEaseIn: 0
   snapAttachEaseInCurve:
