@@ -37,8 +37,6 @@ Input and Steam:
 
  
  
-Changes for 2.5.0
-
 Changes for 2.6.1
 
  * Updated sdk header to 1.13.10
