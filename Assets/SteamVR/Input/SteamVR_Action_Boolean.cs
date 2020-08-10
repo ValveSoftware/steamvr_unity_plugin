@@ -213,6 +213,14 @@ namespace Valve.VR
             sourceMap[inputSource].onStateUp -= functionToStopCalling;
         }
 
+        /// <summary>
+        /// Remove all listeners registered in the source, useful for Dispose pattern
+        /// </summary>
+        public void RemoveAllListeners(SteamVR_Input_Sources input_Sources)
+		{
+			sourceMap[input_Sources].RemoveAllListeners();
+		}
+
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
         }
@@ -339,6 +347,35 @@ namespace Valve.VR
                 actionData_size = (uint)Marshal.SizeOf(typeof(InputDigitalActionData_t));
 
         }
+
+        /// <summary>
+        /// Remove all listeners, useful for Dispose pattern
+        /// </summary>
+        public void RemoveAllListeners()
+		{
+			Delegate[] delegates = onStateDown?.GetInvocationList();
+			if (delegates != null)
+			{
+				foreach (Delegate d in onStateDown.GetInvocationList())
+					onStateDown -= (SteamVR_Action_Boolean.StateDownHandler)d;
+			}
+
+			delegates = onStateUp?.GetInvocationList();
+			if (delegates != null)
+			{
+				foreach (Delegate d in onStateUp.GetInvocationList())
+					onStateUp -= (SteamVR_Action_Boolean.StateUpHandler)d;
+			}
+
+			delegates = onState?.GetInvocationList();
+			if (delegates != null)
+			{
+				foreach (Delegate d in onState.GetInvocationList())
+				{
+					onState -= (SteamVR_Action_Boolean.StateHandler)d;
+				}
+			}
+		}
 
         /// <summary><strong>[Should not be called by user code]</strong>
         /// Updates the data for this action and this input source. Sends related events.
