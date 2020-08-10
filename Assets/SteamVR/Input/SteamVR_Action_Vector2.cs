@@ -170,6 +170,14 @@ namespace Valve.VR
             sourceMap[inputSource].onAxis -= functionToStopCalling;
         }
 
+        /// <summary>
+        /// Removes all listeners, useful for dispose pattern
+        /// </summary>
+        public void RemoveAllListeners(SteamVR_Input_Sources input_Sources)
+		{
+			sourceMap[input_Sources].RemoveAllListeners();
+		}
+
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
         }
@@ -288,6 +296,27 @@ namespace Valve.VR
             if (actionData_size == 0)
                 actionData_size = (uint)Marshal.SizeOf(typeof(InputAnalogActionData_t));
         }
+
+        /// <summary>
+        /// Removes all listeners, useful for dispose pattern
+        /// </summary>
+        public void RemoveAllListeners()
+		{
+			Delegate[] delegates = onAxis?.GetInvocationList();
+			if (delegates != null)
+				foreach (Delegate d in onAxis.GetInvocationList())
+					onAxis -= (SteamVR_Action_Vector2.AxisHandler)d;
+
+			delegates = onUpdate?.GetInvocationList();
+			if (delegates != null)
+				foreach (Delegate d in onUpdate.GetInvocationList())
+					onUpdate -= (SteamVR_Action_Vector2.UpdateHandler)d;
+
+			delegates = onChange?.GetInvocationList();
+			if (delegates != null)
+				foreach (Delegate d in onChange.GetInvocationList())
+					onChange -= (SteamVR_Action_Vector2.ChangeHandler)d;
+		}
 
         /// <summary><strong>[Should not be called by user code]</strong>
         /// Updates the data for this action and this input source. Sends related events.
