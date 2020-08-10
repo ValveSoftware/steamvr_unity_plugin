@@ -171,9 +171,9 @@ namespace Valve.VR
         /// Removes all listeners, useful for dispose pattern
         /// </summary>
         public void RemoveAllListeners(SteamVR_Input_Sources inputSource)
-		{
-			sourceMap[inputSource].RemoveAllListeners();
-		}
+	{
+		sourceMap[inputSource].RemoveAllListeners();
+	}
 
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
@@ -295,22 +295,22 @@ namespace Valve.VR
         /// Removes all listeners, useful for dispose pattern
         /// </summary>
         public void RemoveAllListeners()
-		{
-			Delegate[] delegates = onAxis?.GetInvocationList();
-			if (delegates != null)
-				foreach (Delegate d in onAxis.GetInvocationList())
-					onAxis -= (SteamVR_Action_Single.AxisHandler)d;
+	{
+		Delegate[] delegates = onAxis?.GetInvocationList();
+		if (delegates != null)
+			foreach (Delegate d in onAxis.GetInvocationList())
+				onAxis -= (SteamVR_Action_Single.AxisHandler)d;
 
-			delegates = onUpdate?.GetInvocationList();
-			if (delegates != null)
-				foreach (Delegate d in onUpdate.GetInvocationList())
-				onUpdate -= (SteamVR_Action_Single.UpdateHandler)d;
-			
-			delegates = onChange?.GetInvocationList();
-			if (delegates != null)
-				foreach (Delegate d in onChange.GetInvocationList())
-				onChange -= (SteamVR_Action_Single.ChangeHandler)d;
-		}
+		delegates = onUpdate?.GetInvocationList();
+		if (delegates != null)
+			foreach (Delegate d in onUpdate.GetInvocationList())
+			onUpdate -= (SteamVR_Action_Single.UpdateHandler)d;
+
+		delegates = onChange?.GetInvocationList();
+		if (delegates != null)
+			foreach (Delegate d in onChange.GetInvocationList())
+			onChange -= (SteamVR_Action_Single.ChangeHandler)d;
+	}
 
         /// <summary><strong>[Should not be called by user code]</strong>
         /// Updates the data for this action and this input source. Sends related events.
