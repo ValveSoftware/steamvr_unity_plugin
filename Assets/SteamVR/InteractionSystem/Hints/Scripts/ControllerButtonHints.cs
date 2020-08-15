@@ -472,7 +472,7 @@ namespace Valve.VR.InteractionSystem
 				renderers[i].material.mainTexture = mainTexture;
 
 				// This is to poke unity into setting the correct render queue for the model
-				renderers[i].material.renderQueue = usingMaterial.shader.renderQueue;
+				renderers[i].material.renderQueue = usingMaterial.renderQueue;
 			}
 
 			for ( int i = 0; i < actions.Length; i++ )
