@@ -25,29 +25,22 @@ namespace Valve.VR
 
                 if (stringStart == -1)
                 {
-                    findString = findString.Replace(" ", "");
-                    stringStart = jsonText.IndexOf(findString);
 
-                    if (stringStart == -1)
-                        return; //no app key
                 }
+                else
+                    return; //no app key
 
                 stringStart += findString.Length;
-                int stringEnd = jsonText.IndexOf("\"", stringStart);
+                int stringEnd = jsonText.IndexOf(",", stringStart + findString.Length);
 
-                int stringLength = stringEnd - stringStart;
+                int stringLength = stringEnd - stringStart + 1;
 
-                string currentAppKey = jsonText.Substring(stringStart, stringLength);
+                string removed = jsonText.Remove(stringStart, stringLength);
 
-                if (string.Equals(currentAppKey, SteamVR_Settings.instance.editorAppKey, System.StringComparison.CurrentCultureIgnoreCase) == false)
-                {
-                    jsonText = jsonText.Replace(currentAppKey, SteamVR_Settings.instance.editorAppKey);
+                FileInfo file = new FileInfo(newFilePath);
+                file.IsReadOnly = false;
 
-                    FileInfo file = new FileInfo(newFilePath);
-                    file.IsReadOnly = false;
-
-                    File.WriteAllText(newFilePath, jsonText);
-                }
+                File.WriteAllText(newFilePath, removed);
             }
         }
     }

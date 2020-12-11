@@ -590,6 +590,14 @@ namespace Valve.VR
         }
 
 
+        /// <summary>
+        /// Removes all listeners, useful for dispose pattern
+        /// </summary>
+        public void RemoveAllListeners(SteamVR_Input_Sources input_Sources)
+        {
+            sourceMap[input_Sources].RemoveAllListeners();
+        }
+
 
         /// <summary>Fires an event when a device is connected or disconnected.</summary>
         /// <param name="functionToCall">The method you would like to be called when a device is connected. Should take a SteamVR_Action_Pose as a param</param>
@@ -876,6 +884,65 @@ namespace Valve.VR
 
             if (skeletonActionData_size == 0)
                 skeletonActionData_size = (uint)Marshal.SizeOf(typeof(InputSkeletalActionData_t));
+        }
+
+
+        /// <summary>
+        /// Removes all listeners, useful for dispose pattern
+        /// </summary>
+        public override void RemoveAllListeners()
+        {
+            base.RemoveAllListeners();
+
+            Delegate[] delegates;
+
+            if (onActiveChange != null)
+            {
+                delegates = onActiveChange.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onActiveChange -= (SteamVR_Action_Skeleton.ActiveChangeHandler)existingDelegate;
+            }
+
+            if (onChange != null)
+            {
+                delegates = onChange.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onChange -= (SteamVR_Action_Skeleton.ChangeHandler)existingDelegate;
+            }
+
+            if (onUpdate != null)
+            {
+                delegates = onUpdate.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onUpdate -= (SteamVR_Action_Skeleton.UpdateHandler)existingDelegate;
+            }
+
+            if (onTrackingChanged != null)
+            {
+                delegates = onTrackingChanged.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onTrackingChanged -= (SteamVR_Action_Skeleton.TrackingChangeHandler)existingDelegate;
+            }
+
+            if (onValidPoseChanged != null)
+            {
+                delegates = onValidPoseChanged.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onValidPoseChanged -= (SteamVR_Action_Skeleton.ValidPoseChangeHandler)existingDelegate;
+            }
+
+            if (onDeviceConnectedChanged != null)
+            {
+                delegates = onDeviceConnectedChanged.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onDeviceConnectedChanged -= (SteamVR_Action_Skeleton.DeviceConnectedChangeHandler)existingDelegate;
+            }
         }
 
         /// <summary><strong>[Should not be called by user code]</strong>

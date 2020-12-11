@@ -4719,6 +4719,7 @@ public enum ETrackedDeviceProperty
 	Prop_Audio_DefaultPlaybackDeviceId_String = 2300,
 	Prop_Audio_DefaultRecordingDeviceId_String = 2301,
 	Prop_Audio_DefaultPlaybackDeviceVolume_Float = 2302,
+	Prop_Audio_SupportsDualSpeakerAndJackOutput_Bool = 2303,
 	Prop_AttachedDeviceId_String = 3000,
 	Prop_SupportedButtons_Uint64 = 3001,
 	Prop_Axis0Type_Int32 = 3002,
@@ -4885,6 +4886,8 @@ public enum EVREventType
 	VREvent_RoomViewHidden = 527,
 	VREvent_ShowUI = 528,
 	VREvent_ShowDevTools = 529,
+	VREvent_DesktopViewUpdating = 530,
+	VREvent_DesktopViewReady = 531,
 	VREvent_Notification_Shown = 600,
 	VREvent_Notification_Hidden = 601,
 	VREvent_Notification_BeginInteraction = 602,
@@ -7465,7 +7468,6 @@ public class OpenVR
 		return OpenVRInterop.GetInitToken();
 	}
 
-	public const ulong k_ulSharedTextureIsNTHandle = 4294967296;
 	public const uint k_nDriverNone = 4294967295;
 	public const uint k_unMaxDriverDebugResponseSize = 32768;
 	public const uint k_unTrackedDeviceIndex_Hmd = 0;
@@ -7700,6 +7702,7 @@ public class OpenVR
 	public const string k_pch_audio_EnablePlaybackMirrorIndependentVolume_Bool = "enablePlaybackMirrorIndependentVolume";
 	public const string k_pch_audio_LastHmdPlaybackDeviceId_String = "lastHmdPlaybackDeviceId";
 	public const string k_pch_audio_VIVEHDMIGain = "viveHDMIGain";
+	public const string k_pch_audio_DualSpeakerAndJackOutput_Bool = "dualSpeakerAndJackOutput";
 	public const string k_pch_Power_Section = "power";
 	public const string k_pch_Power_PowerOffOnExit_Bool = "powerOffOnExit";
 	public const string k_pch_Power_TurnOffScreensTimeout_Float = "turnOffScreensTimeout";
