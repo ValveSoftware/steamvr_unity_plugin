@@ -393,6 +393,8 @@ namespace Valve.VR
 
             dest.rightHand.position = source.rightHand.position;
             dest.rightHand.rotation = source.rightHand.rotation;
+            dest.rightHand.bonePositions = new Vector3[boneNum];
+            dest.rightHand.boneRotations = new Quaternion[boneNum];
             for (int boneIndex = 0; boneIndex < boneNum; boneIndex++)
             {
                 dest.rightHand.bonePositions[boneIndex] = source.rightHand.bonePositions[boneIndex];
@@ -409,6 +411,8 @@ namespace Valve.VR
 
             dest.leftHand.position = source.leftHand.position;
             dest.leftHand.rotation = source.leftHand.rotation;
+            dest.leftHand.bonePositions = new Vector3[boneNum];
+            dest.leftHand.boneRotations = new Quaternion[boneNum];
             for (int boneIndex = 0; boneIndex < boneNum; boneIndex++)
             {
                 dest.leftHand.bonePositions[boneIndex] = source.leftHand.bonePositions[boneIndex];
