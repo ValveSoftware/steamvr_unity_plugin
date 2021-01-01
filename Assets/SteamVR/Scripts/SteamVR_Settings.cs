@@ -121,8 +121,10 @@ namespace Valve.VR
 
         public static void Save()
         {
+#if UNITY_EDITOR
             UnityEditor.EditorUtility.SetDirty(instance);
             UnityEditor.AssetDatabase.SaveAssets();
+#endif
         }
 
         private const string defaultSettingsAssetName = "SteamVR_Settings";
