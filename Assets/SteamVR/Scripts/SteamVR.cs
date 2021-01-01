@@ -121,6 +121,10 @@ namespace Valve.VR
         {
             string errorLog = "<b>[SteamVR]</b> Initialization failed. ";
 
+#if OPENVR_XR_API
+            errorLog += "Please verify that you have SteamVR installed, your hmd is functioning, and OpenVR Loader is checked in the XR Plugin Management section of Project Settings.";
+#else
+
             if (XRSettings.enabled == false)
                 errorLog += "VR may be disabled in player settings. Go to player settings in the editor and check the 'Virtual Reality Supported' checkbox'. ";
             if (XRSettings.supportedDevices != null && XRSettings.supportedDevices.Length > 0)
@@ -135,7 +139,8 @@ namespace Valve.VR
                 errorLog += "You have no SDKs in your Player Settings list of supported virtual reality SDKs. Add OpenVR to it. ";
             }
 
-            errorLog += "To force OpenVR initialization call SteamVR.Initialize(true). ";
+            errorLog += "To attempt to force OpenVR initialization call SteamVR.Initialize(true). ";
+#endif
 
             Debug.LogWarning(errorLog);
         }
@@ -267,6 +272,7 @@ namespace Valve.VR
         public string hmd_TrackingSystemName { get { return GetStringProperty(ETrackedDeviceProperty.Prop_TrackingSystemName_String); } }
         public string hmd_ModelNumber { get { return GetStringProperty(ETrackedDeviceProperty.Prop_ModelNumber_String); } }
         public string hmd_SerialNumber { get { return GetStringProperty(ETrackedDeviceProperty.Prop_SerialNumber_String); } }
+        public string hmd_Type { get { return GetStringProperty(ETrackedDeviceProperty.Prop_ControllerType_String); } }
 
         public float hmd_SecondsFromVsyncToPhotons { get { return GetFloatProperty(ETrackedDeviceProperty.Prop_SecondsFromVsyncToPhotons_Float); } }
         public float hmd_DisplayFrequency { get { return GetFloatProperty(ETrackedDeviceProperty.Prop_DisplayFrequency_Float); } }
@@ -664,7 +670,7 @@ namespace Valve.VR
         private SteamVR()
         {
             hmd = OpenVR.System;
-            Debug.Log("<b>[SteamVR]</b> Initialized. Connected to " + hmd_TrackingSystemName + ":" + hmd_SerialNumber);
+            Debug.LogFormat("<b>[SteamVR]</b> Initialized. Connected to {0} : {1} : {2} :: {3}", hmd_TrackingSystemName, hmd_ModelNumber, hmd_SerialNumber, hmd_Type);
 
             compositor = OpenVR.Compositor;
             overlay = OpenVR.Overlay;

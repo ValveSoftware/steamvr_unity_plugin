@@ -167,6 +167,9 @@ PlayerSettings:
   iOSDeviceRequirements: []
   iOSURLSchemes: []
   appleDeveloperTeamID: 
+  iOSManualSigningProvisioningProfileID: 
+  tvOSManualSigningProvisioningProfileID: 
+  appleEnableAutomaticSigning: 0
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
@@ -307,6 +310,9 @@ PlayerSettings:
   ps4attribShareSupport: 0
   ps4attribExclusiveVR: 0
   ps4disableAutoHideSplash: 0
+  ps4videoRecordingFeaturesUsed: 0
+  ps4contentSearchFeaturesUsed: 0
+  ps4attribEyeToEyeDistanceSettingVR: 0
   ps4IncludedModules: []
   monoEnv: 
   psp2Splashimage: {fileID: 0}
@@ -389,7 +395,7 @@ PlayerSettings:
   tizenSigningProfileName: 
   tizenGPSPermissions: 0
   tizenMicrophonePermissions: 0
-  tizenMinOSVersion: 0
+  tizenMinOSVersion: 1
   n3dsUseExtSaveData: 0
   n3dsCompressStaticMem: 1
   n3dsExtSaveDataNumber: 0x12345
@@ -512,6 +518,7 @@ PlayerSettings:
   SamsungTV::VR::enabledDevices: []
   Standalone::VR::enabledDevices:
   - OpenVR
+  - Oculus
   Tizen::VR::enabledDevices: []
   WebGL::VR::enabledDevices: []
   WebPlayer::VR::enabledDevices: []

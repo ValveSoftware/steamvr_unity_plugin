@@ -167,6 +167,11 @@ namespace Valve.VR
             sourceMap[inputSource].onAxis -= functionToStopCalling;
         }
 
+        public void RemoveAllListeners(SteamVR_Input_Sources inputSource)
+        {
+            sourceMap[inputSource].RemoveAllListeners();
+        }
+
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
         }
@@ -281,6 +286,38 @@ namespace Valve.VR
 
             if (actionData_size == 0)
                 actionData_size = (uint)Marshal.SizeOf(typeof(InputAnalogActionData_t));
+        }
+
+        /// <summary>
+        /// Removes all listeners, useful for dispose pattern
+        /// </summary>
+        public void RemoveAllListeners()
+        {
+            Delegate[] delegates;
+
+            if (onAxis != null)
+            {
+                delegates = onAxis.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onAxis -= (SteamVR_Action_Single.AxisHandler)existingDelegate;
+            }
+
+            if (onUpdate != null)
+            {
+                delegates = onUpdate.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onUpdate -= (SteamVR_Action_Single.UpdateHandler)existingDelegate;
+            }
+
+            if (onChange != null)
+            {
+                delegates = onChange.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onChange -= (SteamVR_Action_Single.ChangeHandler)existingDelegate;
+            }
         }
 
         /// <summary><strong>[Should not be called by user code]</strong>
