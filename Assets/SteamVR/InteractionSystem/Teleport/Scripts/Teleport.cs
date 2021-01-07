@@ -7,6 +7,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using UnityEngine.Events;
 
 namespace Valve.VR.InteractionSystem
 {
@@ -64,6 +65,8 @@ namespace Valve.VR.InteractionSystem
 		public Transform offsetReticleTransform;
 		public MeshRenderer floorDebugSphere;
 		public LineRenderer floorDebugLine;
+
+		public UnityEvent onTeleportSucceeded;	// Adds an event hook to the Teleporting (prefab) to hook in events after each teleport action.  
 
 		private LineRenderer pointerLineRenderer;
 		private GameObject teleportPointerObject;
@@ -906,6 +909,9 @@ namespace Valve.VR.InteractionSystem
 				teleportingToMarker.TeleportPlayer( pointedAtPosition );
 			}
 
+ 			onTeleportSucceeded.Invoke();                       // Invoke the event attached to the global teleporting object
+            		teleportingToMarker.onTeleportToHere.Invoke();      // Invoke the event attached to the teleporting object (teleporting point, teleporting area)
+	    
 			Teleport.Player.Send( pointedAtTeleportMarker );
 		}
 
