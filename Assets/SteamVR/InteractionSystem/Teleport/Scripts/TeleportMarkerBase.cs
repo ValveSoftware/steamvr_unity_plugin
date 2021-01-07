@@ -5,6 +5,7 @@
 //=============================================================================
 
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Valve.VR.InteractionSystem
 {
@@ -13,6 +14,8 @@ namespace Valve.VR.InteractionSystem
 	{
 		public bool locked = false;
 		public bool markerActive = true;
+		
+		public UnityEvent onTeleportToHere;
 
 		//-------------------------------------------------
 		public virtual bool showReticle
