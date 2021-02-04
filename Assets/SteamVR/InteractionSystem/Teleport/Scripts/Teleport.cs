@@ -900,7 +900,7 @@ namespace Valve.VR.InteractionSystem
 					player.leftHand.ResetAttachedTransform(player.leftHand.currentAttachedObjectInfo.Value);
 				if (player.rightHand != null && player.rightHand.currentAttachedObjectInfo.HasValue)
 					player.rightHand.ResetAttachedTransform(player.rightHand.currentAttachedObjectInfo.Value);
-            }
+			}
 			else
 			{
 				teleportingToMarker.TeleportPlayer( pointedAtPosition );
