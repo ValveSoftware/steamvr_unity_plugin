@@ -967,7 +967,7 @@ namespace Valve.VR
                     if (actionSetsByPathLowered.ContainsKey(loweredPath))
                     {
                         actionSetsByPathCache.Add(path, actionSetsByPathLowered[loweredPath]);
-                        return actionSetsByPath[loweredPath].GetCopy<T>();
+                        return actionSetsByPathLowered[loweredPath].GetCopy<T>();
                     }
                     else
                     {
