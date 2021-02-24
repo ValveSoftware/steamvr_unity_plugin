@@ -166,6 +166,7 @@ namespace Valve.VR.InteractionSystem
 				if ( takeBackItem && !requireReleaseActionToReturn ) // if we want to take back matching items and aren't waiting for a trigger press
 				{
 					TakeBackItem( hand );
+					return;
 				}
 			}
 
@@ -223,7 +224,7 @@ namespace Valve.VR.InteractionSystem
                 if (hand.isActive)
 				{
 					ItemPackage currentAttachedItemPackage = GetAttachedItemPackage( hand );
-                    if (currentAttachedItemPackage == itemPackage && hand.IsGrabEnding(currentAttachedItemPackage.gameObject))
+					if (currentAttachedItemPackage == itemPackage && hand.GetGrabStarting() != GrabTypes.None)
 					{
 						TakeBackItem( hand );
 						return; // So that we don't pick up an ItemPackage the same frame that we return it
