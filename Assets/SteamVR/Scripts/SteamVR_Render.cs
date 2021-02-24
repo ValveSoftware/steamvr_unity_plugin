@@ -461,7 +461,12 @@ namespace Valve.VR
                     //timing.m_nSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf(typeof(Compositor_FrameTiming));
                     //vr.compositor.GetFrameTiming(ref timing, 0);
 
-                    Time.fixedDeltaTime = Time.timeScale / vr.hmd_DisplayFrequency;
+                    float dynamicTime = Time.timeScale / vr.hmd_DisplayFrequency;
+                    if (Time.fixedDeltaTime > dynamicTime)
+                    {
+                        Debug.Log("SteamVR: Forcing Fixed Delta Time to " + dynamicTime + " to match HMD.");
+                        Time.fixedDeltaTime = dynamicTime;
+                    }
                 }
             }
         }
