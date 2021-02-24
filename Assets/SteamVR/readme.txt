@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.7.2 (sdk 1.14.15)
+﻿# SteamVR Unity Plugin - v2.7.3 (sdk 1.14.15)
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -35,6 +35,9 @@ Input and Steam:
 
  If you publish your game to steam you can let users change their input bindings while the game is not running by setting the location of your action manifest. On the steamworks partner site go to the Application settings, and the Virtual Reality Section. At the bottom you'll see a radio button to designate your title as a SteamVR Input application. You then can set the location of your action manifest. In older versions of the plugin this was next to the executable. In versions 2.3.3 and above this is in [GameName]_Data/StreamingAssets/SteamVR/actions.json.
  
+Changes for 2.7.3
+ * Legacy VR Mode fix. #908 #901
+
 Changes for 2.7.2
 
  * Refixed issue where Unity XR builds were failing
