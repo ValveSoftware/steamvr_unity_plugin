@@ -195,10 +195,6 @@ namespace Valve.VR.InteractionSystem
 
             hand.mainRenderModel.transform.rotation = offsetRotation;
 
-            Vector3 offsetPosition = handCollider.transform.TransformPoint(wristToArmature.inverse.MultiplyPoint3x4(Vector3.zero));
-
-            hand.mainRenderModel.transform.position = offsetPosition;
-
             /*
             Vector3 wristPointInArmatureSpace = transform.InverseTransformPoint(handCollider.transform.position);
 
