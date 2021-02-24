@@ -61,6 +61,16 @@ namespace Valve.VR.InteractionSystem
 				right -= 1.0f;
 			}
 
+			float up = 0.0f;
+			if ( Input.GetKey( KeyCode.E ) )
+			{
+				up += 1.0f;
+			}
+			if ( Input.GetKey( KeyCode.Q ) )
+			{
+				up -= 1.0f;
+			}
+
 			float currentSpeed = speed;
 			if ( Input.GetKey( KeyCode.LeftShift ) || Input.GetKey( KeyCode.RightShift ) )
 			{
