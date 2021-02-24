@@ -811,7 +811,10 @@ namespace Valve.VR
 
         public static Dictionary<string, List<SteamVR_PartialInputBindings>> ScanForPartials()
         {
-            string[] partialManifestPaths = Directory.GetFiles(Application.dataPath, partialManifestFilename, SearchOption.AllDirectories);
+            string[] partialManifestPaths = AssetDatabase.FindAssets(System.IO.Path.GetFileNameWithoutExtension(partialManifestFilename))
+                .Select(AssetDatabase.GUIDToAssetPath)
+                .Where(path => path.EndsWith(partialManifestFilename))
+                .ToArray();
             Dictionary<string, List<SteamVR_PartialInputBindings>> partialBindings = new Dictionary<string, List<SteamVR_PartialInputBindings>>();
 
             for (int partialIndex = 0; partialIndex < partialManifestPaths.Length; partialIndex++)
