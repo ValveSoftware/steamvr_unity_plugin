@@ -33,7 +33,7 @@ namespace Valve.VR
             }
         }
 
-        public bool initializeSteamVROnAwake = true;
+        public bool initializeSteamVROnAwake = SteamVR_Settings.instance.autoEnableVR;
 
         public bool doNotDestroy = true;
 
