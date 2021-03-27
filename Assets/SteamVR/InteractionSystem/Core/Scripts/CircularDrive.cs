@@ -89,6 +89,7 @@ namespace Valve.VR.InteractionSystem
 			}
 		}
 
+		protected Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.DetachFromOtherHand;
 
 		private Quaternion start;
 
