@@ -17,6 +17,13 @@ namespace Valve.VR
         [UnityEditor.Callbacks.DidReloadScripts]
         private static void OnReloadScripts()
         {
+            //Delay method calls as SteamVR_Settings.instance cannot be accessed from 'DidReloadScripts'
+            EditorApplication.update += Update;
+        }
+
+        private static void Update()
+        {
+            EditorApplication.update -= Update;
             SteamVR_Input.CheckOldLocation();
             CopyFiles();
         }
