@@ -69,7 +69,7 @@ namespace Valve.VR.InteractionSystem
 
 
 		//-------------------------------------------------
-		private void FireExposure()
+		public void FireExposure()
 		{
 			if ( fireObject == null )
 			{
