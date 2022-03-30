@@ -280,5 +280,9 @@ namespace Valve.VR.InteractionSystem
             }
         }
 
+        private void OnCollisionStay()
+        {
+            hand.OnHandColliderStay();
+        }
     }
 }

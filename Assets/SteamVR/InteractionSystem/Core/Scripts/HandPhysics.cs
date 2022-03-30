@@ -32,12 +32,24 @@ namespace Valve.VR.InteractionSystem
 
         private bool collisionsEnabled = true;
 
+        private enum RenderModelState
+        {
+            Teleport,
+            Physics
+        };
+
+        private RenderModelState renderModelState;
+
+        // After colliding with an object, how many physics updates should the render model strictly follow the collider
+        const int fixedUpdatesToUsePhysics = 5;
+        private int fixedUpdatesUntilTeleport = 0;
+
 
         private void Start()
         {
             hand = GetComponent<Hand>();
             //spawn hand collider and link it to us
-            
+
             handCollider = ((GameObject)Instantiate(handColliderPrefab.gameObject)).GetComponent<HandCollider>();
             Vector3 localPosition = handCollider.transform.localPosition;
             Quaternion localRotation = handCollider.transform.localRotation;
@@ -75,6 +87,16 @@ namespace Valve.VR.InteractionSystem
                 handCollider.TeleportTo(targetPosition, targetRotation);
 
             UpdateFingertips();
+
+            if (renderModelState == RenderModelState.Physics)
+            {
+                if (fixedUpdatesUntilTeleport <= 0)
+                {
+                    renderModelState = RenderModelState.Teleport;
+                }
+
+                fixedUpdatesUntilTeleport -= 1;
+            }
         }
 
         private void UpdateCenterPoint()
@@ -191,13 +213,16 @@ namespace Valve.VR.InteractionSystem
 
             UpdatePositions();
 
-            Quaternion offsetRotation = handCollider.transform.rotation * wristToArmature.inverse.GetRotation();
+            if (renderModelState == RenderModelState.Physics)
+            {
+                Quaternion offsetRotation = handCollider.transform.rotation * wristToArmature.inverse.GetRotation();
 
-            hand.mainRenderModel.transform.rotation = offsetRotation;
+                hand.mainRenderModel.transform.rotation = offsetRotation;
 
-            Vector3 offsetPosition = handCollider.transform.TransformPoint(wristToArmature.inverse.MultiplyPoint3x4(Vector3.zero));
+                Vector3 offsetPosition = handCollider.transform.TransformPoint(wristToArmature.inverse.MultiplyPoint3x4(Vector3.zero));
 
-            hand.mainRenderModel.transform.position = offsetPosition;
+                hand.mainRenderModel.transform.position = offsetPosition;
+            }
 
             /*
             Vector3 wristPointInArmatureSpace = transform.InverseTransformPoint(handCollider.transform.position);
@@ -210,6 +235,12 @@ namespace Valve.VR.InteractionSystem
 
             //hand.mainRenderModel.transform.rotation = handTargetRotation;
             */
+        }
+
+        public void OnHandColliderStay()
+        {
+            fixedUpdatesUntilTeleport = fixedUpdatesToUsePhysics;
+            renderModelState = RenderModelState.Physics;
         }
 
         Vector3 ProcessPos(int boneIndex, Vector3 pos)
