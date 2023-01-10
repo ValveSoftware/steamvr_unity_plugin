@@ -26,12 +26,14 @@ namespace Valve.VR
 
         // Set this to false to keep from auto-initializing when calling SteamVR.instance.
         private static bool _enabled = true;
+        private static readonly string[] SupportedDevices = XRSettings.supportedDevices;
+
         public static bool enabled
         {
             get
             {
 #if UNITY_2020_1_OR_NEWER || OPENVR_XR_API
-                if (XRSettings.supportedDevices.Length == 0)
+                if (SupportedDevices.Length == 0)
                     enabled = false;
 #else
                 if (!XRSettings.enabled)
@@ -127,11 +129,11 @@ namespace Valve.VR
 
             if (XRSettings.enabled == false)
                 errorLog += "VR may be disabled in player settings. Go to player settings in the editor and check the 'Virtual Reality Supported' checkbox'. ";
-            if (XRSettings.supportedDevices != null && XRSettings.supportedDevices.Length > 0)
+            if (SupportedDevices != null && SupportedDevices.Length > 0)
             {
-                if (XRSettings.supportedDevices.Contains("OpenVR") == false)
+                if (SupportedDevices.Contains("OpenVR") == false)
                     errorLog += "OpenVR is not in your list of supported virtual reality SDKs. Add it to the list in player settings. ";
-                else if (XRSettings.supportedDevices.First().Contains("OpenVR") == false)
+                else if (SupportedDevices.First().Contains("OpenVR") == false)
                     errorLog += "OpenVR is not first in your list of supported virtual reality SDKs. <b>This is okay, but if you have an Oculus device plugged in, and Oculus above OpenVR in this list, it will try and use the Oculus SDK instead of OpenVR.</b> ";
             }
             else

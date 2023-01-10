@@ -74,11 +74,19 @@ namespace Valve.VR
             changed = true;
         }
 
+        private static Dictionary<int, VRActiveActionSet_t[]> pool;
+        private static VRActiveActionSet_t[] activeActionSetsArray;
+
         private static void UpdateActionSetsArray()
         {
-            List<VRActiveActionSet_t> activeActionSetsList = new List<VRActiveActionSet_t>();
-
+            var activeActionSetsCount = 0;
             SteamVR_Input_Sources[] sources = SteamVR_Input_Source.GetAllSources();
+
+            if (pool == null)
+            {
+                pool = new Dictionary<int, VRActiveActionSet_t[]>();
+                activeActionSetsArray = new VRActiveActionSet_t[SteamVR_Input.actionSets.Length * sources.Length];
+            }
 
             for (int actionSetIndex = 0; actionSetIndex < SteamVR_Input.actionSets.Length; actionSetIndex++)
             {
@@ -95,20 +103,44 @@ namespace Valve.VR
                         activeSet.nPriority = set.ReadRawSetPriority(source);
                         activeSet.ulRestrictedToDevice = SteamVR_Input_Source.GetHandle(source);
 
-                        int insertionIndex = 0;
-                        for (insertionIndex = 0; insertionIndex < activeActionSetsList.Count; insertionIndex++)
+                        int insertionIndex;
+                        for (insertionIndex = 0; insertionIndex < activeActionSetsCount; insertionIndex++)
                         {
-                            if (activeActionSetsList[insertionIndex].nPriority > activeSet.nPriority)
+                            if (activeActionSetsArray[insertionIndex].nPriority > activeSet.nPriority)
                                 break;
                         }
-                        activeActionSetsList.Insert(insertionIndex, activeSet);
+
+                        for (int i = activeActionSetsCount; i > insertionIndex; i--)
+                        {
+                            activeActionSetsArray[i] = activeActionSetsArray[i - 1];
+                        }
+                        activeActionSetsArray[insertionIndex] = activeSet;
+                        activeActionSetsCount++;
                     }
                 }
             }
 
+            if (rawActiveActionSetArray != null && rawActiveActionSetArray.Length != activeActionSetsCount)
+            {
+                pool[rawActiveActionSetArray.Length] = rawActiveActionSetArray;
+                rawActiveActionSetArray = null;
+            }
+
+            if (rawActiveActionSetArray == null)
+            {
+                if (!pool.ContainsKey(activeActionSetsCount))
+                {
+                    rawActiveActionSetArray = new VRActiveActionSet_t[activeActionSetsCount];
+                    pool[activeActionSetsCount] = rawActiveActionSetArray;
+                }
+                else
+                    rawActiveActionSetArray = pool[activeActionSetsCount];
+            }
+
             changed = false;
 
-            rawActiveActionSetArray = activeActionSetsList.ToArray();
+            for (int i = 0; i < activeActionSetsCount; i++)
+                rawActiveActionSetArray[i] = activeActionSetsArray[i];
 
             if (Application.isEditor || updateDebugTextInBuilds)
                 UpdateDebugText();
