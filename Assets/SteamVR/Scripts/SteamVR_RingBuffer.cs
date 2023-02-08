@@ -7,6 +7,8 @@ namespace Valve.VR
 {
     public class SteamVR_RingBuffer<T>
     {
+        public static bool UseDateTimeForTicks = false;
+
         protected T[] buffer;
         protected int currentIndex;
         protected T lastElement;
@@ -95,7 +97,17 @@ namespace Valve.VR
             buffer[currentIndex].rotation = rotation;
             buffer[currentIndex].velocity = velocity;
             buffer[currentIndex].angularVelocity = angularVelocity;
-            buffer[currentIndex].timeInTicks = System.DateTime.Now.Ticks;
+
+            if (UseDateTimeForTicks)
+                buffer[currentIndex].timeInTicks = System.DateTime.Now.Ticks;
+            else
+            {
+#if UNITY_2020_2_OR_NEWER
+                buffer[currentIndex].timeInTicks = (long)(Time.realtimeSinceStartupAsDouble * 1000);
+#else
+                buffer[currentIndex].timeInTicks = (long)(Time.realtimeSinceStartup * 1000);
+#endif
+            }
 
             StepForward();
         }

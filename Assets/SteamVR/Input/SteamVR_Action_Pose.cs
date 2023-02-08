@@ -618,7 +618,7 @@ namespace Valve.VR
             UpdateValue(false);
         }
 
-        public static float framesAhead = 2;
+        public static float framesAhead = -1;
 
         /// <summary><strong>[Should not be called by user code]</strong>
         /// Updates the data for this action and this input source. Sends related events.
@@ -634,10 +634,10 @@ namespace Valve.VR
 
             EVRInputError err;
 
-            if (framesAhead == 0)
+            if (framesAhead == -1)
                 err = OpenVR.Input.GetPoseActionDataForNextFrame(handle, universeOrigin, ref poseActionData, poseActionData_size, inputSourceHandle);
             else
-                err = OpenVR.Input.GetPoseActionDataRelativeToNow(handle, universeOrigin, framesAhead * (Time.timeScale / SteamVR.instance.hmd_DisplayFrequency), ref poseActionData, poseActionData_size, inputSourceHandle);
+                err = OpenVR.Input.GetPoseActionDataRelativeToNow(handle, universeOrigin, framesAhead * (1 / SteamVR.instance.hmd_DisplayFrequency), ref poseActionData, poseActionData_size, inputSourceHandle);
 
             if (err != EVRInputError.None)
             {

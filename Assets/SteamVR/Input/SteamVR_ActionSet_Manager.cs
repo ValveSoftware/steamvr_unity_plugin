@@ -15,16 +15,32 @@ namespace Valve.VR
     /// </summary>
     public static class SteamVR_ActionSet_Manager
     {
-        public static VRActiveActionSet_t[] rawActiveActionSetArray;
+        public static VRActiveActionSet_t[] rawActiveActionSetArray
+        {
+            get
+            {
+                if (currentArraySize <= 0)
+                    return null;
+                else
+                    return poolActiveActionSetArrays[currentArraySize];
+            }
+        }
 
         [NonSerialized]
         private static uint activeActionSetSize;
 
+        [NonSerialized]
         private static bool changed = false;
+
+        [NonSerialized]
+        private static int currentArraySize;
+        [NonSerialized]
+        private static Dictionary<int, VRActiveActionSet_t[]> poolActiveActionSetArrays;
 
         public static void Initialize()
         {
             activeActionSetSize = (uint)(Marshal.SizeOf(typeof(VRActiveActionSet_t)));
+            poolActiveActionSetArrays = new Dictionary<int, VRActiveActionSet_t[]>();
         }
 
         /// <summary>
@@ -74,10 +90,38 @@ namespace Valve.VR
             changed = true;
         }
 
+        private static int GetNewArraySize()
+        {
+            int size = 0;
+
+            SteamVR_Input_Sources[] sources = SteamVR_Input_Source.GetAllSources();
+            for (int actionSetIndex = 0; actionSetIndex < SteamVR_Input.actionSets.Length; actionSetIndex++)
+            {
+                SteamVR_ActionSet set = SteamVR_Input.actionSets[actionSetIndex];
+
+                for (int sourceIndex = 0; sourceIndex < sources.Length; sourceIndex++)
+                {
+                    SteamVR_Input_Sources source = sources[sourceIndex];
+
+                    if (set.ReadRawSetActive(source))
+                    {
+                        size++;
+                    }
+                }
+            }
+
+            return size;
+        }
+
         private static void UpdateActionSetsArray()
         {
-            List<VRActiveActionSet_t> activeActionSetsList = new List<VRActiveActionSet_t>();
+            int newArraySize = GetNewArraySize();
+            if (poolActiveActionSetArrays.ContainsKey(newArraySize) == false)
+            {
+                poolActiveActionSetArrays[newArraySize] = new VRActiveActionSet_t[newArraySize];
+            }
 
+            int arrayIndex = 0;
             SteamVR_Input_Sources[] sources = SteamVR_Input_Source.GetAllSources();
 
             for (int actionSetIndex = 0; actionSetIndex < SteamVR_Input.actionSets.Length; actionSetIndex++)
@@ -90,25 +134,17 @@ namespace Valve.VR
 
                     if (set.ReadRawSetActive(source))
                     {
-                        VRActiveActionSet_t activeSet = new VRActiveActionSet_t();
-                        activeSet.ulActionSet = set.handle;
-                        activeSet.nPriority = set.ReadRawSetPriority(source);
-                        activeSet.ulRestrictedToDevice = SteamVR_Input_Source.GetHandle(source);
+                        poolActiveActionSetArrays[newArraySize][arrayIndex].ulActionSet = set.handle;
+                        poolActiveActionSetArrays[newArraySize][arrayIndex].nPriority = set.ReadRawSetPriority(source);
+                        poolActiveActionSetArrays[newArraySize][arrayIndex].ulRestrictedToDevice = SteamVR_Input_Source.GetHandle(source);
 
-                        int insertionIndex = 0;
-                        for (insertionIndex = 0; insertionIndex < activeActionSetsList.Count; insertionIndex++)
-                        {
-                            if (activeActionSetsList[insertionIndex].nPriority > activeSet.nPriority)
-                                break;
-                        }
-                        activeActionSetsList.Insert(insertionIndex, activeSet);
+                        arrayIndex++;
                     }
                 }
             }
 
             changed = false;
-
-            rawActiveActionSetArray = activeActionSetsList.ToArray();
+            currentArraySize = newArraySize;
 
             if (Application.isEditor || updateDebugTextInBuilds)
                 UpdateDebugText();
