@@ -16,7 +16,13 @@ namespace Valve.VR
 
         [UnityEditor.Callbacks.DidReloadScripts]
         private static void OnReloadScripts()
+        {            
+            EditorApplication.update += Update;
+        }
+
+        private static void Update()
         {
+            EditorApplication.update -= Update;
             SteamVR_Input.CheckOldLocation();
             CopyFiles();
         }
