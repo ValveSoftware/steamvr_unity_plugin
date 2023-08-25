@@ -63,6 +63,18 @@ namespace Valve.VR
 
         [Description("/user/elbow/right")]
         RightElbow,
+
+        [Description("/user/wrist/left")]
+        LeftWrist,
+
+        [Description("/user/wrist/right")]
+        RightWrist,
+
+        [Description("/user/ankle/left")]
+        LeftAnkle,
+
+        [Description("/user/ankle/right")]
+        RightAnkle,
     }
 }
 
