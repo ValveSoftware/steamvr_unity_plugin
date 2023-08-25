@@ -1,5 +1,6 @@
 {
     "name": "SteamVR",
+    "rootNamespace": "",
     "references": [
         "SteamVR_Windows_EditorHelper",
         "Unity.XR.OpenVR",
@@ -29,6 +30,11 @@
             "name": "com.unity.render-pipelines.universal",
             "expression": "",
             "define": "UNITY_URP"
+        },
+        {
+            "name": "com.unity.ugui",
+            "expression": "",
+            "define": "UNITY_UGUI_UI"
         }
     ],
     "noEngineReferences": false

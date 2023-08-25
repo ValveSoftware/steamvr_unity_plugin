@@ -4,6 +4,7 @@
 //
 //=============================================================================
 
+#if UNITY_UGUI_UI || !UNITY_2019_2_OR_NEWER
 using UnityEngine;
 using UnityEngine.UI;
 #if UNITY_EDITOR
@@ -350,3 +351,19 @@ namespace Valve.VR.InteractionSystem
 	}
 #endif
 }
+
+#else
+using UnityEngine;
+namespace Valve.VR.InteractionSystem { public class TeleportPoint : TeleportMarkerBase {
+        public override void Highlight(bool highlight) { }
+        public override void SetAlpha(float tintAlpha, float alphaPercent) { }
+        public override bool ShouldActivate(Vector3 playerPosition) { return false; }
+        public override bool ShouldMovePlayer() { return false; }
+        public override void TeleportPlayer(Vector3 pointedAtPosition) { }
+        public override void UpdateVisuals() { }
+        public bool playerSpawnPoint = false;
+        public enum TeleportPointType { MoveToLocation, SwitchToNewScene };
+        public TeleportPointType teleportType = TeleportPointType.MoveToLocation;
+		public void TeleportToScene() { }
+    } }
+#endif
