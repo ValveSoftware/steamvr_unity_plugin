@@ -67,7 +67,7 @@ namespace Valve.VR.InteractionSystem
         protected SkinnedMeshRenderer[] existingSkinnedRenderers;
         protected static Material highlightMat;
         [Tooltip("An array of child gameObjects to not render a highlight for. Things like transparent parts, vfx, etc.")]
-        public GameObject[] hideHighlight;
+        public GameObject[] hideHighlight = new GameObject[] { };
 
         [Tooltip("Higher is better")]
         public int hoverPriority = 0;

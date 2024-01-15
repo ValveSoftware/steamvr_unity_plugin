@@ -904,6 +904,14 @@ namespace Valve.VR
                         onActiveChange -= (SteamVR_Action_Skeleton.ActiveChangeHandler)existingDelegate;
             }
 
+            if (onActiveBindingChange != null)
+            {
+                delegates = onActiveBindingChange.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onActiveBindingChange -= (SteamVR_Action_Skeleton.ActiveChangeHandler)existingDelegate;
+            }
+
             if (onChange != null)
             {
                 delegates = onChange.GetInvocationList();

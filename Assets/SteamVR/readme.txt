@@ -1,4 +1,4 @@
-﻿# SteamVR Unity Plugin - v2.7.3 (sdk 1.14.15)
+﻿# SteamVR Unity Plugin - v2.8.0 (sdk 2.0.10)
 
 Copyright (c) Valve Corporation, All rights reserved.
 
@@ -35,6 +35,51 @@ Input and Steam:
 
  If you publish your game to steam you can let users change their input bindings while the game is not running by setting the location of your action manifest. On the steamworks partner site go to the Application settings, and the Virtual Reality Section. At the bottom you'll see a radio button to designate your title as a SteamVR Input application. You then can set the location of your action manifest. In older versions of the plugin this was next to the executable. In versions 2.3.3 and above this is in [GameName]_Data/StreamingAssets/SteamVR/actions.json.
  
+
+Changes for 2.8.0
+
+ * Updating OpenVR sdk to 2.0.10
+
+ * Added knee, elbow, ankle, and wrist input sources.
+
+ * Updated urls to sidestep log spam in Unity 2022
+
+ * Fixed compiler errors in some plugin update scenarios.
+
+ * Fixed the interaction system not being able to create interactables at runtime
+
+ * Fixed reimports erasing openvr settings on some machines
+
+ * Fixed the interaction system not respecting the hand clearance mask
+
+ * Fixed the interaction system teleport example not working while using the 2d fallback
+
+ * Fixed RemoveAllListeners not removing all listeners
+
+ * Various performance and garbage collection fixes
+
+ * Fix for multipass breaking under scriptable render pipelines.
+
+ * Fix for unnecessary preinit that was breaking some startup scenarios
+ 
+ * Fix for incorrect reporting of eye position
+ 
+ * Fix for broken depth textures in some situations 
+ 
+ * Fixed some scenarios where OpenGL wouldn't work.
+
+ * Fix for projects that use binary serialization. (Settings file gets output on build now)
+
+ * Better support for unicode app names and keys
+
+ * Fix for some projects in linux not loading manifests properly.
+
+ * Fixed a localization issue preventing some projects with unicode characters in the path from working.
+ 
+ * Fixed the interaction system not handling the bow and arrow correctly under newer physics simulations
+
+ * Fixed the interaction system not dismissing hand grab hints properly.
+
 Changes for 2.7.3
  * Legacy VR Mode fix. #908 #901
 

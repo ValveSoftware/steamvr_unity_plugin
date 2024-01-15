@@ -3,7 +3,7 @@
 // Purpose: Makes the hand act as an input module for Unity's event system
 //
 //=============================================================================
-
+#if UNITY_UGUI_UI || !UNITY_2019_2_OR_NEWER
 using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
@@ -77,3 +77,7 @@ namespace Valve.VR.InteractionSystem
 		}
 	}
 }
+#else //if we haven't run the xr install script yet use this
+using UnityEngine;
+namespace Valve.VR.InteractionSystem { public class InputModule : MonoBehaviour {} }
+#endif

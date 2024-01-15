@@ -10,7 +10,7 @@ namespace Valve.VR
 {
     public enum SteamVR_Input_Sources
     {
-        [Description("/unrestricted")] //todo: check to see if this gets exported: k_ulInvalidInputHandle
+        [Description("/unrestricted")] 
         Any,
 
         [Description("/user/hand/left")]
@@ -51,6 +51,30 @@ namespace Valve.VR
 
         [Description("/user/treadmill")]
         Treadmill,
+
+        [Description("/user/knee/left")]
+        LeftKnee,
+
+        [Description("/user/knee/right")]
+        RightKnee,
+
+        [Description("/user/elbow/left")]
+        LeftElbow,
+
+        [Description("/user/elbow/right")]
+        RightElbow,
+
+        [Description("/user/wrist/left")]
+        LeftWrist,
+
+        [Description("/user/wrist/right")]
+        RightWrist,
+
+        [Description("/user/ankle/left")]
+        LeftAnkle,
+
+        [Description("/user/ankle/right")]
+        RightAnkle,
     }
 }
 

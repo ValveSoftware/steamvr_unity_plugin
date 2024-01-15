@@ -101,6 +101,14 @@ namespace Valve.VR
         }
 
         /// <summary>
+        /// Removes all listeners, useful for dispose pattern
+        /// </summary>
+        public void RemoveAllListeners(SteamVR_Input_Sources input_Sources)
+        {
+            sourceMap[input_Sources].RemoveAllListeners();
+        }
+
+        /// <summary>
         /// Returns the last time this action was executed
         /// </summary>
         /// <param name="inputSource">The device you would like to get data from. Any if the action is not device specific.</param>
@@ -181,6 +189,38 @@ namespace Valve.VR
             base.Preinitialize(wrappingAction, forInputSource);
 
             vibrationAction = (SteamVR_Action_Vibration)wrappingAction;
+        }
+
+        /// <summary>
+        /// Removes all listeners, useful for dispose pattern
+        /// </summary>
+        public void RemoveAllListeners()
+        {
+            Delegate[] delegates;
+
+            if (onActiveBindingChange != null)
+            {
+                delegates = onActiveBindingChange.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onActiveBindingChange -= (SteamVR_Action_Vibration.ActiveChangeHandler)existingDelegate;
+            }
+
+            if (onActiveChange != null)
+            {
+                delegates = onActiveChange.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onActiveChange -= (SteamVR_Action_Vibration.ActiveChangeHandler)existingDelegate;
+            }
+
+            if (onExecute != null)
+            {
+                delegates = onExecute.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onExecute -= (SteamVR_Action_Vibration.ExecuteHandler)existingDelegate;
+            }
         }
 
 
