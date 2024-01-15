@@ -78,6 +78,8 @@ Changes for 2.8.0
  
  * Fixed the interaction system not handling the bow and arrow correctly under newer physics simulations
 
+ * Fixed the interaction system not dismissing hand grab hints properly.
+
 Changes for 2.7.3
  * Legacy VR Mode fix. #908 #901
 
