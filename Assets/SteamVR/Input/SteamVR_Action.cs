@@ -266,6 +266,33 @@ namespace Valve.VR
         {
             return sourceMap[inputSource].lastActiveBinding;
         }
+
+        private static uint inputBindingInfo_size = 0;
+        /// <summary>
+        /// Gets all current active bindings for this action.
+        /// Returns array of InputBindingInfo_t with strings: rchDevicePathName, rchInputPathName, rchInputSourceType, rchModeName, rchSlotName;
+        /// </summary>
+        /// <notes>This is not restricted by input source.</notes>
+        public InputBindingInfo_t[] GetActionBindingInfo()
+        {
+            if (inputBindingInfo_size == 0)
+                inputBindingInfo_size = (uint)Marshal.SizeOf(typeof(InputBindingInfo_t));
+
+            uint size = 0;
+            EVRInputError err = OpenVR.Input.GetActionBindingInfo(this.handle, zeroLengthBindingInfos, inputBindingInfo_size, ref size);
+
+            if (err != EVRInputError.BufferTooSmall && err != EVRInputError.None)
+                Debug.LogError("<b>[SteamVR]</b> GetActionBindingInfo error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString());
+
+            InputBindingInfo_t[] bindingInfos = new InputBindingInfo_t[size];
+            err = OpenVR.Input.GetActionBindingInfo(this.handle, bindingInfos, inputBindingInfo_size, ref size);
+
+            if (err != EVRInputError.BufferTooSmall && err != EVRInputError.None)
+                Debug.LogError("<b>[SteamVR]</b> GetActionBindingInfo error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString());
+
+            return bindingInfos;
+        }
+        private static InputBindingInfo_t[] zeroLengthBindingInfos = new InputBindingInfo_t[0];
     }
 
 
