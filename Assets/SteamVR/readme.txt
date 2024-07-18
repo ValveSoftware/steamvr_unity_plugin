@@ -38,19 +38,13 @@ Input and Steam:
  
 Changes for 2.8.3
 
- * Fixed a few crashes on exit
+ * Updating OpenVR sdk to 2.5.1
+
+ * Fixed a few editor crashes on exit
 
  * Added overlay example - SteamVR_FirstPersonOverlay
 
-Changes for 2.8.2
-
- * Updating OpenVR sdk to 2.5.1
-
  * Linux crash fix (action manifest string was broken)
-
-Changes for 2.8.1
-
- * Updating OpenVR sdk to 2.2.3
 
  * Added support for GetActionBindingInfo to all SteamVR_Actions
 
