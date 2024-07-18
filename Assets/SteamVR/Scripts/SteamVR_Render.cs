@@ -407,8 +407,7 @@ namespace Valve.VR
                 return;
 
             // Dispatch any OpenVR events.
-            var system = OpenVR.System;
-            if (system == null)
+            if (OpenVR.System == null)
                 return;
 
             UpdatePoses();
@@ -417,7 +416,9 @@ namespace Valve.VR
             var size = (uint)System.Runtime.InteropServices.Marshal.SizeOf(typeof(VREvent_t));
             for (int i = 0; i < 64; i++)
             {
-                if (!system.PollNextEvent(ref vrEvent, size))
+                if (OpenVR.System == null)
+					return;
+				if (!OpenVR.System.PollNextEvent(ref vrEvent, size))
                     break;
 
                 switch ((EVREventType)vrEvent.eventType)

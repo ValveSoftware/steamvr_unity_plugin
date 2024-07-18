@@ -54,8 +54,7 @@ namespace Valve.VR.InteractionSystem
 			//yield break;
 
 			// Get interface pointer
-			var chaperone = OpenVR.Chaperone;
-			if ( chaperone == null )
+			if ( OpenVR.Chaperone == null )
 			{
 				Debug.LogWarning("<b>[SteamVR Interaction]</b> Failed to get IVRChaperone interface.");
 				initialized = true;
@@ -66,7 +65,11 @@ namespace Valve.VR.InteractionSystem
 			while ( true )
 			{
 				float px = 0.0f, pz = 0.0f;
-				if ( chaperone.GetPlayAreaSize( ref px, ref pz ) )
+
+				if (OpenVR.Chaperone == null)
+					yield break;
+
+				if ( OpenVR.Chaperone.GetPlayAreaSize( ref px, ref pz ) )
 				{
 					initialized = true;
 					playAreaSizeX = px;

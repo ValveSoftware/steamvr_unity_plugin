@@ -265,12 +265,14 @@ namespace Valve.VR
         {
             GetComponent<MeshFilter>().mesh = null; // clear existing
 
-            var chaperone = OpenVR.Chaperone;
-            if (chaperone == null)
+            if (OpenVR.Chaperone == null)
                 yield break;
 
-            while (chaperone.GetCalibrationState() != ChaperoneCalibrationState.OK)
+            while (OpenVR.Chaperone != null && OpenVR.Chaperone.GetCalibrationState() != ChaperoneCalibrationState.OK)
                 yield return null;
+
+			if (OpenVR.Chaperone == null)
+				yield break;
 
             BuildMesh();
         }
