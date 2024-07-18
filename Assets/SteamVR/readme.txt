@@ -41,6 +41,10 @@ Changes for 2.8.3
  * Updating OpenVR sdk to 2.5.1
 
  * Fixed a few editor crashes on exit
+ 
+ * Using WaitFrameSync in main loop for overlay apps
+
+ * Poses predict one frame ahead in overlay apps
 
  * Added overlay example - SteamVR_FirstPersonOverlay
 
