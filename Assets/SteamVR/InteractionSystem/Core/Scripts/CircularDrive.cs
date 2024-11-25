@@ -73,7 +73,22 @@ namespace Valve.VR.InteractionSystem
 		public TextMesh debugText = null;
 
 		[Tooltip( "The output angle value of the drive in degrees, unlimited will increase or decrease without bound, take the 360 modulus to find number of rotations" )]
-		public float outAngle;
+		[SerializeField]
+        private float outAngle;
+
+		public float OutAngle
+		{
+			get
+			{
+				return outAngle;
+			}
+			set
+			{
+				outAngle = value;
+				UpdateAll();
+			}
+		}
+
 
 		private Quaternion start;
 
@@ -243,11 +258,9 @@ namespace Valve.VR.InteractionSystem
 		private void HandHoverUpdate( Hand hand )
         {
             GrabTypes startingGrabType = hand.GetGrabStarting();
-            bool isGrabEnding = hand.IsGrabbingWithType(grabbedWithType) == false;
 
-            if (grabbedWithType == GrabTypes.None && startingGrabType != GrabTypes.None)
+            if (interactable.attachedToHand == null && startingGrabType != GrabTypes.None)
             {
-                grabbedWithType = startingGrabType;
                 // Trigger was just pressed
                 lastHandProjected = ComputeToTransformProjected( hand.hoverSphereTransform );
 
@@ -259,30 +272,28 @@ namespace Valve.VR.InteractionSystem
 
 				driving = true;
 
-				ComputeAngle( hand );
-				UpdateAll();
-
+                hand.AttachObject(gameObject, startingGrabType, attachmentFlags);
                 hand.HideGrabHint();
-			}
-            else if (grabbedWithType != GrabTypes.None && isGrabEnding)
-			{
-				// Trigger was just released
-				if ( hoverLock )
-				{
-					hand.HoverUnlock(interactable);
-					handHoverLocked = null;
-				}
-
-                driving = false;
-                grabbedWithType = GrabTypes.None;
             }
-
-            if ( driving && isGrabEnding == false && hand.hoveringInteractable == this.interactable )
-			{
-				ComputeAngle( hand );
-				UpdateAll();
-			}
 		}
+
+        protected virtual void HandAttachedUpdate(Hand hand)
+        {
+            ComputeAngle(hand);
+            UpdateAll();
+
+            if (hand.IsGrabEnding(this.gameObject))
+            {
+                hand.DetachObject(gameObject);
+
+                if (hoverLock)
+                {
+                    hand.HoverUnlock(interactable);
+                    handHoverLocked = null;
+                }
+            }
+        }
+
 
 
 		//-------------------------------------------------
