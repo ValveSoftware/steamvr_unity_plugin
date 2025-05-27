@@ -6,10 +6,14 @@ using System.Text;
 using UnityEngine;
 
 #if UNITY_2017_2_OR_NEWER
-    using UnityEngine.XR;
+using UnityEngine.XR;
 #else
 using XRSettings = UnityEngine.VR.VRSettings;
 using XRDevice = UnityEngine.VR.VRDevice;
+#endif
+
+#if UNITY_2019_3_OR_NEWER && OPENVR_XR_API
+using UnityEngine.XR.Management;
 #endif
 
 namespace Valve.VR
@@ -53,11 +57,19 @@ namespace Valve.VR
                 if (forceUnityVRToOpenVR)
                     forcingInitialization = true;
 
+#if UNITY_2023_1_OR_NEWER
+                SteamVR_Render renderInstance = GameObject.FindFirstObjectByType<SteamVR_Render>();
+#else
                 SteamVR_Render renderInstance = GameObject.FindObjectOfType<SteamVR_Render>();
+#endif
                 if (renderInstance != null)
                     steamVRObject = renderInstance.gameObject;
 
+#if UNITY_2023_1_OR_NEWER
+                SteamVR_Behaviour behaviourInstance = GameObject.FindFirstObjectByType<SteamVR_Behaviour>();
+#else
                 SteamVR_Behaviour behaviourInstance = GameObject.FindObjectOfType<SteamVR_Behaviour>();
+#endif
                 if (behaviourInstance != null)
                     steamVRObject = behaviourInstance.gameObject;
 
@@ -100,6 +112,141 @@ namespace Valve.VR
                 InitializeSteamVR();
         }
 
+
+
+#if UNITY_2019_3_OR_NEWER && OPENVR_XR_API
+        public void InitializeSteamVR(bool forceUnityVRToOpenVR = false)
+        {
+            if (forceUnityVRToOpenVR)
+            {
+                forcingInitialization = true;
+                if (initializeCoroutine != null)
+                    StopCoroutine(initializeCoroutine);
+
+                if (!IsOpenVRLoaded())
+                {
+                    initializeCoroutine = StartCoroutine(DoInitializeSteamVR(forceUnityVRToOpenVR));
+                }
+            }
+            else
+            {
+                SteamVR.Initialize(false);
+            }
+        }
+
+        private Coroutine initializeCoroutine;
+        private IEnumerator DoInitializeSteamVR(bool forceUnityVRToOpenVR = false)
+        {
+            XRManagerSettings xrManager = XRGeneralSettings.Instance ? XRGeneralSettings.Instance.Manager : null;
+            if (xrManager == null)
+            {
+                Debug.LogError("<b>[SteamVR]</b> XRGeneralSettings.Instance is null");
+                yield break;
+            }
+
+            if (forceUnityVRToOpenVR)
+            {
+                // Stop current loader if one is active
+                if (xrManager.isInitializationComplete)
+                {
+                    xrManager.StopSubsystems();
+                    xrManager.DeinitializeLoader();
+                    yield return null;
+                }
+
+                // Find and initialize OpenVR loader specifically
+                XRLoader openVRLoader = null;
+                foreach (var loader in xrManager.activeLoaders)
+                {
+                    if (loader.name.Contains("OpenVR") || loader.GetType().Name.Contains("OpenVR"))
+                    {
+                        openVRLoader = loader;
+                        break;
+                    }
+                }
+
+                if (openVRLoader == null)
+                {
+                    Debug.LogError("<b>[SteamVR]</b> OpenVR Loader not found in XR Management settings");
+                    yield break;
+                }
+
+                bool initSuccess = openVRLoader.Initialize();
+                if (!initSuccess)
+                {
+                    Debug.LogError("<b>[SteamVR]</b> Failed to initialize OpenVR loader");
+                    yield break;
+                }
+
+                bool startSuccess = openVRLoader.Start();
+                if (!startSuccess)
+                {
+                    Debug.LogError("<b>[SteamVR]</b> Failed to start OpenVR loader");
+                    openVRLoader.Deinitialize();
+                    yield break;
+                }
+            }
+            else
+            {
+                // Use default initialization
+                if (!xrManager.isInitializationComplete)
+                {
+                    yield return xrManager.InitializeLoader();
+                }
+
+                if (xrManager.activeLoader != null)
+                {
+                    xrManager.StartSubsystems();
+                }
+            }
+
+            // Wait for subsystems to be ready
+            if (xrManager.activeLoader != null)
+            {
+                XRDisplaySubsystem displaySubsystem = null;
+                XRInputSubsystem inputSubsystem = null;
+
+                float timeout = 10f;
+                float startTime = Time.time;
+
+                while (Time.time - startTime < timeout)
+                {
+                    displaySubsystem = xrManager.activeLoader.GetLoadedSubsystem<XRDisplaySubsystem>();
+                    inputSubsystem = xrManager.activeLoader.GetLoadedSubsystem<XRInputSubsystem>();
+
+                    if (displaySubsystem != null && displaySubsystem.running &&
+                        inputSubsystem != null && inputSubsystem.running)
+                    {
+                        break;
+                    }
+
+                    yield return null;
+                }
+
+                if (displaySubsystem == null || !displaySubsystem.running ||
+                    inputSubsystem == null || !inputSubsystem.running)
+                {
+                    Debug.LogError("<b>[SteamVR]</b> Timeout exceeded waiting for XR subsystems to start");
+                }
+            }
+            else
+            {
+                Debug.LogError("<b>[SteamVR]</b> No active XR loader");
+            }
+
+            initializeCoroutine = null;
+            forcingInitialization = false;
+        }
+
+        private bool IsOpenVRLoaded()
+        {
+            XRManagerSettings xrManager = XRGeneralSettings.Instance ? XRGeneralSettings.Instance.Manager : null;
+            XRDisplaySubsystem displaySubsystem = xrManager.activeLoader ? xrManager.activeLoader.GetLoadedSubsystem<XRDisplaySubsystem>() : null;
+            XRInputSubsystem inputSubsystem = xrManager.activeLoader ? xrManager.activeLoader.GetLoadedSubsystem<XRInputSubsystem>() : null;
+
+            return (displaySubsystem != null && displaySubsystem.running && inputSubsystem != null && inputSubsystem.running);
+        }
+#elif UNITY_2018_3_OR_NEWER
         public void InitializeSteamVR(bool forceUnityVRToOpenVR = false)
         {
             if (forceUnityVRToOpenVR)
@@ -121,8 +268,6 @@ namespace Valve.VR
         }
 
         private Coroutine initializeCoroutine;
-
-#if UNITY_2018_3_OR_NEWER
         private bool loadedOpenVRDeviceSuccess = false;
         private IEnumerator DoInitializeSteamVR(bool forceUnityVRToOpenVR = false)
         {
@@ -148,14 +293,6 @@ namespace Valve.VR
                 loadedOpenVRDeviceSuccess = true; //try anyway
             }
         }
-#else
-        private IEnumerator DoInitializeSteamVR(bool forceUnityVRToOpenVR = false)
-        {
-            XRSettings.LoadDeviceByName(openVRDeviceName);
-            yield return null;
-            EnableOpenVR();
-        }
-#endif
 
         private void EnableOpenVR()
         {
@@ -164,6 +301,42 @@ namespace Valve.VR
             initializeCoroutine = null;
             forcingInitialization = false;
         }
+#else
+        private Coroutine initializeCoroutine;
+        public void InitializeSteamVR(bool forceUnityVRToOpenVR = false)
+        {
+            if (forceUnityVRToOpenVR)
+            {
+                forcingInitialization = true;
+
+                if (initializeCoroutine != null)
+                    StopCoroutine(initializeCoroutine);
+
+                if (XRSettings.loadedDeviceName == openVRDeviceName)
+                    EnableOpenVR();
+                else
+                    initializeCoroutine = StartCoroutine(DoInitializeSteamVR(forceUnityVRToOpenVR));
+            }
+            else
+            {
+                SteamVR.Initialize(false);
+            }
+        }
+        private IEnumerator DoInitializeSteamVR(bool forceUnityVRToOpenVR = false)
+        {
+            XRSettings.LoadDeviceByName(openVRDeviceName);
+            yield return null;
+            EnableOpenVR();
+        }
+
+        private void EnableOpenVR()
+        {
+            XRSettings.enabled = true;
+            SteamVR.Initialize(false);
+            initializeCoroutine = null;
+            forcingInitialization = false;
+        }
+#endif
 
 #if UNITY_EDITOR
         //only stop playing if the unity editor is running

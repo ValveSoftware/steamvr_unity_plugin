@@ -7,6 +7,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 
 namespace Valve.VR.InteractionSystem
 {
@@ -22,15 +23,35 @@ namespace Valve.VR.InteractionSystem
 			get
 			{
 				if ( _instance == null )
+                {
+#if UNITY_2023_1_OR_NEWER
+                    _instance = GameObject.FindFirstObjectByType<InputModule>();
+#else
 					_instance = GameObject.FindObjectOfType<InputModule>();
+#endif
+                }
 
-				return _instance;
+                return _instance;
 			}
 		}
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+#if UNITY_2019_1_OR_NEWER && ENABLE_INPUT_SYSTEM && !ENABLE_LEGACY_INPUT_MANAGER
+			StandaloneInputModule standaloneInputModule = this.GetComponent<StandaloneInputModule>();
+			if (standaloneInputModule)
+			{
+				GameObject.Destroy(standaloneInputModule);
+				if (this.GetComponent<InputSystemUIInputModule>() == null)
+					this.gameObject.AddComponent<InputSystemUIInputModule>();
+			}
+#endif
+		}
 
-		//-------------------------------------------------
-		public override bool ShouldActivateModule()
+
+        //-------------------------------------------------
+        public override bool ShouldActivateModule()
 		{
 			if ( !base.ShouldActivateModule() )
 				return false;

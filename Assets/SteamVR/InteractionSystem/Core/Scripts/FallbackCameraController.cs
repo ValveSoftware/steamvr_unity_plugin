@@ -32,37 +32,37 @@ namespace Valve.VR.InteractionSystem
 		void Update()
 		{
 			float forward = 0.0f;
-			if ( Input.GetKey( KeyCode.W ) || Input.GetKey( KeyCode.UpArrow ) )
+			if (SteamVR_InputHelper.GetKey( KeyCode.W ) || SteamVR_InputHelper.GetKey( KeyCode.UpArrow ) )
 			{
 				forward += 1.0f;
 			}
-			if ( Input.GetKey( KeyCode.S ) || Input.GetKey( KeyCode.DownArrow ) )
+			if (SteamVR_InputHelper.GetKey( KeyCode.S ) || SteamVR_InputHelper.GetKey( KeyCode.DownArrow ) )
 			{
 				forward -= 1.0f;
 			}
 
             float up = 0.0f;
-            if (Input.GetKey(KeyCode.E))
+            if (SteamVR_InputHelper.GetKey(KeyCode.E))
             {
                 up += 1.0f;
             }
-            if (Input.GetKey(KeyCode.Q))
+            if (SteamVR_InputHelper.GetKey(KeyCode.Q))
             {
                 up -= 1.0f;
             }
 
             float right = 0.0f;
-			if ( Input.GetKey( KeyCode.D ) || Input.GetKey( KeyCode.RightArrow ) )
+			if (SteamVR_InputHelper.GetKey( KeyCode.D ) || SteamVR_InputHelper.GetKey( KeyCode.RightArrow ) )
 			{
 				right += 1.0f;
 			}
-			if ( Input.GetKey( KeyCode.A ) || Input.GetKey( KeyCode.LeftArrow ) )
+			if (SteamVR_InputHelper.GetKey( KeyCode.A ) || SteamVR_InputHelper.GetKey( KeyCode.LeftArrow ) )
 			{
 				right -= 1.0f;
 			}
 
 			float currentSpeed = speed;
-			if ( Input.GetKey( KeyCode.LeftShift ) || Input.GetKey( KeyCode.RightShift ) )
+			if (SteamVR_InputHelper.GetKey( KeyCode.LeftShift ) || SteamVR_InputHelper.GetKey( KeyCode.RightShift ) )
 			{
 				currentSpeed = shiftSpeed;
 			}
@@ -75,15 +75,15 @@ namespace Valve.VR.InteractionSystem
 
 			transform.position += transform.TransformDirection( delta );
 
-			Vector3 mousePosition = Input.mousePosition;
+			Vector3 mousePosition = SteamVR_InputHelper.mousePosition;
 
-			if ( Input.GetMouseButtonDown( 1 ) /* right mouse */)
+			if (SteamVR_InputHelper.GetMouseButtonDown( 1 ) /* right mouse */)
 			{
 				startMousePosition = mousePosition;
 				startEulerAngles = transform.localEulerAngles;
 			}
 
-			if ( Input.GetMouseButton( 1 ) /* right mouse */)
+			if (SteamVR_InputHelper.GetMouseButton( 1 ) /* right mouse */)
 			{
 				Vector3 offset = mousePosition - startMousePosition;
 				transform.localEulerAngles = startEulerAngles + new Vector3( -offset.y * 360.0f / Screen.height, offset.x * 360.0f / Screen.width, 0.0f );

@@ -350,7 +350,11 @@ namespace Valve.VR
         void OnEnable()
         {
             // Move game view cameras to lower-right quadrant.
+#if UNITY_2023_1_OR_NEWER
+            cameras = FindObjectsByType<Camera>(FindObjectsSortMode.None);
+#else
             cameras = FindObjectsOfType<Camera>();
+#endif
             if (cameras != null)
             {
                 var numCameras = cameras.Length;

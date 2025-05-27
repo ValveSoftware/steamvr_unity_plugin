@@ -22,9 +22,13 @@ namespace Valve.VR.InteractionSystem
 			{
 				if ( _instance == null )
 				{
+#if UNITY_2023_1_OR_NEWER
+                    _instance = GameObject.FindFirstObjectByType<DebugUI>();
+#else
 					_instance = GameObject.FindObjectOfType<DebugUI>();
-				}
-				return _instance;
+#endif
+                }
+                return _instance;
 			}
 		}
 

@@ -131,10 +131,14 @@ namespace Valve.VR.InteractionSystem
 			{
 				if ( _instance == null )
 				{
+#if UNITY_2023_1_OR_NEWER
+                    _instance = GameObject.FindFirstObjectByType<Teleport>();
+#else
 					_instance = GameObject.FindObjectOfType<Teleport>();
-				}
+#endif
+                }
 
-				return _instance;
+                return _instance;
 			}
 		}
 
@@ -173,9 +177,13 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		void Start()
         {
+#if UNITY_2023_1_OR_NEWER
+            teleportMarkers = GameObject.FindObjectsByType<TeleportMarkerBase>(FindObjectsSortMode.None);
+#else
             teleportMarkers = GameObject.FindObjectsOfType<TeleportMarkerBase>();
+#endif
 
-			HidePointer();
+            HidePointer();
 
 			player = InteractionSystem.Player.instance;
 
@@ -1094,7 +1102,7 @@ namespace Valve.VR.InteractionSystem
 			{
 				if ( hand.noSteamVRFallbackCamera != null )
 				{
-					return Input.GetKeyUp( KeyCode.T );
+					return SteamVR_InputHelper.GetKeyUp( KeyCode.T );
 				}
 				else
                 {
@@ -1114,7 +1122,7 @@ namespace Valve.VR.InteractionSystem
 			{
 				if ( hand.noSteamVRFallbackCamera != null )
 				{
-					return Input.GetKey( KeyCode.T );
+					return SteamVR_InputHelper.GetKey( KeyCode.T );
 				}
 				else
                 {
@@ -1133,7 +1141,7 @@ namespace Valve.VR.InteractionSystem
 			{
 				if ( hand.noSteamVRFallbackCamera != null )
 				{
-					return Input.GetKeyDown( KeyCode.T );
+					return SteamVR_InputHelper.GetKeyDown( KeyCode.T );
 				}
 				else
                 {

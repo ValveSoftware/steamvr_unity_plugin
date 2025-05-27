@@ -70,7 +70,7 @@ namespace Valve.VR.InteractionSystem.Sample
         {
             p.transform.rotation = Quaternion.LookRotation(transform.TransformDirection(slip));
 
-#if UNITY_2017_1_OR_NEWER
+#if UNITY_5_6_OR_NEWER
             ParticleSystem.MainModule mainModule = p.main;
             mainModule.startSpeed = velocityMul * amt;
 #else

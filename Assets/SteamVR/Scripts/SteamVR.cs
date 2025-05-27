@@ -34,7 +34,6 @@ namespace Valve.VR
             {
                 if (_enabled)
                 {
-#if UNITY_2020_1_OR_NEWER || OPENVR_XR_API
                     if (isSupported == null)
                     {
                         string[] supportedDevices = XRSettings.supportedDevices;
@@ -51,9 +50,6 @@ namespace Valve.VR
                         }
                     }
                     return isSupported.Value;
-#else
-                    return XRSettings.enabled;
-#endif
                 }
 
                 return false;
@@ -739,7 +735,9 @@ namespace Valve.VR
                 case UnityEngine.Rendering.GraphicsDeviceType.OpenGL2:
 #endif
                 case UnityEngine.Rendering.GraphicsDeviceType.OpenGLCore:
+#if (!UNITY_2023_1_OR_NEWER)
                 case UnityEngine.Rendering.GraphicsDeviceType.OpenGLES2:
+#endif
                 case UnityEngine.Rendering.GraphicsDeviceType.OpenGLES3:
                     textureType = ETextureType.OpenGL;
                     break;

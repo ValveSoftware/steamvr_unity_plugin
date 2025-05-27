@@ -55,8 +55,6 @@ namespace Unity.XR.OpenVR
             }
         }
 
-        private static bool forced = false;
-
         public static void Start(bool force = false)
         {
             EditorApplication.update -= Update;

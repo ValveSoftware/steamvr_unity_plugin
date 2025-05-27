@@ -52,10 +52,14 @@ namespace Valve.VR.InteractionSystem
 			get
 			{
 				if ( _instance == null )
-				{
-					_instance = FindObjectOfType<Player>();
-				}
-				return _instance;
+                {
+#if UNITY_2023_1_OR_NEWER
+                    _instance = FindFirstObjectByType<Player>();
+#else
+                    _instance = FindObjectOfType<Player>();
+#endif
+                }
+                return _instance;
 			}
 		}
 

@@ -204,7 +204,7 @@ namespace Valve.VR
 
             if (cursor != null)
             {
-                float x = Input.mousePosition.x, y = Screen.height - Input.mousePosition.y;
+                float x = SteamVR_InputHelper.mousePosition.x, y = Screen.height - SteamVR_InputHelper.mousePosition.y;
                 float w = cursor.width, h = cursor.height;
                 GUI.DrawTexture(new Rect(x, y, w, h), cursor);
             }
@@ -239,7 +239,11 @@ namespace Valve.VR
 
             // If an existing camera is rendering into the overlay texture, we need
             // to temporarily disable it to keep it from clearing the texture on us.
-            var cameras = Object.FindObjectsOfType(typeof(Camera)) as Camera[];
+#if UNITY_2023_1_OR_NEWER
+            var cameras = FindObjectsByType<Camera>(FindObjectsSortMode.None);
+#else
+            var cameras = FindObjectsOfType<Camera>();
+#endif
             foreach (var cam in cameras)
             {
                 if (cam.enabled && cam.targetTexture == texture)
@@ -272,7 +276,7 @@ namespace Valve.VR
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7))
+            if (SteamVR_InputHelper.GetKeyDown(KeyCode.Escape) || SteamVR_InputHelper.GetKeyDown(KeyCode.Joystick1Button7))
             {
                 if (overlay == null)
                 {
@@ -283,15 +287,15 @@ namespace Valve.VR
                     HideMenu();
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.Home))
+            else if (SteamVR_InputHelper.GetKeyDown(KeyCode.Home))
             {
                 SetScale(1.0f);
             }
-            else if (Input.GetKey(KeyCode.PageUp))
+            else if (SteamVR_InputHelper.GetKey(KeyCode.PageUp))
             {
                 SetScale(Mathf.Clamp(scale + scaleRate * Time.deltaTime, scaleLimits.x, scaleLimits.y));
             }
-            else if (Input.GetKey(KeyCode.PageDown))
+            else if (SteamVR_InputHelper.GetKey(KeyCode.PageDown))
             {
                 SetScale(Mathf.Clamp(scale - scaleRate * Time.deltaTime, scaleLimits.x, scaleLimits.y));
             }

@@ -46,7 +46,7 @@ namespace Valve.VR
 #if TEST_FADE_VIEW
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (SteamVR_InputHelper.GetKeyDown(KeyCode.Space))
 		{
 			SteamVR_Fade.View(Color.black, 0);
 			SteamVR_Fade.View(Color.clear, 1);
