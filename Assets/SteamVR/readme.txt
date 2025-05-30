@@ -23,6 +23,8 @@ Quick Start:
 
  For a more extensive example including picking up, throwing objects, and animated hands see the Interaction System example at ​SteamVR/Interaction System/Samples/Interactions_Example
 
+ To get the Interaction System example working with URP just open the SteamVR/SteamVR_URP_Materials.unity bundle to replace the Built-in materials with URP
+
 
 Support:
 
@@ -43,6 +45,8 @@ Changes for 2.8.4
  * Fixed various warnings
 
  * Using the new Input System no longer throws errors in sample scene
+
+ * Added SteamVR/SteamVR_URP_Materials.unity for easier URP compatibility
  
 Changes for 2.8.3
 

@@ -888,6 +888,24 @@ namespace Valve.VR.InteractionSystem
             hoveringInteractable = closestInteractable;
         }
 
+        public Vector3 GetHoverPosition()
+        {
+            if (useControllerHoverComponent && mainRenderModel != null && mainRenderModel.IsControllerVisibile())
+            {
+                return mainRenderModel.GetControllerPosition(controllerHoverComponent);
+            }
+            else if (useHoverSphere)
+            {
+                return hoverSphereTransform.position;
+            }
+            else if (useFingerJointHover && mainRenderModel != null && mainRenderModel.IsHandVisibile())
+            {
+                return mainRenderModel.GetBonePosition((int)fingerJointHover);
+            }
+
+            return this.transform.position;
+        }
+
         protected virtual bool CheckHoveringForTransform(Vector3 hoverPosition, float hoverRadius, ref float closestDistance, ref Interactable closestInteractable, Color debugColor)
         {
             bool foundCloser = false;

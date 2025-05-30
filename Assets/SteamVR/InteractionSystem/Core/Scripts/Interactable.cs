@@ -93,6 +93,9 @@ namespace Valve.VR.InteractionSystem
         public bool wasHovering { get; protected set; }
 
 
+        private bool hasWaveOrigin = false;
+        private int waveOriginID = int.MinValue;
+
         private void Awake()
         {
             skeletonPoser = GetComponent<SteamVR_Skeleton_Poser>();
@@ -101,11 +104,8 @@ namespace Valve.VR.InteractionSystem
         protected virtual void Start()
         {
             if (highlightMat == null)
-#if UNITY_URP
-                highlightMat = (Material)Resources.Load("SteamVR_HoverHighlight_URP", typeof(Material));
-#else
                 highlightMat = (Material)Resources.Load("SteamVR_HoverHighlight", typeof(Material));
-#endif
+            hasWaveOrigin = highlightMat.HasProperty(waveOriginID);
 
             if (highlightMat == null)
                 Debug.LogError("<b>[SteamVR Interaction]</b> Hover Highlight Material is missing. Please create a material named 'SteamVR_HoverHighlight' and place it in a Resources folder", this);
@@ -257,6 +257,31 @@ namespace Valve.VR.InteractionSystem
             {
                 CreateHighlightRenderers();
                 UpdateHighlightRenderers();
+            }
+        }
+
+
+        protected virtual void HandHoverUpdate(Hand hand)
+        {
+            if (hasWaveOrigin)
+            {
+                Vector3 hoverPosition = hand.GetHoverPosition();
+
+                for (int rendererIndex = 0; rendererIndex < highlightRenderers.Length; rendererIndex++)
+                {
+                    for (int materialIndex = 0; materialIndex < highlightRenderers[rendererIndex].sharedMaterials.Length; materialIndex++)
+                    {
+                        highlightRenderers[rendererIndex].sharedMaterials[materialIndex].SetVector(waveOriginID, hoverPosition);
+                    }
+                }
+
+                for (int rendererIndex = 0; rendererIndex < highlightSkinnedRenderers.Length; rendererIndex++)
+                {
+                    for (int materialIndex = 0; materialIndex < highlightSkinnedRenderers[rendererIndex].sharedMaterials.Length; materialIndex++)
+                    {
+                        highlightSkinnedRenderers[rendererIndex].sharedMaterials[materialIndex].SetVector(waveOriginID, hoverPosition);
+                    }
+                }
             }
         }
 
