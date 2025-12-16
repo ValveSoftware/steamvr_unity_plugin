@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System;
-using System.Collections;
 
 
 namespace Valve.VR.InteractionSystem.Sample
@@ -128,7 +126,11 @@ namespace Valve.VR.InteractionSystem.Sample
 
             float angle = maxAngle * steer.x;
 
+#if UNITY_6000_0_OR_NEWER
+            speed = transform.InverseTransformVector(body.linearVelocity).z;
+#else
             speed = transform.InverseTransformVector(body.velocity).z;
+#endif
 
             float forw = Mathf.Abs(speed);
 

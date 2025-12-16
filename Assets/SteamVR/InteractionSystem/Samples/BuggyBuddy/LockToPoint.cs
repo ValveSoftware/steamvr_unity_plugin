@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -47,7 +45,11 @@ namespace Valve.VR.InteractionSystem.Sample
                 {
                     float t = Mathf.Pow(35, dropTimer);
 
+#if UNITY_6000_0_OR_NEWER
+                    body.linearVelocity = Vector3.Lerp(body.linearVelocity, Vector3.zero, Time.fixedDeltaTime * 4);
+#else
                     body.velocity = Vector3.Lerp(body.velocity, Vector3.zero, Time.fixedDeltaTime * 4);
+#endif
                     if (body.useGravity)
                         body.AddForce(-Physics.gravity);
 

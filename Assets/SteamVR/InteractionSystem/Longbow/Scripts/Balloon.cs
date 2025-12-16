@@ -5,7 +5,6 @@
 //=============================================================================
 
 ﻿using UnityEngine;
-using System.Collections;
 
 namespace Valve.VR.InteractionSystem
 {
@@ -99,12 +98,19 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		void FixedUpdate()
 		{
-			// Slow-clamp velocity
+            // Slow-clamp velocity
+#if UNITY_6000_0_OR_NEWER
+            if (balloonRigidbody.linearVelocity.sqrMagnitude > maxVelocity)
+            {
+                balloonRigidbody.linearVelocity *= 0.97f;
+            }
+#else
 			if ( balloonRigidbody.velocity.sqrMagnitude > maxVelocity )
 			{
 				balloonRigidbody.velocity *= 0.97f;
 			}
-		}
+#endif
+        }
 
 
 		//-------------------------------------------------
@@ -155,12 +161,19 @@ namespace Valve.VR.InteractionSystem
 				return;
 			}
 
+#if UNITY_6000_0_OR_NEWER
+            if (balloonRigidbody.linearVelocity.magnitude > (maxVelocity * 10))
+            {
+                balloonRigidbody.linearVelocity = balloonRigidbody.linearVelocity.normalized * maxVelocity;
+            }
+#else
 			if ( balloonRigidbody.velocity.magnitude > ( maxVelocity * 10 ) )
 			{
 				balloonRigidbody.velocity = balloonRigidbody.velocity.normalized * maxVelocity;
 			}
+#endif
 
-			if ( hand != null )
+            if ( hand != null )
 			{
 				ushort collisionStrength = (ushort)Mathf.Clamp( Util.RemapNumber( collision.relativeVelocity.magnitude, 0f, 3f, 500f, 800f ), 500f, 800f );
 

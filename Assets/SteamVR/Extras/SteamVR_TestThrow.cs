@@ -1,6 +1,5 @@
 ﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 using UnityEngine;
-using System.Collections;
 
 namespace Valve.VR.Extras
 {
@@ -46,12 +45,20 @@ namespace Valve.VR.Extras
                 Transform origin = trackedObj.origin ? trackedObj.origin : trackedObj.transform.parent;
                 if (origin != null)
                 {
+#if UNITY_6000_0_OR_NEWER
+                    rigidbody.linearVelocity = origin.TransformVector(trackedObj.GetVelocity());
+#else
                     rigidbody.velocity = origin.TransformVector(trackedObj.GetVelocity());
+#endif
                     rigidbody.angularVelocity = origin.TransformVector(trackedObj.GetAngularVelocity());
                 }
                 else
                 {
+#if UNITY_6000_0_OR_NEWER
+                    rigidbody.linearVelocity = trackedObj.GetVelocity();
+#else
                     rigidbody.velocity = trackedObj.GetVelocity();
+#endif
                     rigidbody.angularVelocity = trackedObj.GetAngularVelocity();
                 }
 
