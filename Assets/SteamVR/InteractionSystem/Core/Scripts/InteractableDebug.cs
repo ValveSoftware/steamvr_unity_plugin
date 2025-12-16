@@ -5,8 +5,6 @@
 //=============================================================================
 
 using UnityEngine;
-using UnityEngine.Events;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Valve.VR.InteractionSystem
@@ -155,7 +153,11 @@ namespace Valve.VR.InteractionSystem
             Vector3 velocity = fromHand.GetTrackedObjectVelocity(timeOffset);
             velocity *= throwable.scaleReleaseVelocity;
 
+#if UNITY_6000_0_OR_NEWER
+            debugCopy.rigidbody.linearVelocity = velocity;
+#else
             debugCopy.rigidbody.velocity = velocity;
+#endif
 
             return debugCopy;
         }
