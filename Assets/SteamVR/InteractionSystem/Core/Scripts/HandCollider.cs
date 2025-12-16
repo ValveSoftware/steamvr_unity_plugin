@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Valve.VR.InteractionSystem
@@ -71,8 +69,13 @@ namespace Valve.VR.InteractionSystem
 
         }
 
+#if UNITY_6000_0_OR_NEWER
+        private static PhysicsMaterial physicMaterial_lowfriction;
+        private static PhysicsMaterial physicMaterial_highfriction;
+#else
         private static PhysicMaterial physicMaterial_lowfriction;
         private static PhysicMaterial physicMaterial_highfriction;
+#endif
 
         private void Awake()
         {
@@ -86,22 +89,40 @@ namespace Valve.VR.InteractionSystem
 
             if (physicMaterial_lowfriction == null)
             {
+#if UNITY_6000_0_OR_NEWER
+                physicMaterial_lowfriction = new PhysicsMaterial("hand_lowFriction");
+#else
                 physicMaterial_lowfriction = new PhysicMaterial("hand_lowFriction");
+#endif
                 physicMaterial_lowfriction.dynamicFriction = 0;
                 physicMaterial_lowfriction.staticFriction = 0;
                 physicMaterial_lowfriction.bounciness = 0;
+#if UNITY_6000_0_OR_NEWER
+                physicMaterial_lowfriction.bounceCombine = PhysicsMaterialCombine.Minimum;
+                physicMaterial_lowfriction.frictionCombine = PhysicsMaterialCombine.Minimum;
+#else
                 physicMaterial_lowfriction.bounceCombine = PhysicMaterialCombine.Minimum;
                 physicMaterial_lowfriction.frictionCombine = PhysicMaterialCombine.Minimum;
+#endif
             }
 
             if (physicMaterial_highfriction == null)
             {
+#if UNITY_6000_0_OR_NEWER
+                physicMaterial_highfriction = new PhysicsMaterial("hand_highFriction");
+#else
                 physicMaterial_highfriction = new PhysicMaterial("hand_highFriction");
+#endif
                 physicMaterial_highfriction.dynamicFriction = 1f;
                 physicMaterial_highfriction.staticFriction = 1f;
                 physicMaterial_highfriction.bounciness = 0;
+#if UNITY_6000_0_OR_NEWER
+                physicMaterial_highfriction.bounceCombine = PhysicsMaterialCombine.Minimum;
+                physicMaterial_highfriction.frictionCombine = PhysicsMaterialCombine.Average;
+#else
                 physicMaterial_highfriction.bounceCombine = PhysicMaterialCombine.Minimum;
                 physicMaterial_highfriction.frictionCombine = PhysicMaterialCombine.Average;
+#endif
             }
 
             SetPhysicMaterial(physicMaterial_lowfriction);
@@ -109,7 +130,11 @@ namespace Valve.VR.InteractionSystem
             scale = SteamVR_Utils.GetLossyScale(hand.transform);
         }
 
+#if UNITY_6000_0_OR_NEWER
+        void SetPhysicMaterial(PhysicsMaterial mat)
+#else
         void SetPhysicMaterial(PhysicMaterial mat)
+#endif
         {
             if (colliders == null) colliders = GetComponentsInChildren<Collider>();
             for (int i = 0; i < colliders.Length; i++)
@@ -179,7 +204,11 @@ namespace Valve.VR.InteractionSystem
             if (collidersInRadius == false)
             {
                 //keep updating velocity, just in case. Otherwise you get jitter
+#if UNITY_6000_0_OR_NEWER
+                rigidbody.linearVelocity = Vector3.zero;
+#else
                 rigidbody.velocity = Vector3.zero;
+#endif
                 rigidbody.angularVelocity = Vector3.zero;
                 /*
                 rigidbody.velocity = (targetPosition - rigidbody.position) / Time.fixedDeltaTime;
@@ -200,7 +229,11 @@ namespace Valve.VR.InteractionSystem
                     float maxAngularVelocityChange = MaxAngularVelocityChange * scale;
                     float maxVelocityChange = MaxVelocityChange * scale;
 
+#if UNITY_6000_0_OR_NEWER
+                    rigidbody.linearVelocity = Vector3.MoveTowards(rigidbody.linearVelocity, velocityTarget, maxVelocityChange);
+#else
                     rigidbody.velocity = Vector3.MoveTowards(rigidbody.velocity, velocityTarget, maxVelocityChange);
+#endif
                     rigidbody.angularVelocity = Vector3.MoveTowards(rigidbody.angularVelocity, angularTarget, maxAngularVelocityChange);
                 }
             }
@@ -269,7 +302,7 @@ namespace Valve.VR.InteractionSystem
 
             float energy = collision.relativeVelocity.magnitude;
 
-            if(energy > minCollisionEnergy && Time.time - lastCollisionHapticsTime > minCollisionHapticsTime)
+            if (energy > minCollisionEnergy && Time.time - lastCollisionHapticsTime > minCollisionHapticsTime)
             {
                 lastCollisionHapticsTime = Time.time;
 
