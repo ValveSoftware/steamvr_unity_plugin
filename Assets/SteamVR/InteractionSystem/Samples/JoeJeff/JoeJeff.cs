@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using Valve.VR.InteractionSystem;
 
 namespace Valve.VR.InteractionSystem.Sample
 {
@@ -95,18 +93,30 @@ namespace Valve.VR.InteractionSystem.Sample
                     {
                         float moveFac = Mathf.InverseLerp(0, frictionTime, groundedTime);
                         //print(moveFac);
+#if UNITY_6000_0_OR_NEWER
+                        Vector3 lerpV = Vector3.Lerp(rigidbody.linearVelocity, animationDelta, moveFac * Time.deltaTime * 30);
+#else
                         Vector3 lerpV = Vector3.Lerp(rigidbody.velocity, animationDelta, moveFac * Time.deltaTime * 30);
+#endif
                         animationDelta.x = lerpV.x;
                         animationDelta.z = lerpV.z;
                     }
 
                     // adding a little downward force to keep him on the floor
                     animationDelta.y += -0.2f;// rb.velocity.y;
+#if UNITY_6000_0_OR_NEWER
+                    rigidbody.linearVelocity = animationDelta;
+#else
                     rigidbody.velocity = animationDelta;
+#endif
                 }
                 else
                 {
+#if UNITY_6000_0_OR_NEWER
+                    rigidbody.linearVelocity += input * Time.deltaTime * airControl;
+#else
                     rigidbody.velocity += input * Time.deltaTime * airControl;
+#endif
                 }
             }
         }
@@ -146,8 +156,13 @@ namespace Valve.VR.InteractionSystem.Sample
 
             if (!isGrounded)
             {
+#if UNITY_6000_0_OR_NEWER
+                animator.SetFloat("FallSpeed", Mathf.Abs(rigidbody.linearVelocity.y));
+                animator.SetFloat("Jump", rigidbody.linearVelocity.y);
+#else
                 animator.SetFloat("FallSpeed", Mathf.Abs(rigidbody.velocity.y));
                 animator.SetFloat("Jump", rigidbody.velocity.y);
+#endif
             }
         }
 
@@ -204,9 +219,15 @@ namespace Valve.VR.InteractionSystem.Sample
             jumpTimer = 0.1f;
             animator.applyRootMotion = false;
             rigidbody.position += Vector3.up * 0.03f;
+#if UNITY_6000_0_OR_NEWER
+            Vector3 velocity = rigidbody.linearVelocity;
+            velocity.y = jumpVelocity;
+            rigidbody.linearVelocity = velocity;
+#else
             Vector3 velocity = rigidbody.velocity;
             velocity.y = jumpVelocity;
             rigidbody.velocity = velocity;
+#endif
         }
     }
 }
