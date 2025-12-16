@@ -241,8 +241,12 @@ namespace Valve.VR.InteractionSystem
 			arrow.arrowHeadRB.AddForce( currentArrow.transform.forward * bow.GetArrowVelocity(), ForceMode.VelocityChange );
 			arrow.arrowHeadRB.AddTorque( currentArrow.transform.forward * 10 );
 
+#if UNITY_6000_0_OR_NEWER
+            arrow.shaftRB.linearVelocity = arrow.arrowHeadRB.linearVelocity;
+#else
 			arrow.shaftRB.velocity = arrow.arrowHeadRB.velocity;
-			arrow.shaftRB.angularVelocity = arrow.arrowHeadRB.angularVelocity;
+#endif
+            arrow.shaftRB.angularVelocity = arrow.arrowHeadRB.angularVelocity;
 
 			nocked = false;
             nockedWithType = GrabTypes.None;
