@@ -1,4 +1,4 @@
-﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
+//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
 // Purpose: Basic throwable object
 //
@@ -10,19 +10,19 @@ using System.Collections;
 
 namespace Valve.VR.InteractionSystem
 {
-	//-------------------------------------------------------------------------
-	[RequireComponent( typeof( Interactable ) )]
-	[RequireComponent( typeof( Rigidbody ) )]
-	public class Throwable : MonoBehaviour
-	{
-		[EnumFlags]
-		[Tooltip( "The flags used to attach this object to the hand." )]
-		public Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.ParentToHand | Hand.AttachmentFlags.DetachFromOtherHand | Hand.AttachmentFlags.TurnOnKinematic;
+    //-------------------------------------------------------------------------
+    [RequireComponent(typeof(Interactable))]
+    [RequireComponent(typeof(Rigidbody))]
+    public class Throwable : MonoBehaviour
+    {
+        [EnumFlags]
+        [Tooltip("The flags used to attach this object to the hand.")]
+        public Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.ParentToHand | Hand.AttachmentFlags.DetachFromOtherHand | Hand.AttachmentFlags.TurnOnKinematic;
 
         [Tooltip("The local point which acts as a positional and rotational offset to use while held")]
         public Transform attachmentOffset;
 
-		[Tooltip( "How fast must this object be moving to attach due to a trigger hold instead of a trigger press? (-1 to disable)" )]
+        [Tooltip("How fast must this object be moving to attach due to a trigger hold instead of a trigger press? (-1 to disable)")]
         public float catchingSpeedThreshold = -1;
 
         public ReleaseStyle releaseVelocityStyle = ReleaseStyle.GetFromHand;
@@ -37,19 +37,19 @@ namespace Valve.VR.InteractionSystem
         [Tooltip("Use this curve to ease into the scaled release velocity based on the magnitude of the measured release velocity. This allows greater differentiation between a drop, toss, and throw.")]
         public AnimationCurve scaleReleaseVelocityCurve = AnimationCurve.EaseInOut(0.0f, 0.1f, 1.0f, 1.0f);
 
-        [Tooltip( "When detaching the object, should it return to its original parent?" )]
-		public bool restoreOriginalParent = false;
+        [Tooltip("When detaching the object, should it return to its original parent?")]
+        public bool restoreOriginalParent = false;
 
 
 
-		protected VelocityEstimator velocityEstimator;
+        protected VelocityEstimator velocityEstimator;
         protected bool attached = false;
         protected float attachTime;
         protected Vector3 attachPosition;
         protected Quaternion attachRotation;
         protected Transform attachEaseInTransform;
 
-		public UnityEvent onPickUp;
+        public UnityEvent onPickUp;
         public UnityEvent onDetachFromHand;
         public HandEvent onHeldUpdate;
 
@@ -64,8 +64,8 @@ namespace Valve.VR.InteractionSystem
 
         //-------------------------------------------------
         protected virtual void Awake()
-		{
-			velocityEstimator = GetComponent<VelocityEstimator>();
+        {
+            velocityEstimator = GetComponent<VelocityEstimator>();
             interactable = GetComponent<Interactable>();
 
 
@@ -74,88 +74,92 @@ namespace Valve.VR.InteractionSystem
             rigidbody.maxAngularVelocity = 50.0f;
 
 
-            if(attachmentOffset != null)
+            if (attachmentOffset != null)
             {
                 // remove?
                 //interactable.handFollowTransform = attachmentOffset;
             }
 
-		}
+        }
 
 
         //-------------------------------------------------
-        protected virtual void OnHandHoverBegin( Hand hand )
-		{
-			bool showHint = false;
+        protected virtual void OnHandHoverBegin(Hand hand)
+        {
+            bool showHint = false;
 
             // "Catch" the throwable by holding down the interaction button instead of pressing it.
             // Only do this if the throwable is moving faster than the prescribed threshold speed,
             // and if it isn't attached to another hand
-            if ( !attached && catchingSpeedThreshold != -1)
+            if (!attached && catchingSpeedThreshold != -1)
             {
                 float catchingThreshold = catchingSpeedThreshold * SteamVR_Utils.GetLossyScale(Player.instance.trackingOriginTransform);
 
                 GrabTypes bestGrabType = hand.GetBestGrabbingType();
 
-                if ( bestGrabType != GrabTypes.None )
-				{
-					if (rigidbody.velocity.magnitude >= catchingThreshold)
-					{
-						hand.AttachObject( gameObject, bestGrabType, attachmentFlags );
-						showHint = false;
-					}
-				}
-			}
+                if (bestGrabType != GrabTypes.None)
+                {
+#if UNITY_6000_0_OR_NEWER
+                    if (rigidbody.linearVelocity.magnitude >= catchingThreshold)
+#else
+                    if (rigidbody.velocity.magnitude >= catchingThreshold)
+#endif
+                    {
+                        hand.AttachObject(gameObject, bestGrabType, attachmentFlags);
+                        showHint = false;
+                    }
+                }
+            }
 
-			if ( showHint )
-			{
+            if (showHint)
+            {
                 hand.ShowGrabHint();
-			}
-		}
+            }
+        }
 
 
         //-------------------------------------------------
-        protected virtual void OnHandHoverEnd( Hand hand )
-		{
+        protected virtual void OnHandHoverEnd(Hand hand)
+        {
             hand.HideGrabHint();
-		}
+        }
 
 
         //-------------------------------------------------
-        protected virtual void HandHoverUpdate( Hand hand )
+        protected virtual void HandHoverUpdate(Hand hand)
         {
             GrabTypes startingGrabType = hand.GetGrabStarting();
 
             if (startingGrabType != GrabTypes.None)
             {
-				hand.AttachObject( gameObject, startingGrabType, attachmentFlags, attachmentOffset );
+                hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset);
                 hand.HideGrabHint();
             }
-		}
+        }
 
         //-------------------------------------------------
-        protected virtual void OnAttachedToHand( Hand hand )
-		{
+        protected virtual void OnAttachedToHand(Hand hand)
+        {
             //Debug.Log("<b>[SteamVR Interaction]</b> Pickup: " + hand.GetGrabStarting().ToString());
 
             hadInterpolation = this.rigidbody.interpolation;
 
             attached = true;
 
-			onPickUp.Invoke();
+            onPickUp.Invoke();
 
-			hand.HoverLock( null );
+            hand.HoverLock(null);
 
             rigidbody.interpolation = RigidbodyInterpolation.None;
 
             if (velocityEstimator != null)
-		        velocityEstimator.BeginEstimatingVelocity();
+                velocityEstimator.BeginEstimatingVelocity();
 
-			attachTime = Time.time;
-			attachPosition = transform.position;
-			attachRotation = transform.rotation;
+            attachTime = Time.time;
+            attachPosition = transform.position;
+            attachRotation = transform.rotation;
 
-		}
+        }
 
 
         //-------------------------------------------------
@@ -174,7 +178,11 @@ namespace Valve.VR.InteractionSystem
 
             GetReleaseVelocities(hand, out velocity, out angularVelocity);
 
+#if UNITY_6000_0_OR_NEWER
+            rigidbody.linearVelocity = velocity;
+#else
             rigidbody.velocity = velocity;
+#endif
             rigidbody.angularVelocity = angularVelocity;
         }
 
@@ -197,7 +205,11 @@ namespace Valve.VR.InteractionSystem
                     {
                         Debug.LogWarning("[SteamVR Interaction System] Throwable: No Velocity Estimator component on object but release style set to short estimation. Please add one or change the release style.");
 
+#if UNITY_6000_0_OR_NEWER
+                        velocity = rigidbody.linearVelocity;
+#else
                         velocity = rigidbody.velocity;
+#endif
                         angularVelocity = rigidbody.angularVelocity;
                     }
                     break;
@@ -210,20 +222,24 @@ namespace Valve.VR.InteractionSystem
                     break;
                 default:
                 case ReleaseStyle.NoChange:
+#if UNITY_6000_0_OR_NEWER
+                    velocity = rigidbody.linearVelocity;
+#else
                     velocity = rigidbody.velocity;
+#endif
                     angularVelocity = rigidbody.angularVelocity;
                     break;
             }
 
             if (releaseVelocityStyle != ReleaseStyle.NoChange)
             {
-                    float scaleFactor = 1.0f;
-                    if (scaleReleaseVelocityThreshold > 0)
-                    {
-                        scaleFactor = Mathf.Clamp01(scaleReleaseVelocityCurve.Evaluate(velocity.magnitude / scaleReleaseVelocityThreshold));
-                    }
+                float scaleFactor = 1.0f;
+                if (scaleReleaseVelocityThreshold > 0)
+                {
+                    scaleFactor = Mathf.Clamp01(scaleReleaseVelocityCurve.Evaluate(velocity.magnitude / scaleReleaseVelocityThreshold));
+                }
 
-                    velocity *= (scaleFactor * scaleReleaseVelocity);
+                velocity *= (scaleFactor * scaleReleaseVelocity);
             }
         }
 
@@ -251,33 +267,33 @@ namespace Valve.VR.InteractionSystem
 
 
         //-------------------------------------------------
-        protected virtual IEnumerator LateDetach( Hand hand )
-		{
-			yield return new WaitForEndOfFrame();
+        protected virtual IEnumerator LateDetach(Hand hand)
+        {
+            yield return new WaitForEndOfFrame();
 
-			hand.DetachObject( gameObject, restoreOriginalParent );
-		}
+            hand.DetachObject(gameObject, restoreOriginalParent);
+        }
 
 
         //-------------------------------------------------
-        protected virtual void OnHandFocusAcquired( Hand hand )
-		{
-			gameObject.SetActive( true );
+        protected virtual void OnHandFocusAcquired(Hand hand)
+        {
+            gameObject.SetActive(true);
 
             if (velocityEstimator != null)
-			    velocityEstimator.BeginEstimatingVelocity();
-		}
+                velocityEstimator.BeginEstimatingVelocity();
+        }
 
 
         //-------------------------------------------------
-        protected virtual void OnHandFocusLost( Hand hand )
-		{
-			gameObject.SetActive( false );
+        protected virtual void OnHandFocusLost(Hand hand)
+        {
+            gameObject.SetActive(false);
 
             if (velocityEstimator != null)
                 velocityEstimator.FinishEstimatingVelocity();
-		}
-	}
+        }
+    }
 
     public enum ReleaseStyle
     {
