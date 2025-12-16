@@ -1,4 +1,4 @@
-﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
+//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
 // Purpose: The hands used by the player in the vr interaction system
 //
@@ -10,7 +10,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine.Events;
-using System.Threading;
 
 namespace Valve.VR.InteractionSystem
 {
@@ -1233,7 +1232,11 @@ namespace Valve.VR.InteractionSystem
                         {
                             if (attachedInfo.HasAttachFlag(AttachmentFlags.VelocityMovement))
                             {
+#if UNITY_6000_0_OR_NEWER
+                                attachedInfo.attachedRigidbody.linearVelocity = Vector3.zero;
+#else
                                 attachedInfo.attachedRigidbody.velocity = Vector3.zero;
+#endif
                                 attachedInfo.attachedRigidbody.angularVelocity = Vector3.zero;
                             }
                             t = attachedInfo.interactable.snapAttachEaseInCurve.Evaluate(t);
@@ -1265,7 +1268,11 @@ namespace Valve.VR.InteractionSystem
                 float maxAngularVelocityChange = MaxAngularVelocityChange * scale;
                 float maxVelocityChange = MaxVelocityChange * scale;
 
+#if UNITY_6000_0_OR_NEWER
+                attachedObjectInfo.attachedRigidbody.linearVelocity = Vector3.MoveTowards(attachedObjectInfo.attachedRigidbody.linearVelocity, velocityTarget, maxVelocityChange);
+#else
                 attachedObjectInfo.attachedRigidbody.velocity = Vector3.MoveTowards(attachedObjectInfo.attachedRigidbody.velocity, velocityTarget, maxVelocityChange);
+#endif
                 attachedObjectInfo.attachedRigidbody.angularVelocity = Vector3.MoveTowards(attachedObjectInfo.attachedRigidbody.angularVelocity, angularTarget, maxAngularVelocityChange);
             }
         }
