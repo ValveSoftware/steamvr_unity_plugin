@@ -5,7 +5,6 @@
 //=============================================================================
 
 using UnityEngine;
-using System.Collections;
 
 namespace Valve.VR.InteractionSystem
 {
@@ -16,9 +15,13 @@ namespace Valve.VR.InteractionSystem
 		public Rigidbody arrowHeadRB;
 		public Rigidbody shaftRB;
 
+#if UNITY_6000_0_OR_NEWER
+        public PhysicsMaterial targetPhysMaterial;
+#else
 		public PhysicMaterial targetPhysMaterial;
+#endif
 
-		private Vector3 prevPosition;
+        private Vector3 prevPosition;
 		private Quaternion prevRotation;
 		private Vector3 prevVelocity;
 		private Vector3 prevHeadPosition;
@@ -48,8 +51,13 @@ namespace Valve.VR.InteractionSystem
         private void Awake()
         {
             initialMass = shaftRB.mass;
+#if UNITY_6000_0_OR_NEWER
+            initialDrag = shaftRB.linearDamping;
+            initialAngularDrag = shaftRB.angularDamping;
+#else
             initialDrag = shaftRB.drag;
             initialAngularDrag = shaftRB.angularDrag;
+#endif
             initialInterpolation = shaftRB.interpolation;
             initialCollisionDetection = shaftRB.collisionDetectionMode;
             initialUseGravity = shaftRB.useGravity;
@@ -70,8 +78,12 @@ namespace Valve.VR.InteractionSystem
 			{
 				prevPosition = transform.position;
 				prevRotation = transform.rotation;
+#if UNITY_6000_0_OR_NEWER
+                prevVelocity = shaftRB.linearVelocity;
+#else
 				prevVelocity = shaftRB.velocity;
-				prevHeadPosition = arrowHeadRB.transform.position;
+#endif
+                prevHeadPosition = arrowHeadRB.transform.position;
 				travelledFrames++;
 			}
 		}
@@ -85,9 +97,14 @@ namespace Valve.VR.InteractionSystem
                 shaftRB = rb;
 
             shaftRB.mass = initialMass;
+#if UNITY_6000_0_OR_NEWER
+            shaftRB.linearDamping = initialDrag;
+            shaftRB.angularDamping = initialAngularDrag;
+#else
             shaftRB.drag = initialDrag;
             shaftRB.angularDrag = initialAngularDrag;
-			shaftRB.interpolation = initialInterpolation;
+#endif
+            shaftRB.interpolation = initialInterpolation;
 			shaftRB.collisionDetectionMode = initialCollisionDetection;
             shaftRB.useGravity = initialUseGravity;
 
@@ -128,7 +145,11 @@ namespace Valve.VR.InteractionSystem
 			prevPosition = transform.position;
 			prevRotation = transform.rotation;
 			prevHeadPosition = arrowHeadRB.transform.position;
+#if UNITY_6000_0_OR_NEWER
+            prevVelocity = GetComponent<Rigidbody>().linearVelocity;
+#else
 			prevVelocity = GetComponent<Rigidbody>().velocity;
+#endif
 
             SetCollisionMode(CollisionDetectionMode.ContinuousDynamic);
 
@@ -152,8 +173,12 @@ namespace Valve.VR.InteractionSystem
 			if ( inFlight )
 			{
 				Rigidbody rb = GetComponent<Rigidbody>();
+#if UNITY_6000_0_OR_NEWER
+                float rbSpeed = rb.linearVelocity.sqrMagnitude;
+#else
 				float rbSpeed = rb.velocity.sqrMagnitude;
-				bool canStick = ( targetPhysMaterial != null && collision.collider.sharedMaterial == targetPhysMaterial && rbSpeed > 0.2f );
+#endif
+                bool canStick = ( targetPhysMaterial != null && collision.collider.sharedMaterial == targetPhysMaterial && rbSpeed > 0.2f );
 				bool hitBalloon = collision.collider.gameObject.GetComponent<Balloon>() != null;
 
 				if ( travelledFrames < 2 && !canStick )
@@ -162,11 +187,17 @@ namespace Valve.VR.InteractionSystem
 					transform.position = prevPosition - prevVelocity * Time.deltaTime;
 					transform.rotation = prevRotation;
 
+#if UNITY_6000_0_OR_NEWER
+                    Vector3 reflfectDir = Vector3.Reflect(arrowHeadRB.linearVelocity, collision.contacts[0].normal);
+                    arrowHeadRB.linearVelocity = reflfectDir * 0.25f;
+                    shaftRB.linearVelocity = reflfectDir * 0.25f;
+#else
 					Vector3 reflfectDir = Vector3.Reflect( arrowHeadRB.velocity, collision.contacts[0].normal );
 					arrowHeadRB.velocity = reflfectDir * 0.25f;
 					shaftRB.velocity = reflfectDir * 0.25f;
+#endif
 
-					travelledFrames = 0;
+                    travelledFrames = 0;
 					return;
 				}
 
@@ -208,8 +239,12 @@ namespace Valve.VR.InteractionSystem
 					// Revert my physics properties cause I don't want balloons to influence my travel
 					transform.position = prevPosition;
 					transform.rotation = prevRotation;
+#if UNITY_6000_0_OR_NEWER
+                    arrowHeadRB.linearVelocity = prevVelocity;
+#else
 					arrowHeadRB.velocity = prevVelocity;
-					Physics.IgnoreCollision( arrowHeadRB.GetComponent<Collider>(), collision.collider );
+#endif
+                    Physics.IgnoreCollision( arrowHeadRB.GetComponent<Collider>(), collision.collider );
 					Physics.IgnoreCollision( shaftRB.GetComponent<Collider>(), collision.collider );
 				}
 
@@ -261,14 +296,22 @@ namespace Valve.VR.InteractionSystem
 
             SetCollisionMode(CollisionDetectionMode.Discrete, true);
 
+#if UNITY_6000_0_OR_NEWER
+            shaftRB.linearVelocity = Vector3.zero;
+#else
             shaftRB.velocity = Vector3.zero;
-			shaftRB.angularVelocity = Vector3.zero;
+#endif
+            shaftRB.angularVelocity = Vector3.zero;
 			shaftRB.isKinematic = true;
 			shaftRB.useGravity = false;
 			shaftRB.transform.GetComponent<BoxCollider>().enabled = false;
 
+#if UNITY_6000_0_OR_NEWER
+            arrowHeadRB.linearVelocity = Vector3.zero;
+#else
 			arrowHeadRB.velocity = Vector3.zero;
-			arrowHeadRB.angularVelocity = Vector3.zero;
+#endif
+            arrowHeadRB.angularVelocity = Vector3.zero;
 			arrowHeadRB.isKinematic = true;
 			arrowHeadRB.useGravity = false;
 			arrowHeadRB.transform.GetComponent<BoxCollider>().enabled = false;
